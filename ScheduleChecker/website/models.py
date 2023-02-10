@@ -41,8 +41,6 @@ class class_data(models.Model):
         managed = False
         db_table = 'class_data'
     
-    def __str__(self):
-        return self.crn
 
 
 class class_prereq(models.Model):
