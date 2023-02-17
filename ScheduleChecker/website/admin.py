@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import class_data, class_prereq
+from .models import ClassData, ClassPrereq
 # Register your models here.
 
-admin.site.register(class_data)
-admin.site.register(class_prereq)
+admin.site.register(ClassData)
+admin.site.register(ClassPrereq)
 
