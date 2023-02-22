@@ -1,0 +1,178 @@
+.grid-container {
+    display: grid;
+    gap: 0px;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+    grid-template-rows: 50px 100px 100px 100px 100px 100px;   
+    grid-template-areas: 
+    "bl mo tu we th fr sa su"
+    "t1 aa aa aa aa aa aa aa"
+    "t2 aa aa aa aa aa aa aa"
+    "t3 aa aa aa aa aa aa aa"
+    "t4 aa aa aa aa aa aa aa"
+    "t5 aa aa aa aa aa aa aa";
+    
+    padding: 0px;
+  }
+  
+  
+  
+  .blank {
+      grid-area: b1;
+      background-color: grey;
+  }
+  
+  .mon {
+      grid-area: mo;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .tue {
+      grid-area: tu;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .wed {
+      grid-area: we;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .thu {
+      grid-area: th;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .fri {
+      grid-area: fr;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .sat {
+      grid-area: sa;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .sun {
+      grid-area: su;
+      text-align: center;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .time1 {
+      grid-area: t1;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      padding: 30px;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .time2 {
+      grid-area: t2;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      padding: 30px;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .time3 {
+      grid-area: t3;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      padding: 30px;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .time4 {
+      grid-area: t4;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      padding: 30px;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .time5 {
+      grid-area: t5;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+      padding: 30px;
+      background-color: whitesmoke;
+      border-style: outset;
+  }
+  
+  .courses {
+      grid-area: aa;
+      background-color: rgba(245, 245, 245, 0);
+      border-style: solid;
+      padding: 30px;
+      font-size: 44px;
+      text-align: center;
+  }
+
+ 
+.dropbtn {
+    background-color: darkgray;
+    color: white;
+    width: 100px;
+    font-size: 16px;
+    border: solid 1px;
+    cursor: pointer;
+  }
+  
+ 
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: whitesmoke;
+    color:black;
+  }
+  
+ 
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+ 
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #cec9c9;
+    width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+
+  .dropdown-content a {
+    color: black;
+    padding: 5px;
+    
+    text-decoration: none;
+    display: block;
+  }
+  
+ 
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+ 
+  .show {display:block;}
