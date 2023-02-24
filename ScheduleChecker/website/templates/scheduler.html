@@ -1,0 +1,113 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/scheduler_style.css' %}">
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SCC</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="scheduler_style.css">
+</head>
+
+<body style="background-color: white;">
+  <!-- Department Button, Semester Buttons-->
+  <div class="dropdown">
+    <button class="dropbtn">Department</button>
+    <div id="deptBtn" class="dropdown-content">
+      <a href="#">CSCE</a>
+      <a href="#">MATH</a>
+      <a href="#">SCIENCES</a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <button class="dropbtn">Semester</button>
+    <div id="semBtn" class="dropdown-content">
+      <a href="#">Spring</a>
+      <a href="#">Fall</a>
+      <a href="#">Summer</a>
+    </div>
+  </div>
+  <!-- Import, Export Buttons-->
+  <div class="dropdown">
+    <button class="imexbtn">Import (.csv)</button>
+  </div>
+  <div class="dropdown">
+    <button class="imexbtn">Export (.csv)</button>
+  </div>
+  <div class="schedule-container">
+    <!--conflict box-->
+    <div class="conflict-header">Conflict Box</div>
+    <div class="conflict-box"> </div>
+    <div class="blank-right"></div>
+    <!--days axis-->
+    <div id="mon" class="days">Monday</div>
+    <div id="tue" class="days">Tuesday</div>
+    <div id="wed" class="days">Wednesday</div>
+    <div id="thu" class="days">Thursday</div>
+    <div id="fri" class="days">Friday</div>
+    <div id="sat" class="days">Saturday</div>
+    <div id="sun" class="days">Sunday</div>
+    <div class="blank"></div>
+    <!--time axis-->
+    <div class="slot8a">8<sup>am</sup></div>
+    <div class="slot10a">10<sup>am</sup></div>
+    <div class="slot12p">12<sup>pm</sup></div>
+    <div class="slot2p">2<sup>pm</sup></div>
+    <div class="slot4p">4<sup>pm</sup></div>
+    <div class="slot6p">6<sup>pm</sup></div>
+    <!--course day/time slots TODO:maybe a nested loop or repeat to fill -->
+    <div class="m-8"></div>
+    <div class="m-10"></div>
+    <div class="m-12"></div>
+    <div class="m-2"></div>
+    <div class="m-4"></div>
+    <div class="m-6"></div>
+
+    <div class="t-8"></div>
+    <div class="t-10"></div>
+    <div class="t-12"></div>
+    <div class="t-2"></div>
+    <div class="t-4"></div>
+    <div class="t-6"></div>
+
+    <div class="w-8"></div>
+    <div class="w-10"></div>
+    <div class="w-12"></div>
+    <div class="w-2"></div>
+    <div class="w-4"></div>
+    <div class="w-6"></div>
+
+    <div class="th-8"></div>
+    <div class="th-10"></div>
+    <div class="th-12"></div>
+    <div class="th-2"></div>
+    <div class="th-4"></div>
+    <div class="th-6"></div>
+
+    <div class="f-8"></div>
+    <div class="f-10"></div>
+    <div class="f-12"></div>
+    <div class="f-2"></div>
+    <div class="f-4"></div>
+    <div class="f-6"></div>
+
+    <div class="s-8"></div>
+    <div class="s-10"></div>
+    <div class="s-12"></div>
+    <div class="s-2"></div>
+    <div class="s-4"></div>
+    <div class="s-6"></div>
+
+    <div class="su-8"></div>
+    <div class="su-10"></div>
+    <div class="su-12"></div>
+    <div class="su-2"></div>
+    <div class="su-4"></div>
+    <div class="su-6"></div>
+
+  </div>
+
+
+</body>
+
+</html>
