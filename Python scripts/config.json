@@ -1,0 +1,38 @@
+{
+  "class_conflicts": [
+    [ "CSCE A101", "CSCE A201" ],
+    [ "PHYS A211", "CSCE A465" ]
+  ],
+  "class_ranges": [
+    {
+      "subject": "CSCE",
+      "start": "300",
+      "end": "499"
+    },
+    {
+      "subject": "CSCE",
+      "start": "500",
+      "end":  "699"
+    }
+  ],
+  "teacher_classes": {
+    "John Doe": [ "CSCE A101" ],
+    "Jane Smith": [ "CSCE 401", "CSCE 411" ]
+  },
+  "hidden_subjects": [
+    "WRTG",
+    "ENGL"
+  ],
+  "hidden_classes": [
+    "STAT A307",
+    "MATH A253"
+  ],
+  "ignore_subjects": [
+    "MATH"
+  ],
+  "ignore_classes": [
+    "ENGL 101",
+    "HIST 200"
+  ],
+  "allow_corequisite_conflicts": true
+}
