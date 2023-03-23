@@ -4,6 +4,15 @@ from django.db.models import Count
 from website.models import MajorRequirements, Subjects
 from django.http import JsonResponse
 import json 
+from selenium import webdriver
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from bs4 import BeautifulSoup
+import pandas as pd
+import threading
+import concurrent.futures
+import time
+import os
+
 
 # Create your views here.
 
@@ -76,5 +85,99 @@ def get_major_requirements(request):
         url = "https://curric.uaa.alaska.edu/scheduleSearch.php?term={}&subj={}".format(term, s)
         urls.append(url)
 
+    # Scrape the data using multiple threads
+    thread_count = min(5, len(urls))
+    url_batches = [urls[i::thread_count] for i in range(thread_count)]
+    # create a list of futures
+    futures = []
+    dataframes = []
 
-    return JsonResponse(urls, safe=False)
+
+    # scrape data for each batch of URLs using ThreadPoolExecutor
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        for batch in url_batches:
+            future = executor.submit(scrape_urls, batch)
+            futures.append(future)
+
+    # retrieve the results of the futures and store them in a list of DataFrames
+    for future in concurrent.futures.as_completed(futures):
+        try:
+            data = future.result()
+            if not data.empty:
+                dataframes.append(data)
+        except Exception as e:
+            print(f"Exception occurred: {e}")
+            dataframes.append(pd.DataFrame())
+
+    # Concatenate dataframes into a single dataframe
+    data = pd.concat(dataframes)
+
+    print(data)
+
+    return JsonResponse({'data': data.to_json(orient='records')})
+
+def scrape_urls(urls):
+    # Create a webdriver instance
+    driver_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'chromedriver')
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    driver = webdriver.Chrome(executable_path=driver_path, options=options)
+
+    dataframes = []
+
+    try:
+        for url in urls:
+            # Navigate to the URL
+            url = str(url)
+            driver.get(url)
+
+            # Wait for JS to populate data
+            time.sleep(2)
+
+            # Parse the HTML
+            html = driver.page_source
+            soup = BeautifulSoup(html, 'html.parser')
+
+            # Extract the data
+            # extract the table
+            table = soup.find('table', {'class': 'table table-striped table-condensed'})
+
+            headers = []
+            for th in table.find_all('th'):
+                headers.append(th.text.strip())
+
+            # Extract the table rows and store them in a list of lists
+            class_data = []
+            for tr in table.find_all('tr')[1:]:
+                # find row data
+                row = []
+                for td in tr.find_all('td'):
+                    row.append(td.text.strip())
+
+                class_data.append(row)
+
+            # Convert the list of lists to a pandas dataframe
+            df = pd.DataFrame(class_data, columns=headers)
+            dataframes.append(df)
+
+        # Quit the webdriver instance
+        driver.quit()
+
+        # Concatenate the dataframes
+        if dataframes:
+            df_combined = pd.concat(dataframes, ignore_index=True)
+        else:
+            df_combined = pd.DataFrame()
+
+        return df_combined
+    
+    except UnexpectedAlertPresentException as e:
+        # Quit the webdriver instance
+        driver.quit()
+
+        # Log the error message
+        print(f"One or more URLs returned no class data")
+
+        # Return an empty dataframe
+        return pd.DataFrame()
