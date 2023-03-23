@@ -1,8 +1,4 @@
 from django.shortcuts import render
-<<<<<<< Updated upstream
-
-# Create your views here.
-=======
 from django.http import HttpResponse
 from django.db.models import Count
 from website.models import MajorRequirements, Subjects
@@ -20,4 +16,3 @@ def calendar(request):
         'subject_data': subject_data
     }
     return render(request, 'scheduler.html', context)
->>>>>>> Stashed changes
