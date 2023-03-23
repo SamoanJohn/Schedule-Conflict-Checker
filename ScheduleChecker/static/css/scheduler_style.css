@@ -120,6 +120,7 @@ Conflict detect:
     background-color: green;
     color: white;
     padding: 10px 20px;
+    height: 39.6px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -129,6 +130,7 @@ Conflict detect:
   .search-btn:hover {
     background-color: darkgreen;
   }
+
   
 /*## Import .csv and export .csv buttons ##*/
 .imexbtn {

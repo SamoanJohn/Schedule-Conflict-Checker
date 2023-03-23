@@ -48,23 +48,64 @@ $(document).ready(function() {
       console.log(selectedSemester);
     }
   });
+});
 
-  $('#submit-btn').click(function() {
-      $.ajax({
-        url: '/path/to/your/view/',
-        type: 'GET',
-        data: {
-          majors: selectedItems.majors,
-          subjects: selectedItems.subjects
-        },
-        success: function(response) {
-          // Parse the JSON response and update the page
-          // with the relevant information
-        },
-        error: function(xhr, status, error) {
-          // Handle errors
-        }
-      });
-    });
 
+window.addEventListener('load', function() {
+  // define a function to handle the button press
+  function handleButtonClick() {
+
+      var selectedTerm = $('#semester-select').val();
+
+      // check if a term is selected
+      if (!selectedTerm) {
+          alert("Please select a term.");
+          return;
+      }
+
+      // get the selected majors from the dropdown
+      var selectedMajors = $('#selected-majors .selected-item span:nth-child(2)').map(function() {
+          return $(this).text();
+      }).get().join(",");
+
+      // check if at least one major is selected
+      if (!selectedMajors) {
+          alert("Please select at least one major.");
+          return;
+      }
+
+      // get the selected subjects from the dropdown
+      var selectedSubjects = $('#selected-subjects .selected-item span:nth-child(2)').map(function() {
+          return $(this).text();
+      }).get().join(",");
+
+
+      var url = 'query/?term=' + selectedTerm + '&majors=' + selectedMajors;
+
+      // add selected subjects to the URL if any are selected
+      if (selectedSubjects) {
+          url += '&subjects=' + selectedSubjects;
+      }
+
+      // make an AJAX request to retrieve the major requirements
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              // handle the response here
+              var requirements = JSON.parse(xhr.responseText);
+              var requirementsHtml = '';
+              for (var i = 0; i < requirements.length; i++) {
+                  requirementsHtml += '<li>' + requirements[i] + '</li>';
+              }
+              document.getElementById("req-list").innerHTML = requirementsHtml;
+          }
+      };
+
+      xhr.open("GET", url, true);
+      xhr.send();
+  }
+
+  // add a click event listener to the button
+  var searchbtn = document.getElementById("search-btn");
+  searchbtn.addEventListener('click', handleButtonClick);
 });
