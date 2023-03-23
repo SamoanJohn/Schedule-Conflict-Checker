@@ -1,3 +1,4 @@
 selenium
 beautifulsoup4
 pandas
+Django==4.1.6
