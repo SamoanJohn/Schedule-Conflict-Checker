@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <title>SCC</title>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'js/major_and_subject_dropdowns.js' %}"></script>
+  <script src="{% static 'js/scheduler.js' %}"></script>
+  <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
+</head>
+
+
+<body style="background-color: white;">
+
+  <!-- Austin -->   
+    <div class="container">
+    <div class="select-wrapper">
+      <select id="semester-select">
+        <option value="" selected disabled hidden>Term</option>
+        <option value="202303" class="fillSelect">Fall 2023</option>
+        <option value="202302" class="fillSelect">Summer 2023</option>
+        <option value="202301" class="fillSelect">Spring 2023</option>
+        <option value="202203" class="fillSelect">Fall 2022</option>
+        <option value="202202" class="fillSelect">Summer 2022</option>
+        <option value="202201" class="fillSelect">Spring 2022</option>
+      </select>
+    </div>
+
+    <div class="select-wrapper">
+      <select id="major-dropdown">
+        <optgroup label="Select Major">
+          <option value="" selected disabled hidden>Select Major...</option>
+            {% for item in degree_major_data %}
+            <option>{{ item.degree }} - {{ item.major }}</option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      <div id="selected-majors"></div>
+    </div>
+
+    <div class="select-wrapper">
+      <select id="subject-dropdown">
+        <optgroup label="Select Major">
+          <option value="" selected disabled hidden>Select Subject...</option>
+            {% for item in subject_data %}
+            <option>{{ item.subj }} - {{ item.subject }}</option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      <div id="selected-subjects"></div>
+    </div>
+
+    <button id="search-btn" class="search-btn">Search</button>
+  
+  </div>
+
+  <div id="requirementsDiv">
+    <ul id="req-list"></ul>
+  </div>
+    
+  <!-- Austin -->
+
+  <div class="schedule-container">
+    <div class="grid-row">
+      <div class="blank"></div>
+      <div class="days">Monday</div>
+      <div class="days">Tuesday</div>
+      <div class="days">Wednesday</div>
+      <div class="days">Thursday</div>
+      <div class="days">Friday</div>
+      <div class="days">Saturday</div>
+      <div class="days">Sunday</div>
+    </div>
+    <div class="grid-row">
+      <div class="slot8a">8<sup>am</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="times">10<sup>am</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="times">12<sup>pm</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="times">2<sup>pm</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="times">4<sup>pm</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="slot6p">6<sup>pm</sup></div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+      <div class="gridCell">
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+        <div class = "timeCell"></div>
+      </div>
+    </div>
+
+    <div id="courseBlock1" class="course-block" draggable="true">Course Block 1</div>
+
+    <!--conflict box
+    <div class="conflict-header">Conflict Box</div>
+    <div class="conflict-box"> </div>
+    <div class="blank-right"></div>
+
+    
+    -->
+  </div>
+  
+</html>

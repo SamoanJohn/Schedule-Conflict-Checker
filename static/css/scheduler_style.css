@@ -1,0 +1,299 @@
+/*TODO: 
+
+Grid:
+-time axis, shadow border
+-may be able to fill grid as some kind of repeat or nested for loop 
+-course objects import from csv
+    -use day/time as a relative x/y position, this may need an invisible table over the grid or grid 
+     label redesign?        
+-course objects z-index to have objects above grid to show continous time
+-draggable objects
+    -create
+-add updatable metadata for object positioning on drag to be able to adjust day/time info for export
+
+Conflict detect:
+(color maninpulation to see what makes the most sense
+-change color of each occurrence (yellow) automatically on import
+-selection of conflict in box, keep base class yellow, change conflicted class to red
+
+*/
+
+
+  
+/*## Department and Semester Buttons ##*/
+
+.container {
+    background-color: #dfdfdf;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 0px
+  }
+  
+  .select-wrapper {
+    position: relative;
+    margin: 0 20px;
+  }
+  
+  select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    border: none;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+    
+  
+  select:focus {
+    outline: none;
+  }
+
+.selected-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #0077c0;
+    border: 1px solid #1a416f;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .selected-item {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    margin-bottom: 2px;
+    padding: 2px;
+    border-radius: 10px;
+    background-color: #5daddf68;
+    color: #000000;
+    border: 2px solid #000000;
+  }
+
+  .selected-item span {
+    margin-left: 5px;
+    font-size: 12px;
+    text-align: left;
+  }
+  
+  .selected-item .remove-item {
+  margin-right: 0;
+  margin-left: 0px;
+}
+  
+  .remove-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    border: none;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .remove-item:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .remove-item:before {
+    content: '×';
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .search-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    height: 39.6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .search-btn:hover {
+    background-color: darkgreen;
+  }
+
+  
+/*## Import .csv and export .csv buttons ##*/
+.imexbtn {
+    background-color: darkseagreen;
+    color: black;
+    padding: 5px;
+    font-size: 16px;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+/* Level, Subject, Instructor Dropdown buttons */
+
+.LSIdropdown {
+    position: relative;
+    display: inline-block;
+}
+.LSIdropbtn {
+    background-color: darkseagreen;
+    color: black;
+    padding: 5px;
+    font-size: 16px;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+    cursor: pointer;
+}
+.LSIdropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.LSIdropdown-content a {
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+.LSIdropdown-content a:hover {
+    background-color: rgba(143, 188, 143, 0.486)
+}
+.LSIdropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Grid */
+.schedule-container {
+    display: grid;
+    gap: none;
+    grid-template-columns: repeat(9);
+    grid-template-rows: 100px reapeat(10, 150px);
+    justify-items: sretch;
+    position: absolute;
+    top: 150px;
+}
+
+.grid-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.days {
+    border: solid 1px #a9a9a9b4;
+    padding: auto;
+    width: 150px;
+    height: 30px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.4);
+    text-align: auto;
+}
+
+.blank {
+    border: none;
+    width: 150px;
+    height: 30px;
+}
+
+.blank-right {
+    width: 10px;
+}
+/*conflict box, may expand width*/
+
+.conflict-header {
+    grid-column: 10;
+    grid-row: 1;
+    text-align: center;
+    border: solid 1px rgba(0, 0, 0, 0.4);
+    border-radius: 10px 10px 0px 0px;
+    width:200px;
+    background-color: white;
+}
+.conflict-box{
+    grid-column: 10;
+    grid-row: 2 / 5;
+    background-color: green;
+    color:white;
+    border: solid 1px rgba(0, 0, 0, 0.4);
+    border-radius: 0px 0px 10px 10px;
+    width: 200px;
+}
+
+/*time axis*/
+
+.slot8a {
+    border-top: solid 2px #a9a9a9b4;
+    border-right: solid 2px #a9a9a9b4;
+    border-left: solid 2px #a9a9a9b4;
+    border-radius: 10px 0px 0px 0px;
+    padding: 30px 20px 30px 20px;
+    text-align: center;
+    box-shadow: -1px 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.times {
+    border-right: solid 2px #a9a9a9b4;
+    border-left: solid 2px #a9a9a9b4;
+    padding: 30px 12px 30px 20px;
+    width: auto;
+    text-align: center;
+    box-shadow: -1px 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.slot6p {
+    border-right: solid 2px #a9a9a9b4;
+    border-left: solid 2px #a9a9a9b4;
+    border-bottom: solid 2px #a9a9a9b4;
+    border-radius: 0px 0px 0px 10px;
+    padding: 30px 19px 30px 20px;
+    text-align: center;
+    box-shadow: -1px 0px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.gridCell  {
+    display: block;
+    align-items: normal;    
+    border: solid 1px #a9a9a9b4;
+}
+
+.timeCell {
+    height:25px;
+    width:100%;
+    align-items: top;
+    z-index:0;
+}
+
+/*draggable course block */
+.course-block {
+    border: solid 1px black;
+    height: 100px;
+    width: 100px;
+    z-index: 1;
+}
+
+.drag-over {
+    border-top: solid 3px blue;
+}
+
+.hide {
+    display: none;
+}
+
