@@ -12,126 +12,120 @@
 
 
 <body style="background-color: white;">
-
   <!-- Austin -->   
-    <div class="container">
+  <div class="search-container">
     <div class="select-wrapper">
       <select id="semester-select">
-        <option value="" selected disabled hidden>Term</option>
-        <option value="202303" class="fillSelect">Fall 2023</option>
-        <option value="202302" class="fillSelect">Summer 2023</option>
-        <option value="202301" class="fillSelect">Spring 2023</option>
-        <option value="202203" class="fillSelect">Fall 2022</option>
-        <option value="202202" class="fillSelect">Summer 2022</option>
-        <option value="202201" class="fillSelect">Spring 2022</option>
+        <optgroup label="Select Term">
+          <option value="" selected disabled hidden>Term</option>
+          <option value="202303" class="fillSelect">Fall 2023</option>
+          <option value="202302" class="fillSelect">Summer 2023</option>
+          <option value="202301" class="fillSelect">Spring 2023</option>
+          <option value="202203" class="fillSelect">Fall 2022</option>
+          <option value="202202" class="fillSelect">Summer 2022</option>
+          <option value="202201" class="fillSelect">Spring 2022</option>
+        </optgroup>
+
       </select>
     </div>
 
     <div class="select-wrapper">
       <select id="major-dropdown">
-        <optgroup label="Select Major">
           <option value="" selected disabled hidden>Select Major...</option>
             {% for item in degree_major_data %}
             <option>{{ item.degree }} - {{ item.major }}</option>
             {% endfor %}
-          </optgroup>
         </select>
       <div id="selected-majors"></div>
     </div>
 
     <div class="select-wrapper">
       <select id="subject-dropdown">
-        <optgroup label="Select Major">
-          <option value="" selected disabled hidden>Select Subject...</option>
-            {% for item in subject_data %}
-            <option>{{ item.subj }} - {{ item.subject }}</option>
-            {% endfor %}
-          </optgroup>
+        <option value="" selected disabled hidden>Select Subject...</option>
+          {% for item in subject_data %}
+          <option>{{ item.subj }} - {{ item.subject }}</option>
+          {% endfor %}
         </select>
       <div id="selected-subjects"></div>
     </div>
 
     <button id="search-btn" class="search-btn">Search</button>
-  
   </div>
 
-  <div id="requirementsDiv">
-    <ul id="req-list"></ul>
+
+  <!-- Advanced Filtering -->
+  <div class="filtering-container">
+    <a id="toggle-advanced-filtering" onclick="toggleAdvancedFiltering()">Advanced Filtering</a>
+    <div id="advanced-filtering-content" style="display: none;">
+      <form>
+        <div class="individual-class-conflicts">
+          <h3>Specify individual course conflicts</h3>
+          <div class="individual-class-conflict-selection">
+            <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1">
+            <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2">
+            <button class="add-button" id="add-individual-class-conflict">Add</button>
+          </div>
+          <!-- Allow multiple conflict pairs to be added -->
+        </div>
+
+        <div class="range-class-conflicts">
+          <h3>Specify conflicts within course ranges</h3>
+          <div class="range-class-conflict-selection">
+            <input type="text" id="range-subject" name="range-subject" placeholder="Subject">
+            <input type="text" id="range-start" name="range-start" placeholder="Start">
+            <input type="text" id="range-end" name="range-end" placeholder="End">
+            <button class="add-button" id="add-range-class-conflict">Add</button>
+          </div>
+        </div>
+        <!-- Allow multiple class ranges to be added -->
+        
+        <div class="hide-container">
+          <div class="hide-subjects">
+            <h3>Hide subjects from calendar</h3>
+            <div class="hide-subject-selection">
+              <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject">
+              <button class="add-button" id="add-hide-subject">Add</button>
+            </div>
+            <!-- Allow multiple hidden subjects to be added -->
+          </div>
+        
+          <div class="hide-classes">
+            <h3>Hide courses from calendar</h3>
+            <div class="hide-class-selection">
+              <input type="text" id="hidden-class" name="hidden-class" placeholder="Course">
+              <button class="add-button" id="add-hide-class">Add</button>
+            </div>
+            <!-- Allow multiple hidden classes to be added -->
+          </div>
+        </div>
+        
+
+        <div class="ignore-container">
+          <div class="ignore-subjects">
+            <h3>Ignore conflicts for subjects</h3>
+            <div class="ignore-subject-selection">
+              <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject">
+              <button class="add-button" id="add-ignore-subject">Add</button>
+            </div>
+            <!-- Allow multiple ignore subjects to be added -->
+          </div>
+          <div class="ignore-classes">
+            <h3>Ignore conflicts for courses</h3>
+            <div class="ignore-class-selection">
+              <input type="text" id="ignore-class" name="ignore-class" placeholder="Course">
+              <button class="add-button" id="add-ignore-class">Add</button>
+            </div>
+            <!-- Allow multiple ignore classes to be added -->
+          </div>
+        </div>
+
+        <h3>Corequisite Conflicts</h3>
+        <div class="corequisite-conflicts">
+          <input type="checkbox" id="corequisite-conflicts" name="corequisite-conflicts">
+        </div>        
+        <button id="apply-filter">Filter</button>
+      </form>
+    </div>
   </div>
-    
-  <!-- Austin -->
-
-  <div class="schedule-container">
-    <!--conflict box-->
-    <div class="conflict-header">Conflict Box</div>
-    <div class="conflict-box"> </div>
-    <div class="blank-right"></div>
-    <!--days axis-->
-    <div id="mon" class="days">Monday</div>
-    <div id="tue" class="days">Tuesday</div>
-    <div id="wed" class="days">Wednesday</div>
-    <div id="thu" class="days">Thursday</div>
-    <div id="fri" class="days">Friday</div>
-    <div id="sat" class="days">Saturday</div>
-    <div id="sun" class="days">Sunday</div>
-    <div class="blank"></div>
-    <!--time axis-->
-    <div class="slot8a">8<sup>am</sup></div>
-    <div class="slot10a">10<sup>am</sup></div>
-    <div class="slot12p">12<sup>pm</sup></div>
-    <div class="slot2p">2<sup>pm</sup></div>
-    <div class="slot4p">4<sup>pm</sup></div>
-    <div class="slot6p">6<sup>pm</sup></div>
-    <!--course day/time slots TODO:maybe a nested loop or repeat to fill -->
-    <div class="m-8"></div>
-    <div class="m-10"></div>
-    <div class="m-12"></div>
-    <div class="m-2"></div>
-    <div class="m-4"></div>
-    <div class="m-6"></div>
-
-    <div class="t-8"></div>
-    <div class="t-10"></div>
-    <div class="t-12"></div>
-    <div class="t-2"></div>
-    <div class="t-4"></div>
-    <div class="t-6"></div>
-
-    <div class="w-8"></div>
-    <div class="w-10"></div>
-    <div class="w-12"></div>
-    <div class="w-2"></div>
-    <div class="w-4"></div>
-    <div class="w-6"></div>
-
-    <div class="th-8"></div>
-    <div class="th-10"></div>
-    <div class="th-12"></div>
-    <div class="th-2"></div>
-    <div class="th-4"></div>
-    <div class="th-6"></div>
-
-    <div class="f-8"></div>
-    <div class="f-10"></div>
-    <div class="f-12"></div>
-    <div class="f-2"></div>
-    <div class="f-4"></div>
-    <div class="f-6"></div>
-
-    <div class="s-8"></div>
-    <div class="s-10"></div>
-    <div class="s-12"></div>
-    <div class="s-2"></div>
-    <div class="s-4"></div>
-    <div class="s-6"></div>
-
-    <div class="su-8"></div>
-    <div class="su-10"></div>
-    <div class="su-12"></div>
-    <div class="su-2"></div>
-    <div class="su-4"></div>
-    <div class="su-6"></div>
-
-  </div>
-  
 </html>
+<!-- Austin -->
