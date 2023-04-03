@@ -7,16 +7,17 @@
   <meta charset="utf-8">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'js/major_and_subject_dropdowns.js' %}"></script>
+  <script src="{% static 'js/filtering_options.js' %}"></script>
   <script src="{% static 'js/scheduler.js' %}"></script>
   <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
 </head>
 
 
-<body style="background-color: white;">
+<body style="background-color: white; margin: 0px;">
   <!-- Austin -->   
   <div class="search-container">
-    <div class="select-wrapper">
-      <select id="semester-select">
+    <div class="select-wrapper-term">
+      <select id="semester-select" class="dropdown-toggle">
         <optgroup label="Select Term">
           <option value="" selected disabled hidden>Term</option>
           <option value="202303" class="fillSelect">Fall 2023</option>
@@ -26,39 +27,39 @@
           <option value="202202" class="fillSelect">Summer 2022</option>
           <option value="202201" class="fillSelect">Spring 2022</option>
         </optgroup>
-
       </select>
+      <span class="dropdown-arrow"></span>
     </div>
-
+  
     <div class="select-wrapper">
-      <select id="major-dropdown">
-          <option value="" selected disabled hidden>Select Major...</option>
-            {% for item in degree_major_data %}
-            <option>{{ item.degree }} - {{ item.major }}</option>
-            {% endfor %}
-        </select>
+      <select id="major-dropdown" class="dropdown-toggle">
+        <option value="" selected disabled hidden>Select Major...</option>
+        {% for item in degree_major_data %}
+        <option>{{ item.degree }} - {{ item.major }}</option>
+        {% endfor %}
+      </select>
+      <span class="dropdown-arrow"></span>
       <div id="selected-majors"></div>
     </div>
-
+  
     <div class="select-wrapper">
-      <select id="subject-dropdown">
+      <select id="subject-dropdown" class="dropdown-toggle">
         <option value="" selected disabled hidden>Select Subject...</option>
-          {% for item in subject_data %}
-          <option>{{ item.subj }} - {{ item.subject }}</option>
-          {% endfor %}
-        </select>
+        {% for item in subject_data %}
+        <option>{{ item.subj }} - {{ item.subject }}</option>
+        {% endfor %}
+      </select>
+      <span class="dropdown-arrow"></span>
       <div id="selected-subjects"></div>
     </div>
-
+  
     <button id="search-btn" class="search-btn">Search</button>
   </div>
 
-
   <!-- Advanced Filtering -->
   <div class="filtering-container">
-    <a id="toggle-advanced-filtering" onclick="toggleAdvancedFiltering()">Advanced Filtering</a>
     <div id="advanced-filtering-content" style="display: none;">
-      <form>
+      <form onsubmit="return false;">
         <div class="individual-class-conflicts">
           <h3>Specify individual course conflicts</h3>
           <div class="individual-class-conflict-selection">
@@ -66,7 +67,7 @@
             <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2">
             <button class="add-button" id="add-individual-class-conflict">Add</button>
           </div>
-          <!-- Allow multiple conflict pairs to be added -->
+          <div id="entered-individual-course-conflict"></div>
         </div>
 
         <div class="range-class-conflicts">
@@ -77,8 +78,8 @@
             <input type="text" id="range-end" name="range-end" placeholder="End">
             <button class="add-button" id="add-range-class-conflict">Add</button>
           </div>
+          <div id="entered-range-course-conflict"></div>
         </div>
-        <!-- Allow multiple class ranges to be added -->
         
         <div class="hide-container">
           <div class="hide-subjects">
@@ -87,7 +88,7 @@
               <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject">
               <button class="add-button" id="add-hide-subject">Add</button>
             </div>
-            <!-- Allow multiple hidden subjects to be added -->
+            <div id="entered-hide-subjects"></div>
           </div>
         
           <div class="hide-classes">
@@ -96,7 +97,7 @@
               <input type="text" id="hidden-class" name="hidden-class" placeholder="Course">
               <button class="add-button" id="add-hide-class">Add</button>
             </div>
-            <!-- Allow multiple hidden classes to be added -->
+            <div id="entered-hide-classes"></div>
           </div>
         </div>
         
@@ -108,7 +109,7 @@
               <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject">
               <button class="add-button" id="add-ignore-subject">Add</button>
             </div>
-            <!-- Allow multiple ignore subjects to be added -->
+            <div id="entered-ignore-subjects"></div>
           </div>
           <div class="ignore-classes">
             <h3>Ignore conflicts for courses</h3>
@@ -116,7 +117,7 @@
               <input type="text" id="ignore-class" name="ignore-class" placeholder="Course">
               <button class="add-button" id="add-ignore-class">Add</button>
             </div>
-            <!-- Allow multiple ignore classes to be added -->
+            <div id="entered-ignore-classes"></div>
           </div>
         </div>
 
@@ -128,6 +129,11 @@
       </form>
     </div>
   </div>
+  <div class="toggle-advanced-filtering-indent" id="toggle-advanced-filtering">
+    <div class="advanced-filtering-text">Advanced Filtering</div>
+    <span class="filter-dropdown-arrow"></span>
+  </div>
+
   <!-- Austin -->
   <!-- John -->
   <div class="schedule-container">

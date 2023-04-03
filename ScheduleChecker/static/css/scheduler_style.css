@@ -21,25 +21,32 @@ Conflict detect:
 
   
 /*## Term, Major, and Subject Search Bar ##*/
-
 .search-container {
     background-color: #dfdfdf;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 15px;
     display: flex;
     justify-content: center;
-    padding-bottom: 35px;
 }
-  
+
+.select-wrapper-term {
+    position: relative;
+    margin: 0 20px;
+    width: 15%;
+  }
+
+
 .select-wrapper {
     position: relative;
     margin: 0 20px;
+    width: 33%;
 }
-  
-select {
+
+
+  select.dropdown-toggle {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 10px 30px 10px 10px;
     font-size: 16px;
     border-radius: 5px;
     margin-bottom: 2px;
@@ -47,49 +54,62 @@ select {
     background-color: white;
     appearance: none;
     -webkit-appearance: none;
-}
-    
+    z-index: 1; /* Ensure select box is above the arrow */
+  }
   
-select:focus {
+  select.dropdown-toggle:focus {
     outline: none;
-}
-
-.selected-items {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    background-color: #ffffff;
-    border: 1px solid #383f47;
-    border-radius: 7px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-}
+  }
   
-.selected-item {
-    display: flex;
+  .dropdown-arrow {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    border-color: black transparent transparent transparent;
+    float: right;
+    z-index: 0; /* Ensure arrow is below the select box */
+  }
+  
+  select.dropdown-toggle:hover + .dropdown-arrow,
+  select.dropdown-toggle:focus + .dropdown-arrow {
+    border-color: blue transparent transparent transparent;
+  }
+  
+  select.dropdown-toggle.active + .dropdown-arrow {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  
+  .selected-item {
+    display: inline-flex;
     align-items: center;
     height: 20px;
-    margin-bottom: 2px;
-    padding: 2px;
+    padding: 2px 8px;
+    margin: 1px;
     border-radius: 20px;
     background-color: #ffffff;
     color: #383f47;
     border: 1.5px solid #383f47;
-}
-
-.selected-item span {
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+  
+  
+  .selected-item span {
     margin-left: 5px;
     font-size: 12px;
     text-align: left;
-}
+  }
+    
   
 .selected-item .remove-item {
   margin-right: 0;
-  margin-left: 2px;
+  margin-left: -2px;
 }
   
 .remove-item {
@@ -97,6 +117,7 @@ select:focus {
     align-items: center;
     justify-content: center;
     width: 17px;
+    left: 5px;
     height: 17px;
     border-radius: 100%;
     border: none;
@@ -136,26 +157,61 @@ select:focus {
 .filtering-container {
     background-color: #dfdfdf;
     position: relative;
-
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#toggle-advanced-filtering {
+.toggle-advanced-filtering-indent {
     position: absolute;
-    top: -15px;
-    right: 65px;
-    transform: translate(50%, -50%);
-    background-color: transparent;
-    color: rgb(0, 60, 255);
+    right: 0;
+    margin-top: 10px; /* Add a margin-top */
+    height: 30px;
+    width: 150px;
+    padding: 0 15px;
+    margin-top: 0px;
+    background-color: #dfdfdf;
+    border-radius: 0 0 10px 10px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .advanced-filtering-text {
+    margin-top: 6px; /* adjust the value as needed */
+  }
+  
+  #toggle-advanced-filtering {
+    position: absolute;
+    color: rgb(0, 0, 0);
     border: none;
     cursor: pointer;
     font-size: 12px;
     text-decoration: none;
-}
+  }
   
-#toggle-advanced-filtering:hover {
-    color: rgb(0, 33, 144);
-}
+  #toggle-advanced-filtering:hover {
+    color: rgb(0, 60, 255);
+  }
+  .toggle-advanced-filtering-indent:hover .filter-dropdown-arrow {
+    border-top-color: rgb(0, 60, 255); /* change the color to your desired hover color */
+  }
+  
+  .filter-dropdown-arrow {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
+    border-top-color: #000000;
+    border-bottom-width: 0;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .filter-dropdown-arrow.active {
+    transform: translateY(-50%) rotateX(180deg);
+  }  
+  
+  #advanced-filtering-content {
+    display: none;
+  }
   
 input {
     display: block;
@@ -179,6 +235,7 @@ input:focus {
 /* Add Button */
 .add-button {
     align-items: center;
+    top: 30px;
     display: flex;
     padding: 0px 20px;
     border: 2px solid #0077cc;
@@ -198,12 +255,14 @@ input:focus {
 
 /* Individual Class Conflict */
 .individual-class-conflicts {
-    height: 75px;
+    position: relative;
+    padding: 5px;
+    margin: 0px;
 }
 
 .individual-class-conflict-selection {
     display: flex;
-    align-items: left;
+    align-items: center;
     justify-content: center;
     height: 40px;
 }
@@ -211,12 +270,15 @@ input:focus {
 /* Class Range Conflict */
 
 .range-class-conflicts {
-    height: 75px;
+    position: relative;
+    padding: 5px;
+    margin: 0px;
+    margin-top: 0 !important;
 }
 
 .range-class-conflict-selection {
     display: flex;
-    align-items: left;
+    align-items: center;
     justify-content: center;
     height: 40px;
 }
@@ -224,13 +286,16 @@ input:focus {
 /* Hide Subjects and Classes */
 
 .hide-container {
-    height: 75px;
+    position: relative;
+    margin: 0px;
     display: flex;
     flex-wrap: wrap;
 }
     
 .hide-subjects, .hide-classes {
-    height: 75px;
+    position: relative;
+    padding: 5px;
+    margin: 0px;
     width: 50%;
     box-sizing: border-box;
 }
@@ -259,12 +324,16 @@ input:focus {
 /* Ignore Subjects and Classes */
 
 .ignore-container {
-    height: 75px;
+    position: relative;
+    margin: 0px;
     display: flex;
     flex-wrap: wrap;
 }
     
 .ignore-subjects, .ignore-classes {
+    position: relative;
+    padding: 5px;
+    margin: 0px;
     width: 50%;
     box-sizing: border-box;
 }
@@ -291,13 +360,13 @@ input:focus {
     height: 40px;
 }
 
-
 #advanced-filtering-content {
     background-color: #dfdfdf;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 15px;
     display: flex;
     width: 75%;
+    padding-top: 0px;
     justify-content: center;
     margin: 0px
 }
@@ -306,10 +375,6 @@ input:focus {
   font-size: 15px;
   margin-top: 0px;
   margin-bottom: 5px;
-}
-  
-#advanced-filtering-content div {
-    margin-top: 0px;
 }
   
 #advanced-filtering-content label {
@@ -410,8 +475,8 @@ input:focus {
     grid-template-columns: repeat(9);
     grid-template-rows: 100px reapeat(10, 150px);
     justify-items: sretch;
-    position: absolute;
-    top: 150px;
+    position: relative;
+    top: 40px;
 }
 
 .grid-row {

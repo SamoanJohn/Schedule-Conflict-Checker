@@ -3,17 +3,6 @@ var selectedItems = {
   subjects: []
 };
 
-var filterVariables = {
-  individualCourseConflicts: [],
-  rangeCourseConflicts: [],
-  ignoreCourses: [],
-  ignoreSubjects: [],
-  hideCourses: [],
-  hideSubjects: [],
-  corequisiteConflicts: []
-};
-
-
 function removeItem(element, type) {
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
@@ -21,16 +10,7 @@ function removeItem(element, type) {
   $(element).parent().remove();
 }
 
-function removeFilterVariable(element, type) {
-  var item = $(element).parent().text().trim();
-  var index = selectedItems[type].indexOf(item);
-  filterVariables[type].splice(index, 1);
-  $(element).parent().remove();
-}
-
 $(document).ready(function() {
-  console.log('JavaScript file loaded and executed!');
-
   $('#major-dropdown').change(function() {
     console.log('Major dropdown changed');
     var selectedMajor = $(this).val();
@@ -68,35 +48,6 @@ $(document).ready(function() {
       console.log(selectedSemester);
     }
   });
-
-  $('#add-individual-class-conflict').click(function() {
-    console.log('Add individual course conflict button clicked');
-    var inputBox1 = $('#conflict-1');
-    var inputBox2 = $('#conflict-2');
-
-    var course1 = inputBox1.val();
-    var course2 = inputBox2.val();
-
-    if ((course1.length >= 5 && course1.length <= 12) && (course2.length >= 5 && course2.length <= 12)) {
-      var course_conflicts = filterVariables.individualCourseConflicts;
-
-      // Sort the values alphabetically
-      var individualCourseConflicts = [course1, course2].sort();
-      
-      // Store the sorted values back into course1 and course2
-      course1 = sortedCourses[0];
-      course2 = sortedCourses[1];
-      if (filterVariables.individualCourseConflicts.some(tuple => tuple[0] === course1[0] && tuple[1] === course2[1])){
-        individualCourseConflicts.push([course1, course2]);
-        var enteredIndividualCourseConflict = $('');
-        $('#entered-individual -course-conflict').append(enteredIndividualCourseConflict);
-        inputBox1.val('');
-        inputBox2.val('');
-      }
-    }
-  });
-
-  
 });
 
 
@@ -157,123 +108,5 @@ window.addEventListener('load', function() {
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
   searchbtn.addEventListener('click', handleButtonClick);
-
-
-// Get the toggle button and the advanced filtering content element
-const toggleButton = document.querySelector("#toggle-advanced-filtering");
-const advancedFilteringContent = document.querySelector("#advanced-filtering-content");
-
-// Add an event listener to the toggle button
-toggleButton.addEventListener("click", function() {
-  // Toggle the display property of the advanced filtering content element
-  advancedFilteringContent.style.display = advancedFilteringContent.style.display === "block" ? "none" : "block";
-});
-// Advanced Filtering 
-// Get references to th ccce relevant DOM elements
-const toggleBtn = document.getElementById("toggle-advanced-filtering");
-const filteringContent = document.getElementById("advanced-filtering-content");
-const conflictContainer = document.getElementById("conflict-container");
-const rangeContainer = document.getElementById("range-container");
-const hiddenSubjectContainer = document.getElementById("hidden-subject-container");
-const hiddenClassContainer = document.getElementById("hidden-class-container");
-const ignoreSubjectContainer = document.getElementById("ignore-subject-container");
-const ignoreClassContainer = document.getElementById("ignore-class-container");
-const addConflictBtn = document.getElementById("add-conflict");
-const addRangeBtn = document.getElementById("add-range");
-const addHiddenSubjectBtn = document.getElementById("add-hidden-subject");
-const addHiddenClassBtn = document.getElementById("add-hidden-class");
-const addIgnoreSubjectBtn = document.getElementById("add-ignore-subject");
-const addIgnoreClassBtn = document.getElementById("add-ignore-class");
 const applyFilterBtn = document.getElementById("apply-filter");
-
-// Define helper functions to add and remove conflict, range, and filter inputs
-function addInput(container, inputName, inputPlaceholder) {
-  const inputWrapper = document.createElement("div");
-  const label = document.createElement("label");
-  const input = document.createElement("input");
-  input.type = "text";
-  input.name = inputName;
-  input.placeholder = inputPlaceholder;
-  inputWrapper.appendChild(label);
-  inputWrapper.appendChild(input);
-  container.appendChild(inputWrapper);
-  return input;
-}
-
-function addConflict() {
-  addInput(conflictContainer, "conflict-1", "Course 1");
-  addInput(conflictContainer, "conflict-2", "Course 2");
-}
-
-function addRange() {
-  addInput(rangeContainer, "range-subject", "Subject");
-  addInput(rangeContainer, "range-start", "Start");
-  addInput(rangeContainer, "range-end", "End");
-}
-
-function addHiddenSubject() {
-  addInput(hiddenSubjectContainer, "hidden-subject", "Subject");
-}
-
-function addHiddenClass() {
-  addInput(hiddenClassContainer, "hidden-class", "Class");
-}
-
-function addIgnoreSubject() {
-  addInput(ignoreSubjectContainer, "ignore-subject", "Subject");
-}
-
-function addIgnoreClass() {
-  addInput(ignoreClassContainer, "ignore-class", "Class");
-}
-
-function removeInput(input) {
-  const inputWrapper = input.parentNode;
-  const container = inputWrapper.parentNode;
-  container.removeChild(inputWrapper);
-}
-
-// Attach event listeners to the relevant DOM elements
-// toggleBtn.addEventListener("click", () => {
-//   filteringContent.classList.toggle("active");
-// });
-
-addConflictBtn.addEventListener("click", () => {
-  addConflict();
 });
-
-addRangeBtn.addEventListener("click", () => {
-  addRange();
-});
-
-addHiddenSubjectBtn.addEventListener("click", () => {
-  addHiddenSubject();
-});
-
-addHiddenClassBtn.addEventListener("click", () => {
-  addHiddenClass();
-});
-
-addIgnoreSubjectBtn.addEventListener("click", () => {
-  addIgnoreSubject();
-});
-
-addIgnoreClassBtn.addEventListener("click", () => {
-  addIgnoreClass();
-});
-
-applyFilterBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  // Do the filtering here
-});
-
-// Make the initial call to add some default inputs
-addConflict();
-addRange();
-addHiddenSubject();
-addHiddenClass();
-addIgnoreSubject();
-addIgnoreClass();
-});
-
-

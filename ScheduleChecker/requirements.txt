@@ -1,4 +1,4 @@
-selenium
-beautifulsoup4
-pandas
+beautifulsoup4==4.12.0
 Django==4.1.6
+pandas==1.5.1
+selenium==4.8.3
