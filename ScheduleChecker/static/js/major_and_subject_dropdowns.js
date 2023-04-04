@@ -88,16 +88,13 @@ window.addEventListener('load', function() {
       }
 
       // make an AJAX request to retrieve the major requirements
+      // make an AJAX request to retrieve the major requirements
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
               // handle the response here
               var requirements = JSON.parse(xhr.responseText);
-              var requirementsHtml = '';
-              for (var i = 0; i < requirements.length; i++) {
-                  requirementsHtml += '<li>' + requirements[i] + '</li>';
-              }
-              document.getElementById("req-list").innerHTML = requirementsHtml;
+              console.log(requirements); // Log the JSON to the console
           }
       };
 
@@ -108,5 +105,4 @@ window.addEventListener('load', function() {
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
   searchbtn.addEventListener('click', handleButtonClick);
-const applyFilterBtn = document.getElementById("apply-filter");
 });
