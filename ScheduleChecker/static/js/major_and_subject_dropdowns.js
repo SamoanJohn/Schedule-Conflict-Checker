@@ -12,6 +12,8 @@ function removeItem(element, type) {
   $(element).parent().remove();
 }
 
+
+
 $(document).ready(function() {
   $('#major-dropdown').change(function() {
     console.log('Major dropdown changed');
@@ -98,17 +100,19 @@ window.addEventListener('load', function() {
               //////////////////////////////////////////////////////////////////////////////////
               //THIS IS WHERE THE CLASS DF JSON IS
               //////////////////////////////////////////////////////////////////////////////////
-              classes = JSON.parse(xhr.responseText);
+              const classes = JSON.parse(xhr.responseText);
+              const classArray = JSON.parse(classes.data);
 
+      
 
-
-
-              console.log(classes);
-
-
-              classes.forEach(course => {
+              console.log(classArray);
+              
+            
+              for (let i = 0; i < classArray.length; i++) {
+                const course = classArray[i];
                 const courseElement = document.createElement('div');
                 courseElement.classList.add('course-block');
+                courseElement.setAttribute("draggable", "true");
                 courseElement.setAttribute('CRN', course.CRN);
                 courseElement.setAttribute('Subj', course.Subj);
                 courseElement.setAttribute('Crs', course.Crs);
@@ -122,51 +126,76 @@ window.addEventListener('load', function() {
                 courseElement.setAttribute('Sdate', course.SDate);
                 courseElement.setAttribute('Edate', course.EDate);
                 courseElement.setAttribute('Instructor', course.Instructor);
-                courseElement.setAttribute('DelMthd', course.DelMthd); // removed whitepsace
+                courseElement.setAttribute('DelMthd', course.DelMthd); 
+
+                console.log(courseElement);
                 
                 // add Subj and Crs data for block text
                 const courseBlockText = document.createElement('div');
                 courseBlockText.classList.add('course-text');
                 courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
                 courseElement.appendChild(courseBlockText);
-          
-                // Add drag and drop listeners
-                courseElement.addEventListener('dragstart', e => {
-                  e.dataTransfer.setData('text/plain', course.Subj);
-                });
-          
-                courseElement.addEventListener('dragover', e => {
-                  e.preventDefault();
-                  e.dataTransfer.dropEffect = 'move';
-                  const target = e.target;
-                  target.classList.add('highlight');
-                });
-          
-                courseElement.addEventListener('dragleave', e => {
-                  e.preventDefault();
-                  const target = e.target;
-                  target.classList.remove('highlight');
-                });
-          
-                courseElement.addEventListener('drop', e => {
-                  e.preventDefault();
-                  const target = e.target;
-                  target.classList.remove('highlight');
-                  const subject = e.dataTransfer.getData('text/plain');
-                  const startTime = target.getAttribute('data-time');
-                  const day = target.getAttribute('data-day');
-                  // Update course object start time
-                  courseElement.setAttribute('STime', startTime);
-                });
-          
+                
+
+              
+                
+
+
+
                 // Add course element to time cell
-                const day = courseElement.getAttribute('Days');
+                const days = courseElement.getAttribute('Days');
                 const time = courseElement.getAttribute('STime');
-                const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
-                timeSlot.appendChild(courseElement);
+                // figure this out, days == TBAW, TBAT, added to handle now
+                if(days == "TBA" || days == "TBAM" || days == "TBAT" || days == "TBAW" || days == "TBAR" || days == "TBAF"){
+                  
+                  const timeSlot = document.querySelector(`[data-day="TBA"]`);
+
+                  //const timeSlot = document.querySelector(`[data-day="${days}"]`);
+                  console.log(timeSlot);
+                  timeSlot.appendChild(courseElement);
+
+                }
+                else{
+                  const daysArray = days.split('');
+                  daysArray.forEach(day => {
+                    const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
+                    const duplicateCourseElement = courseElement.cloneNode(true);
+                    timeSlot.appendChild(duplicateCourseElement);
+                  });
+                }
+            };
+
+            const courseBlock = document.querySelector('.course-block');
+            
+            courseBlock.addEventListener('dragstart', (event) => {
+              event.dataTransfer.setData('text/plain', 'course-block');
+            });
+            
+            const timeCells = document.querySelectorAll('.time-cell');
+            
+            timeCells.forEach((timeCell) => {
+              timeCell.addEventListener('dragover', (event) => {
+                event.preventDefault();
+                event.currentTarget.classList.add('highlight');
               });
-
-
+            
+              timeCell.addEventListener('dragleave', (event) => {
+                event.currentTarget.classList.remove('highlight');
+              });
+            
+              timeCell.addEventListener('drop', (event) => {
+                event.preventDefault();
+                const data = event.dataTransfer.getData('text/plain');
+                if (data === 'course-block') {
+                  const courseBlock = document.querySelector('.course-block');
+                  const gridCell = event.currentTarget.parentNode;
+                  const timeCell = event.currentTarget;
+                  timeCell.appendChild(courseBlock);
+                  timeCell.classList.remove('highlight');
+                  gridCell.classList.remove('highlight');
+                }
+              });
+            });
 
 
 

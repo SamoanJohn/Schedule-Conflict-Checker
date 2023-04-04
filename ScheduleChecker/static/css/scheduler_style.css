@@ -453,7 +453,7 @@ input:focus {
     gap: none;
     grid-template-columns: repeat(9);
     grid-template-rows: 100px reapeat(10, 150px);
-    justify-items: sretch;
+    justify-items: stretch;
     position: relative;
     top: 40px;
 }
@@ -461,21 +461,23 @@ input:focus {
 .grid-row {
     display: grid;
     height: 100%;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     grid-auto-rows: 100px;
     overflow: visible;
 }
 
 .days-row {
     display: grid;
+    width: 100%;
     height: 30px;
-    grid-template-columns: repeat(8, 1fr);
+    position: relative;
+    grid-template-columns: repeat(9, 1fr);
 }
 
 .days {
     border: solid 1px #a9a9a9b4;
     padding: auto;
-    width: 150px;
+    width: 100%;
     height: 30px;
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -483,7 +485,7 @@ input:focus {
 
 .blank {
     border: none;
-    width: 150px;
+    width: 100%;
     height: 30px;
 }
 
@@ -509,6 +511,27 @@ input:focus {
     border: solid 1px rgba(0, 0, 0, 0.4);
     border-radius: 0px 0px 10px 10px;
     width: 200px;
+}
+
+.TBA {
+  display: block;
+  border-left: solid 3px yellowgreen;
+  border-right: solid 3px yellowgreen;
+}
+
+.TBA-top {
+  display:grid;
+  border-left: solid 3px yellowgreen;
+  border-right: solid 3px yellowgreen;
+  border-top: solid 3px yellowgreen;
+  overflow: auto;
+}
+
+.TBA-bottom {
+  display: block;
+  border-left: solid 3px yellowgreen;
+  border-right: solid 3px yellowgreen;
+  border-bottom: solid 3px yellowgreen;
 }
 
 /*time axis*/
@@ -543,15 +566,27 @@ input:focus {
 }
 
 .grid-cell  {
-    display: block;
-    align-items: normal;    
+    position:relative;
+    display: grid;
+    align-items: normal;
+    width: 100%;    
     border: solid 1px #a9a9a9b4;
 }
 
+.grid-cell-bottom  {
+  position:relative;
+  display: grid;
+  align-items: normal;
+  width: 100%;    
+  border-top: solid 1px #a9a9a9b4;
+  border-left: solid 1px #a9a9a9b4;
+  border-right: solid 1px #a9a9a9b4;
+  border-bottom: solid 2px #a9a9a9b4;
+}
+
 .time-cell {
-    display: flex;
     position: relative;
-    height:12.5%;
+    height:fixed;
     width:100%;
     align-items: top;
     justify-content: left;
@@ -560,11 +595,13 @@ input:focus {
 
 /*draggable course block */
 .course-block {
+    position:absolute;
     border: solid 1px black;
     border-radius: 5px;
     background-color: green;
-    height: 100px; /*  */
-    width: 70px;
+    top:0;
+    height: 20px;
+    width: 50%;
     z-index: 2;
     cursor: move;
 }
@@ -579,7 +616,7 @@ input:focus {
     white-space: nowrap;
   }
 
-.highlight {
+.time-cell.highlight {
     border-top: solid 3px blue;
 }
 
