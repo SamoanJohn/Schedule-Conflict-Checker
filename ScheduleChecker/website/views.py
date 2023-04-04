@@ -12,6 +12,7 @@ import threading
 import concurrent.futures
 import time
 import os
+import re
 
 
 # Create your views here.
@@ -110,11 +111,27 @@ def get_major_requirements(request):
             dataframes.append(pd.DataFrame())
 
     # Concatenate dataframes into a single dataframe
-    data = pd.concat(dataframes)
+    class_data_df = pd.concat(dataframes)
 
-    print(data)
+    class_data_df = class_data_df.dropna(how='all')
 
-    return JsonResponse({'data': data.to_json(orient='records')})
+    class_data_df = class_data_df.rename(columns={'Del Mthd': 'DelMthd'})
+    # some data cleanup functions
+    clean_whitespace = lambda x: re.sub(r'\s{2,}', ' ', x.strip()) if isinstance(x, str) else x
+    clean_duplicates = lambda x: re.sub(r'(\S+)\1(?!\S)', r'\1', x) if isinstance(x, str) else x
+    clean_online = lambda s: s.replace("ONLINE", "") if s != "ONLINE" else s
+    clean_dist = lambda s: s.replace("DIST", "") if s != "DIST" else s
+
+    # Apply the cleanup function to dataframe
+    class_data_df = class_data_df.applymap(clean_whitespace)
+    class_data_df[['Days', 'STime', 'ETime', 'SDate', 'EDate']] = class_data_df[['Days', 'STime', 'ETime', 'SDate', 'EDate']].applymap(clean_duplicates)
+    class_data_df[['Bldg']] = class_data_df[['Bldg']].applymap(clean_dist)
+    class_data_df[['Room']] = class_data_df[['Room']].applymap(clean_online)
+    class_data_df[['Subj', 'Crs', 'Sec']] = class_data_df['Subj Crs Sec'].str.split(' ', expand=True)
+    class_data_df = class_data_df.loc[:, ['CRN', 'Subj',"Crs","Sec","Title","Days","STime","ETime","Bldg","SDate","EDate","Instructor","DelMthd"]]
+
+    print(class_data_df)
+    return JsonResponse({'data': class_data_df.to_json(orient='records')})
 
 def scrape_urls(urls):
     # Create a webdriver instance

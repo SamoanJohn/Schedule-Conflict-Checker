@@ -14,8 +14,6 @@ Format JSON data:
 Export button and options to take updated course json data and export in correct format in excel.
 */
 
-
-
 // test json location, will need to find json URL from Austin
 fetch('/static/json/courses.json')
   .then(response => response.json())
@@ -84,42 +82,3 @@ fetch('/static/json/courses.json')
   .catch(error => {
     console.error('Error loading courses:', error);
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$.ajax({
-  url: '/get_major_requirements/', // Update with the correct URL
-  type: 'GET',
-  success: function(response) {
-      var data = JSON.parse(response.data);
-      console.log(data);  // Log the data to the console
-  },
-  error: function(xhr, status, error) {
-      console.log(error); // Log any errors to the console
-  }
-});
-
-
-

@@ -1,3 +1,5 @@
+window.classes = {}
+
 var selectedItems = {
   majors: [],
   subjects: []
@@ -93,11 +95,95 @@ window.addEventListener('load', function() {
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
               // handle the response here
-              var requirements = JSON.parse(xhr.responseText);
-              console.log(requirements); // Log the JSON to the console
+              //////////////////////////////////////////////////////////////////////////////////
+              //THIS IS WHERE THE CLASS DF JSON IS
+              //////////////////////////////////////////////////////////////////////////////////
+              classes = JSON.parse(xhr.responseText);
+
+
+
+
+              console.log(classes);
+
+
+              classes.forEach(course => {
+                const courseElement = document.createElement('div');
+                courseElement.classList.add('course-block');
+                courseElement.setAttribute('CRN', course.CRN);
+                courseElement.setAttribute('Subj', course.Subj);
+                courseElement.setAttribute('Crs', course.Crs);
+                courseElement.setAttribute('Sec', course.Sec);
+                courseElement.setAttribute('Title', course.Title);
+                courseElement.setAttribute('Days', course.Days);
+                courseElement.setAttribute('STime', course.STime);
+                courseElement.setAttribute('ETime', course.ETime);
+                courseElement.setAttribute('Bldg', course.Bldg);
+                courseElement.setAttribute('Room', course.Room);
+                courseElement.setAttribute('Sdate', course.SDate);
+                courseElement.setAttribute('Edate', course.EDate);
+                courseElement.setAttribute('Instructor', course.Instructor);
+                courseElement.setAttribute('DelMthd', course.DelMthd); // removed whitepsace
+                
+                // add Subj and Crs data for block text
+                const courseBlockText = document.createElement('div');
+                courseBlockText.classList.add('course-text');
+                courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
+                courseElement.appendChild(courseBlockText);
+          
+                // Add drag and drop listeners
+                courseElement.addEventListener('dragstart', e => {
+                  e.dataTransfer.setData('text/plain', course.Subj);
+                });
+          
+                courseElement.addEventListener('dragover', e => {
+                  e.preventDefault();
+                  e.dataTransfer.dropEffect = 'move';
+                  const target = e.target;
+                  target.classList.add('highlight');
+                });
+          
+                courseElement.addEventListener('dragleave', e => {
+                  e.preventDefault();
+                  const target = e.target;
+                  target.classList.remove('highlight');
+                });
+          
+                courseElement.addEventListener('drop', e => {
+                  e.preventDefault();
+                  const target = e.target;
+                  target.classList.remove('highlight');
+                  const subject = e.dataTransfer.getData('text/plain');
+                  const startTime = target.getAttribute('data-time');
+                  const day = target.getAttribute('data-day');
+                  // Update course object start time
+                  courseElement.setAttribute('STime', startTime);
+                });
+          
+                // Add course element to time cell
+                const day = courseElement.getAttribute('Days');
+                const time = courseElement.getAttribute('STime');
+                const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
+                timeSlot.appendChild(courseElement);
+              });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           }
       };
-
       xhr.open("GET", url, true);
       xhr.send();
   }
