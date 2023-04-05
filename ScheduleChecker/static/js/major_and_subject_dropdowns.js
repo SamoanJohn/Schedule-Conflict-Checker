@@ -97,17 +97,11 @@ window.addEventListener('load', function() {
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
               // handle the response here
-              //////////////////////////////////////////////////////////////////////////////////
               //THIS IS WHERE THE CLASS DF JSON IS
-              //////////////////////////////////////////////////////////////////////////////////
               const classes = JSON.parse(xhr.responseText);
               const classArray = JSON.parse(classes.data);
-
-      
-
-              console.log(classArray);
               
-            
+              // create the course blocks and assign
               for (let i = 0; i < classArray.length; i++) {
                 const course = classArray[i];
                 const courseElement = document.createElement('div');
@@ -127,8 +121,6 @@ window.addEventListener('load', function() {
                 courseElement.setAttribute('Edate', course.EDate);
                 courseElement.setAttribute('Instructor', course.Instructor);
                 courseElement.setAttribute('DelMthd', course.DelMthd); 
-
-                console.log(courseElement);
                 
                 // add Subj and Crs data for block text
                 const courseBlockText = document.createElement('div');
@@ -136,26 +128,17 @@ window.addEventListener('load', function() {
                 courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
                 courseElement.appendChild(courseBlockText);
                 
-
-              
-                
-
-
-
                 // Add course element to time cell
                 const days = courseElement.getAttribute('Days');
                 const time = courseElement.getAttribute('STime');
                 // figure this out, days == TBAW, TBAT, added to handle now
                 if(days == "TBA" || days == "TBAM" || days == "TBAT" || days == "TBAW" || days == "TBAR" || days == "TBAF"){
-                  
                   const timeSlot = document.querySelector(`[data-day="TBA"]`);
-
-                  //const timeSlot = document.querySelector(`[data-day="${days}"]`);
                   console.log(timeSlot);
                   timeSlot.appendChild(courseElement);
-
                 }
                 else{
+                  // split days and assign seperate course-blocks for each.
                   const daysArray = days.split('');
                   daysArray.forEach(day => {
                     const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
@@ -164,9 +147,9 @@ window.addEventListener('load', function() {
                   });
                 }
             };
-
+            // drag events for course-block and time-cells
             const courseBlock = document.querySelector('.course-block');
-            
+          
             courseBlock.addEventListener('dragstart', (event) => {
               event.dataTransfer.setData('text/plain', 'course-block');
             });
@@ -196,21 +179,6 @@ window.addEventListener('load', function() {
                 }
               });
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           }
       };
       xhr.open("GET", url, true);
