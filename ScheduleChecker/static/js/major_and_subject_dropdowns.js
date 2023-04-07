@@ -90,15 +90,15 @@ window.addEventListener('load', function() {
       if (selectedSubjects) {
           url += '&subjects=' + selectedSubjects;
       }
-
-      // make an AJAX request to retrieve the major requirements
+      const loadingContainer = document.getElementById('loading-container');
       // make an AJAX request to retrieve the major requirements
       var xhr = new XMLHttpRequest();
+      loadingContainer.style.display = 'flex';
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
-              // handle the response here
-              //THIS IS WHERE THE CLASS DF JSON IS
               const classes = JSON.parse(xhr.responseText);
+              loadingContainer.style.display = 'none';
+
               const classArray = JSON.parse(classes.data);
               
               // create the course blocks and assign
