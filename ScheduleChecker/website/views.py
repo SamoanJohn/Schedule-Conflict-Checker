@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Count
 from website.models import MajorRequirements, Subjects
-from django.http import JsonResponse
-import json 
+import json
 from selenium import webdriver
 from selenium.common.exceptions import UnexpectedAlertPresentException
 from bs4 import BeautifulSoup
@@ -13,6 +12,13 @@ import concurrent.futures
 import time
 import os
 import re
+import requests
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+import numpy as np
+import sqlite3
+
 
 def calendar(request):
     # queries database tables MajorRequirements and Subjects used to populate dropdown menues 
@@ -42,13 +48,14 @@ def get_major_requirements(request):
 
     # retrieve  requirements for each selected major
     courses = set()  # use a set to store all courses
-    selected_majors = selected_majors.split(',')
-    for degree_major in selected_majors:
-        degree, major = degree_major.split(' - ')   # e.g., "BS - Computer Science" 
-        major_requirements = set()   # used to delete duplicate courses
-        for requirement in MajorRequirements.objects.filter(degree=degree.strip(), major=major.strip()):
-            major_requirements.add(requirement.course)
-        courses.update(major_requirements)  # append major_requirments to list of courses
+    if selected_majors:
+        selected_majors = selected_majors.split(',')
+        for degree_major in selected_majors:
+            degree, major = degree_major.split(' - ')   # e.g., "BS - Computer Science" 
+            major_requirements = set()   # used to delete duplicate courses
+            for requirement in MajorRequirements.objects.filter(degree=degree.strip(), major=major.strip()):
+                major_requirements.add(requirement.course)
+            courses.update(major_requirements)  # append major_requirments to list of courses
 
     # Remove courses included in the selected subjects
     courses = [course for course in courses if not any(course.startswith(subj + " ") for subj in selected_subj)]
@@ -96,30 +103,23 @@ def get_major_requirements(request):
             print(f"Threading exception occurred: {e}")
             # dataframes.append(pd.DataFrame())
 
+        # some data cleanup functions. the university data isnt very consistent.  this is just to extract the important information
+    clean_whitespace = lambda x: re.sub(r'\s{2,}', ' ', x.strip()) if isinstance(x, str) else x
+
     # Concatenate list of dataframes into a single dataframe
     class_data_df = pd.concat(temp_dataframe_list)
     class_data_df = class_data_df.dropna(how='all') # deletes any empty rows
     class_data_df = class_data_df.rename(columns={'Del Mthd': 'DelMthd'})
-
-    # some data cleanup functions. the university data isnt very consistent.  this is just to extract the important information
-    clean_whitespace = lambda x: re.sub(r'\s{2,}', ' ', x.strip()) if isinstance(x, str) else x
-
-    # if it includes the string ONLINE + something else, delete ONLINE e.g., "209ONLINE" -> "209"
-    clean_online = lambda s: s.replace("ONLINE", "") if s != "ONLINE" else s    
-
-    # if it includes the string DIST + something else, delete DIST e.g., "ECB DIST" -> ECB
-    clean_dist = lambda s: s.replace("DIST", "") if s != "DIST" else s
-
-    # all this does is deletes any duplicate string. e.g., "MWMW" -> "MW", "10/2110/21" -> "10/21", or "0130pm0130pm -> 0130pm"
-    clean_duplicates = lambda x: re.sub(r'(\S+)\1(?!\S)', r'\1', x) if isinstance(x, str) else x
-
-    # Apply the cleanup functions to dataframe
-    class_data_df[['Days', 'STime', 'ETime', 'SDate', 'EDate']] = class_data_df[['Days', 'STime', 'ETime', 'SDate', 'EDate']].applymap(clean_duplicates)
-    class_data_df[['Bldg']] = class_data_df[['Bldg']].applymap(clean_dist)
-    class_data_df[['Room']] = class_data_df[['Room']].applymap(clean_online)
     class_data_df = class_data_df.applymap(clean_whitespace)
     class_data_df[['Subj', 'Crs', 'Sec']] = class_data_df['Subj Crs Sec'].str.split(' ', expand=True)
-    class_data_df = class_data_df.loc[:, ['CRN', 'Subj',"Crs","Sec","Title","Days","STime","ETime","Bldg","SDate","EDate","Instructor","DelMthd"]]
+    class_data_df = class_data_df.loc[:, ['CRN', 'Subj',"Crs","Sec","Title","Days","STime","ETime","Bldg","Room","Instructor","DelMthd"]]
+
+    # Apply the cleanup functions to dataframe
+    class_data_df["STime"] = class_data_df["STime"].apply(parse_time)
+    class_data_df["ETime"] = class_data_df["ETime"].apply(parse_time)
+
+    class_data_df[["Days", "STime", "ETime", "Bldg", "Room"]] = class_data_df.apply(narrow_down, axis=1, result_type="expand")
+    class_data_df.to_csv('output.txt', sep='\t', index=False)
 
     print(class_data_df)
     return JsonResponse({'data': class_data_df.to_json(orient='records')})
@@ -137,7 +137,8 @@ def scrape_urls(urls):
         for url in urls:
             url = str(url)
             driver.get(url) # open url 
-            time.sleep(2)   # wait for js to populate
+            wait = WebDriverWait(driver, 10) # wait up to 10 seconds for the table to load
+            wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'table-striped'))) # wait for the table to be visible
             html = driver.page_source
             soup = BeautifulSoup(html, 'html.parser')
             table = soup.find('table', {'class': 'table table-striped table-condensed'})
@@ -149,10 +150,20 @@ def scrape_urls(urls):
 
             # Extract the table rows and store them in a list of lists
             class_data = []
-            for tr in table.find_all('tr')[1:]:     #<tr></tr>
+            for tr in table.find_all('tr')[1:]:
                 row_data = []
-                for td in tr.find_all('td'):     #<td></td>
-                    row_data.append(td.text.strip())
+                for td in tr.find_all('td'):
+                    if '<br/>' in str(td):
+                        tag_str_list = str(td).split('<br/>')
+                        tag_list = [BeautifulSoup(tag_str_list[0], 'html.parser')]
+                        tag_list += [BeautifulSoup('<td>' + tag_str, 'html.parser').find() for tag_str in tag_str_list[1:]]
+                        cell_text = [tag.text.strip() for tag in tag_list]
+                        cell_text = [cell for cell in cell_text if cell != '']
+                        if len(cell_text) == 1:
+                            cell_text = cell_text[0]
+                    else:
+                        cell_text = td.text.strip()
+                    row_data.append(cell_text)
                 class_data.append(row_data)
 
             scraped_dataframe = pd.DataFrame(class_data, columns=headers)
@@ -172,3 +183,54 @@ def scrape_urls(urls):
         print(f"No data found for URL: {url}")
         # Skip to the next URL
         pass
+
+
+    """
+    Convert a time string in "hhmma" format to military time (24-hour) format.
+    """
+def parse_time(time_str):
+    if isinstance(time_str, list):
+        return [parse_time(t) for t in time_str]
+    elif len(time_str) == 6:
+        hours = int(time_str[:2])
+        minutes = int(time_str[2:4])
+        meridian = time_str[4:].upper()
+        if meridian == "PM" and hours != 12:
+            hours += 12
+        elif meridian == "AM" and hours == 12:
+            hours = 0
+        return f"{hours:02d}{minutes:02d}"
+    else:
+        return time_str
+
+
+'''
+This function eliminates the multi row cells and chooses the most relevent cell
+It also eliminates some potentially usefull information from some classes like labs    
+'''
+
+def narrow_down(row):
+    if isinstance(row["Days"], list):
+        scores = []
+        for i in range(len(row["Days"])):
+            score = 0
+            if row["Days"][i] == "TBA":
+                score += 1
+            if row["STime"][i] == "TBA":
+                score += 1
+            if row["ETime"][i] == "TBA":
+                score += 1
+            if row["Bldg"][i] == "DIST":
+                score += 1
+            if (row["Room"][i] == "ONLINE") or (row["Room"][i] == "BLKBD"):
+                score += 1
+            scores.append(score)
+        index = scores.index(min(scores))
+        days = row["Days"][index]
+        stime = row["STime"][index]
+        etime = row["ETime"][index]
+        bldg = row["Bldg"][index]
+        room = row["Room"][index]
+        return days, stime, etime, bldg, room
+    else:
+        return row["Days"], row["STime"], row["ETime"], row["Bldg"], row["Room"]

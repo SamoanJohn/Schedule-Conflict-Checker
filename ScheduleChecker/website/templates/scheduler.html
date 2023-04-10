@@ -2,604 +2,604 @@
 {% load static %}
 
 <html>
-<head>
-  <title>Schedule Conflict Checker</title>
-  <meta charset="utf-8">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{% static 'js/major_and_subject_dropdowns.js' %}"></script>
-  <script src="{% static 'js/filtering_options.js' %}"></script>
-  <script src="{% static 'js/scheduler.js' %}"></script>
-  <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
-</head>
+  <head>
+    <title>Schedule Conflict Checker</title>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/schedule.js' %}"></script>
+    <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
+  </head>
 
 
-<body style="background-color: white; margin: 0px;">
-  <!-- Austin -->   
-  <div class="search-container">
-    <div class="select-wrapper-term">
-      <select id="semester-select" class="dropdown-toggle">
-        <optgroup label="Select Term">
-          <option value="" selected disabled hidden>Term</option>
-          <option value="202303" class="fillSelect">Fall 2023</option>
-          <option value="202302" class="fillSelect">Summer 2023</option>
-          <option value="202301" class="fillSelect">Spring 2023</option>
-          <option value="202203" class="fillSelect">Fall 2022</option>
-          <option value="202202" class="fillSelect">Summer 2022</option>
-          <option value="202201" class="fillSelect">Spring 2022</option>
-        </optgroup>
-      </select>
-      <span class="dropdown-arrow"></span>
+  <body style="background-color: white; margin: 0px;">
+    <!-- Austin -->   
+    <div class="search-container">
+      <div class="select-wrapper-term">
+        <select id="semester-select" class="dropdown-toggle">
+          <optgroup label="Select Term">
+            <option value="" selected disabled hidden>Term</option>
+            <option value="202303" class="fillSelect">Fall 2023</option>
+            <option value="202302" class="fillSelect">Summer 2023</option>
+            <option value="202301" class="fillSelect">Spring 2023</option>
+            <option value="202203" class="fillSelect">Fall 2022</option>
+            <option value="202202" class="fillSelect">Summer 2022</option>
+            <option value="202201" class="fillSelect">Spring 2022</option>
+          </optgroup>
+        </select>
+        <span class="dropdown-arrow"></span>
+      </div>
+    
+      <div class="select-wrapper">
+        <select id="major-dropdown" class="dropdown-toggle">
+          <option value="" selected disabled hidden>Select Major...</option>
+            <!-- DB access error happening here -->   
+            <!-- Test comment -->   
+          {% for item in degree_major_data %}
+          <option>{{ item.degree }} - {{ item.major }}</option>
+          {% endfor %}
+        </select>
+        <span class="dropdown-arrow"></span>
+        <div id="selected-majors"></div>
+      </div>
+    
+      <div class="select-wrapper">
+        <select id="subject-dropdown" class="dropdown-toggle">
+          <option value="" selected disabled hidden>Select Subject...</option>
+          {% for item in subject_data %}
+          <option>{{ item.subj }} - {{ item.subject }}</option>
+          {% endfor %}
+        </select>
+        <span class="dropdown-arrow"></span>
+        <div id="selected-subjects"></div>
+      </div>
+    
+      <button id="search-btn" class="search-btn">Search</button>
     </div>
-  
-    <div class="select-wrapper">
-      <select id="major-dropdown" class="dropdown-toggle">
-        <option value="" selected disabled hidden>Select Major...</option>
-        {% for item in degree_major_data %}
-        <option>{{ item.degree }} - {{ item.major }}</option>
-        {% endfor %}
-      </select>
-      <span class="dropdown-arrow"></span>
-      <div id="selected-majors"></div>
-    </div>
-  
-    <div class="select-wrapper">
-      <select id="subject-dropdown" class="dropdown-toggle">
-        <option value="" selected disabled hidden>Select Subject...</option>
-        {% for item in subject_data %}
-        <option>{{ item.subj }} - {{ item.subject }}</option>
-        {% endfor %}
-      </select>
-      <span class="dropdown-arrow"></span>
-      <div id="selected-subjects"></div>
-    </div>
-  
-    <button id="search-btn" class="search-btn">Search</button>
-  </div>
 
-  <!-- Advanced Filtering -->
-  <div class="filtering-container">
-    <div id="advanced-filtering-content" style="display: none;">
-      <form onsubmit="return false;">
-        <div class="individual-class-conflicts">
-          <h3>Specify individual course conflicts</h3>
-          <div class="individual-class-conflict-selection">
-            <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1">
-            <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2">
-            <button class="add-button" id="add-individual-class-conflict">Add</button>
-          </div>
-          <div id="entered-individual-course-conflict"></div>
-        </div>
-
-        <div class="range-class-conflicts">
-          <h3>Specify conflicts within course ranges</h3>
-          <div class="range-class-conflict-selection">
-            <input type="text" id="range-subject" name="range-subject" placeholder="Subject">
-            <input type="text" id="range-start" name="range-start" placeholder="Start">
-            <input type="text" id="range-end" name="range-end" placeholder="End">
-            <button class="add-button" id="add-range-class-conflict">Add</button>
-          </div>
-          <div id="entered-range-course-conflict"></div>
-        </div>
-        
-        <div class="hide-container">
-          <div class="hide-subjects">
-            <h3>Hide subjects from calendar</h3>
-            <div class="hide-subject-selection">
-              <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject">
-              <button class="add-button" id="add-hide-subject">Add</button>
+    <!-- Advanced Filtering -->
+    <div class="filtering-container">
+      <div id="advanced-filtering-content" style="display: none;">
+        <form onsubmit="return false;">
+          <div class="individual-class-conflicts">
+            <h3>Specify individual course conflicts</h3>
+            <div class="individual-class-conflict-selection">
+              <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1">
+              <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2">
+              <button class="add-button" id="add-individual-class-conflict">Add</button>
             </div>
-            <div id="entered-hide-subjects"></div>
+            <div id="entered-individual-course-conflict"></div>
           </div>
-        
-          <div class="hide-classes">
-            <h3>Hide courses from calendar</h3>
-            <div class="hide-class-selection">
-              <input type="text" id="hidden-class" name="hidden-class" placeholder="Course">
-              <button class="add-button" id="add-hide-class">Add</button>
-            </div>
-            <div id="entered-hide-classes"></div>
-          </div>
-        </div>
-        
 
-        <div class="ignore-container">
-          <div class="ignore-subjects">
-            <h3>Ignore conflicts for subjects</h3>
-            <div class="ignore-subject-selection">
-              <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject">
-              <button class="add-button" id="add-ignore-subject">Add</button>
+          <div class="range-class-conflicts">
+            <h3>Specify conflicts within course ranges</h3>
+            <div class="range-class-conflict-selection">
+              <input type="text" id="range-subject" name="range-subject" placeholder="Subject">
+              <input type="text" id="range-start" name="range-start" placeholder="Start">
+              <input type="text" id="range-end" name="range-end" placeholder="End">
+              <button class="add-button" id="add-range-class-conflict">Add</button>
             </div>
-            <div id="entered-ignore-subjects"></div>
+            <div id="entered-range-course-conflict"></div>
           </div>
-          <div class="ignore-classes">
-            <h3>Ignore conflicts for courses</h3>
-            <div class="ignore-class-selection">
-              <input type="text" id="ignore-class" name="ignore-class" placeholder="Course">
-              <button class="add-button" id="add-ignore-class">Add</button>
+          
+          <div class="hide-container">
+            <div class="hide-subjects">
+              <h3>Hide subjects from calendar</h3>
+              <div class="hide-subject-selection">
+                <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject">
+                <button class="add-button" id="add-hide-subject">Add</button>
+              </div>
+              <div id="entered-hide-subjects"></div>
             </div>
-            <div id="entered-ignore-classes"></div>
+          
+            <div class="hide-classes">
+              <h3>Hide courses from calendar</h3>
+              <div class="hide-class-selection">
+                <input type="text" id="hidden-class" name="hidden-class" placeholder="Course">
+                <button class="add-button" id="add-hide-class">Add</button>
+              </div>
+              <div id="entered-hide-classes"></div>
+            </div>
           </div>
-        </div>
+          
 
-        <h3>Corequisite Conflicts</h3>
-        <div class="corequisite-conflicts">
-          <input type="checkbox" id="corequisite-conflicts" name="corequisite-conflicts">
-        </div>        
-        <button id="apply-filter">Filter</button>
-      </form>
-    </div>
-  </div>
-  <div class="toggle-advanced-filtering-indent" id="toggle-advanced-filtering">
-    <div class="advanced-filtering-text">Advanced Filtering</div>
-    <span class="filter-dropdown-arrow"></span>
-  </div>
-  <div id="loading-container">
-    <div class="spinner"></div>
-    <div id="loading-text">Scraping data, will take a few seconds...</div>
-  </div>
-  <!-- Austin -->
-  <!-- John -->
- <!-- data-Day may need to change to a M,T,W,TH format-->
- <div class="schedule-container">
-  <div class="days-row">
-    <div class="blank"></div>
-    <div class="days">Monday</div>
-    <div class="days">Tuesday</div>
-    <div class="days">Wednesday</div>
-    <div class="days">Thursday</div>
-    <div class="days">Friday</div>
-    <!-- <div class="days">Saturday</div>
-    <div class="days">Sunday</div> -->
-    <div class="days">TBA</div>
+          <div class="ignore-container">
+            <div class="ignore-subjects">
+              <h3>Ignore conflicts for subjects</h3>
+              <div class="ignore-subject-selection">
+                <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject">
+                <button class="add-button" id="add-ignore-subject">Add</button>
+              </div>
+              <div id="entered-ignore-subjects"></div>
+            </div>
+            <div class="ignore-classes">
+              <h3>Ignore conflicts for courses</h3>
+              <div class="ignore-class-selection">
+                <input type="text" id="ignore-class" name="ignore-class" placeholder="Course">
+                <button class="add-button" id="add-ignore-class">Add</button>
+              </div>
+              <div id="entered-ignore-classes"></div>
+            </div>
+          </div>
 
+          <h3>Corequisite Conflicts</h3>
+          <div class="corequisite-conflicts">
+            <input type="checkbox" id="corequisite-conflicts" name="corequisite-conflicts">
+          </div>        
+          <button id="apply-filter">Filter</button>
+        </form>
+      </div>
+    </div>
+    <div class="toggle-advanced-filtering-indent" id="toggle-advanced-filtering">
+      <div class="advanced-filtering-text">Advanced Filtering</div>
+      <span class="filter-dropdown-arrow"></span>
+    </div>
+    <div id="loading-container">
+      <div class="spinner"></div>
+      <div id="loading-text">Scraping data, will take a few seconds...</div>
+    </div>
+    <!-- Austin -->
+    <!-- John -->
+  <!-- data-Day may need to change to a M,T,W,TH format-->
+  <div class="schedule-container">
+    <div class="days-row">
+      <div class="blank"></div>
+      <div class="days">Monday</div>
+      <div class="days">Tuesday</div>
+      <div class="days">Wednesday</div>
+      <div class="days">Thursday</div>
+      <div class="days">Friday</div>
+      <!-- <div class="days">Saturday</div>
+      <div class="days">Sunday</div> -->
+      <div class="days">TBA</div>
+
+    </div>
+    <div class="grid-row">
+      <div class="slot8a">9<sup>am</sup></div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="M" data-time="0800am"></div>
+        <div class = "time-cell" data-day="M" data-time="0815am"></div>
+        <div class = "time-cell" data-day="M" data-time="0830am"></div>
+        <div class = "time-cell" data-day="M" data-time="0845am"></div>
+        <div class = "time-cell" data-day="M" data-time="0900am"></div>
+        <div class = "time-cell" data-day="M" data-time="0915am"></div>
+        <div class = "time-cell" data-day="M" data-time="0930am"></div>
+        <div class = "time-cell" data-day="M" data-time="0945am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="T" data-time="0800am"></div>
+        <div class = "time-cell" data-day="T" data-time="0815am"></div>
+        <div class = "time-cell" data-day="T" data-time="0830am"></div>
+        <div class = "time-cell" data-day="T" data-time="0845am"></div>
+        <div class = "time-cell" data-day="T" data-time="0900am"></div>
+        <div class = "time-cell" data-day="T" data-time="0915am"></div>
+        <div class = "time-cell" data-day="T" data-time="0930am"></div>
+        <div class = "time-cell" data-day="T" data-time="0945am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="W" data-time="0800am"></div>
+        <div class = "time-cell" data-day="W" data-time="0815am"></div>
+        <div class = "time-cell" data-day="W" data-time="0830am"></div>
+        <div class = "time-cell" data-day="W" data-time="0845am"></div>
+        <div class = "time-cell" data-day="W" data-time="0900am"></div>
+        <div class = "time-cell" data-day="W" data-time="0915am"></div>
+        <div class = "time-cell" data-day="W" data-time="0930am"></div>
+        <div class = "time-cell" data-day="W" data-time="0945am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="R" data-time="0800am"></div>
+        <div class = "time-cell" data-day="R" data-time="0815am"></div>
+        <div class = "time-cell" data-day="R" data-time="0830am"></div>
+        <div class = "time-cell" data-day="R" data-time="0845am"></div>
+        <div class = "time-cell" data-day="R" data-time="0900am"></div>
+        <div class = "time-cell" data-day="R" data-time="0915am"></div>
+        <div class = "time-cell" data-day="R" data-time="0930am"></div>
+        <div class = "time-cell" data-day="R" data-time="0945am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="F" data-time="0800am"></div>
+        <div class = "time-cell" data-day="F" data-time="0815am"></div>
+        <div class = "time-cell" data-day="F" data-time="0830am"></div>
+        <div class = "time-cell" data-day="F" data-time="0845am"></div>
+        <div class = "time-cell" data-day="F" data-time="0900am"></div>
+        <div class = "time-cell" data-day="F" data-time="0915am"></div>
+        <div class = "time-cell" data-day="F" data-time="0930am"></div>
+        <div class = "time-cell" data-day="F" data-time="0945am"></div>
+      </div>
+      <!-- <div class="grid-cell">
+        <div class = "time-cell" data-day="SA" data-time="0800am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0815am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0830am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0845am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0900am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0915am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0930am"></div>
+        <div class = "time-cell" data-day="SA" data-time="0945am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="SU" data-time="0800am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0815am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0830am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0845am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0900am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0915am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0930am"></div>
+        <div class = "time-cell" data-day="SU" data-time="0945am"></div>
+      </div> -->
+      <div class="TBA-top">
+        <div class = "time-cell" data-day="TBA"></div>
+      </div>
+    </div>
+    <div class="grid-row">
+      <div class="times">10<sup>am</sup></div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="M" data-time="1000am"></div>
+        <div class = "time-cell" data-day="M" data-time="1015am"></div>
+        <div class = "time-cell" data-day="M" data-time="1030am"></div>
+        <div class = "time-cell" data-day="M" data-time="1045am"></div>
+        <div class = "time-cell" data-day="M" data-time="1100am"></div>
+        <div class = "time-cell" data-day="M" data-time="1115am"></div>
+        <div class = "time-cell" data-day="M" data-time="1130am"></div>
+        <div class = "time-cell" data-day="M" data-time="1145am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="T" data-time="1000am"></div>
+        <div class = "time-cell" data-day="T" data-time="1015am"></div>
+        <div class = "time-cell" data-day="T" data-time="1030am"></div>
+        <div class = "time-cell" data-day="T" data-time="1045am"></div>
+        <div class = "time-cell" data-day="T" data-time="1100am"></div>
+        <div class = "time-cell" data-day="T" data-time="1115am"></div>
+        <div class = "time-cell" data-day="T" data-time="1130am"></div>
+        <div class = "time-cell" data-day="T" data-time="1145am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="W" data-time="1000am"></div>
+        <div class = "time-cell" data-day="W" data-time="1015am"></div>
+        <div class = "time-cell" data-day="W" data-time="1030am"></div>
+        <div class = "time-cell" data-day="W" data-time="1045am"></div>
+        <div class = "time-cell" data-day="W" data-time="1100am"></div>
+        <div class = "time-cell" data-day="W" data-time="1115am"></div>
+        <div class = "time-cell" data-day="W" data-time="1130am"></div>
+        <div class = "time-cell" data-day="W" data-time="1145am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="R" data-time="1000am"></div>
+        <div class = "time-cell" data-day="R" data-time="1015am"></div>
+        <div class = "time-cell" data-day="R" data-time="1030am"></div>
+        <div class = "time-cell" data-day="R" data-time="1045am"></div>
+        <div class = "time-cell" data-day="R" data-time="1100am"></div>
+        <div class = "time-cell" data-day="R" data-time="1115am"></div>
+        <div class = "time-cell" data-day="R" data-time="1130am"></div>
+        <div class = "time-cell" data-day="R" data-time="1145am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="F" data-time="1000am"></div>
+        <div class = "time-cell" data-day="F" data-time="1015am"></div>
+        <div class = "time-cell" data-day="F" data-time="1030am"></div>
+        <div class = "time-cell" data-day="F" data-time="1045am"></div>
+        <div class = "time-cell" data-day="F" data-time="1100am"></div>
+        <div class = "time-cell" data-day="F" data-time="1115am"></div>
+        <div class = "time-cell" data-day="F" data-time="1130am"></div>
+        <div class = "time-cell" data-day="F" data-time="1145am"></div>
+      </div>
+      <!-- <div class="grid-cell">
+        <div class = "time-cell" data-day="SA" data-time="1000am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1015am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1030am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1045am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1100am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1115am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1130am"></div>
+        <div class = "time-cell" data-day="SA" data-time="1145am"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="SU" data-time="1000am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1015am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1030am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1045am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1100am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1115am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1130am"></div>
+        <div class = "time-cell" data-day="SU" data-time="1145am"></div>
+      </div> -->
+      <div class="TBA"></div>
+    </div>
+    <div class="grid-row">
+      <div class="times">1<sup>pm</sup></div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="M" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="M" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="M" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="M" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0145pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="T" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="T" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="T" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="T" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0145pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="W" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="W" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="W" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="W" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0145pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="R" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="R" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="R" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="R" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0145pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="F" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="F" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="F" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="F" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0145pm"></div>
+      </div>
+      <!-- <div class="grid-cell">
+        <div class = "time-cell" data-day="SA" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0145pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="SU" data-time="1200pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="1215pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="1230pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="1245pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0100pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0115pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0130pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0145pm"></div>
+      </div> -->
+      <div class="TBA"></div>
+    </div>
+    <div class="grid-row">
+      <div class="times">3<sup>pm</sup></div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="M" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0345pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="T" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0345pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="W" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0345pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="R" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0345pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="F" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0345pm"></div>
+      </div>
+      <!-- <div class="grid-cell">
+        <div class = "time-cell" data-day="SA" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0345pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="SU" data-time="0200pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0215pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0230pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0245pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0300pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0315pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0330pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0345pm"></div>
+      </div> -->
+      <div class="TBA"></div>
+    </div>
+    <div class="grid-row">
+      <div class="times">5<sup>pm</sup></div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="M" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0545pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="T" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0545pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="W" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0545pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="R" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0545pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="F" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0545pm"></div>
+      </div>
+      <!-- <div class="grid-cell">
+        <div class = "time-cell" data-day="SA" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0545pm"></div>
+      </div>
+      <div class="grid-cell">
+        <div class = "time-cell" data-day="SU" data-time="0400pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0415pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0430pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0445pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0500pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0515pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0530pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0545pm"></div>
+      </div> -->
+      <div class="TBA"></div>
+    </div>
+    <div class="grid-row">
+      <div class="slot6p">7<sup>pm</sup></div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="M" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="M" data-time="0745pm"></div>
+      </div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="T" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="T" data-time="0745pm"></div>
+      </div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="W" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="W" data-time="0745pm"></div>
+      </div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="R" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="R" data-time="0745pm"></div>
+      </div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="F" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="F" data-time="0745pm"></div>
+      </div>
+      <!-- <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="SA" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="SA" data-time="0745pm"></div>
+      </div>
+      <div class="grid-cell-bottom">
+        <div class = "time-cell" data-day="SU" data-time="0600pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0615pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0630pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0645pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0700pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0715pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0730pm"></div>
+        <div class = "time-cell" data-day="SU" data-time="0745pm"></div>
+      </div> -->
+      <div class="TBA-bottom"></div>
+    </div>
   </div>
-  <div class="grid-row">
-    <div class="slot8a">9<sup>am</sup></div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="M" data-time="0800am"></div>
-      <div class = "time-cell" data-day="M" data-time="0815am"></div>
-      <div class = "time-cell" data-day="M" data-time="0830am"></div>
-      <div class = "time-cell" data-day="M" data-time="0845am"></div>
-      <div class = "time-cell" data-day="M" data-time="0900am"></div>
-      <div class = "time-cell" data-day="M" data-time="0915am"></div>
-      <div class = "time-cell" data-day="M" data-time="0930am"></div>
-      <div class = "time-cell" data-day="M" data-time="0945am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="T" data-time="0800am"></div>
-      <div class = "time-cell" data-day="T" data-time="0815am"></div>
-      <div class = "time-cell" data-day="T" data-time="0830am"></div>
-      <div class = "time-cell" data-day="T" data-time="0845am"></div>
-      <div class = "time-cell" data-day="T" data-time="0900am"></div>
-      <div class = "time-cell" data-day="T" data-time="0915am"></div>
-      <div class = "time-cell" data-day="T" data-time="0930am"></div>
-      <div class = "time-cell" data-day="T" data-time="0945am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="W" data-time="0800am"></div>
-      <div class = "time-cell" data-day="W" data-time="0815am"></div>
-      <div class = "time-cell" data-day="W" data-time="0830am"></div>
-      <div class = "time-cell" data-day="W" data-time="0845am"></div>
-      <div class = "time-cell" data-day="W" data-time="0900am"></div>
-      <div class = "time-cell" data-day="W" data-time="0915am"></div>
-      <div class = "time-cell" data-day="W" data-time="0930am"></div>
-      <div class = "time-cell" data-day="W" data-time="0945am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="R" data-time="0800am"></div>
-      <div class = "time-cell" data-day="R" data-time="0815am"></div>
-      <div class = "time-cell" data-day="R" data-time="0830am"></div>
-      <div class = "time-cell" data-day="R" data-time="0845am"></div>
-      <div class = "time-cell" data-day="R" data-time="0900am"></div>
-      <div class = "time-cell" data-day="R" data-time="0915am"></div>
-      <div class = "time-cell" data-day="R" data-time="0930am"></div>
-      <div class = "time-cell" data-day="R" data-time="0945am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="F" data-time="0800am"></div>
-      <div class = "time-cell" data-day="F" data-time="0815am"></div>
-      <div class = "time-cell" data-day="F" data-time="0830am"></div>
-      <div class = "time-cell" data-day="F" data-time="0845am"></div>
-      <div class = "time-cell" data-day="F" data-time="0900am"></div>
-      <div class = "time-cell" data-day="F" data-time="0915am"></div>
-      <div class = "time-cell" data-day="F" data-time="0930am"></div>
-      <div class = "time-cell" data-day="F" data-time="0945am"></div>
-    </div>
-    <!-- <div class="grid-cell">
-      <div class = "time-cell" data-day="SA" data-time="0800am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0815am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0830am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0845am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0900am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0915am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0930am"></div>
-      <div class = "time-cell" data-day="SA" data-time="0945am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="SU" data-time="0800am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0815am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0830am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0845am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0900am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0915am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0930am"></div>
-      <div class = "time-cell" data-day="SU" data-time="0945am"></div>
-    </div> -->
-    <div class="TBA-top">
-      <div class = "time-cell" data-day="TBA"></div>
-    </div>
-  </div>
-  <div class="grid-row">
-    <div class="times">10<sup>am</sup></div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="M" data-time="1000am"></div>
-      <div class = "time-cell" data-day="M" data-time="1015am"></div>
-      <div class = "time-cell" data-day="M" data-time="1030am"></div>
-      <div class = "time-cell" data-day="M" data-time="1045am"></div>
-      <div class = "time-cell" data-day="M" data-time="1100am"></div>
-      <div class = "time-cell" data-day="M" data-time="1115am"></div>
-      <div class = "time-cell" data-day="M" data-time="1130am"></div>
-      <div class = "time-cell" data-day="M" data-time="1145am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="T" data-time="1000am"></div>
-      <div class = "time-cell" data-day="T" data-time="1015am"></div>
-      <div class = "time-cell" data-day="T" data-time="1030am"></div>
-      <div class = "time-cell" data-day="T" data-time="1045am"></div>
-      <div class = "time-cell" data-day="T" data-time="1100am"></div>
-      <div class = "time-cell" data-day="T" data-time="1115am"></div>
-      <div class = "time-cell" data-day="T" data-time="1130am"></div>
-      <div class = "time-cell" data-day="T" data-time="1145am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="W" data-time="1000am"></div>
-      <div class = "time-cell" data-day="W" data-time="1015am"></div>
-      <div class = "time-cell" data-day="W" data-time="1030am"></div>
-      <div class = "time-cell" data-day="W" data-time="1045am"></div>
-      <div class = "time-cell" data-day="W" data-time="1100am"></div>
-      <div class = "time-cell" data-day="W" data-time="1115am"></div>
-      <div class = "time-cell" data-day="W" data-time="1130am"></div>
-      <div class = "time-cell" data-day="W" data-time="1145am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="R" data-time="1000am"></div>
-      <div class = "time-cell" data-day="R" data-time="1015am"></div>
-      <div class = "time-cell" data-day="R" data-time="1030am"></div>
-      <div class = "time-cell" data-day="R" data-time="1045am"></div>
-      <div class = "time-cell" data-day="R" data-time="1100am"></div>
-      <div class = "time-cell" data-day="R" data-time="1115am"></div>
-      <div class = "time-cell" data-day="R" data-time="1130am"></div>
-      <div class = "time-cell" data-day="R" data-time="1145am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="F" data-time="1000am"></div>
-      <div class = "time-cell" data-day="F" data-time="1015am"></div>
-      <div class = "time-cell" data-day="F" data-time="1030am"></div>
-      <div class = "time-cell" data-day="F" data-time="1045am"></div>
-      <div class = "time-cell" data-day="F" data-time="1100am"></div>
-      <div class = "time-cell" data-day="F" data-time="1115am"></div>
-      <div class = "time-cell" data-day="F" data-time="1130am"></div>
-      <div class = "time-cell" data-day="F" data-time="1145am"></div>
-    </div>
-    <!-- <div class="grid-cell">
-      <div class = "time-cell" data-day="SA" data-time="1000am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1015am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1030am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1045am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1100am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1115am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1130am"></div>
-      <div class = "time-cell" data-day="SA" data-time="1145am"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="SU" data-time="1000am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1015am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1030am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1045am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1100am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1115am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1130am"></div>
-      <div class = "time-cell" data-day="SU" data-time="1145am"></div>
-    </div> -->
-    <div class="TBA"></div>
-  </div>
-  <div class="grid-row">
-    <div class="times">1<sup>pm</sup></div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="M" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="M" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="M" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="M" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0145pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="T" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="T" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="T" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="T" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0145pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="W" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="W" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="W" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="W" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0145pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="R" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="R" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="R" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="R" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0145pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="F" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="F" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="F" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="F" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0145pm"></div>
-    </div>
-    <!-- <div class="grid-cell">
-      <div class = "time-cell" data-day="SA" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0145pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="SU" data-time="1200pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="1215pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="1230pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="1245pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0100pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0115pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0130pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0145pm"></div>
-    </div> -->
-    <div class="TBA"></div>
-  </div>
-  <div class="grid-row">
-    <div class="times">3<sup>pm</sup></div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="M" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0345pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="T" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0345pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="W" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0345pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="R" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0345pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="F" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0345pm"></div>
-    </div>
-    <!-- <div class="grid-cell">
-      <div class = "time-cell" data-day="SA" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0345pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="SU" data-time="0200pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0215pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0230pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0245pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0300pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0315pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0330pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0345pm"></div>
-    </div> -->
-    <div class="TBA"></div>
-  </div>
-  <div class="grid-row">
-    <div class="times">5<sup>pm</sup></div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="M" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0545pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="T" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0545pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="W" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0545pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="R" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0545pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="F" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0545pm"></div>
-    </div>
-    <!-- <div class="grid-cell">
-      <div class = "time-cell" data-day="SA" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0545pm"></div>
-    </div>
-    <div class="grid-cell">
-      <div class = "time-cell" data-day="SU" data-time="0400pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0415pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0430pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0445pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0500pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0515pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0530pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0545pm"></div>
-    </div> -->
-    <div class="TBA"></div>
-  </div>
-  <div class="grid-row">
-    <div class="slot6p">7<sup>pm</sup></div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="M" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="M" data-time="0745pm"></div>
-    </div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="T" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="T" data-time="0745pm"></div>
-    </div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="W" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="W" data-time="0745pm"></div>
-    </div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="R" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="R" data-time="0745pm"></div>
-    </div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="F" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="F" data-time="0745pm"></div>
-    </div>
-    <!-- <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="SA" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="SA" data-time="0745pm"></div>
-    </div>
-    <div class="grid-cell-bottom">
-      <div class = "time-cell" data-day="SU" data-time="0600pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0615pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0630pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0645pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0700pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0715pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0730pm"></div>
-      <div class = "time-cell" data-day="SU" data-time="0745pm"></div>
-    </div> -->
-    <div class="TBA-bottom"></div>
-  </div>
-</div>
 
 
 

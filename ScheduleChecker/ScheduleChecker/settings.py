@@ -26,8 +26,26 @@ SECRET_KEY = 'django-insecure-v!0ieewk^vy0kzb63*r%3z7=7-30-t-4of2wsxqe6tcp$048+y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['cse.uaa.alaska.edu', 'www.cse.uaa.alaska.edu']
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs/file.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Application definition
 
@@ -82,7 +100,7 @@ WSGI_APPLICATION = 'ScheduleChecker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'class_information.db',
+        'NAME': BASE_DIR / 'class_information.sqlite3',
     }
 }
 
