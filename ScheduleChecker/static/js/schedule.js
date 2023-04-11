@@ -501,6 +501,15 @@ function isUndergradGrad(course1_crs, course2_crs) {
 }
 
 
+function isCrossListed(course1_subj, course1_crs, course2_subj, course2_crs) {
+  const course1_number = extractNumberFromString(course1_crs)
+  const course2_number = extractNumberFromString(course2_crs)
+  if ((course1_number === course2_number) && !(course1_subj === course2_subj)) {
+    return true;
+  }
+  return false;
+}
+
 function extractNumberFromString(str) {
   const match = str.match(/\d+/); // match one or more digits
   return match ? parseInt(match[0]) : null; // convert the matched string to a number or return null if no match found
@@ -509,10 +518,13 @@ function extractNumberFromString(str) {
 
 function addConflict(course1_object, course2_object, message){
   if (isDuplicateConflict(course1_object.CRN, course2_object.CRN)) {
-    return
+    return;
   }
   if (isUndergradGrad(course1_object.Crs, course2_object.Crs)){
-    return
+    return;
+  }
+  if (isCrossListed(course1_object.Subj, course1_object.Crs, course2_object.Subj, course2_object.Crs)){
+    return;
   }
   else {
     conflicts.push({
