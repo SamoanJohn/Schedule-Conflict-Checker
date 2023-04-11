@@ -476,11 +476,11 @@ function addToHashTable(course_object) {
 }
 
 
-function isDuplicateConflict(course1_cnr, course2_crn) {
+function isDuplicateConflict(course1_crn, course2_crn) {
   for (let i = 0; i < conflicts.length; i++) {
     const conflict = conflicts[i];
-    if ((conflict.course1_crn === course1_cnr && conflict.course2_crn === course2_crn) || 
-        (conflict.course1_crn === course2_crn && conflict.course2_crn === course1_cnr)) {
+    if ((conflict.course1.CRN === course1_crn && conflict.course2.CRN === course2_crn) || 
+        (conflict.course1.CRN === course2_crn && conflict.course2.CRN === course1_crn)) {
       return true; // duplicate conflict found
     }
   }
@@ -520,16 +520,16 @@ function addConflict(course1_object, course2_object, message){
   if (isDuplicateConflict(course1_object.CRN, course2_object.CRN)) {
     return;
   }
-  if (isUndergradGrad(course1_object.Crs, course2_object.Crs)){
+  else if (isUndergradGrad(course1_object.Crs, course2_object.Crs)){
     return;
   }
-  if (isCrossListed(course1_object.Subj, course1_object.Crs, course2_object.Subj, course2_object.Crs)){
+  else if (isCrossListed(course1_object.Subj, course1_object.Crs, course2_object.Subj, course2_object.Crs)){
     return;
   }
   else {
     conflicts.push({
-      course1_crn: course1_object.CRN,
-      course2_crn: course2_object.CRN,
+      course1: course1_object,
+      course2: course2_object,
       message: message
     });
   }
@@ -551,14 +551,14 @@ function checkForConflicts() {
             const course2 = courses_in_slot[j];
             // Check if the instructors are the same
             if (course1.Instructor === course2.Instructor) {
-              let message = `Conflict detected: ${course1.Title} and ${course2.Title} have the same instructor at ${day}-${time_slot}`;
+              let message = `have the same instructor: ${course1.Instructor}`;
               addConflict(course1, course2, message);
               continue;
             }
             // Check if the building and room are the same
              else if (course1.Bldg === course2.Bldg && course1.Room === course2.Room) {
               if (!(course1.Room == "ONLINE") && !(course1Bldg == "DIST")) {
-                let message = `Conflict detected: ${course1.Title} and ${course2.Title} are in the same room at ${day}-${time_slot}`;
+                let message = `are in the same room: ${course1.Bldg} ${course1.Room}`;
                 addConflict(course1, course2, message);
                 continue;
               }
@@ -566,7 +566,7 @@ function checkForConflicts() {
             // check for specified individual course conflicts in filter
             for (let conflict of filterVariables.individualCourseConflicts) {
               if (conflict.includes(course1.Subj + ' ' + course1.Crs) && conflict.includes(course2.Subj + ' ' + course2.Crs)) {
-                let message = `Conflict detected: ${course1.Title} and ${course2.Title} cannot conflict (specified in filter) at ${day}-${time_slot}`;
+                let message = `cannot conflict`;
                 addConflict(course1, course2, message);
               }
             } 
@@ -575,7 +575,7 @@ function checkForConflicts() {
               if (conflict[0] === course1.Subj && conflict[0] === course2.Subj &&
                 extractNumberFromString(course1.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course1.Crs) <= extractNumberFromString(conflict[2]) &&
                 extractNumberFromString(course2.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course2.Crs) <= extractNumberFromString(conflict[2])) {
-                let message = `Conflict detected: ${course1.Title} and ${course2.Title} cannot conflict (range specified in filter) at ${day}-${time_slot}`;
+                let message = `cannot conflict`;
                 addConflict(course1, course2, message);
               }
             }       
@@ -584,6 +584,7 @@ function checkForConflicts() {
       }
     }
   }
+  displayConflicts()
   for (let row of conflicts) {
     console.log(row);
   }
@@ -690,10 +691,6 @@ window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleFilterButtonClick() {
     class_array = JSON.parse(JSON.stringify(saved_class_array));
-    console.log("In use hash table:")
-    console.log(class_array)
-    console.log("Saved hash table:")
-    console.log(saved_class_array)
     course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table))
     console.log("In use hash table:")
     console.log(course_hash_table)
@@ -714,3 +711,45 @@ window.addEventListener('load', function() {
   var filterbtn = document.getElementById("apply-filter");
   filterbtn.addEventListener('click', handleFilterButtonClick);
 });
+
+
+
+
+////////////////////////////////////////////////////////////////////
+//  JS for displaying the conflicts
+//  within a conflict box
+////////////////////////////////////////////////////////////////////
+
+function displayConflicts() {
+  var conflictsList = document.getElementById("conflict-container");
+  conflictsList.innerHTML = "";
+
+  // add the header again
+  var header = document.createElement("h2");
+  header.innerText = "Detected Conflicts:";
+  conflictsList.appendChild(header);
+
+  for (var i = 0; i < conflicts.length; i++) {
+    var conflict = conflicts[i];
+    var conflictMessage = conflict.message;
+    var course1 = conflict.course1;
+    var course2 = conflict.course2;
+
+    var conflictBox = document.createElement("div");
+    conflictBox.classList.add("conflict-item");
+
+    var coursesElem = document.createElement("div");
+    coursesElem.classList.add("conflict-courses");
+    coursesElem.innerHTML = '<span class="course1">' + course1.Subj + ' ' + course1.Crs + ' <span class="course1-sec">' + course1.Sec + '</span> &' + '</span>  <span class="course2">' + course2.Subj + ' ' + course2.Crs + ' <span class="course2-sec">' + course2.Sec + '</span></span>';
+    conflictBox.appendChild(coursesElem);
+
+
+    var conflictMessageElem = document.createElement("div");
+    conflictMessageElem.classList.add("conflict-message");
+    conflictMessageElem.innerText = conflictMessage;
+    conflictBox.appendChild(conflictMessageElem);
+
+    conflictsList.appendChild(conflictBox);
+  }
+}
+
