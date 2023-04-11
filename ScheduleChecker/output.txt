@@ -2,6 +2,9 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 72172	STAT	A253	601	*Applied Stats for Sciences	TR	1430	1610	BMH	235	Venema R	F2F
 74596	STAT	A253	RW1	*Applied Stats for Sciences	TBA	TBA	TBA	DIST	ONLINE	Johnson J	ONLINE
 72173	STAT	A307	601	Probability & Statistics	MWF	1300	1415	EIB	215	Venema R	F2F
+71992	PHIL	A305	601	*Professional Ethics	TR	1300	1415	ADM	142	Kelly Jr T	F2F
+71993	PHIL	A305	802	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Kelly Jr T	ONLINE
+71994	PHIL	A305	803	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Anthony R	ONLINE
 72001	PHYS	A123	601	*College Physics I	MW	1300	1415	CPSB	120	Rawlins K	F2F
 72002	PHYS	A123	801	*College Physics I	TBA	TBA	TBA	DIST	ONLINE	Rawlins K	ONLINE
 74562	PHYS	A123	IW1	*College Physics I	MW	1130	1245	DIST	ONLINE	Veh A	WEB MTG
@@ -11,12 +14,16 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 74291	PHYS	A211	P31	*General Physics I	TR	0830	0945	SNOD	117	Nichols D	F2F
 72015	PHYS	A212	601	*General Physics II	TR	1300	1415	SSB	253	Hicks N	F2F
 72019	PHYS	A314	651	Electromagnetics	MW	1000	1115	EIB	215	Munk J	F2F
+71354	ESM	A450	801	Econ Analysis & Operations	TBA	TBA	TBA	DIST	ONLINE	Kretchik G	ONLINE
+75079	ESM	A450	803	Econ Analysis & Operations	MW	1430	1545	EIB	217	Kretchik G	F2F, WEB MTG
 75285	EE	A203	601	Fundamentals of Elect Engr I	MW	0830	0945	EIB	211	Petersen T	F2F
 71296	EE	A241	651	Computer Hardware Concepts	MW	1000	1115	ECB	203	Cokgor I	F2F
 71303	EE	A314	651	Electromagnetics	MW	1000	1115	EIB	215	Munk J	F2F
 75286	EE	A353	601	Circuit Theory	MW	0830	0945	EIB	217	Munk J	F2F
 71304	EE	A354	601	Engineering Signal Analysis	MW	1430	1545	EIB	211	Petersen T	F2F
 71308	EE	A462	601	Communication Systems	MW	1600	1715	EIB	215	Petersen T	F2F
+71317	ENGL	A313	801	Professional Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
+71319	ENGL	A414	801	Research Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
 71641	MATH	A221	601	*Appl Calc for Mngrl/Soc Sci	TR	1000	1115	SSB	253	Manthey T	F2F
 71640	MATH	A221	602	*Appl Calc for Mngrl/Soc Sci	MW	1600	1715	EIB	211	Andrews E	F2F
 74548	MATH	A221	RW1	*Appl Calc for Mngrl/Soc Sci	TBA	TBA	TBA	DIST	ONLINE	Johnson J	ONLINE
@@ -65,13 +72,6 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 75284	CSCE	A685	601	Adv Computer & Machine Vision	MW	1300	1415	ECB	209	Heidari Kapourchali M	F2F
 75708	CSCE	A690	851	Neuroscience and Computation	TR	1130	1245	DIST	ONLINE	Kaneshiro B	WEB MTG
 70953	CSCE	A698	601	Individual Research	TBA	TBA	TBA	ARR	ARR	Witmer F	F2F, IND R/T
-71317	ENGL	A313	801	Professional Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
-71319	ENGL	A414	801	Research Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
-71992	PHIL	A305	601	*Professional Ethics	TR	1300	1415	ADM	142	Kelly Jr T	F2F
-71993	PHIL	A305	802	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Kelly Jr T	ONLINE
-71994	PHIL	A305	803	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Anthony R	ONLINE
-71354	ESM	A450	801	Econ Analysis & Operations	TBA	TBA	TBA	DIST	ONLINE	Kretchik G	ONLINE
-75079	ESM	A450	803	Econ Analysis & Operations	MW	1430	1545	EIB	217	Kretchik G	F2F, WEB MTG
 75879	WRTG	A111	101	*Writing Across Contexts	MW	1345	1500	VDZ	156	Humphrey D	F2F, ONLINE
 74417	WRTG	A111	3C1	*Writing Across Contexts	TBA	TBA	TBA	DIST	ONLINE	Griffin J	ONLINE
 74418	WRTG	A111	3D1	*Writing Across Contexts	TBA	TBA	TBA	DIST	ONLINE	Staff U	ONLINE

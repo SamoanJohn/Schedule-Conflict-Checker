@@ -137,7 +137,7 @@ def scrape_urls(urls):
         for url in urls:
             url = str(url)
             driver.get(url) # open url 
-            wait = WebDriverWait(driver, 10) # wait up to 10 seconds for the table to load
+            wait = WebDriverWait(driver, 20) # wait up to 10 seconds for the table to load
             wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'table-striped'))) # wait for the table to be visible
             html = driver.page_source
             soup = BeautifulSoup(html, 'html.parser')

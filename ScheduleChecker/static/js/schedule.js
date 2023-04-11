@@ -5,6 +5,8 @@ var selectedItems = {
   subjects: []
 };
 
+var class_array = []
+
 function removeItem(element, type) {
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
@@ -16,7 +18,6 @@ function removeItem(element, type) {
 
 $(document).ready(function() {
   $('#major-dropdown').change(function() {
-    console.log('Major dropdown changed');
     var selectedMajor = $(this).val();
     if (selectedMajor !== '') {
       var majors = selectedItems.majors;
@@ -31,7 +32,6 @@ $(document).ready(function() {
   });
 
   $('#subject-dropdown').change(function() {
-    console.log('Subject dropdown changed');
     var selectedSubject = $(this).val();
     if (selectedSubject !== '') {
       var subjects = selectedItems.subjects;
@@ -46,18 +46,14 @@ $(document).ready(function() {
   });
 
   $('#semester-select').change(function() {
-    console.log('Semester dropdown changed');
     var selectedSemester = $(this).val();
-    if (selectedSemester !== '') {
-      console.log(selectedSemester);
-    }
   });
 });
 
 
 window.addEventListener('load', function() {
   // define a function to handle the button press
-  function handleButtonClick() {
+  function handleSearchButtonClick() {
 
       var selectedTerm = $('#semester-select').val();
 
@@ -68,15 +64,9 @@ window.addEventListener('load', function() {
       }
 
       // get the selected majors from the dropdown
-      var selectedMajors = $('#selected-majors .selected-item span:nth-child(2)').map(function() {
-          return $(this).text();
-      }).get().join(",");
+      var selectedMajors =  selectedItems.majors.join(',')
 
-      // get the selected subjects from the dropdown
-      var selectedSubjects = $('#selected-subjects .selected-item span:nth-child(2)').map(function() {
-          return $(this).text();
-      }).get().join(",");
-
+      var selectedSubjects =  selectedItems.subjects.join(',')
       
       // check if at least one major or subject is selected
       if (!selectedMajors && !selectedSubjects) {
@@ -105,12 +95,13 @@ window.addEventListener('load', function() {
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
 
-              const classArray = JSON.parse(classes.data);
-              conflictFunction(classArray)
+              class_array = JSON.parse(classes.data);
+              //FIRST ITERATION OF CONFLICT CHECKING
+              conflictFunction()
 
               // create the course blocks and assign
-              for (let i = 0; i < classArray.length; i++) {
-                const course = classArray[i];
+              for (let i = 0; i < class_array.length; i++) {
+                const course = class_array[i];
                 const courseElement = document.createElement('div');
                 courseElement.classList.add('course-block');
                 courseElement.setAttribute("draggable", "true");
@@ -195,7 +186,7 @@ window.addEventListener('load', function() {
 
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
-  searchbtn.addEventListener('click', handleButtonClick);
+  searchbtn.addEventListener('click', handleSearchButtonClick);
 });
 
 
@@ -292,7 +283,6 @@ $('#add-range-class-conflict').click(function() {
   var inputSubject = inputBox1.val();
   var inputRangeStart = inputBox2.val();
   var inputRangeEnd = inputBox3.val();    
-  console.log('Subject: ' + inputSubject + '   start: ' + inputRangeStart + '   end: ' + inputRangeEnd);
 
   if ((inputSubject.length >= 2 && inputSubject.length <= 4) && 
       (inputRangeStart.length >= 2 && inputRangeStart.length <= 4) && 
@@ -328,8 +318,6 @@ $('#add-hide-class').click(function() {
   if (course.length >= 5 && course.length <= 12) {
       var hidden_courses = filterVariables.hideCourses;
       if (!hidden_courses.includes(course)) {
-          console.log('Subject dropdown changed');
-
           filterVariables.hideCourses.push(course);
           var enteredHideClass = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'hideCourses\')"></span><span>' + course + '</span></div>');
           $('#entered-hide-classes').append(enteredHideClass);
@@ -433,9 +421,14 @@ window.addEventListener('load', function() {
 /////////////////////////////////////////////////////////////////////
 let online_courses = [];
 let unscheduled_courses = [];
-let ignored_courses = []
+let conflicts = [];
+let ignored_courses = [];
 let hidden_courses = [];
 let course_hash_table = {};
+let saved_data = false;
+let saved_course_hash_table = {};
+var saved_class_array = [];
+
 const days = ["M", "T", "W", "R", "F"];
 const time_slots = ["0830", "1000", "1130", "1300", "1430", "1600", "1730", "1900", "2030"];
 
@@ -482,8 +475,58 @@ function addToHashTable(course_object) {
   }
 }
 
+
+function isDuplicateConflict(course1_cnr, course2_crn) {
+  for (let i = 0; i < conflicts.length; i++) {
+    const conflict = conflicts[i];
+    if ((conflict.course1_crn === course1_cnr && conflict.course2_crn === course2_crn) || 
+        (conflict.course1_crn === course2_crn && conflict.course2_crn === course1_cnr)) {
+      return true; // duplicate conflict found
+    }
+  }
+  return false; // no duplicate conflict found
+}
+
+
+function isUndergradGrad(course1_crs, course2_crs) {
+  const course1_number = extractNumberFromString(course1_crs)
+  const course2_number = extractNumberFromString(course2_crs)
+  if (((300 <= course1_number) && (course1_number <= 499)) && ((course2_number >= 600) && (course2_number <= 699)) ||
+      ((300 <= course2_number) && (course2_number <= 499)) && ((course1_number >= 600) && (course1_number <= 699))) {
+    if (Math.abs(course1_number - course2_number) === 200){
+      return true; // undergrad graduate i.e., CSCE A405 and CSCE A605 are the same class
+    }
+  }
+  return false; // not undergrad graduate 
+}
+
+
+function extractNumberFromString(str) {
+  const match = str.match(/\d+/); // match one or more digits
+  return match ? parseInt(match[0]) : null; // convert the matched string to a number or return null if no match found
+}
+
+
+function addConflict(course1_object, course2_object, message){
+  if (isDuplicateConflict(course1_object.CRN, course2_object.CRN)) {
+    return
+  }
+  if (isUndergradGrad(course1_object.Crs, course2_object.Crs)){
+    return
+  }
+  else {
+    conflicts.push({
+      course1_crn: course1_object.CRN,
+      course2_crn: course2_object.CRN,
+      message: message
+    });
+  }
+}
+
+
 function checkForConflicts() {
   // Loop through each Day-Time in the hash table
+  conflicts = [];
   for (const day in course_hash_table) {
     for (const time_slot in course_hash_table[day]) {
       const courses_in_slot = course_hash_table[day][time_slot];
@@ -496,21 +539,46 @@ function checkForConflicts() {
             const course2 = courses_in_slot[j];
             // Check if the instructors are the same
             if (course1.Instructor === course2.Instructor) {
-              console.log(`Conflict detected: ${course1.Title} and ${course2.Title} have the same instructor at ${day}-${time_slot}`);
+              let message = `Conflict detected: ${course1.Title} and ${course2.Title} have the same instructor at ${day}-${time_slot}`;
+              addConflict(course1, course2, message);
+              continue;
             }
             // Check if the building and room are the same
-            if (course1.Bldg === course2.Bldg && course1.Room === course2.Room) {
-              console.log(`Conflict detected: ${course1.Title} and ${course2.Title} are in the same room at ${day}-${time_slot}`);
+             else if (course1.Bldg === course2.Bldg && course1.Room === course2.Room) {
+              if (!(course1.Room == "ONLINE") && !(course1Bldg == "DIST")) {
+                let message = `Conflict detected: ${course1.Title} and ${course2.Title} are in the same room at ${day}-${time_slot}`;
+                addConflict(course1, course2, message);
+                continue;
+              }
             }
+            // check for specified individual course conflicts in filter
+            for (let conflict of filterVariables.individualCourseConflicts) {
+              if (conflict.includes(course1.Subj + ' ' + course1.Crs) && conflict.includes(course2.Subj + ' ' + course2.Crs)) {
+                let message = `Conflict detected: ${course1.Title} and ${course2.Title} cannot conflict (specified in filter) at ${day}-${time_slot}`;
+                addConflict(course1, course2, message);
+              }
+            } 
+            // check for range conflict in the filter
+            for (let conflict of filterVariables.rangeCourseConflicts) {
+              if (conflict[0] === course1.Subj && conflict[0] === course2.Subj &&
+                extractNumberFromString(course1.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course1.Crs) <= extractNumberFromString(conflict[2]) &&
+                extractNumberFromString(course2.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course2.Crs) <= extractNumberFromString(conflict[2])) {
+                let message = `Conflict detected: ${course1.Title} and ${course2.Title} cannot conflict (range specified in filter) at ${day}-${time_slot}`;
+                addConflict(course1, course2, message);
+              }
+            }       
           }
         }
       }
     }
   }
+  for (let row of conflicts) {
+      console.log(row);
+  }
 }
 
 
-function conflictFunction(class_array) {
+function conflictFunction() {
   // makes 2 new arrays
   // classArray for displaying on the calendar
   // onlineClasses for disn=playing somewhere (no time or place)
@@ -527,16 +595,103 @@ function conflictFunction(class_array) {
       i--; // decrement i to account for the removed row
     }
   }
+  saved_class_array = class_array;
   // initializes the hashtable
   createHashTable();
   // adds the courses to the hash table
   for (let i = 0; i < class_array.length; i++) {
     addToHashTable(class_array[i]);
   }
-
-  console.log(course_hash_table);
-  checkForConflicts()
+  console.log(course_hash_table)
+  if (!saved_data) {
+    saved_course_hash_table = course_hash_table;
+    saved_data = true;
+  }
+  checkForConflicts();
 }
 
 
+function removeHiddenCourses() {
+  // Remove hidden courses from classArray
+  console.log("Hiding courses:")
+  console.log(filterVariables.hideCourses)
+  class_array = class_array.filter((course) => {
+    return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crn));
+  });
+  // Remove hidden courses from course_hash_table
+  for (let day in course_hash_table) {
+    for (let timeSlot in course_hash_table[day]) {
+      course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+        return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crn));
+      });
+    }
+  }
+}
 
+
+function removeHiddenSubjects() {
+  console.log("Hiding subjects:")
+  console.log(filterVariables.hideSubjects)
+  // Remove hidden subjects from classArray
+  class_array = class_array.filter((course) => {
+    return !filterVariables.hideSubjects.includes(course.Subj);
+  });
+  // Remove hidden subjects from course_hash_table
+  for (let day in course_hash_table) {
+    for (let timeSlot in course_hash_table[day]) {
+      course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+        return !filterVariables.hideSubjects.includes(course.Subj);
+      });
+    }
+  }
+}
+
+
+function removeIgnoreCourses(){
+  console.log("Ignoring courses:")
+  console.log(filterVariables.ignoreCourses)
+  // Remove hidden courses from course_hash_table
+  for (let day in course_hash_table) {
+    for (let timeSlot in course_hash_table[day]) {
+      course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+        return !(filterVariables.ignoreCourses.includes(course.Subj + ' ' + course.Crn));
+      });
+    }
+  }
+}
+
+
+function removeIgnoreSubjects() {
+  console.log("Ignoring subjects:")
+  console.log(filterVariables.ignoreSubjects)
+  // Remove ignore subjects from course_hash_table
+  for (let day in course_hash_table) {
+    for (let timeSlot in course_hash_table[day]) {
+      course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+        return !filterVariables.ignoreSubjects.includes(course.Subj);
+      });
+    }
+  }
+}
+
+
+window.addEventListener('load', function() {
+  // define a function to handle the button press
+  function handleFilterButtonClick() {
+    class_array = saved_class_array;
+    course_hash_table = saved_course_hash_table;
+    console.log("Filtering individual conflicts:")
+    console.log(filterVariables.individualCourseConflicts)
+    console.log("Filtering range conflicts:")
+    console.log(filterVariables.rangeCourseConflicts)
+    removeHiddenCourses();
+    removeHiddenSubjects();
+    removeIgnoreCourses();
+    removeIgnoreSubjects();
+    checkForConflicts();
+  }
+
+  // add a click event listener to the button
+  var filterbtn = document.getElementById("apply-filter");
+  filterbtn.addEventListener('click', handleFilterButtonClick);
+});
