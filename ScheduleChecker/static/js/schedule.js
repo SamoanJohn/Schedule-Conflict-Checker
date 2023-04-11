@@ -573,7 +573,7 @@ function checkForConflicts() {
     }
   }
   for (let row of conflicts) {
-      console.log(row);
+    console.log(row);
   }
 }
 
@@ -595,16 +595,15 @@ function conflictFunction() {
       i--; // decrement i to account for the removed row
     }
   }
-  saved_class_array = class_array;
   // initializes the hashtable
   createHashTable();
   // adds the courses to the hash table
   for (let i = 0; i < class_array.length; i++) {
     addToHashTable(class_array[i]);
   }
-  console.log(course_hash_table)
   if (!saved_data) {
-    saved_course_hash_table = course_hash_table;
+    console.log("saving hash table")
+    saved_course_hash_table = JSON.parse(JSON.stringify(course_hash_table));
     saved_data = true;
   }
   checkForConflicts();
@@ -678,8 +677,16 @@ function removeIgnoreSubjects() {
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleFilterButtonClick() {
-    class_array = saved_class_array;
-    course_hash_table = saved_course_hash_table;
+    class_array = JSON.parse(JSON.stringify(saved_class_array));
+    console.log("In use hash table:")
+    console.log(class_array)
+    console.log("Saved hash table:")
+    console.log(saved_class_array)
+    course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table))
+    console.log("In use hash table:")
+    console.log(course_hash_table)
+    console.log("Saved hash table:")
+    console.log(saved_course_hash_table)
     console.log("Filtering individual conflicts:")
     console.log(filterVariables.individualCourseConflicts)
     console.log("Filtering range conflicts:")
