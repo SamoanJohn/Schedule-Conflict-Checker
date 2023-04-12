@@ -772,14 +772,18 @@ function displayOnlineCourses() {
     courseTile.classList.add("course-tile");
   
     const crn = document.createElement("p");
-  
+    const title = document.createElement("p");
     const courseInfo = document.createElement("p");
-    courseInfo.textContent = `${course.Subj} ${course.Crs} ${course.Sec}: ${course.Title}`;
+    courseInfo.textContent = `${course.Subj} ${course.Crs} ${course.Sec}`;
     courseTile.appendChild(courseInfo);
+
+    title.textContent = `${course.Title}`;
+    courseTile.appendChild(title);
+
   
     crn.textContent = `CRN: ${course.CRN}`;
     courseTile.appendChild(crn);
-    
+
     const instructor = document.createElement("p");
     instructor.textContent = `Instructor: ${course.Instructor}`;
     courseTile.appendChild(instructor);

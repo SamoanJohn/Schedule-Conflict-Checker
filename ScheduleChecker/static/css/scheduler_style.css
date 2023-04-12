@@ -751,7 +751,6 @@ input:focus {
   text-overflow: ellipsis;
   font-size: .95em;
 }
-
 /* Style for the online course section */
 .online-courses {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -773,18 +772,17 @@ input:focus {
 .course-tiles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start; /* align tiles to the left */
   align-items: flex-start;
   padding: 10px;
 }
 
 /* Style for the course tile */
 .course-tile {
-  width: calc(25% - 10px);
-  margin-bottom: 20px;
+  width: calc(20% - 15px);
+  margin: 7.5px;
   border-radius: 15px;
   background-color: #f4f4f4;
-  border: 1px solid #ddd;
   padding: 10px;
   box-sizing: border-box;
   border: 2px solid #c3c3c3;
@@ -794,7 +792,7 @@ input:focus {
 /* Style for the course tile elements */
 .course-tile p {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
