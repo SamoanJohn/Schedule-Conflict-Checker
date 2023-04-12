@@ -751,6 +751,58 @@ input:focus {
   text-overflow: ellipsis;
   font-size: .95em;
 }
+
+
+/* Temporary Conflict Message Box */
+
+#temp-conflict-box {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #fff;
+  border: 2px solid #c3c3c3;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  
+  #temp-conflict-box .col-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+  
+  #temp-conflict-box .col {
+  width: 48%;
+  margin-bottom: 10px;
+  }
+  
+  #temp-conflict-box .col h4 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: #000;
+  }
+  
+  #temp-conflict-box .col p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #757575;
+  }
+  
+  #temp-conflict-box .conflict-message {
+  margin-top: 10px;
+  font-size: 0.95em;
+  color: #000;
+  }
+
+
 /* Style for the online course section */
 .online-courses {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -779,7 +831,7 @@ input:focus {
 
 /* Style for the course tile */
 .course-tile {
-  width: calc(20% - 15px);
+  width: calc(16.66% - 15px);
   margin: 7.5px;
   border-radius: 15px;
   background-color: #f4f4f4;

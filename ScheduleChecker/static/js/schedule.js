@@ -728,7 +728,6 @@ window.addEventListener('load', function() {
 //  JS for displaying the conflicts
 //  within a conflict box
 ////////////////////////////////////////////////////////////////////
-
 function displayConflicts() {
   var conflictsList = document.getElementById("conflict-container");
   conflictsList.innerHTML = "";
@@ -739,28 +738,100 @@ function displayConflicts() {
   conflictsList.appendChild(header);
 
   for (var i = 0; i < conflicts.length; i++) {
-    var conflict = conflicts[i];
-    var conflictMessage = conflict.message;
-    var course1 = conflict.course1;
-    var course2 = conflict.course2;
+    (function(conflict) {
+      var conflictMessage = conflict.message;
+      var course1 = conflict.course1;
+      var course2 = conflict.course2;
 
-    var conflictBox = document.createElement("div");
-    conflictBox.classList.add("conflict-item");
+      var conflictBox = document.createElement("div");
+      conflictBox.classList.add("conflict-item");
 
-    var coursesElem = document.createElement("div");
-    coursesElem.classList.add("conflict-courses");
-    coursesElem.innerHTML = '<span class="course1">' + course1.Subj + ' ' + course1.Crs + ' <span class="course1-sec">' + course1.Sec + '</span> &' + '</span>  <span class="course2">' + course2.Subj + ' ' + course2.Crs + ' <span class="course2-sec">' + course2.Sec + '</span></span>';
-    conflictBox.appendChild(coursesElem);
+      var coursesElem = document.createElement("div");
+      coursesElem.classList.add("conflict-courses");
+      coursesElem.innerHTML = '<span class="course1">' + course1.Subj + ' ' + course1.Crs + ' <span class="course1-sec">' + course1.Sec + '</span> &' + '</span>  <span class="course2">' + course2.Subj + ' ' + course2.Crs + ' <span class="course2-sec">' + course2.Sec + '</span></span>';
+      conflictBox.appendChild(coursesElem);
 
+      var conflictMessageElem = document.createElement("div");
+      conflictMessageElem.classList.add("conflict-message");
+      conflictMessageElem.innerText = conflictMessage;
+      conflictBox.appendChild(conflictMessageElem);
 
-    var conflictMessageElem = document.createElement("div");
-    conflictMessageElem.classList.add("conflict-message");
-    conflictMessageElem.innerText = conflictMessage;
-    conflictBox.appendChild(conflictMessageElem);
+      // add event listener to each conflict item
+      conflictBox.addEventListener("click", function() {
+        console.log("conflict clicked")
+        console.log(conflict)
+        showConflictDetails(conflict);
+      });
 
-    conflictsList.appendChild(conflictBox);
+      conflictsList.appendChild(conflictBox);
+      
+    })(conflicts[i]);
   }
 }
+
+function militaryToStandardTime(timeString) {
+  var militaryHours = parseInt(timeString.slice(0,2));
+  var militaryMinutes = timeString.slice(2);
+  var standardHours = militaryHours % 12 || 12;
+  var standardMinutes = parseInt(militaryMinutes);
+  var meridiem = militaryHours < 12 || militaryHours === 24 ? "AM" : "PM";
+  return standardHours + ":" + (standardMinutes < 10 ? "0" : "") + standardMinutes + meridiem;
+}
+
+
+function showConflictDetails(conflict) {
+  // get the courses and conflict message
+  var course1 = conflict.course1;
+  var course2 = conflict.course2;
+  var conflictMessage = conflict.message;
+
+  // create temporary conflict box and set content
+  var tempConflictBox = document.createElement("div");
+  tempConflictBox.id = "temp-conflict-box";
+  tempConflictBox.innerHTML = '<div class="col-container">' +
+  '<div class="col">' +
+  '<h4>' + course1.Subj + ' ' + course1.Crs + ' ' + course1.Sec + '</h4>' +
+  '<p>' + course1.Title + '</p>' +
+  '<p>' + 'CRN: ' + course1.CRN + '</p>' +
+  '<p>' + 'Instructor: ' + course1.Instructor + '</p>' +
+  '<p>' + 'Days: ' + course1.Days + '</p>' +
+  '<p>' + militaryToStandardTime(course1.STime) + '-' + militaryToStandardTime(course1.ETime) + '</p>' +
+  '<p>' + 'Location: ' + course1.Bldg + ' ' + course1.Room + '</p>' +
+  '</div>' +
+  '<div class="col">' +
+  '<h4>' + course2.Subj + ' ' + course2.Crs + ' ' + course2.Sec + '</h4>' +
+  '<p>' + course2.Title + '</p>' +
+  '<p>' + 'CRN: ' + course1.CRN + '</p>' +
+  '<p>' + 'Instructor: ' + course2.Instructor + '</p>' +
+  '<p>' + 'Days: ' + course2.Days + '</p>' +
+  '<p>' + militaryToStandardTime(course2.STime) + '-' + militaryToStandardTime(course2.ETime) + '</p>' +
+  '<p>' + 'Location: ' + course2.Bldg + ' ' + course2.Room + '</p>' +
+  '</div>' +
+  '</div>' +
+  '<div class="conflict-message">' + 'These courses ' + conflictMessage + '</div>';
+
+  // append temporary conflict box to body
+  document.body.appendChild(tempConflictBox);
+
+  // make the temporary conflict box visible
+  tempConflictBox.style.display = "block";
+  // add event listener to close temporary conflict box on click outside
+
+  setTimeout(function() {
+    document.addEventListener("click", closeConflictDetails);
+  }, 10);
+}
+
+
+// function to close temporary conflict box
+function closeConflictDetails(event) {
+  var tempConflictBox = document.getElementById("temp-conflict-box");
+  if (tempConflictBox && !tempConflictBox.contains(event.target)) {
+    tempConflictBox.parentNode.removeChild(tempConflictBox);
+    document.removeEventListener("click", closeConflictDetails);
+  }
+}
+
 
 
 function displayOnlineCourses() {
