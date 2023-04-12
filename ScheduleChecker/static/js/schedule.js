@@ -86,7 +86,7 @@ window.addEventListener('load', function() {
         url += '&subjects=' + selectedSubjects;
       }
 
-      const loadingContainer = document.getElementById('loading-container');
+      const loadingContainer = document.getElementById('loading-search-container');
       // make an AJAX request to retrieve the major requirements
       var xhr = new XMLHttpRequest();
       loadingContainer.style.display = 'flex';
@@ -566,7 +566,7 @@ function checkForConflicts() {
             // check for specified individual course conflicts in filter
             for (let conflict of filterVariables.individualCourseConflicts) {
               if (conflict.includes(course1.Subj + ' ' + course1.Crs) && conflict.includes(course2.Subj + ' ' + course2.Crs)) {
-                let message = `cannot conflict`;
+                let message = `cannot conflict, specified in filter`;
                 addConflict(course1, course2, message);
               }
             } 
@@ -575,7 +575,7 @@ function checkForConflicts() {
               if (conflict[0] === course1.Subj && conflict[0] === course2.Subj &&
                 extractNumberFromString(course1.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course1.Crs) <= extractNumberFromString(conflict[2]) &&
                 extractNumberFromString(course2.Crs) >= extractNumberFromString(conflict[1]) && extractNumberFromString(course2.Crs) <= extractNumberFromString(conflict[2])) {
-                let message = `cannot conflict`;
+                let message = `cannot conflict, specified in filter`;
                 addConflict(course1, course2, message);
               }
             }       
@@ -608,6 +608,7 @@ function conflictFunction() {
       i--; // decrement i to account for the removed row
     }
   }
+  displayOnlineCourses()
   // initializes the hashtable
   createHashTable();
   // adds the courses to the hash table
@@ -690,6 +691,10 @@ function removeIgnoreSubjects() {
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleFilterButtonClick() {
+
+    const loadingContainer = document.getElementById('loading-filtering-container');
+    loadingContainer.style.display = 'flex';
+
     class_array = JSON.parse(JSON.stringify(saved_class_array));
     course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table))
     console.log("In use hash table:")
@@ -705,6 +710,10 @@ window.addEventListener('load', function() {
     removeIgnoreCourses();
     removeIgnoreSubjects();
     checkForConflicts();
+    setTimeout(function() {
+      loadingContainer.style.display = 'none';;
+    }, 300);
+
   }
 
   // add a click event listener to the button
@@ -753,3 +762,35 @@ function displayConflicts() {
   }
 }
 
+
+function displayOnlineCourses() {
+ 
+  // Create course tiles for each online course and append them to the "course-tiles" container
+  const courseTilesContainer = document.querySelector(".course-tiles");
+  online_courses.forEach(course => {
+    const courseTile = document.createElement("div");
+    courseTile.classList.add("course-tile");
+  
+    const crn = document.createElement("p");
+  
+    const courseInfo = document.createElement("p");
+    courseInfo.textContent = `${course.Subj} ${course.Crs} ${course.Sec}: ${course.Title}`;
+    courseTile.appendChild(courseInfo);
+  
+    crn.textContent = `CRN: ${course.CRN}`;
+    courseTile.appendChild(crn);
+    
+    const instructor = document.createElement("p");
+    instructor.textContent = `Instructor: ${course.Instructor}`;
+    courseTile.appendChild(instructor);
+  
+    courseTilesContainer.appendChild(courseTile);
+  });
+}
+// Toggle the online courses section visibility
+function toggleOnlineCourses() {
+  const onlineCoursesSection = document.querySelector('.online-courses');
+  const toggleButton = document.querySelector('.toggle-online-courses-button');
+  onlineCoursesSection.classList.toggle('show');
+  toggleButton.textContent = onlineCoursesSection.classList.contains('show') ? 'Hide' : 'Show';
+}

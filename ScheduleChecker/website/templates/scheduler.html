@@ -52,8 +52,11 @@
         <span class="dropdown-arrow"></span>
         <div id="selected-subjects"></div>
       </div>
-    
       <button id="search-btn" class="search-btn">Search</button>
+      <div id="loading-search-container" class="loading-container">
+        <div class="spinner"></div>
+        <div id="loading-text">Scraping data, will take a few seconds...</div>
+      </div>
     </div>
 
     <!-- Advanced Filtering -->
@@ -145,23 +148,24 @@
               <div id="entered-ignore-classes"></div>
             </div>
           </div>
-
+          <!-- 
           <h3>Corequisite Conflicts</h3>
           <div class="corequisite-conflicts">
             <input type="checkbox" id="corequisite-conflicts" name="corequisite-conflicts">
-          </div>        
+          </div> -->
           <button id="apply-filter">Filter</button>
         </form>
+        <div id="loading-filtering-container" class="loading-container">
+          <div class="spinner"></div>
+          <div id="loading-text">Filtering...</div>
+        </div>
       </div>
     </div>
     <div class="toggle-advanced-filtering-indent" id="toggle-advanced-filtering">
       <div class="advanced-filtering-text">Advanced Filtering</div>
       <span class="filter-dropdown-arrow"></span>
     </div>
-    <div id="loading-container">
-      <div class="spinner"></div>
-      <div id="loading-text">Scraping data, will take a few seconds...</div>
-    </div>
+
     <!-- Austin -->
     <!-- John -->
   <!-- data-Day may need to change to a M,T,W,TH format-->
@@ -630,15 +634,15 @@
     <!-- displaying conflicts -->
     <div id="conflict-container">
       <h2>Detected Conflicts:</h2>
-      <div class = "conflict-item">
-        <div class="conflict-courses">
-          <span class="course1">WRTG A111 612</span>
-          &
-          <span class="course2">WRTG A111 672</span>
-        </div>
-        <div class="conflict-message">have the same instructor: Rufner S</div>
-      </div>
     </div>
+</div>
+<!-- displaying asychronous online courses-->
+<div class="online-courses">
+  <div class="online-courses-header">
+    <h2>Online Courses</h2>
+    <button class="toggle-online-courses-button" onclick="toggleOnlineCourses()">Show</button>
+  </div>
+  <div class="course-tiles"></div>
 </div>
 
 

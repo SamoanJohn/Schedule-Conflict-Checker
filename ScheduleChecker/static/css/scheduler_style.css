@@ -135,7 +135,7 @@
 }
 
 
-#loading-container {
+.loading-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -173,6 +173,12 @@
 }
 
 /*## Advanced Filtering ##*/
+
+input[type="text"] {
+  border-bottom: 2px solid #c3c3c3;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 
 .filtering-container {
     background-color: #dfdfdf;
@@ -674,6 +680,11 @@ input:focus {
     display: none;
 }
 
+/* MAIN CONTAINER DISPLAYING */
+.main-container {
+  display: flex;
+}
+
 /* DISPLAYING CONFLICTS */
 #conflict-container {
   width: 20%;
@@ -741,9 +752,79 @@ input:focus {
   font-size: .95em;
 }
 
-/* MAIN CONTAINER DISPLAYING */
-
-.main-container {
-  display: flex;
+/* Style for the online course section */
+.online-courses {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 50px;
+  background-color: #dfdfdf;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  max-height: 100px;
+  transition: max-height 0.3s ease-out;
+  border-top: 2px solid #c3c3c3;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.online-courses.show {
+  max-height: 1000px; /* adjust the height to fit all the course tiles */
+}
+
+/* Style for the course tiles container */
+.course-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+/* Style for the course tile */
+.course-tile {
+  width: calc(25% - 10px);
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #c3c3c3;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the course tile elements */
+.course-tile p {
+  margin: 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-tile p:first-child {
+  font-weight: bold;
+}
+
+/* Style for the online course section header */
+.online-courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ddd;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.toggle-online-courses-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  height: 39.6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.toggle-online-courses-button:hover {
+  background-color: darkgreen;
+}
