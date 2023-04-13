@@ -64,6 +64,13 @@ function handleFileSelect(event) {
     // Find indices of selected columns in the first row
     const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
 
+    const missingColumns = selectedColumns.filter(col => !Object.values(contents[0]).includes(col));
+    if (missingColumns.length > 0) {
+      const downloadLink = "https://curric.uaa.alaska.edu/scheduleSearch.php";
+      alert(`The Excel file was not recognized. Please download a new file from ${downloadLink}.`);
+      return; // Stop the function
+    }
+    
     const newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
       if (col === 'Subj Crs Sec') {
         const [subj, crs, sec] = row[columnIndices[index]].split(' ');
@@ -858,7 +865,7 @@ function displayConflicts() {
       conflictBox.addEventListener("click", function() {
         console.log("conflict clicked")
         console.log(conflict)
-        showConflictDetails(conflict);
+        showConflictDetails(conflict, conflictBox);
       });
 
       conflictsList.appendChild(conflictBox);
@@ -876,7 +883,7 @@ function militaryToStandardTime(timeString) {
 }
 
 
-function showConflictDetails(conflict) {
+function showConflictDetails(conflict, clickedElement) {
   // get the courses and conflict message
   var course1 = conflict.course1;
   var course2 = conflict.course2;
@@ -908,12 +915,23 @@ function showConflictDetails(conflict) {
   '<div class="conflict-message">' + 'These courses ' + conflictMessage + '</div>';
 
   // append temporary conflict box to body
-  document.body.appendChild(tempConflictBox);
+  var container = document.getElementById("conflict-container");
+  container.appendChild(tempConflictBox);
+
+  // var clickedRect = clickedElement.getBoundingClientRect();
+  // var clickedTop = clickedRect.top;
+  // var boxTop = clickedTop + clickedElement.offsetHeight;
+  // tempConflictBox.style.top = boxTop + "px";
+
+
+  var parentContainer = clickedElement.parentNode.getBoundingClientRect();
+  var clickedRect = clickedElement.getBoundingClientRect();
+  var clickedTop = clickedRect.top - parentContainer.top;
+  var boxTop = clickedTop + clickedElement.offsetHeight + 100;
+  tempConflictBox.style.top = boxTop + "px";
 
   // make the temporary conflict box visible
   tempConflictBox.style.display = "block";
-  // add event listener to close temporary conflict box on click outside
-
   setTimeout(function() {
     document.addEventListener("click", closeConflictDetails);
   }, 10);

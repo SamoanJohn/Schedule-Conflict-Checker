@@ -136,7 +136,6 @@
 
 .upload-btn-wrapper {
   position: relative;
-  overflow: hidden;
   display: inline-block;
 }
 
@@ -170,7 +169,7 @@
 
 #OR {
   font-weight: bold;
-  padding: 10px;
+  padding: 15px;
 }
 
 .loading-container {
@@ -235,7 +234,7 @@ input[type="text"] {
     padding: 0 15px;
     margin-top: 0px;
     background-color: #dfdfdf;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 15px 15px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     border: 2px solid #c3c3c3;
     border-width: 0px 2px 2px 2px;
@@ -433,7 +432,7 @@ input:focus {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 15px;
     display: flex;
-    width: 75%;
+    width: 50%;
     padding-top: 0px;
     justify-content: center;
     margin: 0px
@@ -798,9 +797,9 @@ input:focus {
   position: absolute;
   z-index: 1;
   top: 50%;
-  left: 75%;
+  left: 25%;
+  width: 135%;
   transform: translate(-50%, -50%);
-  width: 40%;
   max-width: 800px;
   padding: 20px;
   border-radius: 15px;
