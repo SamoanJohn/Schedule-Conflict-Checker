@@ -99,6 +99,8 @@ window.addEventListener('load', function() {
               //FIRST ITERATION OF CONFLICT CHECKING
               conflictFunction()
 
+              console.log(class_array);
+
               // create the course blocks and assign
               for (let i = 0; i < class_array.length; i++) {
                 const course = class_array[i];
@@ -129,6 +131,7 @@ window.addEventListener('load', function() {
                 // Add course element to time cell
                 const days = courseElement.getAttribute('Days');
                 const time = courseElement.getAttribute('STime');
+
                 // figure this out, days == TBAW, TBAT, added to handle now
                 if(days == "TBA" || days == "TBAM" || days == "TBAT" || days == "TBAW" || days == "TBAR" || days == "TBAF"){
                   const timeSlot = document.querySelector(`[data-day="TBA"]`);
@@ -144,6 +147,7 @@ window.addEventListener('load', function() {
                     timeSlot.appendChild(duplicateCourseElement);
                   });
                 }
+                console.log(courseElement);
             };
             // drag events for course-block and time-cells
             const courseBlock = document.querySelector('.course-block');
