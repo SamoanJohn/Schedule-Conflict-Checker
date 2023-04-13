@@ -48,47 +48,84 @@ $(document).ready(function() {
   });
 });
 
-
 function handleFileSelect(event) {
   const file = event.target.files[0];
   const reader = new FileReader();
 
-  reader.onload = function(event) {
+  reader.onload = (event) => {
     const data = new Uint8Array(event.target.result);
-    const workbook = XLSX.read(data, {type: 'array'});
+    const workbook = XLSX.read(data, { type: 'array' });
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
-    
+
     const selectedColumns = ['CRN', 'Subj Crs Sec', 'Title', 'Days', 'STime', 'ETime', 'Bldg', 'Room', 'Instructor', 'Del Mthd'];
-    const contents = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+    const contents = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
     // Find indices of selected columns in the first row
     const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
-    console.log(columnIndices);
 
-    const newData = contents.slice(1).map(row => {
-      return selectedColumns.reduce((acc, col, index) => {
-        if (col === 'Subj Crs Sec') {
-          const [subj, crs, sec] = row[columnIndices[index]].split(' ');
-          acc['Subj'] = subj;
-          acc['Crs'] = crs;
-          acc['Sec'] = sec;
-        } else {
-          let cellValue = row[columnIndices[index]];
-          if (typeof cellValue === 'string' && cellValue.includes('\r\n')) {
-            cellValue = cellValue.replace(/\r\n$/, ''); // Remove trailing \r\n
-            cellValue = cellValue.replace(/\r\n/g, ', '); // Replace remaining \r\n with ', '
-          }
-          acc[col] = cellValue;
-        }
-        return acc;
-      }, {});
+    const newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
+      if (col === 'Subj Crs Sec') {
+        const [subj, crs, sec] = row[columnIndices[index]].split(' ');
+        return { ...acc, Subj: subj, Crs: crs, Sec: sec };
+      }
+
+      let cellValue = row[columnIndices[index]];
+      if (typeof cellValue === 'string' && cellValue.includes('\r\n')) {
+        cellValue = cellValue.replace(/\r\n$/, ''); // Remove trailing \r\n
+        cellValue = cellValue.replace(/\r\n/g, ', '); // Replace remaining \r\n with ', '
+        cellValue = cellValue.split(', '); // Convert cellValue into an array of values
+        cellValue = cellValue.length === 1 ? cellValue[0] : cellValue.join(', ');
+      }
+
+      return { ...acc, [col]: cellValue };
+    }, {}));
+
+    class_array = newData.map(row => {
+      const [days, stime, etime, bldg, room] = narrowDown(row);
+      return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
     });
-    console.log(newData);
 
-    
+    console.log(class_array);
+    conflictFunction()
+
   };
+
   reader.readAsArrayBuffer(file);
+}
+
+
+function narrowDown(row) {
+  if (Array.isArray(row['Days'])) {
+    let scores = row['Days'].map((_, i) => {
+      let score = 0;
+      if (row['Days'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['STime'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['ETime'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['Bldg'][i] === 'DIST') {
+        score += 1;
+      }
+      if (row['Room'][i] === 'ONLINE' || row['Room'][i] === 'BLKBD') {
+        score += 1;
+      }
+      return score;
+    });
+    let index = scores.indexOf(Math.min(...scores));
+    let days = row['Days'][index];
+    let stime = row['STime'][index];
+    let etime = row['ETime'][index];
+    let bldg = row['Bldg'][index];
+    let room = row['Room'][index];
+    return [days, stime, etime, bldg, room];
+  } else {
+    return [row['Days'], row['STime'], row['ETime'], row['Bldg'], row['Room']];
+  }
 }
 
 function parse_time(time_str) {
@@ -159,7 +196,6 @@ window.addEventListener('load', function() {
               class_array = JSON.parse(classes.data);
               //FIRST ITERATION OF CONFLICT CHECKING
               conflictFunction()
-
               console.log(class_array);
 
               // create the course blocks and assign
@@ -196,7 +232,6 @@ window.addEventListener('load', function() {
                 // figure this out, days == TBAW, TBAT, added to handle now
                 if(days == "TBA" || days == "TBAM" || days == "TBAT" || days == "TBAW" || days == "TBAR" || days == "TBAF"){
                   const timeSlot = document.querySelector(`[data-day="TBA"]`);
-                  console.log(timeSlot);
                   timeSlot.appendChild(courseElement);
                 }
                 else{
@@ -208,7 +243,6 @@ window.addEventListener('load', function() {
                     timeSlot.appendChild(duplicateCourseElement);
                   });
                 }
-                console.log(courseElement);
             };
             // drag events for course-block and time-cells
             const courseBlock = document.querySelector('.course-block');
@@ -261,7 +295,6 @@ window.addEventListener('load', function() {
 //  TO PASS JS VARIABLES
 //
 /////////////////////////////////////////////////////////////////////
-
 
 var filterVariables = {
   individualCourseConflicts: [],
@@ -829,7 +862,6 @@ function displayConflicts() {
       });
 
       conflictsList.appendChild(conflictBox);
-      
     })(conflicts[i]);
   }
 }
