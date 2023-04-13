@@ -6,6 +6,7 @@
     <title>Schedule Conflict Checker</title>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
     <script src="{% static 'js/schedule.js' %}"></script>
     <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
   </head>
@@ -53,6 +54,11 @@
         <div id="selected-subjects"></div>
       </div>
       <button id="search-btn" class="search-btn">Search</button>
+      <div id="OR"> OR </div>
+      <div class="upload-btn-wrapper">
+        <button class="upload-btn" onclick="document.querySelector('input[type=file]').click()">Upload Excel</button>
+        <input type="file" accept=".xlsx" name="myfile" style="display:none" onchange="handleFileSelect(event)">
+      </div>
       <div id="loading-search-container" class="loading-container">
         <div class="spinner"></div>
         <div id="loading-text">Scraping data, will take a few seconds...</div>
@@ -639,7 +645,7 @@
 <!-- displaying asychronous online courses-->
 <div class="online-courses">
   <div class="online-courses-header">
-    <h2>Online Courses</h2>
+    <h2>Online / Asynchronous Courses</h2>
     <button class="toggle-online-courses-button" onclick="toggleOnlineCourses()">Show</button>
   </div>
   <div class="course-tiles"></div>

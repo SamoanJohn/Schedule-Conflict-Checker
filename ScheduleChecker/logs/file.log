@@ -19996,3 +19996,2019 @@ Not Found: /favicon.ico
 (0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Science'); args=('BS', 'Computer Science'); alias=default
 (0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Systems Engineering'); args=('BS', 'Computer Systems Engineering'); alias=default
 "GET /query/?term=202303&majors=BA%20-%20Computer%20Science,BS%20-%20Computer%20Science,BS%20-%20Computer%20Systems%20Engineering&subjects=CSCE%20-%20Computer%20Sci%20&%20Computer%20Eng HTTP/1.1" 200 30817
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681322357.2217624, current mtime: 1681327281.6895142
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48767
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18172
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.016) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science HTTP/1.1" 200 20690
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48767
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18143
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science HTTP/1.1" 200 20690
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48767
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18143
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Science'); args=('BS', 'Computer Science'); alias=default
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Systems Engineering'); args=('BS', 'Computer Systems Engineering'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science,BS%20-%20Computer%20Science,BS%20-%20Computer%20Systems%20Engineering&subjects=CSCE%20-%20Computer%20Sci%20&%20Computer%20Eng HTTP/1.1" 200 30817
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681327281.6895142, current mtime: 1681348940.0768068
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48941
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18143
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681348940.0768068, current mtime: 1681349003.3426254
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48948
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18552
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48948
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18619
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681349003.3426254, current mtime: 1681349065.95284
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48944
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18619
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48944
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18619
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681349065.95284, current mtime: 1681349230.890262
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18649
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18673
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18663
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.015) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18704
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18704
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18704
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48965
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18706
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681349230.890262, current mtime: 1681349709.46231
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48987
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18524
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 48987
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18789
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681349709.46231, current mtime: 1681349874.1730778
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49080
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18706
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49080
+"GET /static/js/schedule.js HTTP/1.1" 200 34278
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49080
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 34745
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1681349874.1730778, current mtime: 1681350379.514087
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x000001BB02735800>, True), (<function translation_file_changed at 0x000001BB03882840>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 34845
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36682
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36690
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.015) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36659
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36682
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35815
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/js/schedule.js HTTP/1.1" 200 35819
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35995
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35885
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35912
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35963
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35963
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 35961
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/js/schedule.js HTTP/1.1" 200 36160
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36336
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/js/schedule.js HTTP/1.1" 200 36465
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science HTTP/1.1" 200 20690
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Systems Engineering'); args=('BS', 'Computer Systems Engineering'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science,BS%20-%20Computer%20Systems%20Engineering HTTP/1.1" 200 25776
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/js/schedule.js HTTP/1.1" 200 36465
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Systems Engineering'); args=('BS', 'Computer Systems Engineering'); alias=default
+"GET /query/?term=202303&majors=BS%20-%20Computer%20Systems%20Engineering&subjects=CSCE%20-%20Computer%20Sci%20&%20Computer%20Eng HTTP/1.1" 200 27836
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 49176
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 18779
+"GET /static/js/schedule.js HTTP/1.1" 200 36461
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\urls\resolvers.py", line 702, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <URLPattern list> (admin:admin) 'admin/'>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern ''>], [<URLResolver <module 'website.urls' from 'C:\\Users\\austi\\OneDrive\\Documents\\Schedule-Conflict-Checker\\ScheduleChecker\\website\\urls.py'> (None:None) ''>, <URLPattern 'query/' [name='get_major_requirements']>], [<URLPattern '^static/(?P<path>.*)$'>]], 'path': 'favicon.ico'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 880, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+TypeError: 'URLResolver' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 890, in _resolve_lookup
+    current = getattr(current, bit)
+              ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'URLResolver' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 896, in _resolve_lookup
+    current = current[int(bit)]
+                      ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\template\base.py", line 903, in _resolve_lookup
+    raise VariableDoesNotExist(
+django.template.base.VariableDoesNotExist: Failed lookup for key [name] in <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2577
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BA' AND "major_requirements"."Major" = 'Computer Science'); args=('BA', 'Computer Science'); alias=default
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Science'); args=('BS', 'Computer Science'); alias=default
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Systems Engineering'); args=('BS', 'Computer Systems Engineering'); alias=default
+"GET /query/?term=202303&majors=BA%20-%20Computer%20Science,BS%20-%20Computer%20Science,BS%20-%20Computer%20Systems%20Engineering&subjects=CSCE%20-%20Computer%20Sci%20&%20Computer%20Eng HTTP/1.1" 200 30817

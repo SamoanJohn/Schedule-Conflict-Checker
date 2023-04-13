@@ -14,8 +14,6 @@ function removeItem(element, type) {
   $(element).parent().remove();
 }
 
-
-
 $(document).ready(function() {
   $('#major-dropdown').change(function() {
     var selectedMajor = $(this).val();
@@ -49,6 +47,69 @@ $(document).ready(function() {
     var selectedSemester = $(this).val();
   });
 });
+
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const data = new Uint8Array(event.target.result);
+    const workbook = XLSX.read(data, {type: 'array'});
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    
+    const selectedColumns = ['CRN', 'Subj Crs Sec', 'Title', 'Days', 'STime', 'ETime', 'Bldg', 'Room', 'Instructor', 'Del Mthd'];
+    const contents = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+
+    // Find indices of selected columns in the first row
+    const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
+    console.log(columnIndices);
+
+    const newData = contents.slice(1).map(row => {
+      return selectedColumns.reduce((acc, col, index) => {
+        if (col === 'Subj Crs Sec') {
+          const [subj, crs, sec] = row[columnIndices[index]].split(' ');
+          acc['Subj'] = subj;
+          acc['Crs'] = crs;
+          acc['Sec'] = sec;
+        } else {
+          let cellValue = row[columnIndices[index]];
+          if (typeof cellValue === 'string' && cellValue.includes('\r\n')) {
+            cellValue = cellValue.replace(/\r\n$/, ''); // Remove trailing \r\n
+            cellValue = cellValue.replace(/\r\n/g, ', '); // Replace remaining \r\n with ', '
+          }
+          acc[col] = cellValue;
+        }
+        return acc;
+      }, {});
+    });
+    console.log(newData);
+
+    
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function parse_time(time_str) {
+  if (Array.isArray(time_str)) {
+    return time_str.map(t => parse_time(t));
+  } else if (time_str.length === 6) {
+    let hours = parseInt(time_str.substring(0, 2));
+    const minutes = parseInt(time_str.substring(2, 4));
+    const meridian = time_str.substring(4).toUpperCase();
+    if (meridian === 'PM' && hours !== 12) {
+      hours += 12;
+    } else if (meridian === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    return `${hours.toString().padStart(2, '0')}${minutes.toString().padStart(2, '0')}`;
+  } else {
+    return time_str;
+  }
+}
+
+
 
 
 window.addEventListener('load', function() {
@@ -801,7 +862,7 @@ function showConflictDetails(conflict) {
   '<div class="col">' +
   '<h4>' + course2.Subj + ' ' + course2.Crs + ' ' + course2.Sec + '</h4>' +
   '<p>' + course2.Title + '</p>' +
-  '<p>' + 'CRN: ' + course1.CRN + '</p>' +
+  '<p>' + 'CRN: ' + course2.CRN + '</p>' +
   '<p>' + 'Instructor: ' + course2.Instructor + '</p>' +
   '<p>' + 'Days: ' + course2.Days + '</p>' +
   '<p>' + militaryToStandardTime(course2.STime) + '-' + militaryToStandardTime(course2.ETime) + '</p>' +
