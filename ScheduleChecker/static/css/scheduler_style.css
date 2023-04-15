@@ -25,7 +25,7 @@ select:focus {
   z-index: 5;
 }
 
-#subject-dropdown,
+/* #subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
 #room-dropdown,
@@ -36,7 +36,7 @@ select:focus {
   height: 150px;
   width: 100%;
 }
-/*  Use this if you want the dropdowns to float
+  Use this if you want the dropdowns to float */
 #subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
@@ -48,7 +48,7 @@ select:focus {
   height: 150px;
   width: 100%;
   z-index: 999;
-} */
+} 
 
 
 .dropdown-toggle-wrapper {
