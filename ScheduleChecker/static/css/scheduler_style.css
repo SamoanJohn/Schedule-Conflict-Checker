@@ -25,7 +25,7 @@ select:focus {
   z-index: 5;
 }
 
-/* #subject-dropdown,
+#subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
 #room-dropdown,
@@ -35,7 +35,8 @@ select:focus {
   font-size: 16px;
   height: 150px;
   width: 100%;
-} */
+}
+/*  Use this if you want the dropdowns to float
 #subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
@@ -47,7 +48,7 @@ select:focus {
   height: 150px;
   width: 100%;
   z-index: 999;
-}
+} */
 
 
 .dropdown-toggle-wrapper {
@@ -1008,7 +1009,7 @@ h2 {
   display: none;
   position: absolute;
   z-index: 10;
-  left: 85%;
+  left: 85.5%;
   width: 25%;
   transform: translate(-50%, -50%);
   max-width: 800px;

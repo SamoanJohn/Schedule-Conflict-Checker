@@ -1170,16 +1170,14 @@ function showConflictDetails(conflict, clickedElement) {
   var container = document.getElementById("temp-conflict-container");
   container.appendChild(tempConflictBox);
 
-  // var clickedRect = clickedElement.getBoundingClientRect();
-  // var clickedTop = clickedRect.top;
-  // var boxTop = clickedTop + clickedElement.offsetHeight;
-  // tempConflictBox.style.top = boxTop + "px";
+  var advancedFilteringContainer = document.querySelector(".advanced-filtering-container");
+  var advancedFilteringContainerHeight = advancedFilteringContainer.offsetHeight;
 
 
   var parentContainer = clickedElement.parentNode.getBoundingClientRect();
   var clickedRect = clickedElement.getBoundingClientRect();
   var clickedTop = clickedRect.top - parentContainer.top;
-  var boxTop = clickedTop + clickedElement.offsetHeight + 230;
+  var boxTop = clickedTop + clickedElement.offsetHeight + 230 + advancedFilteringContainerHeight;
   tempConflictBox.style.top = boxTop + "px";
 
   // make the temporary conflict box visible
