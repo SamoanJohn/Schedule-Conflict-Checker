@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
     <script src="{% static 'js/schedule.js' %}"></script>
     <link rel="stylesheet" type='text/css' media='screen' href="{% static 'css/scheduler_style.css' %}">
   </head>
@@ -31,19 +35,36 @@
       </div>
     
       <div class="select-wrapper">
-        <select id="major-dropdown" class="dropdown-toggle">
-          <option value="" selected disabled hidden>Select Major...</option>
-            <!-- DB access error happening here -->   
-            <!-- Test comment -->   
-          {% for item in degree_major_data %}
-          <option>{{ item.degree }} - {{ item.major }}</option>
-          {% endfor %}
-        </select>
-        <span class="dropdown-arrow"></span>
+        <div class="dropdown-toggle-wrapper">
+          <button id="major-dropdown-toggle" class="dropdown-toggle">Select Major...</button>
+          <span class="dropdown-arrow"></span>
+        </div>
+        <div class="dropdown-wrapper">
+          <select id="major-dropdown" class="dropdown" multiple>
+            {% for item in degree_major_data %}
+              <option>{{ item.degree }} - {{ item.major }}</option>
+            {% endfor %}
+          </select>
+        </div>
         <div id="selected-majors"></div>
       </div>
-    
+      
       <div class="select-wrapper">
+        <div class="dropdown-toggle-wrapper">
+          <button id="subject-dropdown-toggle" class="dropdown-toggle">Select Subject...</button>
+          <span class="dropdown-arrow"></span>
+        </div>
+        <div class="dropdown-wrapper">
+          <select id="subject-dropdown" class="dropdown" multiple>
+            {% for item in subject_data %}
+            <option>{{ item.subj }} - {{ item.subject }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div id="selected-subjects"></div>
+      </div>
+      
+      <!-- <div class="select-wrapper">
         <select id="subject-dropdown" class="dropdown-toggle">
           <option value="" selected disabled hidden>Select Subject...</option>
           {% for item in subject_data %}
@@ -52,7 +73,9 @@
         </select>
         <span class="dropdown-arrow"></span>
         <div id="selected-subjects"></div>
-      </div>
+      </div> -->
+
+      
       <button id="search-btn" class="search-btn">Search</button>
       <div id="OR"> OR </div>
       <div class="upload-btn-wrapper">
@@ -69,98 +92,143 @@
     <div class="filtering-container">
       <div id="advanced-filtering-content" style="display: none;">
         <form onsubmit="return false;">
-          <div class="individual-class-conflicts">
-            <h3>Specify individual course conflicts</h3>
-            <div class="individual-class-conflict-selection">
-              <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
-              <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
-              <button class="add-button" id="add-individual-class-conflict">Add</button>
-              <datalist id="course-suggestion">
-                <option value="Format: CSCE A101"></option>
-              </datalist>
-            </datalist>
-            </div>
-            <div id="entered-individual-course-conflict"></div>
-          </div>
+          <div class="advanced-filtering-container">
+            <div class="filtering-schedule-conflict-container ">
+              <div class="conflict-filtering">
+                <h2>Conflict Filtering</h2>
+                <div class="individual-class-conflicts">
+                  <h3>Specify individual course conflicts</h3>
+                  <div class="individual-class-conflict-selection">
+                    <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
+                    <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
+                    <button class="add-button" id="add-individual-class-conflict">Add</button>
+                    <datalist id="course-suggestion">
+                      <option value="Format: CSCE A101"></option>
+                    </datalist>
+                  </datalist>
+                  </div>
+                  <div id="entered-individual-course-conflict"></div>
+                </div>
 
-          <div class="range-class-conflicts">
-            <h3>Specify conflicts within course ranges</h3>
-            <div class="range-class-conflict-selection">
-              <input type="text" id="range-subject" name="range-subject" placeholder="Subject" list="subj-suggestion" oninput="if (this.value=='Format: CSCE') {this.value='CSCE'}"/>
-              <input type="text" id="range-start" name="range-start" placeholder="Start" list="crs-lower-suggestion" oninput="if (this.value=='Format: A300') {this.value='A300'}"/>
-              <input type="text" id="range-end" name="range-end" placeholder="End" list="crs-higher-suggestion" oninput="if (this.value=='Format: A699') {this.value='A699'}"/>
-              <datalist id="subj-suggestion">
-                <option value="Format: CSCE">
-              </datalist>
-              <datalist id="crs-lower-suggestion">
-                <option value="Format: A300">
-              </datalist>
-              <datalist id="crs-higher-suggestion">
-                <option value="Format: A699">
-              </datalist>
-              <button class="add-button" id="add-range-class-conflict">Add</button>
-            </div>
-            <div id="entered-range-course-conflict"></div>
-          </div>
-          
-          <div class="hide-container">
-            <div class="hide-subjects">
-              <h3>Hide subjects from calendar</h3>
-              <div class="hide-subject-selection">
-                <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject" list="hide-subj-suggestion" oninput="if (this.value=='Format: WRTG') {this.value='WRTG'}"/>
-                <datalist id="hide-subj-suggestion">
-                  <option value="Format: WRTG">
-                </datalist>
-                <button class="add-button" id="add-hide-subject">Add</button>
-              </div>
-              <div id="entered-hide-subjects"></div>
-            </div>
-          
-            <div class="hide-classes">
-              <h3>Hide courses from calendar</h3>
-              <div class="hide-class-selection">
-                <input type="text" id="hidden-class" name="hidden-class" placeholder="Course" list="hide-course-suggestion" oninput="if (this.value=='Format: WRTG A111') {this.value='WRTG A111'}"/>
-                <datalist id="hide-course-suggestion">
-                  <option value="Format: WRTG A111">
-                </datalist>
-                <button class="add-button" id="add-hide-class">Add</button>
-              </div>
-              <div id="entered-hide-classes"></div>
-            </div>
-          </div>
-          
+                <div class="range-class-conflicts">
+                  <h3>Specify conflicts within course ranges</h3>
+                  <div class="range-class-conflict-selection">
+                    <input type="text" id="range-subject" name="range-subject" placeholder="Subject" list="subj-suggestion" oninput="if (this.value=='Format: CSCE') {this.value='CSCE'}"/>
+                    <input type="text" id="range-start" name="range-start" placeholder="Start" list="crs-lower-suggestion" oninput="if (this.value=='Format: A300') {this.value='A300'}"/>
+                    <input type="text" id="range-end" name="range-end" placeholder="End" list="crs-higher-suggestion" oninput="if (this.value=='Format: A699') {this.value='A699'}"/>
+                    <datalist id="subj-suggestion">
+                      <option value="Format: CSCE">
+                    </datalist>
+                    <datalist id="crs-lower-suggestion">
+                      <option value="Format: A300">
+                    </datalist>
+                    <datalist id="crs-higher-suggestion">
+                      <option value="Format: A699">
+                    </datalist>
+                    <button class="add-button" id="add-range-class-conflict">Add</button>
+                  </div>
+                  <div id="entered-range-course-conflict"></div>
+                </div>             
 
-          <div class="ignore-container">
-            <div class="ignore-subjects">
-              <h3>Ignore conflicts for subjects</h3>
-              <div class="ignore-subject-selection">
-                <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject" list="ignore-subj-suggestion" oninput="if (this.value=='Format: WRTG') {this.value='WRTG'}"/>
-                <datalist id="ignore-subj-suggestion">
-                  <option value="Format: WRTG">
-                </datalist>
-                <button class="add-button" id="add-ignore-subject">Add</button>
+                <div class="ignore-container">
+                  <div class="ignore-subjects">
+                    <h3>Ignore conflicts for subjects</h3>
+                    <div class="ignore-subject-selection">
+                      <input type="text" id="ignore-subject" name="ignore-subject" placeholder="Subject" list="ignore-subj-suggestion" oninput="if (this.value=='Format: WRTG') {this.value='WRTG'}"/>
+                      <datalist id="ignore-subj-suggestion">
+                        <option value="Format: WRTG">
+                      </datalist>
+                      <button class="add-button" id="add-ignore-subject">Add</button>
+                    </div>
+                    <div id="entered-ignore-subjects"></div>
+                  </div>
+                  <div class="ignore-classes">
+                    <h3>Ignore conflicts for courses</h3>
+                    <div class="ignore-class-selection">
+                      <input type="text" id="ignore-class" name="ignore-class" placeholder="Course" list="ignore-course-suggestion" oninput="if (this.value=='Format: WRTG A111') {this.value='WRTG A111'}"/>
+                      <datalist id="ignore-course-suggestion">
+                        <option value="Format: WRTG A111">
+                      </datalist>
+                      <button class="add-button" id="add-ignore-class">Add</button>
+                    </div>
+                    <div id="entered-ignore-classes"></div>
+                  </div>
+                </div>
+
               </div>
-              <div id="entered-ignore-subjects"></div>
-            </div>
-            <div class="ignore-classes">
-              <h3>Ignore conflicts for courses</h3>
-              <div class="ignore-class-selection">
-                <input type="text" id="ignore-class" name="ignore-class" placeholder="Course" list="ignore-course-suggestion" oninput="if (this.value=='Format: WRTG A111') {this.value='WRTG A111'}"/>
-                <datalist id="ignore-course-suggestion">
-                  <option value="Format: WRTG A111">
-                </datalist>
-                <button class="add-button" id="add-ignore-class">Add</button>
+              <div class="schedule-filtering">
+                <h2>Calendar Filtering</h2>
+
+                <div class="select-wrapper" id="instructor-select-wrapper">
+                  <h3>Select instructors to display</h3>
+                  <div class="dropdown-toggle-wrapper" id="instructor-dropdown-toggle-wrapper">
+                    <button id="instructor-dropdown-toggle" class="dropdown-toggle">Select Instructor...</button>
+                    <span class="dropdown-arrow" id="instructor-dropdown-arrow"></span>
+                  </div>
+                  <div class="dropdown-wrapper">
+                    <select id="instructor-dropdown" class="dropdown" multiple>
+                    </select>
+                  </div>
+                  <div id="selected-instructors"></div>
+                </div>
+                
+                <div id="bldg-room-select-header">
+                  <div id="bldg-header">
+                    <h3>Select buildings to display</h3>
+                  </div>
+                  <div id="room-header">
+                    <h3>Select rooms to display</h3>
+                  </div>
+                </div>
+
+                <div class="select-wrapper" id="bldg-room-select-wrapper">
+                  <div class="dropdown-toggle-wrapper" id="bldg-dropdown-toggle-wrapper">
+                    <button id="bldg-dropdown-toggle" class="dropdown-toggle">Select Building...</button>
+                    <span class="dropdown-arrow" id="bldg-dropdown-arrow"></span>
+                    <div class="dropdown-wrapper">
+                      <select id="bldg-dropdown" class="dropdown" multiple></select>
+                    </div>
+                  </div>
+                  <div class="dropdown-toggle-wrapper" id="room-dropdown-toggle-wrapper">
+                    <button id="room-dropdown-toggle" class="dropdown-toggle">Select Room...</button>
+                    <span class="dropdown-arrow" id="room-dropdown-arrow"></span>
+                    <div class="dropdown-wrapper">
+                      <select id="room-dropdown" class="dropdown" multiple></select>
+                    </div>
+                  </div>
+                </div>
+                <div id="selected-items"></div>              
+
+                <div class="hide-container">
+                  <div class="hide-subjects">
+                    <h3>Hide subjects from calendar</h3>
+                    <div class="hide-subject-selection">
+                      <input type="text" id="hidden-subject" name="hidden-subject" placeholder="Subject" list="hide-subj-suggestion" oninput="if (this.value=='Format: WRTG') {this.value='WRTG'}"/>
+                      <datalist id="hide-subj-suggestion">
+                        <option value="Format: WRTG">
+                      </datalist>
+                      <button class="add-button" id="add-hide-subject">Add</button>
+                    </div>
+                    <div id="entered-hide-subjects"></div>
+                  </div>
+                
+                  <div class="hide-classes">
+                    <h3>Hide courses from calendar</h3>
+                    <div class="hide-class-selection">
+                      <input type="text" id="hidden-class" name="hidden-class" placeholder="Course" list="hide-course-suggestion" oninput="if (this.value=='Format: WRTG A111') {this.value='WRTG A111'}"/>
+                      <datalist id="hide-course-suggestion">
+                        <option value="Format: WRTG A111">
+                      </datalist>
+                      <button class="add-button" id="add-hide-class">Add</button>
+                    </div>
+                    <div id="entered-hide-classes"></div>
+                  </div>
+                </div>
               </div>
-              <div id="entered-ignore-classes"></div>
             </div>
-          </div>
-          <!-- 
-          <h3>Corequisite Conflicts</h3>
-          <div class="corequisite-conflicts">
-            <input type="checkbox" id="corequisite-conflicts" name="corequisite-conflicts">
-          </div> -->
-          <button id="apply-filter">Filter</button>
-        </form>
+            <button id="apply-filter">Filter</button>
+          </form>
+        </div>
         <div id="loading-filtering-container" class="loading-container">
           <div class="spinner"></div>
           <div id="loading-text">Filtering...</div>
@@ -639,7 +707,11 @@
 
     <!-- displaying conflicts -->
     <div id="conflict-container">
-      <h2>Detected Conflicts:</h2>
+      <div id="conflict-header">
+        <h2>Detected Conflicts:</h2>
+      </div>
+    </div>
+    <div id="temp-conflict-container">
     </div>
 </div>
 <!-- displaying asychronous online courses-->
