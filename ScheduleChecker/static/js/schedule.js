@@ -8,10 +8,11 @@ var selectedItems = {
 var class_array = []
 
 $(document).ready(function() {
+  const slider = document.querySelector('.toggle-slider');
   $('.dark-mode-toggle').click(function() {
-    $('body').toggleClass('dark-mode');
-    $('.dark-mode-toggle').toggleClass('dark-mode');
+    slider.classList.toggle('toggle-slider-on');
     $('.dark-text, .light-text').toggle();
+    $('body').toggleClass('dark-mode');
   });
 });
 
@@ -30,7 +31,7 @@ function removeItem(element, type, id) {
   // Force set background color to white and text color to black for the removed option
   $(id + ' option').filter(function() {
     return $(this).text() === item;
-  }).css('background-color', 'white').css('color', 'black');
+  }).css('background-color', 'var(background-color)').css('color', 'var(--black-text-color)');
 }
 
 
@@ -1184,11 +1185,14 @@ function showConflictDetails(conflict, clickedElement) {
   var searchContainer = document.querySelector(".search-container");
   var searchContainerHeight = searchContainer.offsetHeight;
 
+  var header = document.querySelector(".header");
+  var headerHeight = header.offsetHeight;
+
 
   var parentContainer = clickedElement.parentNode.getBoundingClientRect();
   var clickedRect = clickedElement.getBoundingClientRect();
   var clickedTop = clickedRect.top - parentContainer.top;
-  var boxTop = clickedTop + clickedElement.offsetHeight + 145 + advancedFilteringContainerHeight + searchContainerHeight;
+  var boxTop = clickedTop + clickedElement.offsetHeight + 145 + advancedFilteringContainerHeight + searchContainerHeight + headerHeight;
   tempConflictBox.style.top = boxTop + "px";
 
   // make the temporary conflict box visible

@@ -1,32 +1,74 @@
-  
 :root {
-  --main-color: #007bff; /* Default value */
+  --background-color: #FFFFFF;
+  --black-text-color: #000000;
+  --grey-text-color: #757575;
+  --white-text-color: white;
+  --grey-background-color: #dfdfdf;
+  --lightgrey-background-color: #f4f4f4;
+  --grey-text-color: grey;
+  --header-background-color: #004895;
+  --grey-border-color: #c3c3c3;
+  --submit-button-color: green;
+  --submit-button-hover-color: darkgreen;
+  --add-button-blue-color: #0077cc;
+  --hover-dropdown-option: #007bff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --conflict-hover-color: #acb3ff;
+  --dropdown-blue-color: rgb(0, 60, 255);
+  --splinner-blue-color: rgba(0, 38, 255, 0.352);
+  --loading-background-color: rgba(133, 133, 133, 0.441);
+  --remove-item-hover: #383f475d;
+  --selected-item-text-color: #383f47;
 }
 
-body.dark {
-  --main-color: #4d6d9a; /* Dark mode value */
+/* Dark mode styles */
+body.dark-mode {
+  --background-color: #1a1a1a; /* dark mode background color */
+  --black-text-color: #FFFFFF; /* default dark mode text color */
+  --grey-text-color: #858585;
+  --white-text-color: #FFFFFF; /* default button text color */
+  --grey-background-color: #111111;
+  --lightgrey-background-color: #3C3C3C;
+  --header-background-color: #004895;
+  --grey-border-color: #6B6B6B;
+  --submit-button-color: darkgreen; /* default button background color */
+  --submit-button-hover-color: green;
+  --add-button-blue-color: #0077cc;
+  --hover-dropdown-option: #007bff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --conflict-hover-color: #4a5097;
+  --dropdown-blue-color: rgb(76, 118, 255);
+  --splinner-blue-color: rgba(0, 38, 255, 0.352);
+  --loading-background-color: rgba(133, 133, 133, 0.441);
+  --remove-item-hover: #383f475d;
+  --selected-item-text-color: #FFFFFF;
 }
+
+body {
+  background-color: var(--background-color);
+}
+
 
 .header {
   height: 65px;
-  background-color: #004895;
+  background-color: var(--header-background-color);
   display: flex;
   font-family: "Montserrat", sans-serif;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--grey-border-color);
   padding: 0 20px;
 }
 
 .header-title {
-  font-size: 24px;
-  color: white;
+  font-size: 36px;
+  color: var(--white-text-color);
   font-weight: bold;
 }
 
 .university-title {
-  font-size: 24px;
-  color: white;
+  font-size: 20px;
+  color: var(--white-text-color);
   font-weight: bold;
 }
 
@@ -45,7 +87,7 @@ body.dark {
 
 .profile-name {
   font-size: 18px;
-  color: white;
+  color: var(--white-text-color);
 }
 
 .dark-mode-toggle {
@@ -55,7 +97,7 @@ body.dark {
   width: 50px;
   height: 30px;
   border-radius: 15px;
-  background-color: #fff;
+  background-color: var(--background-color);
   cursor: pointer;
 }
 
@@ -67,7 +109,7 @@ body.dark {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background-color: #004895;
+  background-color: var(--header-background-color);
   transition: transform 0.2s;
 }
 
@@ -79,7 +121,7 @@ body.dark {
 .dark-text,
 .light-text {
   font-size: 14px;
-  color: white;
+  color: var(--white-text-color);
   font-weight: bold;
 }
 
@@ -95,22 +137,26 @@ body.dark {
   align-items: center;
 }
 
-.dark-mode-toggle.dark .toggle-slider {
+.toggle-slider-on {
+  transform: translate(22px, -50%);
+}
+
+/* .dark-mode-toggle.dark .toggle-slider {
   transform: translate(21px, -50%);
   transition: transform 0.2s;
-}
+} */
 
 
 
 /*## Term, Major, and Subject Search Bar ##*/
 .search-container {
-    background-color: #dfdfdf;
+    background-color: var(--grey-background-color);
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 15px;
     display: flex;
     justify-content: center;
-    border-bottom: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 /**/
@@ -123,6 +169,7 @@ select:focus {
 }
 
 .dropdown-wrapper {
+  background-color: var(--background-color);
   position: static;
   left: 0;
   z-index: 5;
@@ -133,6 +180,8 @@ select:focus {
 #instructor-dropdown,
 #room-dropdown,
 #bldg-dropdown {
+  background-color: var(--background-color);
+  color: var(--black-text-color);
   display: none;
   position: sticky;
   font-size: 16px;
@@ -153,40 +202,14 @@ select:focus {
   z-index: 999;
 }  */
 
-
-.dropdown-toggle-wrapper {
-  cursor: pointer;
-}
-
-.dropdown-toggle-wrapper.active .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-.dropdown-toggle-wrapper.active + .dropdown-wrapper {
-  display: block;
-  /* Add the background color only when the dropdown is active */
-  background-color: #cce6ff;
-}
-
 .dropdown option:hover {
-  background-color: #007bff;
-  color: white;
-}
-.dropdown-arrow {
-  display: inline-block;
-  z-index: -1;
-  width: 0.5em;
-  height: 0.5em;
-  border: solid #333;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-  margin-left: 0.5em;
+  background-color: var(--hover-dropdown-option);
+  color: var(--white-text-color);
 }
 
 .select-wrapper.open .dropdown-wrapper {
   display: block;
 }
-
 
 /**/
 .select-wrapper-term {
@@ -211,12 +234,13 @@ select.dropdown-toggle {
     border-radius: 5px;
     margin-bottom: 2px;
     border: none;
-    background-color: white;
+    color: var(--black-text-color);
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
     z-index: 1; /* Ensure select box is above the arrow */
-    border: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
   
   #major-dropdown-toggle,
@@ -236,12 +260,13 @@ select.dropdown-toggle {
     border-radius: 5px;
     margin-bottom: 2px;
     border: none;
-    background-color: white;
+    color: var(--black-text-color);
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
     z-index: 1; /* Ensure select box is above the arrow */
-    border: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
 
     /* Dark mode colors */
@@ -250,10 +275,8 @@ select.dropdown-toggle {
   body.dark #instructor-dropdown-toggle,
   body.dark #room-dropdown-toggle,
   body.dark #bldg-dropdown-toggle {
-  background-color: #333;
-  color: white;
-  border-color: #666;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+  color: var(--white-text-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
 
   select.dropdown-toggle:focus {
@@ -269,18 +292,9 @@ select.dropdown-toggle {
     height: 0;
     border-style: solid;
     border-width: 5px 4px 0 4px;
-    border-color: black transparent transparent transparent;
+    border-color: var(--black-text-color) transparent transparent transparent;
     float: right;
     z-index: 0; /* Ensure arrow is below the select box */
-  }
-  
-  select.dropdown-toggle:hover + .dropdown-arrow,
-  select.dropdown-toggle:focus + .dropdown-arrow {
-    border-color: blue transparent transparent transparent;
-  }
-  
-  select.dropdown-toggle.active + .dropdown-arrow {
-    transform: translateY(-50%) rotate(180deg);
   }
 
   
@@ -295,10 +309,10 @@ select.dropdown-toggle {
     margin: 1px;
     border-radius: 20px;
     font-weight: bold;
-    background-color: #ffffff;
-    color: #383f47;
-    border: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color);
+    color: var(--selected-item-text-color);
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
     white-space: nowrap;
     min-width: fit-content;
   }
@@ -325,14 +339,14 @@ select.dropdown-toggle {
     height: 17px;
     border-radius: 100%;
     border: none;
-    color: #000000;
+    color: var(--black-text-color);
     font-weight: bold;
     cursor: pointer;
     margin-right: 10px;
 }
   
 .remove-item:hover {
-    background-color: #383f475d;
+    background-color: var(--remove-item-hover);
 }
   
 .remove-item:before {
@@ -342,8 +356,8 @@ select.dropdown-toggle {
 }
 
 .search-btn {
-    background-color: green;
-    color: white;
+    background-color: var(--submit-button-color);
+    color: var(--white-text-color);
     padding: 10px 20px;
     height: 39.6px;
     border: none;
@@ -353,7 +367,7 @@ select.dropdown-toggle {
 }
   
 .search-btn:hover {
-    background-color: darkgreen;
+    background-color: var(--submit-button-hover-color);
 }
 
 .upload-btn-wrapper {
@@ -362,8 +376,8 @@ select.dropdown-toggle {
 }
 
 .upload-btn {
-  background-color: green;
-  color: white;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
   padding: 10px 20px;
   height: 39.6px;
   border: none;
@@ -377,7 +391,7 @@ select.dropdown-toggle {
 }
 
 .upload-btn:hover {
-  background-color: darkgreen !important;
+  background-color: var(--submit-button-hover-color) !important;
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -391,6 +405,7 @@ select.dropdown-toggle {
 
 #OR {
   display: flex;
+  color: var(--black-text-color);
   justify-content: center;
   font-weight: bold;
   padding: 15px;
@@ -405,7 +420,7 @@ select.dropdown-toggle {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(133, 133, 133, 0.441);
+  background-color: var(--loading-background-color);
   display: none;
   justify-content: center;
   align-items: center;
@@ -416,9 +431,9 @@ select.dropdown-toggle {
   display: inline-block;
   width: 30px;
   height: 30px;
-  border: 4px solid rgba(0, 38, 255, 0.352);
+  border: 4px solid var(--splinner-blue-color);
   border-radius: 50%;
-  border-top-color: #000000;
+  border-top-color: var(--black-text-color);
   animation: spin 0.8s ease-in-out infinite;
   margin-right: 10px;
 }
@@ -430,7 +445,7 @@ select.dropdown-toggle {
 }
 
 #loading-text {
-  color: #000000;
+  color: var(--black-text-color);
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 22px;
   font-weight: bold;
@@ -439,16 +454,17 @@ select.dropdown-toggle {
 /*## Advanced Filtering ##*/
 
 input[type="text"] {
-  border-bottom: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  color: var(--black-text-color);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 .filtering-container {
-    background-color: #dfdfdf;
+    background-color: var(--grey-background-color);
     position: relative;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    border: 2px solid #c3c3c3;
+    border: 2px solid var(--grey-border-color);
     border-top: none;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 .advanced-filtering-container {
@@ -463,12 +479,12 @@ input[type="text"] {
     width: 150px;
     padding: 0 15px;
     margin-top: 0px;
-    background-color: #dfdfdf;
+    background-color: var(--grey-background-color);
     border-radius: 0 0 15px 15px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    border: 2px solid #c3c3c3;
+    border: 2px solid var(--grey-border-color);
     border-width: 0px 2px 2px 2px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
 
   .advanced-filtering-text {
@@ -477,17 +493,17 @@ input[type="text"] {
   
   #toggle-advanced-filtering {
     position: absolute;
-    color: rgb(0, 0, 0);
+    color: var(--black-text-color);
     cursor: pointer;
     font-size: 12px;
     text-decoration: none;
   }
   
   #toggle-advanced-filtering:hover {
-    color: rgb(0, 60, 255);
+    color: var(--dropdown-blue-color);
   }
   .toggle-advanced-filtering-indent:hover .filter-dropdown-arrow {
-    border-top-color: rgb(0, 60, 255); /* change the color to your desired hover color */
+    border-top-color: var(--dropdown-blue-color); /* change the color to your desired hover color */
   }
   
   .filter-dropdown-arrow {
@@ -497,7 +513,7 @@ input[type="text"] {
     right: 10px;
     transform: translateY(-50%);
     border: 8px solid transparent;
-    border-top-color: #000000;
+    border-top-color: var(--black-text-color);
     border-bottom-width: 0;
     transition: transform 0.2s ease-in-out;
   }
@@ -520,7 +536,7 @@ input {
     margin-bottom: 2px;
     margin-right: 10px;
     border: none;
-    background-color: white;
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
 }
@@ -535,20 +551,20 @@ input:focus {
     top: 30px;
     display: flex;
     padding: 0px 20px;
-    border: 2px solid #0077cc;
+    border: 2px solid var(--add-button-blue-color);
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     height: 30px;
-    color: #0077cc;
+    color: var(--add-button-blue-color);
     font-size: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
   
 .add-button:hover {
-    background-color: #0077cc;
-    color: #ffffff;
-}
+    background-color: var(--add-button-blue-color);
+    color: var(--white-text-color);
+  }
 
 /* Individual Class Conflict */
 .individual-class-conflicts {
@@ -670,7 +686,7 @@ input:focus {
   padding: 0px;
   padding-left: 10px;;
   font-size: 12px;
-  color: grey;
+  color: var(--grey-text-color);
 }
 #instructor-dropdown-arrow,
 #room-dropdown-arrow,
@@ -755,6 +771,7 @@ input:focus {
 }
 
 #advanced-filtering-content h3 {
+  color: var(--black-text-color);
   font-size: 12px;
   margin-top: 0px;
   margin-bottom: 5px;
@@ -771,8 +788,8 @@ input:focus {
 
 
 #apply-filter {
-  background-color: green;
-  color: white;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
   margin: 20px;
   padding: 10px 20px;
   width: 125px;
@@ -787,16 +804,11 @@ input:focus {
 }
 
 #apply-filter:hover {
-    background-color: darkgreen;
+    background-color: var(--submit-button-hover-color);
 }
   
-#advanced-filtering-content .error {
-    color: #dc3545;
-    margin-top: 5px;
-}
-
 /* corequisite checkbox */
-.corequisite-conflicts {
+/* .corequisite-conflicts {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -819,7 +831,7 @@ input:focus {
   
   .corequisite-conflicts input[type="checkbox"]:checked::before {
     content: "\2714";
-    color: #fff;
+    color: var(--white-text-color);
     display: block;
     position: absolute;
     top: 50%;
@@ -845,7 +857,7 @@ input:focus {
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-  }
+  } */
 
   /* #bldg-room-select,
   #instructor-select {
@@ -864,18 +876,18 @@ input:focus {
   margin-top: 40px; 
   padding: 10px;
   padding-left: 5px;
-  border: 2px solid #c3c3c3;
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
-  background-color: #dfdfdf;
+  background-color: var(--grey-background-color);
 }
 
 .schedule-grid {
-  background-color: white;
-  border: 2px solid #c3c3c3;
+  background-color: var(--background-color);
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
   width: 100%;
   display: grid;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 
 }
 
@@ -895,7 +907,7 @@ input:focus {
 }
 
 .days {
-    border-left: 1px solid #c3c3c3;
+    border-left: 1px solid var(--grey-border-color);
     padding: auto;
     width: 100%;
     height: 30px;
@@ -904,7 +916,7 @@ input:focus {
 
 .days h2{
   font-size: 16px;
-  color: #000000;
+  color: var(--black-text-color);
   text-align: center;
 }
 
@@ -953,9 +965,9 @@ input:focus {
 /*draggable course block */
 .course-block {
     position:absolute;
-    border: 2px solid #c3c3c3;
+    border: 2px solid var(--grey-border-color);
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--background-color);
     top:0;
     height: 20px;
     width: 50%;
@@ -988,6 +1000,8 @@ input:focus {
 /* MAIN CONTAINER DISPLAYING */
 .main-container {
   display: flex;
+  justify-content: flex-end;
+
 }
 
 /* DISPLAYING CONFLICTS */
@@ -999,14 +1013,15 @@ input:focus {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 40px;
   margin-left: 15px;
-  border: 2px solid #c3c3c3;
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
-  background-color: #dfdfdf;
+  background-color: var(--grey-background-color);
   /* box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); */
 }
 
 
 h2 {
+  color: var(--black-text-color);
   font-size: 16px;
   margin-bottom: 5px;
   margin-left: 10px;
@@ -1015,7 +1030,7 @@ h2 {
 #conflict-container h2 {
   font-size: 16px;
   margin-bottom: 5px;
-  color: #000000;
+  color: var(--black-text-color);
   text-align: center;
   position: sticky; /* make the header sticky */
 }
@@ -1023,11 +1038,11 @@ h2 {
 #conflict-header {
   font-size: 16px;
   margin-bottom: 5px;
-  color: #000000;
+  color: var(--black-text-color);
   text-align: center;
   position: sticky; /* make the header sticky */
   top: 0; /* position the header at the top */
-  background-color: #dfdfdf;
+  background-color: var(--grey-background-color);
   padding: 10px;
 }
 
@@ -1040,14 +1055,14 @@ h2 {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  border: 2px solid #c3c3c3;
-  background-color: #fff;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--grey-border-color);
+  background-color: var(--background-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 .conflict-item:hover {
-  background-color: #acb3ff;
-  color: #fff;
+  background-color: var(--conflict-hover-color);
+  color: var(--white-text-color);
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -1057,21 +1072,21 @@ h2 {
   font-weight: bold;
   text-overflow: ellipsis;
   font-size: .95em;
-  color: #000000;
+  color: var(--black-text-color);
 }
 
 .course1-sec {
   font-size: 0.8em;
-  color: #757575;
+  color: var(--grey-text-color);
 }
 
 .course2-sec {
   font-size: 0.85em;
-  color: #757575;
+  color: var(--grey-text-color);
 }
 
 .conflict-message {
-  color: #000000;
+  color: var(--black-text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1091,9 +1106,9 @@ h2 {
   max-width: 800px;
   padding: 20px;
   border-radius: 15px;
-  background-color: #fff;
-  border: 2px solid #c3c3c3;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 10px 30px var(--box-shadow-color);
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   
@@ -1112,19 +1127,19 @@ h2 {
   margin: 0;
   font-size: 1em;
   font-weight: bold;
-  color: #000;
+  color: var(--black-text-color);
   }
   
   #temp-conflict-box .col p {
   margin: 0;
   font-size: 0.9em;
-  color: #757575;
+  color: var(--grey-text-color);
   }
   
   #temp-conflict-box .conflict-message {
   margin-top: 10px;
   font-size: 0.95em;
-  color: #000;
+  color: var(--black-text-color);
   }
 
   #conflict-container::-webkit-scrollbar {
@@ -1151,13 +1166,13 @@ h2 {
 .online-courses {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 50px;
-  background-color: #dfdfdf;
-  border: 1px solid #ddd;
+  background-color: var(--grey-background-color);
+  border: 2px solid var(--grey-border-color);
   overflow: hidden;
   max-height: 100px;
   transition: max-height 0.3s ease-out;
-  border-top: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 .online-courses.show {
@@ -1175,14 +1190,15 @@ h2 {
 
 /* Style for the course tile */
 .course-tile {
+  color: var(--black-text-color);
   width: calc(16.66% - 15px);
   margin: 7.5px;
   border-radius: 15px;
-  background-color: #f4f4f4;
+  background-color: var(--background-color);
   padding: 10px;
   box-sizing: border-box;
-  border: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 /* Style for the course tile elements */
@@ -1203,15 +1219,15 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ddd;
+  background-color: var(--grey-background-color);
   font-size: 12px;
   padding: 10px;
   cursor: pointer;
 }
 
 .toggle-online-courses-button {
-  background-color: green;
-  color: white;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
   padding: 10px 20px;
   height: 39.6px;
   border: none;
@@ -1221,5 +1237,5 @@ h2 {
 }
 
 .toggle-online-courses-button:hover {
-  background-color: darkgreen;
+  background-color: var(--submit-button-hover-color);
 }
