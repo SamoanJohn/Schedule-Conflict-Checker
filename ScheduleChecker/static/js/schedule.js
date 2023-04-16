@@ -429,84 +429,8 @@ window.addEventListener('load', function() {
               //FIRST ITERATION OF CONFLICT CHECKING
               conflictFunction()
 
-              // create the course blocks and assign
-              for (let i = 0; i < class_array.length; i++) {
-                const course = class_array[i];
-                const courseElement = document.createElement('div');
-                courseElement.classList.add('course-block');
-                courseElement.setAttribute("draggable", "true");
-                courseElement.setAttribute('CRN', course.CRN);
-                courseElement.setAttribute('Subj', course.Subj);
-                courseElement.setAttribute('Crs', course.Crs);
-                courseElement.setAttribute('Sec', course.Sec);
-                courseElement.setAttribute('Title', course.Title);
-                courseElement.setAttribute('Days', course.Days);
-                courseElement.setAttribute('STime', course.STime);
-                courseElement.setAttribute('ETime', course.ETime);
-                courseElement.setAttribute('Bldg', course.Bldg);
-                courseElement.setAttribute('Room', course.Room);
-                courseElement.setAttribute('Sdate', course.SDate);
-                courseElement.setAttribute('Edate', course.EDate);
-                courseElement.setAttribute('Instructor', course.Instructor);
-                courseElement.setAttribute('DelMthd', course.DelMthd); 
-                
-                // add Subj and Crs data for block text
-                const courseBlockText = document.createElement('div');
-                courseBlockText.classList.add('course-text');
-                courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
-                courseElement.appendChild(courseBlockText);
-                
-                // Add course element to time cell
-                const days = courseElement.getAttribute('Days');
-                const time = courseElement.getAttribute('STime');
-
-                // figure this out, days == TBAW, TBAT, added to handle now
-                if(days == "TBA" || days == "TBAM" || days == "TBAT" || days == "TBAW" || days == "TBAR" || days == "TBAF"){
-                  const timeSlot = document.querySelector(`[data-day="TBA"]`);
-                  timeSlot.appendChild(courseElement);
-                }
-                else{
-                  // split days and assign seperate course-blocks for each.
-                  const daysArray = days.split('');
-                  daysArray.forEach(day => {
-                    const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
-                    const duplicateCourseElement = courseElement.cloneNode(true);
-                    timeSlot.appendChild(duplicateCourseElement);
-                  });
-                }
-            };
-            // drag events for course-block and time-cells
-            const courseBlock = document.querySelector('.course-block');
-          
-            courseBlock.addEventListener('dragstart', (event) => {
-              event.dataTransfer.setData('text/plain', 'course-block');
-            });
-            
-            const timeCells = document.querySelectorAll('.time-cell');
-            
-            timeCells.forEach((timeCell) => {
-              timeCell.addEventListener('dragover', (event) => {
-                event.preventDefault();
-                event.currentTarget.classList.add('highlight');
-              });
-            
-              timeCell.addEventListener('dragleave', (event) => {
-                event.currentTarget.classList.remove('highlight');
-              });
-            
-              timeCell.addEventListener('drop', (event) => {
-                event.preventDefault();
-                const data = event.dataTransfer.getData('text/plain');
-                if (data === 'course-block') {
-                  const courseBlock = document.querySelector('.course-block');
-                  const gridCell = event.currentTarget.parentNode;
-                  const timeCell = event.currentTarget;
-                  timeCell.appendChild(courseBlock);
-                  timeCell.classList.remove('highlight');
-                  gridCell.classList.remove('highlight');
-                }
-              });
-            });
+              console.log(class_array);
+              updateCourseElements(class_array);
           }
       };
       console.log(url);
@@ -519,6 +443,79 @@ window.addEventListener('load', function() {
   searchbtn.addEventListener('click', handleSearchButtonClick);
 });
 
+// update the course elements on the grid.
+function updateCourseElements(class_array){
+  for (let i = 0; i < class_array.length; i++) {
+    const course = class_array[i];
+    const courseElement = document.createElement('div');
+    courseElement.classList.add('course-block');
+    courseElement.setAttribute("draggable", "true");
+    courseElement.setAttribute('CRN', course.CRN);
+    courseElement.setAttribute('Subj', course.Subj);
+    courseElement.setAttribute('Crs', course.Crs);
+    courseElement.setAttribute('Sec', course.Sec);
+    courseElement.setAttribute('Title', course.Title);
+    courseElement.setAttribute('Days', course.Days);
+    courseElement.setAttribute('STime', course.STime);
+    courseElement.setAttribute('ETime', course.ETime);
+    courseElement.setAttribute('Bldg', course.Bldg);
+    courseElement.setAttribute('Room', course.Room);
+    courseElement.setAttribute('Sdate', course.SDate);
+    courseElement.setAttribute('Edate', course.EDate);
+    courseElement.setAttribute('Instructor', course.Instructor);
+    courseElement.setAttribute('DelMthd', course.DelMthd); 
+    
+    // add Subj and Crs data for block text
+    const courseBlockText = document.createElement('div');
+    courseBlockText.classList.add('course-text');
+    courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
+    courseElement.appendChild(courseBlockText);
+    
+    // Add course element to time cell
+    const days = courseElement.getAttribute('Days');
+    const time = courseElement.getAttribute('STime');
+    const daysArray = days.split('');
+    daysArray.forEach(day => {
+      const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
+      const duplicateCourseElement = courseElement.cloneNode(true);
+      timeSlot.appendChild(duplicateCourseElement);
+    });
+  };
+
+  // drag events for course-block and time-cells
+  const courseBlock = document.querySelector('.course-block');
+
+  courseBlock.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('text/plain', 'course-block');
+  });
+
+  const timeCells = document.querySelectorAll('.time-cell');
+            
+  timeCells.forEach((timeCell) => {
+    timeCell.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      event.currentTarget.classList.add('highlight');
+    });
+  
+    timeCell.addEventListener('dragleave', (event) => {
+      event.currentTarget.classList.remove('highlight');
+    });
+  
+    timeCell.addEventListener('drop', (event) => {
+      event.preventDefault();
+      const data = event.dataTransfer.getData('text/plain');
+      if (data === 'course-block') {
+        const courseBlock = document.querySelector('.course-block');
+        const gridCell = event.currentTarget.parentNode;
+        const timeCell = event.currentTarget;
+        timeCell.appendChild(courseBlock);
+        timeCell.classList.remove('highlight');
+        gridCell.classList.remove('highlight');
+      }
+    });
+  });
+
+}
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
