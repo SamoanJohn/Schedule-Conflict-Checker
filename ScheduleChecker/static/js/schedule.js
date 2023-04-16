@@ -7,6 +7,16 @@ var selectedItems = {
 
 var class_array = []
 
+$(document).ready(function() {
+  $('.dark-mode-toggle').click(function() {
+    $('body').toggleClass('dark-mode');
+    $('.dark-mode-toggle').toggleClass('dark-mode');
+    $('.dark-text, .light-text').toggle();
+  });
+});
+
+
+
 function removeItem(element, type, id) {
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
@@ -760,7 +770,7 @@ let saved_data = false;
 let saved_course_hash_table = {};
 var saved_class_array = [];
 
-const days = ["M", "T", "W", "R", "F"];
+const days = ["M", "T", "W", "R", "F", "S", "U"];
 const time_slots = ["0830", "1000", "1130", "1300", "1430", "1600", "1730", "1900", "2030"];
 
 // this just creates a hash table with the above information
@@ -1173,11 +1183,15 @@ function showConflictDetails(conflict, clickedElement) {
   var advancedFilteringContainer = document.querySelector(".advanced-filtering-container");
   var advancedFilteringContainerHeight = advancedFilteringContainer.offsetHeight;
 
+  
+  var searchContainer = document.querySelector(".search-container");
+  var searchContainerHeight = searchContainer.offsetHeight;
+
 
   var parentContainer = clickedElement.parentNode.getBoundingClientRect();
   var clickedRect = clickedElement.getBoundingClientRect();
   var clickedTop = clickedRect.top - parentContainer.top;
-  var boxTop = clickedTop + clickedElement.offsetHeight + 230 + advancedFilteringContainerHeight;
+  var boxTop = clickedTop + clickedElement.offsetHeight + 145 + advancedFilteringContainerHeight + searchContainerHeight;
   tempConflictBox.style.top = boxTop + "px";
 
   // make the temporary conflict box visible

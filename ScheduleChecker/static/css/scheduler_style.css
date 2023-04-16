@@ -1,4 +1,106 @@
   
+:root {
+  --main-color: #007bff; /* Default value */
+}
+
+body.dark {
+  --main-color: #4d6d9a; /* Dark mode value */
+}
+
+.header {
+  height: 65px;
+  background-color: #004895;
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  padding: 0 20px;
+}
+
+.header-title {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.university-title {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-name {
+  font-size: 18px;
+  color: white;
+}
+
+.dark-mode-toggle {
+  padding-left: 5px;
+  padding-right: 5px;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #004895;
+  transition: transform 0.2s;
+}
+
+.dark-text-container,
+.light-text-container {
+  width: 60px;
+}
+.dark-text,
+.light-text {
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+}
+
+.dark-text {
+  display: none;
+  margin-left: 5px;
+}
+
+.dark-mode-container {
+  display: flex;
+  width: 150px;
+  font-family: "Montserrat", sans-serif;
+  align-items: center;
+}
+
+.dark-mode-toggle.dark .toggle-slider {
+  transform: translate(21px, -50%);
+  transition: transform 0.2s;
+}
+
+
+
 /*## Term, Major, and Subject Search Bar ##*/
 .search-container {
     background-color: #dfdfdf;
@@ -25,7 +127,7 @@ select:focus {
   z-index: 5;
 }
 
-/* #subject-dropdown,
+#subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
 #room-dropdown,
@@ -36,7 +138,7 @@ select:focus {
   height: 150px;
   width: 100%;
 }
-  Use this if you want the dropdowns to float */
+  /* Use this if you want the dropdowns to float
 #subject-dropdown,
 #major-dropdown,
 #instructor-dropdown,
@@ -48,7 +150,7 @@ select:focus {
   height: 150px;
   width: 100%;
   z-index: 999;
-} 
+}  */
 
 
 .dropdown-toggle-wrapper {
@@ -89,7 +191,8 @@ select:focus {
 .select-wrapper-term {
     position: relative;
     margin: 0 20px;
-    width: 15%;
+    width: 10%;
+    min-width: 90px;
   }
 
 
@@ -140,6 +243,18 @@ select.dropdown-toggle {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
   }
 
+    /* Dark mode colors */
+  body.dark #major-dropdown-toggle,
+  body.dark #subject-dropdown-toggle,
+  body.dark #instructor-dropdown-toggle,
+  body.dark #room-dropdown-toggle,
+  body.dark #bldg-dropdown-toggle {
+  background-color: #333;
+  color: white;
+  border-color: #666;
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.1);
+  }
+
   select.dropdown-toggle:focus {
     outline: none;
   }
@@ -175,11 +290,14 @@ select.dropdown-toggle {
     align-items: center;
     height: 20px;
     padding: 2px 8px;
+    padding-right: 10px;
     margin: 1px;
     border-radius: 20px;
+    font-weight: bold;
     background-color: #ffffff;
     color: #383f47;
-    border: 1.5px solid #383f47;
+    border: 2px solid #c3c3c3;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
     min-width: fit-content;
   }
@@ -271,8 +389,11 @@ select.dropdown-toggle {
 }
 
 #OR {
+  display: flex;
+  justify-content: center;
   font-weight: bold;
   padding: 15px;
+  width: 10%;
 }
 
 
@@ -324,7 +445,8 @@ input[type="text"] {
     background-color: #dfdfdf;
     position: relative;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    border-bottom: 2px solid #c3c3c3;
+    border: 2px solid #c3c3c3;
+    border-top: none;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -616,8 +738,12 @@ input:focus {
 }
 
 .schedule-filtering {
-  padding-left: 100px;
+  padding-left: 50px;
 }
+.conflict-filtering {
+  padding-right: 50px;
+}
+
 
 @media screen and (max-width: 768px) {
   .conflict-filtering,
@@ -648,6 +774,9 @@ input:focus {
   color: white;
   margin: 20px;
   padding: 10px 20px;
+  width: 125px;
+  margin-bottom: 15px;
+  margin-left: 90%;
   height: 39.6px;
   border: none;
   border-radius: 5px;
