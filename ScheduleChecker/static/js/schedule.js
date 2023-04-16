@@ -16,37 +16,83 @@ $(document).ready(function() {
 });
 
 
-function removeItem(element, type) {
+
+function removeItem(element, type, id) {
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
   selectedItems[type].splice(index, 1);
   $(element).parent().remove();
+  // Remove the class from the corresponding option in the dropdown
+  $(id + ' option').filter(function() {
+    return $(this).text() === item;
+  }).removeClass('selected').css('background-color', '').css('color', '');
+  
+  // Force set background color to white and text color to black for the removed option
+  $(id + ' option').filter(function() {
+    return $(this).text() === item;
+  }).css('background-color', 'white').css('color', 'black');
 }
 
+
 $(document).ready(function() {
+
+  $('#major-dropdown-toggle').click(function() {
+    event.stopPropagation();
+    $('#major-dropdown').toggle();
+  });
+
   $('#major-dropdown').change(function() {
+    $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedMajor = $(this).val();
-    if (selectedMajor !== '') {
-      var majors = selectedItems.majors;
-      if (!majors.includes(selectedMajor)) {
-        majors.push(selectedMajor);
-        var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeItem(this, \'majors\')"></span><span>' + selectedMajor + '</span></div>');
-        $('#selected-majors').append(selectedItem);
-        $(this).val('');
+    if (selectedMajor[0] !== '') {
+      if (/^[^-]+-\s*[^-]+$/.test(selectedMajor)) { // Check if the option matches the format "?? - ????????"
+        var majors = selectedItems.majors;
+        if (!majors.includes(selectedMajor[0])) {
+          majors.push(selectedMajor[0]);
+          var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeItem(this, \'majors\', \'#major-dropdown\')"></span><span>' + selectedMajor + '</span></div>');
+          $('#selected-majors').append(selectedItem);
+          $(this).val('');
+        }
       }
       $(this).val('');
     }
   });
+  
+  $(document).click(function(event) {
+    if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
+      $('#major-dropdown').hide();
+      $('#subject-dropdown').hide();
+      $('#instructor-dropdown').hide();
+      $('#bldg-dropdown').hide();
+      $('#room-dropdown').hide();
+    }
+  });
+  
+  $('.dropdown-btn').click(function() {
+    var dropdown = $(this).next('.dropdown-wrapper');
+    $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
+    dropdown.toggle();
+  });
+  
+  
+  
+  $('#subject-dropdown-toggle').click(function() {
+    event.stopPropagation();
+    $('#subject-dropdown').toggle();
+  });
 
   $('#subject-dropdown').change(function() {
+    $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedSubject = $(this).val();
-    if (selectedSubject !== '') {
-      var subjects = selectedItems.subjects;
-      if (!subjects.includes(selectedSubject)) {
-        subjects.push(selectedSubject);
-        var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeItem(this, \'subjects\')"></span><span>' + selectedSubject + '</span></div>');
-        $('#selected-subjects').append(selectedItem);
-        $(this).val('');
+    if (selectedSubject[0] !== '') {
+      if (/^[^-]+-\s*[^-]+$/.test(selectedSubject)) { // Check if the option matches the format "?? - ????????"
+        var subjects = selectedItems.subjects;
+        if (!subjects.includes(selectedSubject[0])) {
+          subjects.push(selectedSubject[0]);
+          var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeItem(this, \'subjects\', \'#subject-dropdown\')"></span><span>' + selectedSubject + '</span></div>');
+          $('#selected-subjects').append(selectedItem);
+          $(this).val('');
+        }
       }
       $(this).val('');
     }
@@ -56,6 +102,278 @@ $(document).ready(function() {
     var selectedSemester = $(this).val();
   });
 });
+
+
+
+// Define a function to populate the instructors dropdown and register the event handlers
+function populateInstructorsDropdown() {
+  // Populating the instructors dropdown with unique professor names
+  var instructors = [];
+  for (var i = 0; i < saved_class_array.length; i++) {
+    var instructor = saved_class_array[i].Instructor;
+    if (!instructors.includes(instructor)) {
+      instructors.push(instructor);
+    }
+  }
+  
+  // Sort the instructor names alphabetically
+  instructors.sort();
+  var selectAllOption = $('<option></option>').attr('value', 'All Instructors').addClass('bold').text('Select All');
+  $('#instructor-dropdown').append(selectAllOption);
+  // Add the options to the dropdown
+  for (var i = 0; i < instructors.length; i++) {
+    var option = $('<option></option>').text(instructors[i]);
+    $('#instructor-dropdown').append(option);
+  }
+  
+
+  // Adding click event to toggle the dropdown
+  $('#instructor-dropdown-toggle').click(function(event) {
+    event.stopPropagation();
+    $('#instructor-dropdown').toggle();
+  });
+
+  // Adding change event to add selected item to selected items list
+  $('#instructor-dropdown').change(function() {
+    $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
+    var selectedInstructor = $(this).val();
+    if (selectedInstructor[0] !== '') {
+      if (/^\S+\s+\S+$/.test(selectedInstructor[0])) {
+        var instructors = filterVariables.instructors;
+        if (!instructors.includes(selectedInstructor[0])) {
+          var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'instructors\', \'#instructor-dropdown\')"></span><span>' + selectedInstructor + '</span></div>');
+          $('#selected-instructors').append(selectedItem);
+          filterVariables.instructors.push(selectedInstructor[0]);
+          $(this).val('');
+        }
+      }
+      $(this).val('');
+    }
+  });
+}
+// Define a function to populate the buildings dropdown and register the event handlers
+function populateBuildingsDropdown() {
+  // Populating the buildings dropdown with unique building names
+  var buildings = [];
+  for (var i = 0; i < saved_class_array.length; i++) {
+    var building = saved_class_array[i].Bldg;
+    if (!buildings.includes(building)) {
+      buildings.push(building);
+    }
+  }
+
+  buildings.sort(); // sort the building names alphabetically
+
+  for (var i = 0; i < buildings.length; i++) {
+    var option = $('<option></option>').text(buildings[i]);
+    $('#bldg-dropdown').append(option);
+  }
+
+
+  // Adding click event to toggle the dropdown
+  $('#bldg-dropdown-toggle').click(function(event) {
+    event.stopPropagation();
+    $('#bldg-dropdown').toggle();
+  });
+
+  $('#bldg-dropdown').change(function() {    
+    $('#room-dropdown').hide();
+    $('#bldg-dropdown option').css('background-color', '').css('color', '');
+
+    $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
+    console.log(saved_class_array)
+    var selectedBldg = $(this).val();
+    if (selectedBldg[0] !== '') {
+      if (/^\S+$/.test(selectedBldg[0])) {
+        // Clearing the options in the room dropdown
+        $('#room-dropdown').empty();
+        var selectAllOption = $('<option></option>').attr('value', 'Select All').addClass('bold').text('Select All');
+        $('#room-dropdown').append(selectAllOption);
+        // Filtering the class_array to find unique rooms for the selected building
+        // Filtering the class_array to find unique rooms for the selected building
+        var rooms = [];
+        var selectedBldgRooms = saved_class_array.filter(function(c) {
+          return c.Bldg === selectedBldg[0];
+        }).forEach(function(c) {
+          if (!rooms.includes(c.Room.toString())) {
+            rooms.push(c.Room.toString());
+          }
+        });
+        
+        rooms.sort(); // Sort the rooms array
+        
+        // Add options to #room-dropdown
+        for (var i = 0; i < rooms.length; i++) {
+          var option = $('<option></option>').text(rooms[i]);
+          $('#room-dropdown').append(option);
+        }
+        
+        
+        $('#room-dropdown').toggle(); // Open room dropdown
+  
+        // Adding change event to add selected item to selected items list
+        $('#room-dropdown').off('change').on('change', function() {
+          $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
+          var selectedRoom = $(this).val();
+
+          if (selectedRoom[0] !== '') {
+            if (/^\S+$/.test(selectedRoom[0])) {
+              var selectedItemText = selectedBldg[0] + ' ' + selectedRoom[0];
+              var bldgRooms = filterVariables.bldgRoom;
+              if (!bldgRooms.includes(selectedItemText)) {
+                var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'bldgRoom\', \'#room-dropdown\')"></span><span>' + selectedItemText + '</span></div>');
+                $('#selected-items').append(selectedItem);
+                filterVariables.bldgRoom.push(selectedItemText);
+              }
+            }
+            else if (selectedRoom[0] === 'Select All') {
+              selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'bldgRoom\', \'#room-dropdown\')"></span><span>' + selectedBldg[0] + '</span></div>');
+              $('#selected-items').append(selectedItem);
+              filterVariables.bldgRoom.push(selectedBldg[0]);
+            }
+            $(this).val('');
+          }
+        });
+        $(this).val('');
+      }
+      $(this).val('');
+    }
+  });  
+}
+
+
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    // const data = new Uint8Array(event.target.result);
+    // const workbook = XLSX.read(data, { type: 'array' });
+    // const sheetName = workbook.SheetNames[0];
+    // const worksheet = workbook.Sheets[sheetName];
+    const data = new Uint8Array(event.target.result);
+    const workbook = XLSX.read(data, { type: 'array' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+      
+
+// Loop through the first row (header row)
+    for (let cell in worksheet) {
+      const cellRef = XLSX.utils.decode_cell(cell);
+      if (cellRef.r === 0 && worksheet[cell].v === 'Del Mthd') {
+        worksheet[cell].v = 'DelMthd';
+        break;
+      }
+    }
+    const contents = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    
+    const selectedColumns = ['CRN', 'Subj Crs Sec', 'Title', 'Days', 'STime', 'ETime', 'Bldg', 'Room', 'Instructor', 'DelMthd'];
+    const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
+    const missingColumns = selectedColumns.filter(col => !Object.values(contents[0]).includes(col));
+    if (missingColumns.length > 0) {
+      const downloadLink = "https://curric.uaa.alaska.edu/scheduleSearch.php";
+      alert(`The Excel file was not recognized. Please download a new file from ${downloadLink}.`);
+      return; // Stop the function
+    }
+    
+
+    const newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
+      if (col === 'Subj Crs Sec') {
+        const [subj, crs, sec] = row[columnIndices[index]].split(' ');
+        return { ...acc, Subj: subj, Crs: crs, Sec: sec };
+      }
+      let cellValue = row[columnIndices[index]];
+      if (typeof cellValue === 'string' && cellValue.includes('\r\n')) {
+        cellValue = cellValue.replace(/\r\n$/, ''); // Remove trailing \r\n
+        cellValue = cellValue.replace(/\r\n/g, ', '); // Replace remaining \r\n with ', '
+        cellValue = cellValue.split(', '); // Convert cellValue into an array of values
+        cellValue = cellValue.length === 1 ? cellValue[0] : cellValue.join(', ');
+      }
+      if (typeof cellValue === 'string' && cellValue.includes('\n')) {
+        cellValue = cellValue.replace(/\n$/, ''); // Remove trailing \n
+        cellValue = cellValue.replace(/\n/g, ', '); // Replace remaining \n with ', '
+        cellValue = cellValue.split(', '); // Convert cellValue into an array of values
+        cellValue = cellValue.length === 1 ? cellValue[0] : cellValue.join(', ');
+      }
+      if (typeof cellValue === 'string' && cellValue.includes(', ')) {
+        cellValue = cellValue.split(', '); // Convert cellValue into an array of values
+        cellValue = cellValue.length === 1 ? cellValue[0] : cellValue;
+      }
+    
+      return { ...acc, [col]: cellValue };
+    }, {}));
+    
+
+    class_array = newData.map(row => {
+      const [days, stime, etime, bldg, room] = narrowDown(row);
+      return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
+    });
+
+    saved_class_array = [...class_array];
+    console.log(saved_class_array);
+    populateInstructorsDropdown();
+    populateBuildingsDropdown();
+    conflictFunction()
+
+  };
+
+  reader.readAsArrayBuffer(file);
+}
+
+
+function narrowDown(row) {
+  if (Array.isArray(row['Days'])) {
+    let scores = row['Days'].map((_, i) => {
+      let score = 0;
+      if (row['Days'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['STime'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['ETime'][i] === 'TBA') {
+        score += 1;
+      }
+      if (row['Bldg'][i] === 'DIST') {
+        score += 1;
+      }
+      if (row['Room'][i] === 'ONLINE' || row['Room'][i] === 'BLKBD') {
+        score += 1;
+      }
+      return score;
+    });
+    let index = scores.indexOf(Math.min(...scores));
+    let days = row['Days'][index];
+    let stime = row['STime'][index];
+    let etime = row['ETime'][index];
+    let bldg = row['Bldg'][index];
+    let room = row['Room'][index];
+    return [days, stime, etime, bldg, room];
+  } else {
+    return [row['Days'], row['STime'], row['ETime'], row['Bldg'], row['Room']];
+  }
+}
+
+function parse_time(time_str) {
+  if (Array.isArray(time_str)) {
+    return time_str.map(t => parse_time(t));
+  } else if (time_str.length === 6) {
+    let hours = parseInt(time_str.substring(0, 2));
+    const minutes = parseInt(time_str.substring(2, 4));
+    const meridian = time_str.substring(4).toUpperCase();
+    if (meridian === 'PM' && hours !== 12) {
+      hours += 12;
+    } else if (meridian === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    return `${hours.toString().padStart(2, '0')}${minutes.toString().padStart(2, '0')}`;
+  } else {
+    return time_str;
+  }
+}
+
+
 
 
 window.addEventListener('load', function() {
@@ -81,8 +399,9 @@ window.addEventListener('load', function() {
         return;
       }
 
-      var url = 'query/?term=' + selectedTerm;
-      //var url = 'http://www.cse.uaa.alaska.edu/sc/query/?term=' + selectedTerm + '&majors=' + selectedMajors;
+      // var url = '/sc/query/?term=' + selectedTerm;
+      var url = '/query/?term=' + selectedTerm;
+
 
       // add selected subjects to the URL if any are selected
       if (selectedMajors.length > 0) {
@@ -103,6 +422,10 @@ window.addEventListener('load', function() {
               loadingContainer.style.display = 'none';
 
               class_array = JSON.parse(classes.data);
+              saved_class_array = [...class_array];
+              console.log(saved_class_array);
+              populateInstructorsDropdown();
+              populateBuildingsDropdown();
               //FIRST ITERATION OF CONFLICT CHECKING
               conflictFunction()
 
@@ -201,7 +524,6 @@ function updateCourseElements(class_array){
 //
 /////////////////////////////////////////////////////////////////////
 
-
 var filterVariables = {
   individualCourseConflicts: [],
   rangeCourseConflicts: [],
@@ -209,14 +531,25 @@ var filterVariables = {
   ignoreSubjects: [],
   hideCourses: [],
   hideSubjects: [],
-  corequisiteConflicts: []
+  corequisiteConflicts: [],
+  instructors: [],
+  bldgRoom: []
 };
 
-function removeFilterVariable(element, type) {
+function removeFilterVariable(element, type, id) {
   var item = $(element).parent().text().trim();
   var index = filterVariables[type].indexOf(item);
   filterVariables[type].splice(index, 1);
   $(element).parent().remove();
+  // Remove the class from the corresponding option in the dropdown
+  $(id + ' option').filter(function() {
+    return $(this).text() === item;
+  }).removeClass('selected').css('background-color', '').css('color', '');
+  
+  // Force set background color to white and text color to black for the removed option
+  $(id + ' option').filter(function() {
+    return $(this).text() === item;
+  }).css('background-color', 'white').css('color', 'black');
 }
 
 $(document).ready(function() {
@@ -245,8 +578,9 @@ $(document).ready(function() {
           event.preventDefault();
       }
       });
+      
   });
-
+  
 $('#add-individual-class-conflict').click(function() {
   event.preventDefault(); // Prevent the default form submission behavior
   var inputBox1 = $('#conflict-1');
@@ -433,7 +767,7 @@ let saved_data = false;
 let saved_course_hash_table = {};
 var saved_class_array = [];
 
-const days = ["M", "T", "W", "R", "F"];
+const days = ["M", "T", "W", "R", "F", "S", "U"];
 const time_slots = ["0830", "1000", "1130", "1300", "1430", "1600", "1730", "1900", "2030"];
 
 // this just creates a hash table with the above information
@@ -470,9 +804,12 @@ function addToHashTable(course_object) {
       const time_slot = time_slots[j];
       if (!(day in course_hash_table)) {
         console.log("day not found");
+        console.log(day)
+
       }
       if (!(time_slot in course_hash_table[day])) {
         console.log("time not found");
+        console.log(time_slot)
       }
       course_hash_table[day][time_slot].push(course_object);
     }
@@ -590,7 +927,6 @@ function checkForConflicts() {
   }
   displayConflicts()
   for (let row of conflicts) {
-    console.log(row);
   }
 }
 
@@ -620,8 +956,9 @@ function conflictFunction() {
     addToHashTable(class_array[i]);
   }
   if (!saved_data) {
-    console.log("saving hash table")
     saved_course_hash_table = JSON.parse(JSON.stringify(course_hash_table));
+    console.log("ORIGINAL SAVE")
+    console.log(saved_course_hash_table)
     saved_data = true;
   }
   checkForConflicts();
@@ -630,8 +967,6 @@ function conflictFunction() {
 
 function removeHiddenCourses() {
   // Remove hidden courses from classArray
-  console.log("Hiding courses:")
-  console.log(filterVariables.hideCourses)
   class_array = class_array.filter((course) => {
     return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crn));
   });
@@ -647,8 +982,6 @@ function removeHiddenCourses() {
 
 
 function removeHiddenSubjects() {
-  console.log("Hiding subjects:")
-  console.log(filterVariables.hideSubjects)
   // Remove hidden subjects from classArray
   class_array = class_array.filter((course) => {
     return !filterVariables.hideSubjects.includes(course.Subj);
@@ -665,8 +998,6 @@ function removeHiddenSubjects() {
 
 
 function removeIgnoreCourses(){
-  console.log("Ignoring courses:")
-  console.log(filterVariables.ignoreCourses)
   // Remove hidden courses from course_hash_table
   for (let day in course_hash_table) {
     for (let timeSlot in course_hash_table[day]) {
@@ -679,8 +1010,6 @@ function removeIgnoreCourses(){
 
 
 function removeIgnoreSubjects() {
-  console.log("Ignoring subjects:")
-  console.log(filterVariables.ignoreSubjects)
   // Remove ignore subjects from course_hash_table
   for (let day in course_hash_table) {
     for (let timeSlot in course_hash_table[day]) {
@@ -691,6 +1020,44 @@ function removeIgnoreSubjects() {
   }
 }
 
+function displayInstructors() {
+  // Check if the filter includes "All Instructors"
+  if (filterVariables.instructors.length === 0) {
+    return;
+  }
+  if (filterVariables.instructors.includes("All Instructors")) {
+    return;
+  } 
+  else {
+    for (let day in course_hash_table) {
+      for (let timeSlot in course_hash_table[day]) {
+        course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+          return filterVariables.instructors.includes(course.Instructor);
+        });
+      }
+    }
+  }
+}
+
+function displayBldgRoom() {
+  console.log("Displaying building and room information:");
+
+  if (filterVariables.bldgRoom.length === 0) {
+    return;
+  }
+  
+  else {
+    for (let day in course_hash_table) {
+      for (let timeSlot in course_hash_table[day]) {
+        course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+          return (filterVariables.bldgRoom.includes(course.Bldg) || filterVariables.bldgRoom.includes(course.Bldg + ' ' + course.Room));
+        });
+      }
+    }
+  }
+  
+  console.log(course_hash_table); // Display filtered courses
+}
 
 window.addEventListener('load', function() {
   // define a function to handle the button press
@@ -698,21 +1065,16 @@ window.addEventListener('load', function() {
 
     const loadingContainer = document.getElementById('loading-filtering-container');
     loadingContainer.style.display = 'flex';
-
-    class_array = JSON.parse(JSON.stringify(saved_class_array));
-    course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table))
-    console.log("In use hash table:")
+    course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
     console.log(course_hash_table)
-    console.log("Saved hash table:")
     console.log(saved_course_hash_table)
-    console.log("Filtering individual conflicts:")
-    console.log(filterVariables.individualCourseConflicts)
-    console.log("Filtering range conflicts:")
-    console.log(filterVariables.rangeCourseConflicts)
+
     removeHiddenCourses();
     removeHiddenSubjects();
     removeIgnoreCourses();
     removeIgnoreSubjects();
+    displayInstructors();
+    displayBldgRoom();
     checkForConflicts();
     setTimeout(function() {
       loadingContainer.style.display = 'none';;
@@ -762,13 +1124,10 @@ function displayConflicts() {
 
       // add event listener to each conflict item
       conflictBox.addEventListener("click", function() {
-        console.log("conflict clicked")
-        console.log(conflict)
-        showConflictDetails(conflict);
+        showConflictDetails(conflict, conflictBox);
       });
 
       conflictsList.appendChild(conflictBox);
-      
     })(conflicts[i]);
   }
 }
@@ -783,7 +1142,7 @@ function militaryToStandardTime(timeString) {
 }
 
 
-function showConflictDetails(conflict) {
+function showConflictDetails(conflict, clickedElement) {
   // get the courses and conflict message
   var course1 = conflict.course1;
   var course2 = conflict.course2;
@@ -805,7 +1164,7 @@ function showConflictDetails(conflict) {
   '<div class="col">' +
   '<h4>' + course2.Subj + ' ' + course2.Crs + ' ' + course2.Sec + '</h4>' +
   '<p>' + course2.Title + '</p>' +
-  '<p>' + 'CRN: ' + course1.CRN + '</p>' +
+  '<p>' + 'CRN: ' + course2.CRN + '</p>' +
   '<p>' + 'Instructor: ' + course2.Instructor + '</p>' +
   '<p>' + 'Days: ' + course2.Days + '</p>' +
   '<p>' + militaryToStandardTime(course2.STime) + '-' + militaryToStandardTime(course2.ETime) + '</p>' +
@@ -815,12 +1174,25 @@ function showConflictDetails(conflict) {
   '<div class="conflict-message">' + 'These courses ' + conflictMessage + '</div>';
 
   // append temporary conflict box to body
-  document.body.appendChild(tempConflictBox);
+  var container = document.getElementById("temp-conflict-container");
+  container.appendChild(tempConflictBox);
+
+  var advancedFilteringContainer = document.querySelector(".advanced-filtering-container");
+  var advancedFilteringContainerHeight = advancedFilteringContainer.offsetHeight;
+
+  
+  var searchContainer = document.querySelector(".search-container");
+  var searchContainerHeight = searchContainer.offsetHeight;
+
+
+  var parentContainer = clickedElement.parentNode.getBoundingClientRect();
+  var clickedRect = clickedElement.getBoundingClientRect();
+  var clickedTop = clickedRect.top - parentContainer.top;
+  var boxTop = clickedTop + clickedElement.offsetHeight + 145 + advancedFilteringContainerHeight + searchContainerHeight;
+  tempConflictBox.style.top = boxTop + "px";
 
   // make the temporary conflict box visible
   tempConflictBox.style.display = "block";
-  // add event listener to close temporary conflict box on click outside
-
   setTimeout(function() {
     document.addEventListener("click", closeConflictDetails);
   }, 10);
