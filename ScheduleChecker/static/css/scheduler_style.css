@@ -939,6 +939,7 @@ input:focus {
 /*time axis*/
 /* get rid of the different times, make a times column, eliminate the different times and the blank?*/
 .times {
+    color: var(--black-text-color);
     border-top: solid 1px #a9a9a9b4;
     padding-top: 35px;
     width: 100%;
@@ -956,6 +957,7 @@ input:focus {
 
 .time-cell {
     display: flex;
+    color: var(--black-text-color);
     position: relative;
     height:fixed;
     width:100%;
@@ -967,6 +969,7 @@ input:focus {
 /*draggable course block */
 .course-block {
     position:absolute;
+    color: var(--black-text-color);
     border: 2px solid var(--grey-border-color);
     border-radius: 5px;
     background-color: var(--background-color);
@@ -981,7 +984,7 @@ input:focus {
     font-size: 10px;
     font-weight: bold;
     text-align: left;
-    color: black;
+    color: var(--black-text-color);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
