@@ -8,7 +8,6 @@ var class_array = []
 $(document).ready(function() {
   const slider = document.querySelector('.toggle-slider');
   $('.dark-mode-toggle').off('click').click(function() {
-    console.log("dark mode clicked")
     slider.classList.toggle('toggle-slider-on');
     $('.dark-text, .light-text').toggle();
     $('body').toggleClass('dark-mode');
@@ -18,7 +17,6 @@ $(document).ready(function() {
 
 
 function removeItem(element, type, id) {
-  console.log("removeItem")
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
   selectedItems[type].splice(index, 1);
@@ -38,15 +36,11 @@ function removeItem(element, type, id) {
 $(document).ready(function() {
 
   $('#major-dropdown-toggle').off('click').click(function() {
-    console.log("major dropdown clicked")
-
     event.stopPropagation();
     $('#major-dropdown').toggle();
   });
 
   $('#major-dropdown').off('change').change(function() {
-    console.log("major dropdown changed")
-
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedMajor = $(this).val();
     if (selectedMajor[0] !== '') {
@@ -64,7 +58,6 @@ $(document).ready(function() {
   });
 
   $(document).click(function(event) {
-    console.log("close dropdown clicked")
     if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
       $('#major-dropdown').hide();
       $('#subject-dropdown').hide();
@@ -76,8 +69,6 @@ $(document).ready(function() {
 
 
   $('.dropdown-btn').off('click').click(function() {
-    console.log("dropdown button clicked")
-
     var dropdown = $(this).next('.dropdown-wrapper');
     $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
     dropdown.toggle();
@@ -86,8 +77,6 @@ $(document).ready(function() {
 
 
   $('#subject-dropdown-toggle').off('click').click(function() {
-    console.log("subject dropdown clicked")
-
     event.stopPropagation();
     $('#subject-dropdown').toggle();
   });
@@ -118,7 +107,6 @@ $(document).ready(function() {
 
 // Define a function to populate the instructors dropdown and register the event handlers
 function populateInstructorsDropdown() {
-  console.log("populate instructors")
   // Populating the instructors dropdown with unique professor names
   var instructors = [];
   for (var i = 0; i < saved_class_array.length; i++) {
@@ -146,7 +134,6 @@ function populateInstructorsDropdown() {
 
   // Adding click event to toggle the dropdown
   $('#instructor-dropdown-toggle').off('click').on('click', function(event) {
-    console.log("instructor dropdown clicked")
     event.stopPropagation();
     $('#instructor-dropdown').toggle();
   });
@@ -174,8 +161,6 @@ function populateInstructorsDropdown() {
 
 // Define a function to populate the buildings dropdown and register the event handlers
 function populateBuildingsDropdown() {
-  console.log("populate bluildings")
-
   // Populating the buildings dropdown with unique building names
   var buildings = [];
   for (var i = 0; i < saved_class_array.length; i++) {
@@ -197,18 +182,15 @@ function populateBuildingsDropdown() {
 
   // Adding click event to toggle the dropdown
   $('#bldg-dropdown-toggle').off('click').click(function(event) {
-    console.log("building dropdown clicked")
     event.stopPropagation();
     $('#bldg-dropdown').toggle();
   });
 
   $('#bldg-dropdown').off('change').change(function() {
-    console.log("bldg dropdown changed")
     $('#room-dropdown').hide();
     $('#bldg-dropdown option').css('background-color', '').css('color', '');
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedBldg = $(this).val();
-    console.log(selectedBldg)
     if (selectedBldg[0] !== '') {
       if (/^\S+$/.test(selectedBldg[0])) {
         // Clearing the options in the room dropdown
@@ -227,7 +209,6 @@ function populateBuildingsDropdown() {
         });
 
         rooms.sort(); // Sort the rooms array
-        console.log(rooms)
         // Add options to #room-dropdown
         for (var i = 0; i < rooms.length; i++) {
           var option = $('<option></option>').text(rooms[i]);
@@ -270,8 +251,6 @@ function populateBuildingsDropdown() {
 
 
 function handleFileSelect(event) {
-  console.log("handelFileSelect")
-
   // Reset file input element
   const fileInput = document.getElementById('file-input');
   const newFileInput = fileInput.cloneNode(true);
@@ -360,8 +339,6 @@ function handleFileSelect(event) {
 
 
     saved_class_array = [...class_array];
-    console.log(class_array)
-    console.log(saved_class_array)
     newData = null;
     contents = null;
     initializeFilterVariables();
@@ -377,8 +354,6 @@ function handleFileSelect(event) {
 
 
 function narrowDown(row) {
-  console.log("narrow down")
-
   if (Array.isArray(row['Days'])) {
     let scores = row['Days'].map((_, i) => {
       let score = 0;
@@ -436,7 +411,6 @@ function parse_time(time_str) {
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleSearchButtonClick() {
-    console.log("seach button clicked")
       var selectedTerm = $('#semester-select').val();
 
       // check if a term is selected
@@ -482,8 +456,6 @@ window.addEventListener('load', function() {
       loadingContainer.style.display = 'flex';
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("waiting for data")
-
               class_array = [];
               saved_class_array = [];
               course_hash_table = {};
@@ -493,8 +465,6 @@ window.addEventListener('load', function() {
               loadingContainer.style.display = 'none';
               class_array = JSON.parse(classes.data);
               saved_class_array = [...class_array];
-              console.log(class_array)
-              console.log(saved_class_array)
               initializeFilterVariables();
               populateInstructorsDropdown();
               populateBuildingsDropdown();
@@ -514,14 +484,7 @@ window.addEventListener('load', function() {
 
 // update the course elements on the grid.
 function updateCourseElements(){
-  console.log("displaying courses")
-
-  const timeCellsContainer = document.getElementsByClassName('time-cell')[0];
-
-  // Remove existing elements from the container
-  while (timeCellsContainer.firstChild) {
-    timeCellsContainer.removeChild(timeCellsContainer.firstChild);
-  }
+  $('.schedule-grid .course-block').remove();
 
   for (let i = 0; i < class_array.length; i++) {
     const course = class_array[i];
@@ -563,9 +526,6 @@ function updateCourseElements(){
       }
     });
   };
-
-
-
 
 // Add new listener to course-block
   // drag events for course-block and time-cells
@@ -685,7 +645,6 @@ $(document).ready(function() {
   });
 
   $('#add-individual-class-conflict').off('click').click(function() {
-    console.log("add conflict clicked")
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#conflict-1');
     var inputBox2 = $('#conflict-2');
@@ -717,8 +676,6 @@ $(document).ready(function() {
   });
 
   $('#add-range-class-conflict').off('click').click(function() {
-    console.log("add conflict clicked")
-
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#range-subject');
     var inputBox2 = $('#range-start');
@@ -754,8 +711,6 @@ $(document).ready(function() {
   });
 
   $('#add-hide-class').off('click').click(function() {
-    console.log("add conflict clicked")
-
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#hidden-class');
 
@@ -777,8 +732,6 @@ $(document).ready(function() {
   });
 
   $('#add-hide-subject').off('click').click(function() {
-    console.log("add conflict clicked")
-
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#hidden-subject');
 
@@ -800,8 +753,6 @@ $(document).ready(function() {
   });
 
   $('#add-ignore-class').off('click').click(function() {
-    console.log("add conflict clicked")
-
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#ignore-class');
 
@@ -823,8 +774,6 @@ $(document).ready(function() {
   });
 
   $('#add-ignore-subject').off('click').click(function() {
-    console.log("add conflict clicked")
-
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#ignore-subject');
 
@@ -857,8 +806,6 @@ window.addEventListener('load', function() {
   function toggleAdvancedFiltering() {
     // Toggle the display property of the advanced filtering content element
     advancedFilteringContent.style.display = advancedFilteringContent.style.display === "block" ? "none" : "block";
-    console.log("filtering clicked")
-
     // Loop through each arrow element and toggle the 'active' class
     dropdownArrows.forEach(function(arrow) {
       arrow.classList.toggle("active");
@@ -1173,8 +1120,6 @@ function displayBldgRoom() {
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleFilterButtonClick() {
-    console.log("filter button clicked")
-
     const loadingContainer = document.getElementById('loading-filtering-container');
     loadingContainer.style.display = 'flex';
     course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
@@ -1241,8 +1186,6 @@ function displayConflicts() {
       conflictBox.addEventListener("click", showConflictsClick);
 
       function showConflictsClick() {
-        console.log("show conflict info")
-
         showConflictDetails(conflict, conflictBox);
       }
 
@@ -1325,7 +1268,6 @@ function showConflictDetails(conflict, clickedElement) {
 
 // function to close temporary conflict box
 function closeConflictDetails(event) {
-  console.log("closeConflictDetails clicked")
   var tempConflictBox = document.getElementById("temp-conflict-box");
   if (tempConflictBox && !tempConflictBox.contains(event.target)) {
     tempConflictBox.parentNode.removeChild(tempConflictBox);
