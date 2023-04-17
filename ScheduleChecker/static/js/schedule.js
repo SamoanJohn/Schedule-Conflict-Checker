@@ -486,6 +486,9 @@ window.addEventListener('load', function() {
 function updateCourseElements(){
   $('.schedule-grid .course-block').remove();
 
+  if (class_array.length === 0) {
+    return;
+  }
   for (let i = 0; i < class_array.length; i++) {
     const course = class_array[i];
     const courseElement = document.createElement('div');
@@ -531,16 +534,17 @@ function updateCourseElements(){
   // drag events for course-block and time-cells
   // Remove existing listeners from course-block
   const courseBlock = document.querySelector('.course-block');
-  courseBlock.removeEventListener('dragstart', handleDragstart);
-
-  // Remove existing listeners from time-cells
   const timeCells = document.querySelectorAll('.time-cell');
 
+  // we do this to remove the previous event listeners from the last search
+  courseBlock.removeEventListener('dragstart', handleDragstart);
   timeCells.forEach((timeCell) => {
     timeCell.removeEventListener('dragover', handleDragover);
     timeCell.removeEventListener('dragleave', handleDragLeave);
     timeCell.removeEventListener('drop', handleDrop);
   });
+  // the function allows the add and remove event listened, functions defined below
+
 
   courseBlock.addEventListener('dragstart', handleDragstart);
 
@@ -1099,13 +1103,17 @@ function displayInstructors() {
       }
     }
   }
+
+  class_array = class_array.filter((course) => {
+    return filterVariables.instructors.includes(course.Instructor);
+  });
+  console.log(class_array);
 }
 
 function displayBldgRoom() {
   if (filterVariables.bldgRoom.length === 0) {
     return;
   }
-
   else {
     for (let day in course_hash_table) {
       for (let timeSlot in course_hash_table[day]) {
@@ -1115,6 +1123,9 @@ function displayBldgRoom() {
       }
     }
   }
+  class_array = class_array.filter((course) => {
+    return (filterVariables.bldgRoom.includes(course.Bldg) || filterVariables.bldgRoom.includes(course.Bldg + ' ' + course.Room));
+  });
 }
 
 window.addEventListener('load', function() {
@@ -1131,6 +1142,7 @@ window.addEventListener('load', function() {
     displayInstructors();
     displayBldgRoom();
     checkForConflicts();
+    updateCourseElements();
     setTimeout(function() {
       loadingContainer.style.display = 'none';;
     }, 300);
