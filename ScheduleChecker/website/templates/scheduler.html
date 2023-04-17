@@ -107,7 +107,7 @@
       <div id="OR"> OR </div>
       <div class="upload-btn-wrapper">
         <button class="upload-btn" onclick="document.querySelector('input[type=file]').click()">Upload Excel</button>
-        <input type="file" accept=".xlsx" name="myfile" style="display:none" onchange="handleFileSelect(event)">
+        <input type="file" accept=".xlsx" name="myfile" id="file-input" style="display:none" onchange="handleFileSelect(event)">
       </div>
       <div id="loading-search-container" class="loading-container">
         <div class="spinner"></div>

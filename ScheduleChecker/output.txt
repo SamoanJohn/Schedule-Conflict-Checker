@@ -8,17 +8,12 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 74291	PHYS	A211	P31	*General Physics I	TR	0830	0945	SNOD	117	Nichols D	F2F
 72015	PHYS	A212	601	*General Physics II	TR	1300	1415	SSB	253	Hicks N	F2F
 72019	PHYS	A314	651	Electromagnetics	MW	1000	1115	EIB	215	Munk J	F2F
-71354	ESM	A450	801	Econ Analysis & Operations	TBA	TBA	TBA	DIST	ONLINE	Kretchik G	ONLINE
-75079	ESM	A450	803	Econ Analysis & Operations	MW	1430	1545	EIB	217	Kretchik G	F2F, WEB MTG
-75285	EE	A203	601	Fundamentals of Elect Engr I	MW	0830	0945	EIB	211	Petersen T	F2F
-71296	EE	A241	651	Computer Hardware Concepts	MW	1000	1115	ECB	203	Cokgor I	F2F
-71303	EE	A314	651	Electromagnetics	MW	1000	1115	EIB	215	Munk J	F2F
-75286	EE	A353	601	Circuit Theory	MW	0830	0945	EIB	217	Munk J	F2F
-71304	EE	A354	601	Engineering Signal Analysis	MW	1430	1545	EIB	211	Petersen T	F2F
-71308	EE	A462	601	Communication Systems	MW	1600	1715	EIB	215	Petersen T	F2F
 72172	STAT	A253	601	*Applied Stats for Sciences	TR	1430	1610	BMH	235	Venema R	F2F
 74596	STAT	A253	RW1	*Applied Stats for Sciences	TBA	TBA	TBA	DIST	ONLINE	Johnson J	ONLINE
 72173	STAT	A307	601	Probability & Statistics	MWF	1300	1415	EIB	215	Venema R	F2F
+71992	PHIL	A305	601	*Professional Ethics	TR	1300	1415	ADM	142	Kelly Jr T	F2F
+71993	PHIL	A305	802	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Kelly Jr T	ONLINE
+71994	PHIL	A305	803	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Anthony R	ONLINE
 70922	CSCE	A101	601	Intro to Computer Science	TR	1000	1115	EIB	401	Witmer F	F2F
 70923	CSCE	A101	801	Intro to Computer Science	MW	1430	1545	DIST	ONLINE	Staff U	WEB MTG
 70925	CSCE	A201	602	Computer Programming I	TR	1300	1415	RH	117	Siddique K	F2F
@@ -67,6 +62,12 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 74280	MATH	A253	P31	*Calculus III	TR	1130	1310	SNOD	124	Gaussoin A	F2F
 71651	MATH	A261	802	Intro to Discrete Mathematics	MW	1130	1245	DIST	ONLINE	Andrews E	WEB MTG
 71653	MATH	A302	601	Ordinary Differential Eqns	TR	1000	1115	SSB	213	Folias S	F2F
+75285	EE	A203	601	Fundamentals of Elect Engr I	MW	0830	0945	EIB	211	Petersen T	F2F
+71296	EE	A241	651	Computer Hardware Concepts	MW	1000	1115	ECB	203	Cokgor I	F2F
+71303	EE	A314	651	Electromagnetics	MW	1000	1115	EIB	215	Munk J	F2F
+75286	EE	A353	601	Circuit Theory	MW	0830	0945	EIB	217	Munk J	F2F
+71304	EE	A354	601	Engineering Signal Analysis	MW	1430	1545	EIB	211	Petersen T	F2F
+71308	EE	A462	601	Communication Systems	MW	1600	1715	EIB	215	Petersen T	F2F
 71317	ENGL	A313	801	Professional Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
 71319	ENGL	A414	801	Research Writing	TBA	TBA	TBA	DIST	ONLINE	Jenkins P	ONLINE
 75879	WRTG	A111	101	*Writing Across Contexts	MW	1345	1500	VDZ	156	Humphrey D	F2F, ONLINE
@@ -120,6 +121,5 @@ CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
 74335	WRTG	A111	PX1	*Writing Across Contexts	TR	1000	1115	DIST	ONLINE	Thompson B	WEB MTG
 75842	WRTG	A111	PZ1	*Writing Across Contexts	TR	1130	1245	JKB	125	Simmons P	F2F
 74621	WRTG	A111	RC1	*Writing Across Contexts	M	1130	1245	PION	P202	Calhoun E	F2F, ONLINE
-71992	PHIL	A305	601	*Professional Ethics	TR	1300	1415	ADM	142	Kelly Jr T	F2F
-71993	PHIL	A305	802	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Kelly Jr T	ONLINE
-71994	PHIL	A305	803	*Professional Ethics	TBA	TBA	TBA	DIST	ONLINE	Anthony R	ONLINE
+71354	ESM	A450	801	Econ Analysis & Operations	TBA	TBA	TBA	DIST	ONLINE	Kretchik G	ONLINE
+75079	ESM	A450	803	Econ Analysis & Operations	MW	1430	1545	EIB	217	Kretchik G	F2F, WEB MTG

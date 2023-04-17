@@ -1,5 +1,3 @@
-window.classes = {}
-
 var selectedItems = {
   majors: [],
   subjects: []
@@ -9,7 +7,8 @@ var class_array = []
 
 $(document).ready(function() {
   const slider = document.querySelector('.toggle-slider');
-  $('.dark-mode-toggle').click(function() {
+  $('.dark-mode-toggle').off('click').click(function() {
+    console.log("dark mode clicked")
     slider.classList.toggle('toggle-slider-on');
     $('.dark-text, .light-text').toggle();
     $('body').toggleClass('dark-mode');
@@ -19,6 +18,7 @@ $(document).ready(function() {
 
 
 function removeItem(element, type, id) {
+  console.log("removeItem")
   var item = $(element).parent().text().trim();
   var index = selectedItems[type].indexOf(item);
   selectedItems[type].splice(index, 1);
@@ -27,7 +27,7 @@ function removeItem(element, type, id) {
   $(id + ' option').filter(function() {
     return $(this).text() === item;
   }).removeClass('selected').css('background-color', '').css('color', '');
-  
+
   // Force set background color to white and text color to black for the removed option
   $(id + ' option').filter(function() {
     return $(this).text() === item;
@@ -37,12 +37,16 @@ function removeItem(element, type, id) {
 
 $(document).ready(function() {
 
-  $('#major-dropdown-toggle').click(function() {
+  $('#major-dropdown-toggle').off('click').click(function() {
+    console.log("major dropdown clicked")
+
     event.stopPropagation();
     $('#major-dropdown').toggle();
   });
 
-  $('#major-dropdown').change(function() {
+  $('#major-dropdown').off('change').change(function() {
+    console.log("major dropdown changed")
+
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedMajor = $(this).val();
     if (selectedMajor[0] !== '') {
@@ -58,8 +62,9 @@ $(document).ready(function() {
       $(this).val('');
     }
   });
-  
+
   $(document).click(function(event) {
+    console.log("close dropdown clicked")
     if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
       $('#major-dropdown').hide();
       $('#subject-dropdown').hide();
@@ -68,21 +73,26 @@ $(document).ready(function() {
       $('#room-dropdown').hide();
     }
   });
-  
-  $('.dropdown-btn').click(function() {
+
+
+  $('.dropdown-btn').off('click').click(function() {
+    console.log("dropdown button clicked")
+
     var dropdown = $(this).next('.dropdown-wrapper');
     $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
     dropdown.toggle();
   });
-  
-  
-  
-  $('#subject-dropdown-toggle').click(function() {
+
+
+
+  $('#subject-dropdown-toggle').off('click').click(function() {
+    console.log("subject dropdown clicked")
+
     event.stopPropagation();
     $('#subject-dropdown').toggle();
   });
 
-  $('#subject-dropdown').change(function() {
+  $('#subject-dropdown').off('change').change(function() {
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedSubject = $(this).val();
     if (selectedSubject[0] !== '') {
@@ -99,7 +109,7 @@ $(document).ready(function() {
     }
   });
 
-  $('#semester-select').change(function() {
+  $('#semester-select').off('change').change(function() {
     var selectedSemester = $(this).val();
   });
 });
@@ -108,6 +118,7 @@ $(document).ready(function() {
 
 // Define a function to populate the instructors dropdown and register the event handlers
 function populateInstructorsDropdown() {
+  console.log("populate instructors")
   // Populating the instructors dropdown with unique professor names
   var instructors = [];
   for (var i = 0; i < saved_class_array.length; i++) {
@@ -116,26 +127,32 @@ function populateInstructorsDropdown() {
       instructors.push(instructor);
     }
   }
-  
+  instructor = null;
+
+  // $('#instructor-dropdown').empty();
   // Sort the instructor names alphabetically
+
   instructors.sort();
   var selectAllOption = $('<option></option>').attr('value', 'All Instructors').addClass('bold').text('Select All');
   $('#instructor-dropdown').append(selectAllOption);
+  selectAllOption = null;
   // Add the options to the dropdown
   for (var i = 0; i < instructors.length; i++) {
     var option = $('<option></option>').text(instructors[i]);
     $('#instructor-dropdown').append(option);
   }
-  
+  instructors = null;
+  option = null;
 
   // Adding click event to toggle the dropdown
-  $('#instructor-dropdown-toggle').click(function(event) {
+  $('#instructor-dropdown-toggle').off('click').on('click', function(event) {
+    console.log("instructor dropdown clicked")
     event.stopPropagation();
     $('#instructor-dropdown').toggle();
   });
 
   // Adding change event to add selected item to selected items list
-  $('#instructor-dropdown').change(function() {
+  $('#instructor-dropdown').off('change').change(function() {
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedInstructor = $(this).val();
     if (selectedInstructor[0] !== '') {
@@ -150,10 +167,15 @@ function populateInstructorsDropdown() {
       }
       $(this).val('');
     }
+    selectedInstructor = null;
   });
 }
+
+
 // Define a function to populate the buildings dropdown and register the event handlers
 function populateBuildingsDropdown() {
+  console.log("populate bluildings")
+
   // Populating the buildings dropdown with unique building names
   var buildings = [];
   for (var i = 0; i < saved_class_array.length; i++) {
@@ -165,6 +187,8 @@ function populateBuildingsDropdown() {
 
   buildings.sort(); // sort the building names alphabetically
 
+  $('#bldg-dropdown').empty();
+
   for (var i = 0; i < buildings.length; i++) {
     var option = $('<option></option>').text(buildings[i]);
     $('#bldg-dropdown').append(option);
@@ -172,18 +196,19 @@ function populateBuildingsDropdown() {
 
 
   // Adding click event to toggle the dropdown
-  $('#bldg-dropdown-toggle').click(function(event) {
+  $('#bldg-dropdown-toggle').off('click').click(function(event) {
+    console.log("building dropdown clicked")
     event.stopPropagation();
     $('#bldg-dropdown').toggle();
   });
 
-  $('#bldg-dropdown').change(function() {    
+  $('#bldg-dropdown').off('change').change(function() {
+    console.log("bldg dropdown changed")
     $('#room-dropdown').hide();
     $('#bldg-dropdown option').css('background-color', '').css('color', '');
-
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
-    console.log(saved_class_array)
     var selectedBldg = $(this).val();
+    console.log(selectedBldg)
     if (selectedBldg[0] !== '') {
       if (/^\S+$/.test(selectedBldg[0])) {
         // Clearing the options in the room dropdown
@@ -200,18 +225,18 @@ function populateBuildingsDropdown() {
             rooms.push(c.Room.toString());
           }
         });
-        
+
         rooms.sort(); // Sort the rooms array
-        
+        console.log(rooms)
         // Add options to #room-dropdown
         for (var i = 0; i < rooms.length; i++) {
           var option = $('<option></option>').text(rooms[i]);
           $('#room-dropdown').append(option);
         }
-        
-        
+
+
         $('#room-dropdown').toggle(); // Open room dropdown
-  
+
         // Adding change event to add selected item to selected items list
         $('#room-dropdown').off('change').on('change', function() {
           $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
@@ -239,12 +264,32 @@ function populateBuildingsDropdown() {
       }
       $(this).val('');
     }
-  });  
+  });
 }
 
 
 
 function handleFileSelect(event) {
+  console.log("handelFileSelect")
+
+  // Reset file input element
+  const fileInput = document.getElementById('file-input');
+  const newFileInput = fileInput.cloneNode(true);
+  fileInput.parentNode.replaceChild(newFileInput, fileInput);
+
+    // If saved_course_hash_table is not empty, prompt the user with an alert box
+  if (Object.keys(saved_class_array).length > 0) {
+    const response = confirm("Loading this file will overwrite your existing data. Do you want to continue?");
+    if (!response) {
+      fileInput.value = ''; // Clear the value of the file input element
+      return;
+    }
+  }
+  class_array = [];
+  saved_class_array = [];
+  course_hash_table = {};
+  saved_course_hash_table = {};
+  saved_data = false;
   const file = event.target.files[0];
   const reader = new FileReader();
 
@@ -253,13 +298,15 @@ function handleFileSelect(event) {
     // const workbook = XLSX.read(data, { type: 'array' });
     // const sheetName = workbook.SheetNames[0];
     // const worksheet = workbook.Sheets[sheetName];
-    const data = new Uint8Array(event.target.result);
-    const workbook = XLSX.read(data, { type: 'array' });
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-      
+    var data = new Uint8Array(event.target.result);
+    var workbook = XLSX.read(data, { type: 'array' });
+    var sheetName = workbook.SheetNames[0];
+    var worksheet = workbook.Sheets[sheetName];
+    workbook = null; // set workbook to null to free up memory
+    sheetName = null;
+    data = null;
 
-// Loop through the first row (header row)
+    // Loop through the first row (header row)
     for (let cell in worksheet) {
       const cellRef = XLSX.utils.decode_cell(cell);
       if (cellRef.r === 0 && worksheet[cell].v === 'Del Mthd') {
@@ -267,8 +314,9 @@ function handleFileSelect(event) {
         break;
       }
     }
-    const contents = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-    
+    var contents = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    worksheet = null; // set worksheet to null to free up memory
+
     const selectedColumns = ['CRN', 'Subj Crs Sec', 'Title', 'Days', 'STime', 'ETime', 'Bldg', 'Room', 'Instructor', 'DelMthd'];
     const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
     const missingColumns = selectedColumns.filter(col => !Object.values(contents[0]).includes(col));
@@ -277,9 +325,9 @@ function handleFileSelect(event) {
       alert(`The Excel file was not recognized. Please download a new file from ${downloadLink}.`);
       return; // Stop the function
     }
-    
 
-    const newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
+
+    var newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
       if (col === 'Subj Crs Sec') {
         const [subj, crs, sec] = row[columnIndices[index]].split(' ');
         return { ...acc, Subj: subj, Crs: crs, Sec: sec };
@@ -301,29 +349,36 @@ function handleFileSelect(event) {
         cellValue = cellValue.split(', '); // Convert cellValue into an array of values
         cellValue = cellValue.length === 1 ? cellValue[0] : cellValue;
       }
-    
+
       return { ...acc, [col]: cellValue };
     }, {}));
-    
 
     class_array = newData.map(row => {
       const [days, stime, etime, bldg, room] = narrowDown(row);
       return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
     });
 
+
     saved_class_array = [...class_array];
-    console.log(saved_class_array);
+    console.log(class_array)
+    console.log(saved_class_array)
+    newData = null;
+    contents = null;
+    initializeFilterVariables();
     populateInstructorsDropdown();
     populateBuildingsDropdown();
     conflictFunction()
-
+    updateCourseElements();
   };
 
   reader.readAsArrayBuffer(file);
+  fileInput.value = ''; // Clear the value of the file input element
 }
 
 
 function narrowDown(row) {
+  console.log("narrow down")
+
   if (Array.isArray(row['Days'])) {
     let scores = row['Days'].map((_, i) => {
       let score = 0;
@@ -357,6 +412,7 @@ function narrowDown(row) {
 }
 
 function parse_time(time_str) {
+
   if (Array.isArray(time_str)) {
     return time_str.map(t => parse_time(t));
   } else if (time_str.length === 6) {
@@ -380,7 +436,7 @@ function parse_time(time_str) {
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleSearchButtonClick() {
-
+    console.log("seach button clicked")
       var selectedTerm = $('#semester-select').val();
 
       // check if a term is selected
@@ -393,11 +449,18 @@ window.addEventListener('load', function() {
       var selectedMajors =  selectedItems.majors.join(',')
 
       var selectedSubjects =  selectedItems.subjects.join(',')
-      
+
       // check if at least one major or subject is selected
       if (!selectedMajors && !selectedSubjects) {
         alert("Please select at least one major or subject");
         return;
+      }
+      // If saved_course_hash_table is not empty, prompt the user with an alert box
+      if (Object.keys(saved_course_hash_table).length > 0) {
+        const response = confirm("This will overwrite your existing data. Do you want to continue?");
+        if (!response) {
+          return;
+        }
       }
 
       // var url = '/sc/query/?term=' + selectedTerm;
@@ -419,33 +482,47 @@ window.addEventListener('load', function() {
       loadingContainer.style.display = 'flex';
       xhr.onreadystatechange = function() {
           if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("waiting for data")
+
+              class_array = [];
+              saved_class_array = [];
+              course_hash_table = {};
+              saved_course_hash_table = {};
+              saved_data = false;
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
-
               class_array = JSON.parse(classes.data);
               saved_class_array = [...class_array];
-              console.log(saved_class_array);
+              console.log(class_array)
+              console.log(saved_class_array)
+              initializeFilterVariables();
               populateInstructorsDropdown();
               populateBuildingsDropdown();
-              //FIRST ITERATION OF CONFLICT CHECKING
               conflictFunction()
-
-              console.log(class_array);
-              updateCourseElements(class_array);
+              updateCourseElements();
           }
       };
       console.log(url);
       xhr.open("GET", url, true);
       xhr.send();
   }
-
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
+  searchbtn.removeEventListener('click', handleSearchButtonClick);
   searchbtn.addEventListener('click', handleSearchButtonClick);
 });
 
 // update the course elements on the grid.
-function updateCourseElements(class_array){
+function updateCourseElements(){
+  console.log("displaying courses")
+
+  const timeCellsContainer = document.getElementsByClassName('time-cell')[0];
+
+  // Remove existing elements from the container
+  while (timeCellsContainer.firstChild) {
+    timeCellsContainer.removeChild(timeCellsContainer.firstChild);
+  }
+
   for (let i = 0; i < class_array.length; i++) {
     const course = class_array[i];
     const courseElement = document.createElement('div');
@@ -464,59 +541,82 @@ function updateCourseElements(class_array){
     courseElement.setAttribute('Sdate', course.SDate);
     courseElement.setAttribute('Edate', course.EDate);
     courseElement.setAttribute('Instructor', course.Instructor);
-    courseElement.setAttribute('DelMthd', course.DelMthd); 
-    
+    courseElement.setAttribute('DelMthd', course.DelMthd);
+
     // add Subj and Crs data for block text
     const courseBlockText = document.createElement('div');
     courseBlockText.classList.add('course-text');
     courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
     courseElement.appendChild(courseBlockText);
-    
+
     // Add course element to time cell
     const days = courseElement.getAttribute('Days');
     const time = courseElement.getAttribute('STime');
     const daysArray = days.split('');
     daysArray.forEach(day => {
       const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
-      const duplicateCourseElement = courseElement.cloneNode(true);
-      timeSlot.appendChild(duplicateCourseElement);
+      if (timeSlot) {
+        const duplicateCourseElement = courseElement.cloneNode(true);
+        timeSlot.appendChild(duplicateCourseElement);
+      } else {
+        console.warn(`Element not found for day ${day} and time ${time}`);
+      }
     });
   };
 
+
+
+
+// Add new listener to course-block
   // drag events for course-block and time-cells
+  // Remove existing listeners from course-block
   const courseBlock = document.querySelector('.course-block');
+  courseBlock.removeEventListener('dragstart', handleDragstart);
 
-  courseBlock.addEventListener('dragstart', (event) => {
-    event.dataTransfer.setData('text/plain', 'course-block');
-  });
-
+  // Remove existing listeners from time-cells
   const timeCells = document.querySelectorAll('.time-cell');
-            
+
   timeCells.forEach((timeCell) => {
-    timeCell.addEventListener('dragover', (event) => {
-      event.preventDefault();
-      event.currentTarget.classList.add('highlight');
-    });
-  
-    timeCell.addEventListener('dragleave', (event) => {
-      event.currentTarget.classList.remove('highlight');
-    });
-  
-    timeCell.addEventListener('drop', (event) => {
-      event.preventDefault();
-      const data = event.dataTransfer.getData('text/plain');
-      if (data === 'course-block') {
-        const courseBlock = document.querySelector('.course-block');
-        const gridCell = event.currentTarget.parentNode;
-        const timeCell = event.currentTarget;
-        timeCell.appendChild(courseBlock);
-        timeCell.classList.remove('highlight');
-        gridCell.classList.remove('highlight');
-      }
-    });
+    timeCell.removeEventListener('dragover', handleDragover);
+    timeCell.removeEventListener('dragleave', handleDragLeave);
+    timeCell.removeEventListener('drop', handleDrop);
   });
 
+  courseBlock.addEventListener('dragstart', handleDragstart);
+
+  timeCells.forEach((timeCell) => {
+    timeCell.addEventListener('dragover', handleDragover);
+    timeCell.addEventListener('dragleave', handleDragLeave);
+    timeCell.addEventListener('drop', handleDrop);
+  });
 }
+
+function handleDragstart(event) {
+  event.dataTransfer.setData('text/plain', 'course-block');
+}
+
+function handleDragover(event) {
+  event.preventDefault();
+  event.currentTarget.classList.add('highlight');
+}
+
+function handleDragLeave(event) {
+  event.currentTarget.classList.remove('highlight');
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData('text/plain');
+  if (data === 'course-block') {
+    const courseBlock = document.querySelector('.course-block');
+    const gridCell = event.currentTarget.parentNode;
+    const timeCell = event.currentTarget;
+    timeCell.appendChild(courseBlock);
+    timeCell.classList.remove('highlight');
+    gridCell.classList.remove('highlight');
+  }
+}
+
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
@@ -546,15 +646,18 @@ function removeFilterVariable(element, type, id) {
   $(id + ' option').filter(function() {
     return $(this).text() === item;
   }).removeClass('selected').css('background-color', '').css('color', '');
-  
+
   // Force set background color to white and text color to black for the removed option
   $(id + ' option').filter(function() {
     return $(this).text() === item;
-  }).css('background-color', 'white').css('color', 'black');
+  }).css('background-color', 'var(background-color)').css('color', 'var(--black-text-color)');
+}
+
+function initializeFilterVariables() {
+  $('.filtering-container .selected-item').remove();
 }
 
 $(document).ready(function() {
-
       // Listen for keypress events on all input boxes in the form
   document.querySelectorAll('#advanced-filtering-content input').forEach(input => {
       input.addEventListener('keypress', event => {
@@ -564,7 +667,7 @@ $(document).ready(function() {
           const addButton = event.target.parentNode.querySelector('button.add-button');
           // If there is an add button, click it
           if (addButton) {
-          addButton.click();
+            addButton.click();
           }
           // Otherwise, find the next input box and focus it
           else {
@@ -578,159 +681,169 @@ $(document).ready(function() {
           // Prevent the default "Enter" behavior (submitting the form)
           event.preventDefault();
       }
-      });
-      
+    });
   });
-  
-$('#add-individual-class-conflict').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#conflict-1');
-  var inputBox2 = $('#conflict-2');
 
-  var course1 = inputBox1.val();
-  var course2 = inputBox2.val();
+  $('#add-individual-class-conflict').off('click').click(function() {
+    console.log("add conflict clicked")
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#conflict-1');
+    var inputBox2 = $('#conflict-2');
 
-  if ((course1.length >= 5 && course1.length <= 12) && (course2.length >= 5 && course2.length <= 12)) {
-    var course_conflicts = filterVariables.individualCourseConflicts;
+    var course1 = inputBox1.val();
+    var course2 = inputBox2.val();
 
-    // Sort the values alphabetically
-    var sortedCourses = [course1, course2].sort();
-    
-    // Store the sorted values back into course1 and course2
-    course1 = sortedCourses[0];
-    course2 = sortedCourses[1];
-    if (!filterVariables.individualCourseConflicts.some(tuple => tuple[0] === course1 && tuple[1] === course2)) {
-      filterVariables.individualCourseConflicts.push([course1, course2]);
-      var enteredIndividualCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'individualCourseConflicts\')"></span><span>' + course1 + " " + course2 + '</span></div>');
-      $('#entered-individual-course-conflict').append(enteredIndividualCourseConflict);
-      inputBox1.val('');
-      inputBox2.val('');
+    if ((course1.length >= 5 && course1.length <= 12) && (course2.length >= 5 && course2.length <= 12)) {
+      var course_conflicts = filterVariables.individualCourseConflicts;
+
+      // Sort the values alphabetically
+      var sortedCourses = [course1, course2].sort();
+
+      // Store the sorted values back into course1 and course2
+      course1 = sortedCourses[0];
+      course2 = sortedCourses[1];
+      if (!filterVariables.individualCourseConflicts.some(tuple => tuple[0] === course1 && tuple[1] === course2)) {
+        filterVariables.individualCourseConflicts.push([course1, course2]);
+        var enteredIndividualCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'individualCourseConflicts\')"></span><span>' + course1 + " " + course2 + '</span></div>');
+        $('#entered-individual-course-conflict').append(enteredIndividualCourseConflict);
+        inputBox1.val('');
+        inputBox2.val('');
+      }
     }
-  }
-  else {
-      alert("Check that course format is correct: \"CSCE A101\"");
-      return;
-  }
-});
-
-$('#add-range-class-conflict').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#range-subject');
-  var inputBox2 = $('#range-start');
-  var inputBox3 = $('#range-end');
-
-  var inputSubject = inputBox1.val();
-  var inputRangeStart = inputBox2.val();
-  var inputRangeEnd = inputBox3.val();    
-
-  if ((inputSubject.length >= 2 && inputSubject.length <= 4) && 
-      (inputRangeStart.length >= 2 && inputRangeStart.length <= 4) && 
-      (inputRangeEnd.length >= 2 && inputRangeEnd.length <= 4) &&
-      (inputRangeEnd[0] == 'A') && (inputRangeStart[0] == 'A') &&
-      (inputRangeStart.slice(1) < inputRangeEnd.slice(1))) {
-
-      if (!filterVariables.rangeCourseConflicts.some(function(tuple) {
-          return tuple[0] === inputSubject &&
-                  tuple[1] === inputRangeStart &&
-                  tuple[2] === inputRangeEnd;
-      })) {
-      filterVariables.rangeCourseConflicts.push([inputSubject, inputRangeStart, inputRangeEnd]);
-      var enteredRangeCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'rangeCourseConflicts\')"></span><span>' + inputSubject + " " + inputRangeStart + " - " + inputRangeEnd + '</span></div>');
-      $('#entered-range-course-conflict').append(enteredRangeCourseConflict);
-      inputBox1.val('');
-      inputBox2.val('');
-      inputBox3.val('');
+    else {
+        alert("Check that course format is correct: \"CSCE A101\"");
+        return;
     }
-  }
-  else {
-      alert("Check that range format is correct: \"CSCE A101 - A201\"");
-      return;
-  }
-});
+  });
 
-$('#add-hide-class').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#hidden-class');
+  $('#add-range-class-conflict').off('click').click(function() {
+    console.log("add conflict clicked")
 
-  var course = inputBox1.val();
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#range-subject');
+    var inputBox2 = $('#range-start');
+    var inputBox3 = $('#range-end');
 
-  if (course.length >= 5 && course.length <= 12) {
-      var hidden_courses = filterVariables.hideCourses;
-      if (!hidden_courses.includes(course)) {
-          filterVariables.hideCourses.push(course);
-          var enteredHideClass = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'hideCourses\')"></span><span>' + course + '</span></div>');
-          $('#entered-hide-classes').append(enteredHideClass);
-          inputBox1.val('');
+    var inputSubject = inputBox1.val();
+    var inputRangeStart = inputBox2.val();
+    var inputRangeEnd = inputBox3.val();
+
+    if ((inputSubject.length >= 2 && inputSubject.length <= 4) &&
+        (inputRangeStart.length >= 2 && inputRangeStart.length <= 4) &&
+        (inputRangeEnd.length >= 2 && inputRangeEnd.length <= 4) &&
+        (inputRangeEnd[0] == 'A') && (inputRangeStart[0] == 'A') &&
+        (inputRangeStart.slice(1) < inputRangeEnd.slice(1))) {
+
+        if (!filterVariables.rangeCourseConflicts.some(function(tuple) {
+            return tuple[0] === inputSubject &&
+                    tuple[1] === inputRangeStart &&
+                    tuple[2] === inputRangeEnd;
+        })) {
+        filterVariables.rangeCourseConflicts.push([inputSubject, inputRangeStart, inputRangeEnd]);
+        var enteredRangeCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'rangeCourseConflicts\')"></span><span>' + inputSubject + " " + inputRangeStart + " - " + inputRangeEnd + '</span></div>');
+        $('#entered-range-course-conflict').append(enteredRangeCourseConflict);
+        inputBox1.val('');
+        inputBox2.val('');
+        inputBox3.val('');
       }
-  }
-  else {
-      alert("Check that course format is correct. \"CSCE A101\"");
-      return;
-  }
-});
+    }
+    else {
+        alert("Check that range format is correct: \"CSCE A101 - A201\"");
+        return;
+    }
+  });
 
-$('#add-hide-subject').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#hidden-subject');
+  $('#add-hide-class').off('click').click(function() {
+    console.log("add conflict clicked")
 
-  var subject = inputBox1.val();
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#hidden-class');
 
-  if (subject.length >= 2 && subject.length <= 4) {
-      var hidden_subjects = filterVariables.hideSubjects;
-      if (!hidden_subjects.includes(subject)) {
-          filterVariables.hideSubjects.push(subject);
-          var enteredHideSubject = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'hideSubjects\')"></span><span>' + subject + '</span></div>');
-          $('#entered-hide-subjects').append(enteredHideSubject);
-          inputBox1.val('');
-      }
-  }
-  else {
-      alert("Check that subject format is correct. e.g., \"CSCE\"");
-      return;
-  }
-});
+    var course = inputBox1.val();
 
-$('#add-ignore-class').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#ignore-class');
+    if (course.length >= 5 && course.length <= 12) {
+        var hidden_courses = filterVariables.hideCourses;
+        if (!hidden_courses.includes(course)) {
+            filterVariables.hideCourses.push(course);
+            var enteredHideClass = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'hideCourses\')"></span><span>' + course + '</span></div>');
+            $('#entered-hide-classes').append(enteredHideClass);
+            inputBox1.val('');
+        }
+    }
+    else {
+        alert("Check that course format is correct. \"CSCE A101\"");
+        return;
+    }
+  });
 
-  var course = inputBox1.val();
+  $('#add-hide-subject').off('click').click(function() {
+    console.log("add conflict clicked")
 
-  if (course.length >= 5 && course.length <= 12) {
-      var ignore_courses = filterVariables.ignoreCourses;
-      if (!ignore_courses.includes(course)) {
-          filterVariables.ignoreCourses.push(course);
-          var enteredIgnoreClass = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'ignoreCourses\')"></span><span>' + course + '</span></div>');
-          $('#entered-ignore-classes').append(enteredIgnoreClass);
-          inputBox1.val('');
-      }
-  }
-  else {
-      alert("Check that course format is correct. \"CSCE A101\"");
-      return;
-  }
-});
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#hidden-subject');
 
-$('#add-ignore-subject').click(function() {
-  event.preventDefault(); // Prevent the default form submission behavior
-  var inputBox1 = $('#ignore-subject');
+    var subject = inputBox1.val();
 
-  var subject = inputBox1.val();
+    if (subject.length >= 2 && subject.length <= 4) {
+        var hidden_subjects = filterVariables.hideSubjects;
+        if (!hidden_subjects.includes(subject)) {
+            filterVariables.hideSubjects.push(subject);
+            var enteredHideSubject = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'hideSubjects\')"></span><span>' + subject + '</span></div>');
+            $('#entered-hide-subjects').append(enteredHideSubject);
+            inputBox1.val('');
+        }
+    }
+    else {
+        alert("Check that subject format is correct. e.g., \"CSCE\"");
+        return;
+    }
+  });
 
-  if (subject.length >= 2 && subject.length <= 4) {
-      var ignore_subjects = filterVariables.ignoreSubjects;
-      if (!ignore_subjects.includes(subject)) {
-          filterVariables.ignoreSubjects.push(subject);
-          var enteredIgnoreSubject = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'ignoreSubjects\')"></span><span>' + subject + '</span></div>');
-          $('#entered-ignore-subjects').append(enteredIgnoreSubject);
-          inputBox1.val('');
-      }
-  }
-  else {
-      alert("Check that subject format is correct. e.g., \"CSCE\"");
-      return;
-  }
-});
+  $('#add-ignore-class').off('click').click(function() {
+    console.log("add conflict clicked")
+
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#ignore-class');
+
+    var course = inputBox1.val();
+
+    if (course.length >= 5 && course.length <= 12) {
+        var ignore_courses = filterVariables.ignoreCourses;
+        if (!ignore_courses.includes(course)) {
+            filterVariables.ignoreCourses.push(course);
+            var enteredIgnoreClass = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'ignoreCourses\')"></span><span>' + course + '</span></div>');
+            $('#entered-ignore-classes').append(enteredIgnoreClass);
+            inputBox1.val('');
+        }
+    }
+    else {
+        alert("Check that course format is correct. \"CSCE A101\"");
+        return;
+    }
+  });
+
+  $('#add-ignore-subject').off('click').click(function() {
+    console.log("add conflict clicked")
+
+    event.preventDefault(); // Prevent the default form submission behavior
+    var inputBox1 = $('#ignore-subject');
+
+    var subject = inputBox1.val();
+
+    if (subject.length >= 2 && subject.length <= 4) {
+        var ignore_subjects = filterVariables.ignoreSubjects;
+        if (!ignore_subjects.includes(subject)) {
+            filterVariables.ignoreSubjects.push(subject);
+            var enteredIgnoreSubject = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'ignoreSubjects\')"></span><span>' + subject + '</span></div>');
+            $('#entered-ignore-subjects').append(enteredIgnoreSubject);
+            inputBox1.val('');
+        }
+    }
+    else {
+        alert("Check that subject format is correct. e.g., \"CSCE\"");
+        return;
+    }
+  });
 });
 
 
@@ -740,17 +853,22 @@ window.addEventListener('load', function() {
   const advancedFilteringContent = document.querySelector("#advanced-filtering-content");
   const dropdownArrows = document.querySelectorAll(".filter-dropdown-arrow");
 
-  // Add an event listener to the toggle button
-  toggleButton.addEventListener("click", function() {
+  // Define the click event handler function
+  function toggleAdvancedFiltering() {
     // Toggle the display property of the advanced filtering content element
     advancedFilteringContent.style.display = advancedFilteringContent.style.display === "block" ? "none" : "block";
-    
+    console.log("filtering clicked")
+
     // Loop through each arrow element and toggle the 'active' class
     dropdownArrows.forEach(function(arrow) {
       arrow.classList.toggle("active");
     });
-  });
+  }
+
+  toggleButton.removeEventListener('click', toggleAdvancedFiltering);
+  toggleButton.addEventListener('click', toggleAdvancedFiltering);
 });
+
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE CONFLICT CHECKER
@@ -783,7 +901,7 @@ function createHashTable(){
   }
 }
 
-// Returns the timeslots of a specific class.  
+// Returns the timeslots of a specific class.
 // A class can return more than one time slot if its longer than the usual 1hr 15min
 function getClassTimeSlots(startTime, endTime) {
   const course_time_slots = [];
@@ -821,7 +939,7 @@ function addToHashTable(course_object) {
 function isDuplicateConflict(course1_crn, course2_crn) {
   for (let i = 0; i < conflicts.length; i++) {
     const conflict = conflicts[i];
-    if ((conflict.course1.CRN === course1_crn && conflict.course2.CRN === course2_crn) || 
+    if ((conflict.course1.CRN === course1_crn && conflict.course2.CRN === course2_crn) ||
         (conflict.course1.CRN === course2_crn && conflict.course2.CRN === course1_crn)) {
       return true; // duplicate conflict found
     }
@@ -839,7 +957,7 @@ function isUndergradGrad(course1_crs, course2_crs) {
       return true; // undergrad graduate i.e., CSCE A405 and CSCE A605 are the same class
     }
   }
-  return false; // not undergrad graduate 
+  return false; // not undergrad graduate
 }
 
 
@@ -911,7 +1029,7 @@ function checkForConflicts() {
                 let message = `cannot conflict, specified in filter`;
                 addConflict(course1, course2, message);
               }
-            } 
+            }
             // check for range conflict in the filter
             for (let conflict of filterVariables.rangeCourseConflicts) {
               if (conflict[0] === course1.Subj && conflict[0] === course2.Subj &&
@@ -920,15 +1038,13 @@ function checkForConflicts() {
                 let message = `cannot conflict, specified in filter`;
                 addConflict(course1, course2, message);
               }
-            }       
+            }
           }
         }
       }
     }
   }
   displayConflicts()
-  for (let row of conflicts) {
-  }
 }
 
 
@@ -958,8 +1074,6 @@ function conflictFunction() {
   }
   if (!saved_data) {
     saved_course_hash_table = JSON.parse(JSON.stringify(course_hash_table));
-    console.log("ORIGINAL SAVE")
-    console.log(saved_course_hash_table)
     saved_data = true;
   }
   checkForConflicts();
@@ -1028,7 +1142,7 @@ function displayInstructors() {
   }
   if (filterVariables.instructors.includes("All Instructors")) {
     return;
-  } 
+  }
   else {
     for (let day in course_hash_table) {
       for (let timeSlot in course_hash_table[day]) {
@@ -1041,12 +1155,10 @@ function displayInstructors() {
 }
 
 function displayBldgRoom() {
-  console.log("Displaying building and room information:");
-
   if (filterVariables.bldgRoom.length === 0) {
     return;
   }
-  
+
   else {
     for (let day in course_hash_table) {
       for (let timeSlot in course_hash_table[day]) {
@@ -1056,19 +1168,16 @@ function displayBldgRoom() {
       }
     }
   }
-  
-  console.log(course_hash_table); // Display filtered courses
 }
 
 window.addEventListener('load', function() {
   // define a function to handle the button press
   function handleFilterButtonClick() {
+    console.log("filter button clicked")
 
     const loadingContainer = document.getElementById('loading-filtering-container');
     loadingContainer.style.display = 'flex';
     course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
-    console.log(course_hash_table)
-    console.log(saved_course_hash_table)
 
     removeHiddenCourses();
     removeHiddenSubjects();
@@ -1085,6 +1194,7 @@ window.addEventListener('load', function() {
 
   // add a click event listener to the button
   var filterbtn = document.getElementById("apply-filter");
+  filterbtn.removeEventListener('click', handleFilterButtonClick);
   filterbtn.addEventListener('click', handleFilterButtonClick);
 });
 
@@ -1097,7 +1207,11 @@ window.addEventListener('load', function() {
 ////////////////////////////////////////////////////////////////////
 function displayConflicts() {
   var conflictsList = document.getElementById("conflict-container");
-  conflictsList.innerHTML = "";
+
+  // Remove existing elements from the container
+  while (conflictsList.firstChild) {
+    conflictsList.removeChild(conflictsList.firstChild);
+  }
 
   // add the header again
   var header = document.createElement("h2");
@@ -1123,10 +1237,14 @@ function displayConflicts() {
       conflictMessageElem.innerText = conflictMessage;
       conflictBox.appendChild(conflictMessageElem);
 
-      // add event listener to each conflict item
-      conflictBox.addEventListener("click", function() {
+      conflictBox.removeEventListener("click", showConflictsClick);
+      conflictBox.addEventListener("click", showConflictsClick);
+
+      function showConflictsClick() {
+        console.log("show conflict info")
+
         showConflictDetails(conflict, conflictBox);
-      });
+      }
 
       conflictsList.appendChild(conflictBox);
     })(conflicts[i]);
@@ -1181,7 +1299,7 @@ function showConflictDetails(conflict, clickedElement) {
   var advancedFilteringContainer = document.querySelector(".advanced-filtering-container");
   var advancedFilteringContainerHeight = advancedFilteringContainer.offsetHeight;
 
-  
+
   var searchContainer = document.querySelector(".search-container");
   var searchContainerHeight = searchContainer.offsetHeight;
 
@@ -1198,13 +1316,16 @@ function showConflictDetails(conflict, clickedElement) {
   // make the temporary conflict box visible
   tempConflictBox.style.display = "block";
   setTimeout(function() {
+    document.removeEventListener("click", closeConflictDetails);
     document.addEventListener("click", closeConflictDetails);
   }, 10);
+
 }
 
 
 // function to close temporary conflict box
 function closeConflictDetails(event) {
+  console.log("closeConflictDetails clicked")
   var tempConflictBox = document.getElementById("temp-conflict-box");
   if (tempConflictBox && !tempConflictBox.contains(event.target)) {
     tempConflictBox.parentNode.removeChild(tempConflictBox);
@@ -1215,13 +1336,18 @@ function closeConflictDetails(event) {
 
 
 function displayOnlineCourses() {
- 
   // Create course tiles for each online course and append them to the "course-tiles" container
   const courseTilesContainer = document.querySelector(".course-tiles");
+  // Remove existing elements from the container
+  while (courseTilesContainer.firstChild) {
+    courseTilesContainer.removeChild(courseTilesContainer.firstChild);
+  }
+
+
   online_courses.forEach(course => {
     const courseTile = document.createElement("div");
     courseTile.classList.add("course-tile");
-  
+
     const crn = document.createElement("p");
     const title = document.createElement("p");
     const courseInfo = document.createElement("p");
@@ -1231,14 +1357,14 @@ function displayOnlineCourses() {
     title.textContent = `${course.Title}`;
     courseTile.appendChild(title);
 
-  
+
     crn.textContent = `CRN: ${course.CRN}`;
     courseTile.appendChild(crn);
 
     const instructor = document.createElement("p");
     instructor.textContent = `Instructor: ${course.Instructor}`;
     courseTile.appendChild(instructor);
-  
+
     courseTilesContainer.appendChild(courseTile);
   });
 }
