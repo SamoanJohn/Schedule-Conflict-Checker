@@ -1087,6 +1087,10 @@ function removeIgnoreSubjects() {
 }
 
 function displayInstructors() {
+  console.log("Instructor followed by class_array")
+  console.log(filterVariables.instructors)
+  console.log(class_array)
+
   // Check if the filter includes "All Instructors"
   if (filterVariables.instructors.length === 0) {
     return;
@@ -1107,7 +1111,6 @@ function displayInstructors() {
   class_array = class_array.filter((course) => {
     return filterVariables.instructors.includes(course.Instructor);
   });
-  console.log(class_array);
 }
 
 function displayBldgRoom() {
@@ -1134,6 +1137,7 @@ window.addEventListener('load', function() {
     const loadingContainer = document.getElementById('loading-filtering-container');
     loadingContainer.style.display = 'flex';
     course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
+    class_array = [...saved_class_array];
 
     removeHiddenCourses();
     removeHiddenSubjects();
