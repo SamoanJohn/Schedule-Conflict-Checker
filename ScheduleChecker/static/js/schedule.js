@@ -249,12 +249,12 @@ function populateBuildingsDropdown() {
 }
 
 
-
 function handleFileSelect(event) {
   // Reset file input element
   const fileInput = document.getElementById('file-input');
   const newFileInput = fileInput.cloneNode(true);
   fileInput.parentNode.replaceChild(newFileInput, fileInput);
+
 
     // If saved_course_hash_table is not empty, prompt the user with an alert box
   if (Object.keys(saved_class_array).length > 0) {
@@ -336,7 +336,6 @@ function handleFileSelect(event) {
       const [days, stime, etime, bldg, room] = narrowDown(row);
       return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
     });
-
 
     saved_class_array = [...class_array];
     newData = null;
@@ -437,8 +436,8 @@ window.addEventListener('load', function() {
         }
       }
 
-      // var url = '/sc/query/?term=' + selectedTerm;
-      var url = '/query/?term=' + selectedTerm;
+      var url = '/sc/query/?term=' + selectedTerm;
+      // var url = '/query/?term=' + selectedTerm;
 
 
       // add selected subjects to the URL if any are selected
@@ -475,6 +474,7 @@ window.addEventListener('load', function() {
       console.log(url);
       xhr.open("GET", url, true);
       xhr.send();
+    
   }
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
@@ -1030,22 +1030,20 @@ function conflictFunction() {
   checkForConflicts();
 }
 
-
 function removeHiddenCourses() {
   // Remove hidden courses from classArray
   class_array = class_array.filter((course) => {
-    return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crn));
+    return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
   });
   // Remove hidden courses from course_hash_table
   for (let day in course_hash_table) {
     for (let timeSlot in course_hash_table[day]) {
       course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
-        return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crn));
+        return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
       });
     }
   }
 }
-
 
 function removeHiddenSubjects() {
   // Remove hidden subjects from classArray
@@ -1062,18 +1060,16 @@ function removeHiddenSubjects() {
   }
 }
 
-
 function removeIgnoreCourses(){
   // Remove hidden courses from course_hash_table
   for (let day in course_hash_table) {
     for (let timeSlot in course_hash_table[day]) {
       course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
-        return !(filterVariables.ignoreCourses.includes(course.Subj + ' ' + course.Crn));
+        return !(filterVariables.ignoreCourses.includes(course.Subj + ' ' + course.Crs));
       });
     }
   }
 }
-
 
 function removeIgnoreSubjects() {
   // Remove ignore subjects from course_hash_table
