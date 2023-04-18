@@ -436,8 +436,8 @@ window.addEventListener('load', function() {
         }
       }
 
-      var url = '/sc/query/?term=' + selectedTerm;
-      // var url = '/query/?term=' + selectedTerm;
+      //var url = '/sc/query/?term=' + selectedTerm;
+      var url = '/query/?term=' + selectedTerm;
 
 
       // add selected subjects to the URL if any are selected
