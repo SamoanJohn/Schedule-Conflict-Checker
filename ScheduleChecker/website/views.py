@@ -80,7 +80,8 @@ def get_major_requirements(request):
         url = "https://curric.uaa.alaska.edu/scheduleSearch.php?term={}&subj={}".format(selected_term, subj)
         urls.append(url)
 
-    thread_count = min(os.cpu_count(), len(urls))
+    # thread_count = min(os.cpu_count(), len(urls))
+    thread_count = min(8, len(urls))
     # seperates urls into batches determined by avaliable resourses
     url_batches = [urls[i::thread_count] for i in range(thread_count)]
     scraping_futures = []
@@ -107,6 +108,9 @@ def get_major_requirements(request):
     clean_whitespace = lambda x: re.sub(r'\s{2,}', ' ', x.strip()) if isinstance(x, str) else x
 
     # Concatenate list of dataframes into a single dataframe
+    if not temp_dataframe_list:
+        return
+    
     class_data_df = pd.concat(temp_dataframe_list)
     class_data_df = class_data_df.dropna(how='all') # deletes any empty rows
     class_data_df = class_data_df.rename(columns={'Del Mthd': 'DelMthd'})
@@ -119,7 +123,6 @@ def get_major_requirements(request):
     class_data_df["ETime"] = class_data_df["ETime"].apply(parse_time)
 
     class_data_df[["Days", "STime", "ETime", "Bldg", "Room"]] = class_data_df.apply(narrow_down, axis=1, result_type="expand")
-    class_data_df.to_csv('output.txt', sep='\t', index=False)
 
     print(class_data_df)
     return JsonResponse({'data': class_data_df.to_json(orient='records')})

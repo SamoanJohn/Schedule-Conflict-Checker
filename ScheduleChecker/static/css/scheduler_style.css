@@ -1,29 +1,235 @@
-  
+:root {
+  --background-color: #FFFFFF;
+  --black-text-color: #000000;
+  --grey-text-color: #757575;
+  --white-text-color: white;
+  --grey-background-color: #dfdfdf;
+  --lightgrey-background-color: #f4f4f4;
+  --grey-text-color: grey;
+  --header-background-color: #004895;
+  --grey-border-color: #c3c3c3;
+  --submit-button-color: green;
+  --submit-button-hover-color: darkgreen;
+  --add-button-blue-color: #0077cc;
+  --hover-dropdown-option: #007bff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --conflict-hover-color: #acb3ff;
+  --dropdown-blue-color: rgb(0, 60, 255);
+  --splinner-blue-color: rgba(0, 38, 255, 0.352);
+  --loading-background-color: rgba(133, 133, 133, 0.441);
+  --remove-item-hover: #383f475d;
+  --selected-item-text-color: #383f47;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  --background-color: #1a1a1a; /* dark mode background color */
+  --black-text-color: #FFFFFF; /* default dark mode text color */
+  --grey-text-color: #858585;
+  --white-text-color: #FFFFFF; /* default button text color */
+  --grey-background-color: #111111;
+  --lightgrey-background-color: #3C3C3C;
+  --header-background-color: #004895;
+  --grey-border-color: #6B6B6B;
+  --submit-button-color: green; /* default button background color */
+  --submit-button-hover-color: darkgreen;
+  --add-button-blue-color: #0077cc;
+  --hover-dropdown-option: #007bff;
+  --box-shadow-color: rgba(0, 0, 0, 0.1);
+  --conflict-hover-color: #4a5097;
+  --dropdown-blue-color: rgb(76, 118, 255);
+  --splinner-blue-color: rgba(0, 38, 255, 0.352);
+  --loading-background-color: rgba(133, 133, 133, 0.441);
+  --remove-item-hover: #383f475d;
+  --selected-item-text-color: #FFFFFF;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+
+.header {
+  height: 65px;
+  background-color: var(--header-background-color);
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header-title {
+  width: 40%;
+  min-width: 325px;
+  font-size: 36px;
+  color: var(--white-text-color);
+  font-weight: bold;
+}
+
+.university-title {
+  width: 30%;
+  font-size: 20px;
+  color: var(--white-text-color);
+  font-weight: bold;
+}
+
+.profile-section {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-name {
+  font-size: 18px;
+  color: var(--white-text-color);
+}
+
+.dark-mode-toggle {
+  padding-left: 5px;
+  padding-right: 5px;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--background-color);
+  cursor: pointer;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--header-background-color);
+  transition: transform 0.2s;
+}
+
+.dark-text-container,
+.light-text-container {
+  width: 60px;
+}
+
+.dark-text,
+.light-text {
+  font-size: 14px;
+  color: var(--white-text-color);
+  font-weight: bold;
+}
+
+.dark-text {
+  display: none;
+  margin-left: 5px;
+}
+
+.dark-mode-container {
+  display: flex;
+  width: 150px;
+  font-family: "Montserrat", sans-serif;
+  align-items: center;
+}
+
+.toggle-slider-on {
+  transform: translate(22px, -50%);
+}
+
+/* .dark-mode-toggle.dark .toggle-slider {
+  transform: translate(21px, -50%);
+  transition: transform 0.2s;
+} */
+
+
+
 /*## Term, Major, and Subject Search Bar ##*/
 .search-container {
-    background-color: #dfdfdf;
+    background-color: var(--grey-background-color);
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     padding: 15px;
     display: flex;
     justify-content: center;
-    border-bottom: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
+/**/
+select:focus {
+  outline: none;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.dropdown-wrapper {
+  background-color: var(--background-color);
+  position: static;
+  left: 0;
+  z-index: 5;
+}
+
+#subject-dropdown,
+#major-dropdown,
+#instructor-dropdown,
+#room-dropdown,
+#bldg-dropdown {
+  background-color: var(--background-color);
+  color: var(--black-text-color);
+  display: none;
+  position: sticky;
+  font-size: 16px;
+  height: 150px;
+  width: 100%;
+}
+  /* Use this if you want the dropdowns to float
+#subject-dropdown,
+#major-dropdown,
+#instructor-dropdown,
+#room-dropdown,
+#bldg-dropdown {
+  display: none;
+  position: absolute;
+  font-size: 16px;
+  height: 150px;
+  width: 100%;
+  z-index: 999;
+}  */
+
+.dropdown option:hover {
+  background-color: var(--hover-dropdown-option);
+  color: var(--white-text-color);
+}
+
+.select-wrapper.open .dropdown-wrapper {
+  display: block;
+}
+
+/**/
 .select-wrapper-term {
     position: relative;
     margin: 0 20px;
-    width: 15%;
+    width: 10%;
+    min-width: 90px;
   }
 
 
 .select-wrapper {
     position: relative;
     margin: 0 20px;
-    width: 33%;
+    width: 25%;
 }
 
-  select.dropdown-toggle {
+select.dropdown-toggle {
     display: block;
     width: 100%;
     padding: 10px 30px 10px 10px;
@@ -31,14 +237,51 @@
     border-radius: 5px;
     margin-bottom: 2px;
     border: none;
-    background-color: white;
+    color: var(--black-text-color);
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
     z-index: 1; /* Ensure select box is above the arrow */
-    border: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
   
+  #major-dropdown-toggle,
+  #subject-dropdown-toggle,
+  #instructor-dropdown-toggle,
+  #room-dropdown-toggle,
+  #bldg-dropdown-toggle {
+    display: block;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 41.09px;
+    padding: 10px 30px 10px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    border: none;
+    color: var(--black-text-color);
+    background-color: var(--background-color);
+    appearance: none;
+    -webkit-appearance: none;
+    z-index: 1; /* Ensure select box is above the arrow */
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
+  }
+
+    /* Dark mode colors */
+  body.dark #major-dropdown-toggle,
+  body.dark #subject-dropdown-toggle,
+  body.dark #instructor-dropdown-toggle,
+  body.dark #room-dropdown-toggle,
+  body.dark #bldg-dropdown-toggle {
+  color: var(--white-text-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
+  }
+
   select.dropdown-toggle:focus {
     outline: none;
   }
@@ -52,31 +295,27 @@
     height: 0;
     border-style: solid;
     border-width: 5px 4px 0 4px;
-    border-color: black transparent transparent transparent;
+    border-color: var(--black-text-color) transparent transparent transparent;
     float: right;
     z-index: 0; /* Ensure arrow is below the select box */
-  }
-  
-  select.dropdown-toggle:hover + .dropdown-arrow,
-  select.dropdown-toggle:focus + .dropdown-arrow {
-    border-color: blue transparent transparent transparent;
-  }
-  
-  select.dropdown-toggle.active + .dropdown-arrow {
-    transform: translateY(-50%) rotate(180deg);
   }
 
   
   .selected-item {
     display: inline-flex;
+    position: relative;
+    z-index: 0;
     align-items: center;
     height: 20px;
     padding: 2px 8px;
+    padding-right: 10px;
     margin: 1px;
     border-radius: 20px;
-    background-color: #ffffff;
-    color: #383f47;
-    border: 1.5px solid #383f47;
+    font-weight: bold;
+    background-color: var(--background-color);
+    color: var(--selected-item-text-color);
+    border: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
     white-space: nowrap;
     min-width: fit-content;
   }
@@ -103,14 +342,14 @@
     height: 17px;
     border-radius: 100%;
     border: none;
-    color: #000000;
+    color: var(--black-text-color);
     font-weight: bold;
     cursor: pointer;
     margin-right: 10px;
 }
   
 .remove-item:hover {
-    background-color: #383f475d;
+    background-color: var(--remove-item-hover);
 }
   
 .remove-item:before {
@@ -120,8 +359,8 @@
 }
 
 .search-btn {
-    background-color: green;
-    color: white;
+    background-color: var(--submit-button-color);
+    color: var(--white-text-color);
     padding: 10px 20px;
     height: 39.6px;
     border: none;
@@ -131,8 +370,51 @@
 }
   
 .search-btn:hover {
-    background-color: darkgreen;
+    background-color: var(--submit-button-hover-color);
 }
+
+.upload-btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.upload-btn {
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
+  padding: 10px 20px;
+  height: 39.6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1;  
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.upload-btn:hover {
+  background-color: var(--submit-button-hover-color) !important;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 2;
+}
+
+#OR {
+  display: flex;
+  color: var(--black-text-color);
+  justify-content: center;
+  font-weight: bold;
+  padding: 15px;
+  width: 10%;
+}
+
 
 
 .loading-container {
@@ -141,7 +423,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(133, 133, 133, 0.441);
+  background-color: var(--loading-background-color);
   display: none;
   justify-content: center;
   align-items: center;
@@ -152,9 +434,9 @@
   display: inline-block;
   width: 30px;
   height: 30px;
-  border: 4px solid rgba(0, 38, 255, 0.352);
+  border: 4px solid var(--splinner-blue-color);
   border-radius: 50%;
-  border-top-color: #000000;
+  border-top-color: var(--black-text-color);
   animation: spin 0.8s ease-in-out infinite;
   margin-right: 10px;
 }
@@ -166,7 +448,7 @@
 }
 
 #loading-text {
-  color: #000000;
+  color: var(--black-text-color);
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 22px;
   font-weight: bold;
@@ -175,17 +457,20 @@
 /*## Advanced Filtering ##*/
 
 input[type="text"] {
-  border-bottom: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  color: var(--black-text-color);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
-
-
 .filtering-container {
-    background-color: #dfdfdf;
+    background-color: var(--grey-background-color);
     position: relative;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    border-bottom: 2px solid #c3c3c3;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid var(--grey-border-color);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
+}
+
+.advanced-filtering-container {
+  justify-content: right;
 }
 
 .toggle-advanced-filtering-indent {
@@ -196,12 +481,12 @@ input[type="text"] {
     width: 150px;
     padding: 0 15px;
     margin-top: 0px;
-    background-color: #dfdfdf;
-    border-radius: 0 0 10px 10px;
+    background-color: var(--grey-background-color);
+    border-radius: 0 0 15px 15px;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    border: 2px solid #c3c3c3;
+    border: 2px solid var(--grey-border-color);
     border-width: 0px 2px 2px 2px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px var(--box-shadow-color);
   }
 
   .advanced-filtering-text {
@@ -210,17 +495,17 @@ input[type="text"] {
   
   #toggle-advanced-filtering {
     position: absolute;
-    color: rgb(0, 0, 0);
+    color: var(--black-text-color);
     cursor: pointer;
     font-size: 12px;
     text-decoration: none;
   }
   
   #toggle-advanced-filtering:hover {
-    color: rgb(0, 60, 255);
+    color: var(--dropdown-blue-color);
   }
   .toggle-advanced-filtering-indent:hover .filter-dropdown-arrow {
-    border-top-color: rgb(0, 60, 255); /* change the color to your desired hover color */
+    border-top-color: var(--dropdown-blue-color); /* change the color to your desired hover color */
   }
   
   .filter-dropdown-arrow {
@@ -230,7 +515,7 @@ input[type="text"] {
     right: 10px;
     transform: translateY(-50%);
     border: 8px solid transparent;
-    border-top-color: #000000;
+    border-top-color: var(--black-text-color);
     border-bottom-width: 0;
     transition: transform 0.2s ease-in-out;
   }
@@ -253,7 +538,7 @@ input {
     margin-bottom: 2px;
     margin-right: 10px;
     border: none;
-    background-color: white;
+    background-color: var(--background-color);
     appearance: none;
     -webkit-appearance: none;
 }
@@ -268,20 +553,20 @@ input:focus {
     top: 30px;
     display: flex;
     padding: 0px 20px;
-    border: 2px solid #0077cc;
+    border: 2px solid var(--add-button-blue-color);
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     height: 30px;
-    color: #0077cc;
+    color: var(--add-button-blue-color);
     font-size: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
   
 .add-button:hover {
-    background-color: #0077cc;
-    color: #ffffff;
-}
+    background-color: var(--add-button-blue-color);
+    color: var(--white-text-color);
+  }
 
 /* Individual Class Conflict */
 .individual-class-conflicts {
@@ -390,18 +675,105 @@ input:focus {
     height: 40px;
 }
 
-#advanced-filtering-content {
-    background-color: #dfdfdf;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 15px;
-    display: flex;
-    width: 75%;
-    padding-top: 0px;
-    justify-content: center;
-    margin: 0px
+/* instructors */
+#instructor-dropdown,
+#room-dropdown,
+#bldg-dropdown {
+  font-size: 14px;
+}
+#instructor-dropdown-toggle,
+#room-dropdown-toggle,
+#bldg-dropdown-toggle {
+  height: 35px;
+  padding: 0px;
+  padding-left: 10px;;
+  font-size: 12px;
+  color: var(--grey-text-color);
+}
+#instructor-dropdown-arrow,
+#room-dropdown-arrow,
+#bldg-dropdown-arrow {
+  top: 17px;
+  right: 20px;
+
+}
+
+#instructor-select-wrapper,
+#bldg-room-select-wrapper {
+  width: 98%;
+  position: relative;
+  padding: 5px;
+  margin: 0px;
+}
+#bldg-room-select-wrapper {
+  display: flex;
+  padding: 5px;
+}
+#bldg-room-select-header {
+  display: flex;
+  height: 22px;
+}
+.bold {
+  font-weight: bold;
+}
+#room-header,
+#bldg-header {
+  bottom: -10px;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 5px;
+}
+
+#instructor-dropdown-toggle-wrapper,
+#room-dropdown-toggle-wrapper,
+#bldg-dropdown-toggle-wrapper {
+  height: 40px;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 0px;
+}
+#room-dropdown-toggle-wrapper{
+  padding-left: 5px;
 }
   
+
+.filtering-schedule-conflict-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.conflict-filtering,
+.schedule-filtering {
+  width: 50%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.schedule-filtering {
+  padding-left: 50px;
+}
+.conflict-filtering {
+  padding-right: 50px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .conflict-filtering,
+  .schedule-filtering {
+    width: 100%;
+    padding: 0;
+  }
+}
+
 #advanced-filtering-content h3 {
+  color: var(--black-text-color);
   font-size: 12px;
   margin-top: 0px;
   margin-bottom: 5px;
@@ -415,37 +787,30 @@ input:focus {
 #advanced-filtering-content input[type="text"] {
     display: block;
 }
-  
-#advanced-filtering-content button {
-    margin-top: 10px;
-}
-  
-#advanced-filtering-content button:last-of-type {
-    margin-bottom: 20px;
-}
-  
+
+
 #apply-filter {
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    height: 39.6px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-  
-#apply-filter:hover {
-    background-color: darkgreen;
-}
-  
-#advanced-filtering-content .error {
-    color: #dc3545;
-    margin-top: 5px;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
+  margin: 20px;
+  padding: 10px 20px;
+  width: 125px;
+  margin-bottom: 15px;
+  margin-left: 90%;
+  height: 39.6px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
 }
 
+#apply-filter:hover {
+    background-color: var(--submit-button-hover-color);
+}
+  
 /* corequisite checkbox */
-.corequisite-conflicts {
+/* .corequisite-conflicts {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -468,7 +833,7 @@ input:focus {
   
   .corequisite-conflicts input[type="checkbox"]:checked::before {
     content: "\2714";
-    color: #fff;
+    color: var(--white-text-color);
     display: block;
     position: absolute;
     top: 50%;
@@ -494,8 +859,16 @@ input:focus {
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-  }
-  
+  } */
+
+  /* #bldg-room-select,
+  #instructor-select {
+    height: 35px;
+    padding: 5px 30px 5px 10px;
+  } */
+
+
+
   /* John */
 
 /* Grid */
@@ -505,18 +878,18 @@ input:focus {
   margin-top: 40px; 
   padding: 10px;
   padding-left: 5px;
-  border: 2px solid #c3c3c3;
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
-  background-color: #dfdfdf;
+  background-color: var(--grey-background-color);
 }
 
 .schedule-grid {
-  background-color: white;
-  border: 2px solid #c3c3c3;
+  background-color: var(--background-color);
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
   width: 100%;
   display: grid;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 
 }
 
@@ -536,7 +909,7 @@ input:focus {
 }
 
 .days {
-    border-left: 1px solid #c3c3c3;
+    border-left: 1px solid var(--grey-border-color);
     padding: auto;
     width: 100%;
     height: 30px;
@@ -545,7 +918,7 @@ input:focus {
 
 .days h2{
   font-size: 16px;
-  color: #000000;
+  color: var(--black-text-color);
   text-align: center;
 }
 
@@ -566,6 +939,7 @@ input:focus {
 /*time axis*/
 /* get rid of the different times, make a times column, eliminate the different times and the blank?*/
 .times {
+    color: var(--black-text-color);
     border-top: solid 1px #a9a9a9b4;
     padding-top: 35px;
     width: 100%;
@@ -583,6 +957,7 @@ input:focus {
 
 .time-cell {
     display: flex;
+    color: var(--black-text-color);
     position: relative;
     height:fixed;
     width:100%;
@@ -594,9 +969,10 @@ input:focus {
 /*draggable course block */
 .course-block {
     position:absolute;
-    border: 2px solid #c3c3c3;
+    color: var(--black-text-color);
+    border: 2px solid var(--grey-border-color);
     border-radius: 5px;
-    background-color: white;
+    background-color: var(--background-color);
     top:0;
     height: 20px;
     width: 90%;
@@ -608,7 +984,7 @@ input:focus {
     font-size: 10px;
     font-weight: bold;
     text-align: left;
-    color: black;
+    color: var(--black-text-color);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -629,26 +1005,50 @@ input:focus {
 /* MAIN CONTAINER DISPLAYING */
 .main-container {
   display: flex;
+  justify-content: flex-end;
+
 }
 
 /* DISPLAYING CONFLICTS */
 #conflict-container {
+  max-height: 550px; /* set the maximum height */
+  overflow-y: auto; /* add a scrollbar if content overflows */
   width: 20%;
   position: relative;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 40px;
   margin-left: 15px;
-  border: 2px solid #c3c3c3;
+  border: 2px solid var(--grey-border-color);
   border-radius: 15px;
-  background-color: #dfdfdf;
+  background-color: var(--grey-background-color);
   /* box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); */
+}
+
+
+h2 {
+  color: var(--black-text-color);
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 #conflict-container h2 {
   font-size: 16px;
   margin-bottom: 5px;
-  color: #000000;
+  color: var(--black-text-color);
   text-align: center;
+  position: sticky; /* make the header sticky */
+}
+
+#conflict-header {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: var(--black-text-color);
+  text-align: center;
+  position: sticky; /* make the header sticky */
+  top: 0; /* position the header at the top */
+  background-color: var(--grey-background-color);
+  padding: 10px;
 }
 
 .conflict-item {
@@ -660,14 +1060,14 @@ input:focus {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  border: 2px solid #c3c3c3;
-  background-color: #fff;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--grey-border-color);
+  background-color: var(--background-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 .conflict-item:hover {
-  background-color: #acb3ff;
-  color: #fff;
+  background-color: var(--conflict-hover-color);
+  color: var(--white-text-color);
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -677,21 +1077,21 @@ input:focus {
   font-weight: bold;
   text-overflow: ellipsis;
   font-size: .95em;
-  color: #000000;
+  color: var(--black-text-color);
 }
 
 .course1-sec {
   font-size: 0.8em;
-  color: #757575;
+  color: var(--grey-text-color);
 }
 
 .course2-sec {
   font-size: 0.85em;
-  color: #757575;
+  color: var(--grey-text-color);
 }
 
 .conflict-message {
-  color: #000000;
+  color: var(--black-text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -704,17 +1104,16 @@ input:focus {
 #temp-conflict-box {
   display: none;
   position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 75%;
+  z-index: 10;
+  left: 85.5%;
+  width: 25%;
   transform: translate(-50%, -50%);
-  width: 40%;
   max-width: 800px;
   padding: 20px;
   border-radius: 15px;
-  background-color: #fff;
-  border: 2px solid #c3c3c3;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 10px 30px var(--box-shadow-color);
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
   
@@ -733,33 +1132,52 @@ input:focus {
   margin: 0;
   font-size: 1em;
   font-weight: bold;
-  color: #000;
+  color: var(--black-text-color);
   }
   
   #temp-conflict-box .col p {
   margin: 0;
   font-size: 0.9em;
-  color: #757575;
+  color: var(--grey-text-color);
   }
   
   #temp-conflict-box .conflict-message {
   margin-top: 10px;
   font-size: 0.95em;
-  color: #000;
+  color: var(--black-text-color);
   }
 
+  #conflict-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  #conflict-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  #conflict-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  #conflict-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 /* Style for the online course section */
 .online-courses {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 50px;
-  background-color: #dfdfdf;
-  border: 1px solid #ddd;
+  background-color: var(--grey-background-color);
+  border: 2px solid var(--grey-border-color);
   overflow: hidden;
   max-height: 100px;
   transition: max-height 0.3s ease-out;
-  border-top: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 .online-courses.show {
@@ -777,14 +1195,15 @@ input:focus {
 
 /* Style for the course tile */
 .course-tile {
+  color: var(--black-text-color);
   width: calc(16.66% - 15px);
   margin: 7.5px;
   border-radius: 15px;
-  background-color: #f4f4f4;
+  background-color: var(--background-color);
   padding: 10px;
   box-sizing: border-box;
-  border: 2px solid #c3c3c3;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--grey-border-color);
+  box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
 
 /* Style for the course tile elements */
@@ -805,14 +1224,15 @@ input:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ddd;
+  background-color: var(--grey-background-color);
+  font-size: 12px;
   padding: 10px;
   cursor: pointer;
 }
 
 .toggle-online-courses-button {
-  background-color: green;
-  color: white;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
   padding: 10px 20px;
   height: 39.6px;
   border: none;
@@ -822,5 +1242,5 @@ input:focus {
 }
 
 .toggle-online-courses-button:hover {
-  background-color: darkgreen;
+  background-color: var(--submit-button-hover-color);
 }
