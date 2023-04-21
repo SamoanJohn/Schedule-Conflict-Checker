@@ -141,7 +141,7 @@ body {
 }
 
 .toggle-slider-on {
-  transform: translate(22px, -50%);
+  transform: translate(21px, -50%);
 }
 
 /* .dark-mode-toggle.dark .toggle-slider {

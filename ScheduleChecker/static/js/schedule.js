@@ -35,9 +35,13 @@ function removeItem(element, type, id) {
 
 $(document).ready(function() {
 
+  var $major_select = $('#major-dropdown');
+  var $major_options = $major_select.find('option');
+
   $('#major-dropdown-toggle').off('click').click(function() {
     event.stopPropagation();
     $('#major-dropdown').toggle();
+    $('#major-dropdown').focus(); // set focus to the input field
   });
 
   $('#major-dropdown').off('change').change(function() {
@@ -56,6 +60,38 @@ $(document).ready(function() {
       $(this).val('');
     }
   });
+$major_select.on('keydown', function(e) {
+  console.log("key pressed")
+  var input = String.fromCharCode(e.keyCode);
+  var index = -1;
+  var minDistance = Infinity;
+
+  // Check if the arrow keys were pressed and prevent the default action
+  if (e.keyCode == 38 || e.keyCode == 40) {
+    e.preventDefault();
+    return;
+  }
+
+  // Find the closest option matching the user's input
+  $major_options.each(function(i) {
+    var optionText = $(this).text().split(' - ')[1].trim().toUpperCase();
+    var distance = optionText.indexOf(input.toUpperCase());
+    if (distance >= 0 && distance < minDistance) {
+      index = i;
+      minDistance = distance;
+    }
+  });
+
+  // Scroll to the closest option
+  if (index >= 0) {
+    $major_select.prop('selectedIndex', index);
+    var topOffset = $major_select.find('option:selected').offset().top - $major_select.offset().top;
+    $major_select.scrollTop(topOffset);
+  }
+});
+
+  
+
 
   $(document).click(function(event) {
     if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
@@ -619,6 +655,15 @@ function removeFilterVariable(element, type, id) {
 
 function initializeFilterVariables() {
   $('.filtering-container .selected-item').remove();
+  filterVariables.individualCourseConflicts = [];
+  filterVariables.rangeCourseConflicts = [];
+  filterVariables.ignoreCourses = [];
+  filterVariables.ignoreSubjects = [];
+  filterVariables.hideCourses = [];
+  filterVariables.hideSubjects = [];
+  filterVariables.corequisiteConflicts = [];
+  filterVariables.instructors = [];
+  filterVariables.bldgRoom = [];
 }
 
 $(document).ready(function() {

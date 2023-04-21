@@ -1,0 +1,29 @@
+CRN	Subj	Crs	Sec	Title	Days	STime	ETime	Bldg	Room	Instructor	DelMthd
+70922	CSCE	A101	601	Intro to Computer Science	TR	1000	1115	EIB	401	Witmer F	F2F
+70923	CSCE	A101	801	Intro to Computer Science	MW	1430	1545	DIST	ONLINE	Staff U	WEB MTG
+70925	CSCE	A201	602	Computer Programming I	TR	1300	1415	RH	117	Siddique K	F2F
+70927	CSCE	A201L	601	Computer Programming I Lab	F	0800	0940	ECB	209	Siddique K	F2F
+70928	CSCE	A201L	602	Computer Programming I Lab	F	1000	1140	ECB	209	Siddique K	F2F
+70929	CSCE	A201L	603	Computer Programming I Lab	F	1200	1340	ECB	209	Siddique K	F2F
+70930	CSCE	A211	801	Computer Programming II	['TR', 'TR']	['1000', '1000']	['1115', '1115']	['DIST', 'ECB']	['ONLINE', '203']	Neumayer S	F2F, WEB MTG
+70931	CSCE	A211L	601	Computer Programming II Lab	F	1300	1440	EIB	401	Neumayer S	F2F
+70932	CSCE	A211L	602	Computer Programming II Lab	F	1450	1630	EIB	401	Neumayer S	F2F
+70933	CSCE	A241	651	Computer Hardware Concepts	MW	1000	1115	ECB	203	Cokgor I	F2F
+70934	CSCE	A241L	651	Computer Hardware Concepts Lab	T	1145	1415	EIB	314	Cokgor I	F2F
+70935	CSCE	A241L	652	Computer Hardware Concepts Lab	W	1145	1415	EIB	314	Cokgor I	F2F
+70937	CSCE	A248	601	Comp Org & Assembly Lang Prog	MW	1300	1415	ECB	203	Cokgor I	F2F
+70938	CSCE	A311	601	Data Structures & Algorithms	MW	1430	1545	ECB	203	Siddique K	F2F
+70939	CSCE	A342	801	Digital Circuits Design	['TR', 'TR']	['1130', '1130']	['1245', '1245']	['DIST', 'ECB']	['ONLINE', '209']	Neumayer S	F2F, WEB MTG
+70940	CSCE	A351	601	Automata/Algorithms/Complexity	MW	1130	1245	ECB	203	Siddique K	F2F
+70941	CSCE	A360	601	Database Systems	MW	1000	1115	EIB	401	Franklin J	F2F
+70942	CSCE	A365	601	Computer Networks	TR	1430	1545	ECB	203	Neumayer S	F2F
+70944	CSCE	A401	801	Software Engineering	['TR', 'TR']	['1300', '1300']	['1415', '1415']	['ECB', 'DIST']	['209', 'ONLINE']	Kominiak N	F2F, WEB MTG
+70945	CSCE	A405	651	Artificial Intelligence	TR	1000	1115	ECB	209	Heidari Kapourchali M	F2F
+70946	CSCE	A470	601	*CSCE Capstone Project	TR	1600	1715	ECB	209	Witmer F	F2F
+75283	CSCE	A490	601	Web App Develop using Django	MW	1600	1715	ECB	209	Brown M	F2F
+75707	CSCE	A490	851	Neuroscience and Computation	TR	1130	1245	DIST	ONLINE	Kaneshiro B	WEB MTG
+70950	CSCE	A601	801	Advanced Software Engineering	['TR', 'TR']	['1300', '1300']	['1415', '1415']	['DIST', 'ECB']	['ONLINE', '209']	Kominiak N	F2F, WEB MTG
+70951	CSCE	A605	651	Adv Artificial Intelligence	TR	1000	1115	ECB	209	Heidari Kapourchali M	F2F
+75284	CSCE	A685	601	Adv Computer & Machine Vision	MW	1300	1415	ECB	209	Heidari Kapourchali M	F2F
+75708	CSCE	A690	851	Neuroscience and Computation	TR	1130	1245	DIST	ONLINE	Kaneshiro B	WEB MTG
+70953	CSCE	A698	601	Individual Research	TBA	TBA	TBA	ARR	ARR	Witmer F	F2F, IND R/T

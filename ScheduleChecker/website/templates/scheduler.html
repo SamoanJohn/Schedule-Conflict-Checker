@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 
 <html>
   <head>
@@ -68,10 +69,12 @@
         </div>
         <div class="dropdown-wrapper">
           <select id="major-dropdown" class="dropdown" multiple>
-            {% for item in degree_major_data %}
-              <option>{{ item.degree }} - {{ item.major }}</option>
-            {% endfor %}
-          </select>
+            {% with sorted_data=degree_major_data|dictsort:'major' %}
+              {% for item in sorted_data %}
+                <option>{{ item.degree }} - {{ item.major }}</option>
+              {% endfor %}
+            {% endwith %}
+          </select>       
         </div>
         <div id="selected-majors"></div>
       </div>
