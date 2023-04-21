@@ -25,14 +25,14 @@
       <div class="header-title">
         Course Scheduler
       </div>
-      <div class="profile-section">
+      <!-- <div class="profile-section">
         <div class="profile-image">
           <img src="{% static 'images/profile-image.png' %}" alt="Profile Image">
         </div>
         <div class="profile-name">
           Temporary Profile Name
         </div>
-      </div>
+      </div> -->
       <div class="dark-mode-container">
         <div class="light-text-container">
           <div class="light-text">Light Mode</div>
@@ -267,7 +267,7 @@
         </div>
       </div>
     </div>
-    <div class="toggle-advanced-filtering-indent" id="toggle-advanced-filtering">
+    <div id="toggle-advanced-filtering">
       <div class="advanced-filtering-text">Advanced Filtering</div>
       <span class="filter-dropdown-arrow"></span>
     </div>
@@ -827,17 +827,65 @@
         <h2>Detected Conflicts:</h2>
       </div>
     </div>
-    <div id="temp-conflict-container">
-    </div>
-</div>
-<!-- displaying asychronous online courses-->
-<div class="online-courses">
-  <div class="online-courses-header">
-    <h2>Online / Asynchronous Courses</h2>
-    <button class="toggle-online-courses-button" onclick="toggleOnlineCourses()">Show</button>
+    <div id="temp-conflict-container"></div>
   </div>
-  <div class="course-tiles"></div>
-</div>
+  <!-- displaying asychronous online courses-->
+  <div id="toggle-online-courses-indent" class="toggle-online-courses-indent">
+    <div class="toggle-online-courses-indent-text">Online / Asynchronous Courses</div>
+    <span class="online-courses-dropdown-arrow"></span>
+  </div>
+  <div class="online-courses">
+    <div class="course-tiles" id="course-tiles"style="display: none;"></div>
+  </div>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div id="footer-left-column">
+      <section id="about-us">
+        <h2 id="about-us-text">About Us</h2>
+        <p>Welcome! We're a group of Computer Science students at the University of Alaska Anchorage. As part of our senior project, we've developed a course scheduling website specifically for professors.</p>
+        <p>Our goal is to provide a simple and intuitive platform that makes managing course schedules a breeze. We've put a lot of effort into designing a user-friendly interface and implementing key features to make scheduling easier than ever.</p>
+        <p>We hope you find our website useful and efficient. If you have any questions or feedback, please feel free to <a id="email-link"href="mailto:uaa.csce.schedule@gmail.com">reach out to us</a>. We're always looking to improve and provide the best service possible.</p>
+      </section>
+      <div class="license-container">
+        <div class="license-text">
+          The contents and source code of this website is licensed by <a id="license" href="https://choosealicense.com/licenses/gpl-3.0/">unGNU General Public License v3.0</a>.
+        </div>
+      </div>
+    </div>
+    <div id="footer-right-column">
+      <div id="our-team-container">
+        <h2 id="our-team-text">Our Team</h2>
+        <div class="team-member">
+          <h3 id="member-name">Austin Edwards</h3>
+          <p>
+            <a href="https://github.com/AustinPEdwards">
+              <img id="github-image" src="{% static 'images/github.png' %}" alt="GitHub Profile">
+            </a>
+          </p>
+        </div>
+        <div class="team-member">
+          <h3 id="member-name">Conner Trouy</h3>
+          <p>
+            <a href="https://github.com/username">
+              <img id="github-image" src="{% static 'images/github.png' %}" alt="GitHub Profile">
+            </a>
+          </p>
+        </div>
+        <div class="team-member">
+          <h3 id="member-name">John Schwenke</h3>
+          <p>
+            <a href="https://github.com/SamoanJohn">
+              <img id="github-image" src="{% static 'images/github.png' %}" alt="GitHub Profile">
+            </a>
+          </p>
+        </div>
+      </div>      
+    </div>
+  </footer>
+  <!-- Footer -->
+
+
 
 
 </html>

@@ -38,10 +38,14 @@ $(document).ready(function() {
   var $major_select = $('#major-dropdown');
   var $major_options = $major_select.find('option');
 
+  var $subject_select = $('#subject-dropdown');
+  var $subject_options = $subject_select.find('option');
+
+
   $('#major-dropdown-toggle').off('click').click(function() {
     event.stopPropagation();
     $('#major-dropdown').toggle();
-    $('#major-dropdown').focus(); // set focus to the input field
+    // $('#major-dropdown').focus(); // set focus to the input field
   });
 
   $('#major-dropdown').off('change').change(function() {
@@ -60,61 +64,41 @@ $(document).ready(function() {
       $(this).val('');
     }
   });
-$major_select.on('keydown', function(e) {
-  console.log("key pressed")
-  var input = String.fromCharCode(e.keyCode);
-  var index = -1;
-  var minDistance = Infinity;
 
-  // Check if the arrow keys were pressed and prevent the default action
-  if (e.keyCode == 38 || e.keyCode == 40) {
-    e.preventDefault();
-    return;
-  }
+  //$major_select.on('keydown', function(e) {
+  //   console.log("key pressed")
+  //   var input = String.fromCharCode(e.keyCode);
+  //   var index = -1;
+  //   var minDistance = Infinity;
 
-  // Find the closest option matching the user's input
-  $major_options.each(function(i) {
-    var optionText = $(this).text().split(' - ')[1].trim().toUpperCase();
-    var distance = optionText.indexOf(input.toUpperCase());
-    if (distance >= 0 && distance < minDistance) {
-      index = i;
-      minDistance = distance;
-    }
-  });
+  //   // Check if the arrow keys were pressed and prevent the default action
+  //   if (e.keyCode == 38 || e.keyCode == 40) {
+  //     e.preventDefault();
+  //     return;
+  //   }
 
-  // Scroll to the closest option
-  if (index >= 0) {
-    $major_select.prop('selectedIndex', index);
-    var topOffset = $major_select.find('option:selected').offset().top - $major_select.offset().top;
-    $major_select.scrollTop(topOffset);
-  }
-});
+  //   // Find the closest option matching the user's input
+  //   $major_options.each(function(i) {
+  //     var optionText = $(this).text().split(' - ')[1].trim().toUpperCase();
+  //     var distance = optionText.indexOf(input.toUpperCase());
+  //     if (distance >= 0 && distance < minDistance) {
+  //       index = i;
+  //       minDistance = distance;
+  //     }
+  //   });
 
-  
-
-
-  $(document).click(function(event) {
-    if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
-      $('#major-dropdown').hide();
-      $('#subject-dropdown').hide();
-      $('#instructor-dropdown').hide();
-      $('#bldg-dropdown').hide();
-      $('#room-dropdown').hide();
-    }
-  });
-
-
-  $('.dropdown-btn').off('click').click(function() {
-    var dropdown = $(this).next('.dropdown-wrapper');
-    $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
-    dropdown.toggle();
-  });
-
-
+  //   // Scroll to the closest option
+  //   if (index >= 0) {
+  //     $major_select.prop('selectedIndex', index);
+  //     var topOffset = $major_select.find('option:selected').offset().top - $major_select.offset().top;
+  //     $major_select.scrollTop(topOffset);
+  //   }
+  // });
 
   $('#subject-dropdown-toggle').off('click').click(function() {
     event.stopPropagation();
     $('#subject-dropdown').toggle();
+    // $('#subject-dropdown').focus(); // set focus to the input field
   });
 
   $('#subject-dropdown').off('change').change(function() {
@@ -137,6 +121,25 @@ $major_select.on('keydown', function(e) {
   $('#semester-select').off('change').change(function() {
     var selectedSemester = $(this).val();
   });
+
+  
+  $(document).click(function(event) {
+    if (!$(event.target).closest('.dropdown-wrapper').length && !$(event.target).hasClass('remove-item')) {
+      $('#major-dropdown').hide();
+      $('#subject-dropdown').hide();
+      $('#instructor-dropdown').hide();
+      $('#bldg-dropdown').hide();
+      $('#room-dropdown').hide();
+    }
+  });
+
+
+  $('.dropdown-btn').off('click').click(function() {
+    var dropdown = $(this).next('.dropdown-wrapper');
+    $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
+    dropdown.toggle();
+  });
+
 });
 
 
@@ -304,6 +307,8 @@ function handleFileSelect(event) {
   saved_class_array = [];
   course_hash_table = {};
   saved_course_hash_table = {};
+  online_courses = [];
+  unscheduled_courses = [];
   saved_data = false;
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -495,6 +500,8 @@ window.addEventListener('load', function() {
               saved_class_array = [];
               course_hash_table = {};
               saved_course_hash_table = {};
+              online_courses = [];
+              unscheduled_courses = [];
               saved_data = false;
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
@@ -579,11 +586,8 @@ function updateCourseElements(){
     timeCell.removeEventListener('dragleave', handleDragLeave);
     timeCell.removeEventListener('drop', handleDrop);
   });
-  // the function allows the add and remove event listened, functions defined below
-
-
+  // the function allows the add listener, functions defined below
   courseBlock.addEventListener('dragstart', handleDragstart);
-
   timeCells.forEach((timeCell) => {
     timeCell.addEventListener('dragover', handleDragover);
     timeCell.addEventListener('dragleave', handleDragLeave);
@@ -1367,10 +1371,25 @@ function displayOnlineCourses() {
     courseTilesContainer.appendChild(courseTile);
   });
 }
-// Toggle the online courses section visibility
-function toggleOnlineCourses() {
-  const onlineCoursesSection = document.querySelector('.online-courses');
-  const toggleButton = document.querySelector('.toggle-online-courses-button');
-  onlineCoursesSection.classList.toggle('show');
-  toggleButton.textContent = onlineCoursesSection.classList.contains('show') ? 'Hide' : 'Show';
-}
+window.addEventListener('load', function() {
+  // Get the toggle button and the course tiles element
+  const toggleOnlineCoursesButton = document.querySelector("#toggle-online-courses-indent");
+  const courseTiles = document.querySelector("#course-tiles");
+  const onlineDropdownArrows = document.querySelectorAll(".online-courses-dropdown-arrow");
+
+  // Define the click event handler function
+  function toggleOnlineCourses() {
+    // Toggle the display property of the course tiles element
+    courseTiles.style.display = courseTiles.style.display === "flex" ? "none" : "flex";
+    // Loop through each arrow element and toggle the 'active' class
+    onlineDropdownArrows.forEach(function(arrow) {
+      arrow.classList.toggle("active");
+    });
+    // Scroll to the new height of the course tiles element
+    courseTiles.scrollIntoView();
+  }
+
+  // Remove the click event listener (if any) and add it back again
+  toggleOnlineCoursesButton.removeEventListener('click', toggleOnlineCourses);
+  toggleOnlineCoursesButton.addEventListener('click', toggleOnlineCourses);
+});

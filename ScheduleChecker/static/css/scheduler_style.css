@@ -461,6 +461,7 @@ input[type="text"] {
   border: 2px solid var(--grey-border-color);
   box-shadow: 0px 5px 15px var(--box-shadow-color);
 }
+
 .filtering-container {
     background-color: var(--grey-background-color);
     position: relative;
@@ -473,7 +474,7 @@ input[type="text"] {
   justify-content: right;
 }
 
-.toggle-advanced-filtering-indent {
+#toggle-advanced-filtering {
     position: absolute;
     right: 0;
     margin-top: 10px; /* Add a margin-top */
@@ -1017,7 +1018,6 @@ input:focus {
 
 /* DISPLAYING CONFLICTS */
 #conflict-container {
-  max-height: 550px; /* set the maximum height */
   overflow-y: auto; /* add a scrollbar if content overflows */
   width: 20%;
   position: relative;
@@ -1174,13 +1174,13 @@ h2 {
   }
 
 /* Style for the online course section */
+
 .online-courses {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 50px;
   background-color: var(--grey-background-color);
   border: 2px solid var(--grey-border-color);
   overflow: hidden;
-  max-height: 100px;
   transition: max-height 0.3s ease-out;
   border-top: 2px solid var(--grey-border-color);
   box-shadow: 0px 5px 15px var(--box-shadow-color);
@@ -1226,7 +1226,7 @@ h2 {
 }
 
 /* Style for the online course section header */
-.online-courses-header {
+/* .online-courses-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1234,19 +1234,145 @@ h2 {
   font-size: 12px;
   padding: 10px;
   cursor: pointer;
+} */
+
+#toggle-online-courses-indent {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  height: 40px;
+  width: 220px;
+  margin-top: 10px;
+  padding-left: 20px;
+  background-color: var(--grey-background-color);
+  border-radius: 15px 15px 0px 0px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 2px solid var(--grey-border-color);
+  border-width: 2px 2px 0px 2px;
+  /* box-shadow: 15px 5px 0px var(--box-shadow-color); */
 }
 
-.toggle-online-courses-button {
-  background-color: var(--submit-button-color);
-  color: var(--white-text-color);
-  padding: 10px 20px;
-  height: 39.6px;
-  border: none;
-  border-radius: 5px;
+#toggle-online-courses-indent-text {
+  position: absolute;
+  top: 15px;
+  color: var(--black-text-color);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
+  text-decoration: none;
 }
 
-.toggle-online-courses-button:hover {
-  background-color: var(--submit-button-hover-color);
+#toggle-online-courses-indent {
+  position: absolute;
+  color: var(--black-text-color);
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none;
 }
+
+#toggle-online-courses-indent:hover {
+  color: var(--dropdown-blue-color);
+}
+#toggle-online-courses-indent:hover .filter-dropdown-arrow {
+  border-top-color: var(--dropdown-blue-color); /* change the color to your desired hover color */
+}
+
+.online-courses-dropdown-arrow {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%) rotateX(180deg);
+  border: 8px solid transparent;
+  border-top-color: var(--black-text-color);
+  border-bottom-width: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.online-courses-dropdown-arrow.active {
+  transform: translateY(-50%) rotateX(0deg);
+}  
+
+/* Footer */
+
+.footer {
+  background-color: var(--header-background-color);
+  color: var(--white-text-color);
+  display:flex;
+  font-family: "Montserrat", sans-serif;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#footer-left-column{
+  width: 65%;
+}
+
+.about-us {
+  display: flex;
+  align-items: center;
+}
+
+#about-us-text{
+  color: var(--white-text-color);
+  font-size: 20px;
+  margin-left: 0px;
+
+}
+
+.license-container {
+  color: var(--white-text-color);
+  margin-right: 20px;
+}
+
+.license-text {
+  width: 100%;
+  font-size: 16px;
+  color: var(--white-text-color);
+  font-weight: bold;
+}
+
+#license {
+  color: white !important;
+}
+
+#email-link {
+  color: white !important;
+}
+
+#footer-right-column{
+  margin-left: 50px;
+  vertical-align: top;
+  width: 30%;
+}
+
+#our-team-container {
+  color: var(--white-text-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#our-team-text{
+  color: var(--white-text-color);
+  font-size: 20px;
+  margin-left: 0px;
+}
+
+#github-image {
+  height: 20px;
+  width: 20px;
+  margin-left: 20px;
+}
+
+.team-member {
+  display:flex;
+  align-items: center; /* centers child elements vertically */
+  height: 40px;
+}
+
+#member-name {
+  color: var(--white-text-color);
+  font-size: 16px;
+  width: 150px;
+}
+
