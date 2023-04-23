@@ -962,7 +962,7 @@ input:focus {
     color: var(--black-text-color);
     position: relative;
     height:fixed;
-    width:100%;
+    width:98%;
     align-items: top;
     justify-content: flex-start;
     z-index:1;
@@ -997,7 +997,7 @@ input:focus {
   }
 
 .time-cell.highlight {
-    border-top: solid 3px blue;
+    border: solid 1px rgba(128, 128, 128, 0.63) ;
 }
 
 .conlict {

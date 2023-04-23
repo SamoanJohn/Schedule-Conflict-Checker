@@ -572,7 +572,9 @@ function updateCourseElements(){
   const courseBlock = document.querySelector('.course-block');
   const timeCells = document.querySelectorAll('.time-cell');
 
+
   // we do this to remove the previous event listeners from the last search
+  // we dont need this for time-cells? Only course-blocks??
   courseBlock.removeEventListener('dragstart', handleDragstart);
   timeCells.forEach((timeCell) => {
     timeCell.removeEventListener('dragover', handleDragover);
@@ -609,12 +611,10 @@ function handleDrop(event) {
   const data = event.dataTransfer.getData('text/plain');
   if (data === 'course-block') {
     const courseBlock = document.querySelector('.course-block');
-    const gridCell = event.currentTarget.parentNode;
     const timeCell = event.currentTarget;
     timeCell.appendChild(courseBlock);
-    timeCell.classList.remove('highlight');
-    gridCell.classList.remove('highlight');
   }
+  event.currentTarget.classList.remove('highlight');
 }
 
 
