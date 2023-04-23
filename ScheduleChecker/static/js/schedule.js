@@ -607,10 +607,14 @@ function updateCourseElements(){
   });
 }
 
+
+let courseBlockToDelete = null;
+
 function handleDragstart(event) {
   console.log("Drag start");
   const courseBlock = event.target;
   event.dataTransfer.setData('text/plain', courseBlock.outerHTML);
+  courseBlockToDelete = courseBlock;
 }
 
 
@@ -625,25 +629,37 @@ function handleDragLeave(event) {
   event.currentTarget.classList.remove('highlight');
 }
 
-
 function handleDrop(event) {
   console.log("drop");
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
 
   if (data.includes('course-block')) {
-    const courseBlock = document.createElement('div');
-    courseBlock.innerHTML = data;
-    courseBlock.firstChild.addEventListener('dragstart', handleDragstart);
-    console.log(courseBlock.innerHTML)
+    const tempCourseDiv = document.createElement('div');
+    tempCourseDiv.innerHTML = data;
+    let courseCRN = tempCourseDiv.firstChild.getAttribute("CRN")
+    let courseChildren = document.querySelectorAll('.course-block[CRN="' + courseCRN + '"]');
+    console.log(courseChildren)
+
+
+    const courseBlockContainer = document.createElement('div');
+    courseBlockContainer.innerHTML = data;
+    courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
     const timeCell = event.currentTarget;
-    timeCell.appendChild(courseBlock.firstChild);
-    courseBlock.remove();
+    console.log(timeCell)
+    courseBlockContainer.firstChild
+    timeCell.appendChild(courseBlockContainer.firstChild);
+    courseBlockToDelete.remove();
+
+    // MW -> M = MW
+    // MW -> W = MW
+    // MW -> T = TR
+    // ...
+    // MWF -> T  -> open input box 
+    // single day -> single day 
   }
   event.currentTarget.classList.remove('highlight');
 }
-
-
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
