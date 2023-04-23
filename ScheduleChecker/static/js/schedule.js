@@ -627,20 +627,22 @@ function handleDragLeave(event) {
 
 
 function handleDrop(event) {
-  console.log("drop")
+  console.log("drop");
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
-
-  console.log(data);
 
   if (data.includes('course-block')) {
     const courseBlock = document.createElement('div');
     courseBlock.innerHTML = data;
+    courseBlock.firstChild.addEventListener('dragstart', handleDragstart);
+    console.log(courseBlock.innerHTML)
     const timeCell = event.currentTarget;
     timeCell.appendChild(courseBlock.firstChild);
+    courseBlock.remove();
   }
   event.currentTarget.classList.remove('highlight');
 }
+
 
 
 /////////////////////////////////////////////////////////////////////
