@@ -8,6 +8,7 @@ from selenium.common.exceptions import UnexpectedAlertPresentException
 from bs4 import BeautifulSoup
 import pandas as pd
 import threading
+import copy
 import concurrent.futures
 import time
 import os
@@ -114,7 +115,10 @@ def get_major_requirements(request):
     class_data_df = pd.concat(temp_dataframe_list)
     class_data_df = class_data_df.dropna(how='all') # deletes any empty rows
     class_data_df = class_data_df.rename(columns={'Del Mthd': 'DelMthd'})
+    
     class_data_df = class_data_df.applymap(clean_whitespace)
+    original_class_data_df = class_data_df.copy()
+
     class_data_df[['Subj', 'Crs', 'Sec']] = class_data_df['Subj Crs Sec'].str.split(' ', expand=True)
     class_data_df = class_data_df.loc[:, ['CRN', 'Subj',"Crs","Sec","Title","Days","STime","ETime","Bldg","Room","Instructor","DelMthd"]]
 
@@ -124,8 +128,19 @@ def get_major_requirements(request):
 
     class_data_df[["Days", "STime", "ETime", "Bldg", "Room"]] = class_data_df.apply(narrow_down, axis=1, result_type="expand")
 
-    print(class_data_df)
-    return JsonResponse({'data': class_data_df.to_json(orient='records')})
+    class_data_json = class_data_df.to_json(orient='records')
+    # original_class_data_json = original_class_data_df.to_json(orient='records')
+
+    # response_data = {
+    #     'class_data_json': class_data_json,
+    #     'original_class_data_json': original_class_data_json,
+    #     'class_data_df': class_data_df.to_dict(),
+    #     'original_class_data_df': original_class_data_df.to_dict(),
+    # }
+
+    # return JsonResponse({'data': response_data})
+    return JsonResponse({'data': class_data_json})
+
 
 def scrape_urls(urls):
     # Create a webdriver instance

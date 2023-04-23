@@ -4,6 +4,7 @@ var selectedItems = {
 };
 
 var class_array = []
+var original_class_array = []
 
 $(document).ready(function() {
   const slider = document.querySelector('.toggle-slider');
@@ -295,7 +296,7 @@ function handleFileSelect(event) {
   fileInput.parentNode.replaceChild(newFileInput, fileInput);
 
 
-    // If saved_course_hash_table is not empty, prompt the user with an alert box
+  // If saved_course_hash_table is not empty, prompt the user with an alert box
   if (Object.keys(saved_class_array).length > 0) {
     const response = confirm("Loading this file will overwrite your existing data. Do you want to continue?");
     if (!response) {
@@ -336,7 +337,6 @@ function handleFileSelect(event) {
     }
     var contents = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
     worksheet = null; // set worksheet to null to free up memory
-
     const selectedColumns = ['CRN', 'Subj Crs Sec', 'Title', 'Days', 'STime', 'ETime', 'Bldg', 'Room', 'Instructor', 'DelMthd'];
     const columnIndices = selectedColumns.map(col => Object.values(contents[0]).indexOf(col));
     const missingColumns = selectedColumns.filter(col => !Object.values(contents[0]).includes(col));
@@ -345,8 +345,15 @@ function handleFileSelect(event) {
       alert(`The Excel file was not recognized. Please download a new file from ${downloadLink}.`);
       return; // Stop the function
     }
-
-
+    // for (var i = 1; i < contents.length; i++) {
+    //   var obj = {};
+    //   for (var j = 0; j < contents[0].length; j++) {
+    //     obj[contents[0][j]] = contents[i][j];
+    //   }
+    //   original_class_array.push(obj);
+    // }
+    
+    console.log(original_class_array);
     var newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
       if (col === 'Subj Crs Sec') {
         const [subj, crs, sec] = row[columnIndices[index]].split(' ');
@@ -377,7 +384,7 @@ function handleFileSelect(event) {
       const [days, stime, etime, bldg, room] = narrowDown(row);
       return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
     });
-
+    console.log(class_array)
     saved_class_array = [...class_array];
     newData = null;
     contents = null;
@@ -506,6 +513,8 @@ window.addEventListener('load', function() {
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
               class_array = JSON.parse(classes.data);
+              // original_class_array = JSON.parse(classes.data.original_class_data_json);
+              // console.log(original_class_array)
               saved_class_array = [...class_array];
               initializeFilterVariables();
               populateInstructorsDropdown();
@@ -573,7 +582,7 @@ function updateCourseElements(){
     });
   };
 
-// Add new listener to course-block
+  // Add new listener to course-block
   // drag events for course-block and time-cells
   // Remove existing listeners from course-block
   const courseBlock = document.querySelector('.course-block');
@@ -611,7 +620,11 @@ function handleDragLeave(event) {
 function handleDrop(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
+  console.log(data)
+
   if (data === 'course-block') {
+    console.log(data)
+
     const courseBlock = document.querySelector('.course-block');
     const gridCell = event.currentTarget.parentNode;
     const timeCell = event.currentTarget;
