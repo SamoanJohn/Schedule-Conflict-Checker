@@ -576,11 +576,14 @@ function updateCourseElements(){
       if (timeSlot) {
         const duplicateCourseElement = courseElement.cloneNode(true);
         timeSlot.appendChild(duplicateCourseElement);
+        // add drag event listener to the cloned element
+        duplicateCourseElement.addEventListener('dragstart', handleDragstart);
       } else {
         console.warn(`Element not found for day ${day} and time ${time}`);
       }
     });
   };
+
 
   // Add new listener to course-block
   // drag events for course-block and time-cells
@@ -591,14 +594,12 @@ function updateCourseElements(){
 
   // we do this to remove the previous event listeners from the last search
   // we dont need this for time-cells? Only course-blocks??
-  courseBlock.removeEventListener('dragstart', handleDragstart);
   timeCells.forEach((timeCell) => {
     timeCell.removeEventListener('dragover', handleDragover);
     timeCell.removeEventListener('dragleave', handleDragLeave);
     timeCell.removeEventListener('drop', handleDrop);
   });
   // the function allows the add listener, functions defined below
-  courseBlock.addEventListener('dragstart', handleDragstart);
   timeCells.forEach((timeCell) => {
     timeCell.addEventListener('dragover', handleDragover);
     timeCell.addEventListener('dragleave', handleDragLeave);
@@ -607,29 +608,36 @@ function updateCourseElements(){
 }
 
 function handleDragstart(event) {
-  event.dataTransfer.setData('text/plain', 'course-block');
+  console.log("Drag start");
+  const courseBlock = event.target;
+  event.dataTransfer.setData('text/plain', courseBlock.outerHTML);
 }
 
+
 function handleDragover(event) {
+  console.log("Drag over")
   event.preventDefault();
   event.currentTarget.classList.add('highlight');
 }
 
 function handleDragLeave(event) {
+  console.log("drag leave")
   event.currentTarget.classList.remove('highlight');
 }
 
+
 function handleDrop(event) {
+  console.log("drop")
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
-  console.log(data)
 
-  if (data === 'course-block') {
-    console.log(data)
+  console.log(data);
 
-    const courseBlock = document.querySelector('.course-block');
+  if (data.includes('course-block')) {
+    const courseBlock = document.createElement('div');
+    courseBlock.innerHTML = data;
     const timeCell = event.currentTarget;
-    timeCell.appendChild(courseBlock);
+    timeCell.appendChild(courseBlock.firstChild);
   }
   event.currentTarget.classList.remove('highlight');
 }
