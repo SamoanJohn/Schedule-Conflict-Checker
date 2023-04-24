@@ -552,7 +552,12 @@ function updateCourseElements(){
     courseElement.setAttribute('Sec', course.Sec);
     courseElement.setAttribute('Title', course.Title);
     courseElement.setAttribute('Days', course.Days);
-    courseElement.setAttribute('STime', course.STime);
+    // check STime for 15 minute incremement
+    if (course.STime % 15 !== 0) {
+      courseElement.setAttribute('STime', roundTo15(course.STime));
+    } else {
+      courseElement.setAttribute('STime', course.STime);
+    }    
     courseElement.setAttribute('ETime', course.ETime);
     courseElement.setAttribute('Bldg', course.Bldg);
     courseElement.setAttribute('Room', course.Room);
@@ -615,6 +620,28 @@ function updateCourseElements(){
   });
 }
 
+//Round to nearest 15
+function roundTo15(time) {
+  // Convert time to minutes
+  var hours = Math.floor(time / 100);
+  var minutes = time % 100;
+  var totalMinutes = hours * 60 + minutes;
+
+  // Round to nearest multiple of 15
+  var roundedMinutes = Math.round(totalMinutes / 15) * 15;
+
+  // Convert back to time format
+  var roundedHours = Math.floor(roundedMinutes / 60);
+  var roundedMinutesInHour = roundedMinutes % 60;
+  var roundedTime = roundedHours * 100 + roundedMinutesInHour;
+    
+  if (roundedTime < 1000) {
+    return "0" + roundedTime;
+  } else {
+    return roundedTime;
+  }
+}
+
 
 let courseBlockToDelete = null;
 
@@ -654,7 +681,8 @@ function handleDrop(event) {
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
     const timeCell = event.currentTarget;
-    console.log(timeCell)
+    const dayTime = timeCell.getAttribute('data-time');
+    courseBlockContainer.firstChild.setAttribute('STime', dayTime); // set STime to time-cells time value. 
     courseBlockContainer.firstChild
     timeCell.appendChild(courseBlockContainer.firstChild);
     courseBlockToDelete.remove();
@@ -1467,12 +1495,31 @@ function showConflictDetails(conflict, clickedElement) {
   var boxTop = clickedTop + clickedElement.offsetHeight + 145 + advancedFilteringContainerHeight + searchContainerHeight + headerHeight;
   tempConflictBox.style.top = boxTop + "px";
 
+  // Highlight conflicted courses
+  // Get the CRNs of both courses
+  var crn1 = course1.CRN;
+  var crn2 = course2.CRN;
+
+  // Select all course blocks with the same CRN as the first course and add the border
+  document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
+    courseBlock.style.border = "2px solid red";
+    updateCourseElements();
+  });
+
+  // Select all course blocks with the same CRN as the second course and add the border
+  document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
+    courseBlock.style.border = "2px solid red";
+    updateCourseElements();
+  });
+
+  
   // make the temporary conflict box visible
   tempConflictBox.style.display = "block";
   setTimeout(function() {
     document.removeEventListener("click", closeConflictDetails);
     document.addEventListener("click", closeConflictDetails);
   }, 10);
+  
 
 }
 
