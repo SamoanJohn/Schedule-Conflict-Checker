@@ -989,6 +989,10 @@ input:focus {
     flex-basis: 0%;
 }
 
+.course-block.active {
+  background-color: var(--conflict-hover-color);
+}  
+
 .course-text {
     font-size: 14px;
     font-weight: bold;
@@ -1118,7 +1122,7 @@ h2 {
   position: absolute;
   transform: translate(-50%, -50%);
   max-width: 800px;
-  right: -225px;
+  right: -175px;
   padding: 20px;
   z-index: 10;
   border-radius: 15px;

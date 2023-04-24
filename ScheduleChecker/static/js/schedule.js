@@ -728,6 +728,10 @@ function openEditBox(courseElement) {
   const room = courseElement.getAttribute("room");
 
   // populate the course information in the edit box
+  courseElement.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--conflict-hover-color');
+
+
+
   const courseSubjCrsSec = document.querySelector(".course-subj-crs-sec");
   courseSubjCrsSec.textContent = `${subj} ${crs} ${sec}`;
 
