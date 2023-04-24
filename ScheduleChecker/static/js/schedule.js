@@ -581,6 +581,10 @@ function updateCourseElements(){
       if (timeSlot) {
         const duplicateCourseElement = courseElement.cloneNode(true);
         timeSlot.appendChild(duplicateCourseElement);
+
+        minutes = minutesBetweenMilitaryTimes(duplicateCourseElement.getAttribute('STime'), duplicateCourseElement.getAttribute('ETime'))
+        height = minutes / 60 * 18.55*4;
+        duplicateCourseElement.style.height = height + "px";
         // add drag event listener to the cloned element
         duplicateCourseElement.removeEventListener('dragstart', handleDragstart);
         duplicateCourseElement.addEventListener('dragstart', handleDragstart);
@@ -597,6 +601,16 @@ function updateCourseElements(){
     });
   };
 
+  function minutesBetweenMilitaryTimes(startTimeString, endTimeString) {
+    const startHours = parseInt(startTimeString.slice(0, 2));
+    const startMinutes = parseInt(startTimeString.slice(2));
+    const endHours = parseInt(endTimeString.slice(0, 2));
+    const endMinutes = parseInt(endTimeString.slice(2));
+    const totalStartMinutes = startHours * 60 + startMinutes;
+    const totalEndMinutes = endHours * 60 + endMinutes;
+    const minutesBetween = totalEndMinutes - totalStartMinutes;
+    return minutesBetween;
+  }
 
   // Add new listener to course-block
   // drag events for course-block and time-cells
@@ -1196,7 +1210,7 @@ function checkForConflicts() {
             }
             // Check if the building and room are the same
              else if (course1.Bldg === course2.Bldg && course1.Room === course2.Room) {
-              if (!(course1.Room == "ONLINE") && !(course1Bldg == "DIST")) {
+              if (!(course1.Room == "ONLINE") && !(course1.Bldg == "DIST")) {
                 let message = `are in the same room: ${course1.Bldg} ${course1.Room}`;
                 addConflict(course1, course2, message);
                 continue;
@@ -1502,14 +1516,15 @@ function showConflictDetails(conflict, clickedElement) {
 
   // Select all course blocks with the same CRN as the first course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
+    console.log(courseBlock)
     courseBlock.style.border = "2px solid red";
-    updateCourseElements();
+    // updateCourseElements();
   });
 
   // Select all course blocks with the same CRN as the second course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
     courseBlock.style.border = "2px solid red";
-    updateCourseElements();
+    // updateCourseElements();
   });
 
   

@@ -874,6 +874,7 @@ input:focus {
 
 /* Grid */
 .schedule-container {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 60%;
   position: relative;
   margin-top: 40px; 
@@ -958,12 +959,13 @@ input:focus {
 
 .time-cell {
     display: flex;
+    height: 18.55px !important;
     flex-direction: row;
     flex-wrap: wrap;
     color: var(--black-text-color);
     position: relative;
     height:fixed;
-    width:98%;
+    width: 98%;
     align-items: top;
     justify-content: flex-start;
     z-index:1;
@@ -976,7 +978,7 @@ input:focus {
     color: var(--black-text-color);
     border: 2px solid var(--grey-border-color);
     border-radius: 5px;
-    background-color: var(--background-color);
+    background-color: var(--lightgrey-background-color);
     top:0;
     height: 15px;
     width: 5%; /*minimum width to prevent wrap*/
@@ -988,13 +990,14 @@ input:focus {
 }
 
 .course-text {
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bold;
     text-align: left;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: var(--black-text-color);
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; */
   }
 
 .time-cell.highlight {
@@ -1110,13 +1113,14 @@ h2 {
 
 /* Temporary Conflict Message Box */
 
-
 #temp-conflict-box {
   display: none;
   position: absolute;
   transform: translate(-50%, -50%);
   max-width: 800px;
+  right: -225px;
   padding: 20px;
+  z-index: 10;
   border-radius: 15px;
   background-color: var(--background-color);
   border: 2px solid var(--grey-border-color);
