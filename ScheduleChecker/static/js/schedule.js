@@ -577,7 +577,15 @@ function updateCourseElements(){
         const duplicateCourseElement = courseElement.cloneNode(true);
         timeSlot.appendChild(duplicateCourseElement);
         // add drag event listener to the cloned element
+        duplicateCourseElement.removeEventListener('dragstart', handleDragstart);
         duplicateCourseElement.addEventListener('dragstart', handleDragstart);
+        // add a normal click listener to open the Edit box
+        duplicateCourseElement.removeEventListener("click", openEditBoxClick);
+        duplicateCourseElement.addEventListener("click", openEditBoxClick);
+    
+        function openEditBoxClick() {
+          openEditBox(duplicateCourseElement);
+        }
       } else {
         console.warn(`Element not found for day ${day} and time ${time}`);
       }
@@ -660,6 +668,110 @@ function handleDrop(event) {
   }
   event.currentTarget.classList.remove('highlight');
 }
+
+
+function openEditBox(courseElement) {
+
+  // get the course information from the courseElement
+  const subj = courseElement.getAttribute("subj");
+  const crs = courseElement.getAttribute("crs");
+  const sec = courseElement.getAttribute("sec");
+  const title = courseElement.getAttribute("title");
+  const crn = courseElement.getAttribute("crn");
+  const instructor = courseElement.getAttribute("instructor");
+  const days = courseElement.getAttribute("days");
+  const stime = courseElement.getAttribute("stime");
+  const etime = courseElement.getAttribute("etime");
+  const bldg = courseElement.getAttribute("bldg");
+  const room = courseElement.getAttribute("room");
+
+  // populate the course information in the edit box
+  const courseSubjCrsSec = document.querySelector(".course-subj-crs-sec");
+  courseSubjCrsSec.textContent = `${subj} ${crs} ${sec}`;
+
+  const courseTitle = document.querySelector(".course-title");
+  courseTitle.textContent = title;
+
+  const courseCRN = document.querySelector(".course-crn");
+  courseCRN.textContent = `CRN: ${crn}`;
+
+  const instructorInput = document.querySelector("#instructor");
+  instructorInput.value = instructor;
+
+  const daysInput = document.querySelector("#days");
+  daysInput.value = days;
+
+  stimeStandard = militaryToStandardTime(stime)
+  etimeStandard = militaryToStandardTime(etime)
+
+  const startTimeInput = document.querySelector("#start-time");
+  startTimeInput.value = stimeStandard;
+
+  const endTimeInput = document.querySelector("#end-time");
+  endTimeInput.value = etimeStandard;
+
+  const buildingInput = document.querySelector("#building");
+  buildingInput.value = bldg;
+
+  const roomInput = document.querySelector("#room");
+  roomInput.value = room;
+
+  // // remove any existing event listener from the "Save Changes" button
+  // const saveChangesButton = document.querySelector(".save-course-info-button");
+  // saveChangesButton.removeEventListener("click", saveChangesHandler);
+
+  // // add a new event listener to the "Save Changes" button
+  // saveChangesButton.addEventListener("click", saveChangesHandler);
+
+  // remove the event listener from all "Save Changes" buttons
+  const saveChangesButtons = document.querySelectorAll(".save-course-info-button");
+  saveChangesButtons.forEach(button => {
+    button.removeEventListener("click", saveChangesHandler);
+  });
+
+  // add the event listener to the current "Save Changes" button
+  const saveChangesButton = courseElement.querySelector(".save-course-info-button");
+  saveChangesButton.addEventListener("click", saveChangesHandler);
+
+  function saveChangesHandler() {
+    // update the course information in the course element
+    courseElement.setAttribute("subj", subj);
+    courseElement.setAttribute("crs", crs);
+    courseElement.setAttribute("sec", sec);
+    courseElement.setAttribute("title", title);
+    courseElement.setAttribute("crn", crn);
+    courseElement.setAttribute("instructor", instructorInput.value);
+    courseElement.setAttribute("days", daysInput.value);
+
+    startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
+    endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
+
+    courseElement.setAttribute("stime", startTimeMilitary);
+    courseElement.setAttribute("etime", endTimeMilitary);
+    courseElement.setAttribute("bldg", buildingInput.value);
+    courseElement.setAttribute("room", roomInput.value);
+
+    // update the content of the course element
+    const courseText = courseElement.querySelector(".course-text");
+    courseText.textContent = `${subj} ${crs}`;
+  }
+}
+
+function standardToMilitaryTime(timeString) {
+  var timeArr = timeString.split(":");
+  var hours = parseInt(timeArr[0]);
+  var minutes = parseInt(timeArr[1].substring(0, 2)); // extract the first two characters to get the minutes
+  var meridiem = timeString.slice(-2);
+  if (meridiem === "PM" && hours !== 12) {
+    hours += 12;
+  } else if (meridiem === "AM" && hours === 12) {
+    hours = 0;
+  }
+  var militaryHours = hours < 10 ? "0" + hours : hours;
+  var militaryMinutes = minutes < 10 ? "0" + minutes : minutes;
+  return militaryHours + " " + militaryMinutes;
+}
+
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
@@ -1302,7 +1414,6 @@ function militaryToStandardTime(timeString) {
   var meridiem = militaryHours < 12 || militaryHours === 24 ? "AM" : "PM";
   return standardHours + ":" + (standardMinutes < 10 ? "0" : "") + standardMinutes + meridiem;
 }
-
 
 function showConflictDetails(conflict, clickedElement) {
   // get the courses and conflict message
