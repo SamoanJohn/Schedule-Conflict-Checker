@@ -943,7 +943,8 @@ input:focus {
 .times {
     color: var(--black-text-color);
     border-top: solid 1px #a9a9a9b4;
-    padding-top: 25px;
+    font-weight: bold;
+    padding-top: 2px;
     width: 100%;
     text-align: center;
 }
@@ -982,7 +983,7 @@ input:focus {
     top:0;
     height: 15px;
     width: 5%; /*minimum width to prevent wrap*/
-    z-index: 2;
+    z-index: 5;
     cursor: move;
     flex-grow: 1;
     flex-shrink: 1;
@@ -995,7 +996,6 @@ input:focus {
 
 .course-text {
     font-size: 14px;
-    font-weight: bold;
     text-align: left;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: var(--black-text-color);
@@ -1273,7 +1273,10 @@ input[type="text"] {
   background-color: var(--submit-button-hover-color);
 }
 
-  
+
+.invalid-input {
+  outline: 2px solid red;
+}
 /* Style for the online course section */
 
 .online-courses {
@@ -1443,7 +1446,7 @@ input[type="text"] {
 #footer-right-column{
   margin-left: 50px;
   vertical-align: top;
-  width: 30%;
+  width: 35%;
 }
 
 #our-team-container {
@@ -1467,12 +1470,12 @@ input[type="text"] {
 .team-member {
   display:flex;
   align-items: center; /* centers child elements vertically */
-  height: 40px;
+  height: 32px;
 }
 
 #member-name {
   color: var(--white-text-color);
   font-size: 16px;
-  width: 150px;
+  width: 195px;
 }
 

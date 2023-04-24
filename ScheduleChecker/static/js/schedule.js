@@ -391,8 +391,8 @@ function handleFileSelect(event) {
     initializeFilterVariables();
     populateInstructorsDropdown();
     populateBuildingsDropdown();
-    conflictFunction()
     updateCourseElements();
+    conflictFunction();
   };
 
   reader.readAsArrayBuffer(file);
@@ -451,9 +451,6 @@ function parse_time(time_str) {
     return time_str;
   }
 }
-
-
-
 
 window.addEventListener('load', function() {
   // define a function to handle the button press
@@ -519,8 +516,8 @@ window.addEventListener('load', function() {
               initializeFilterVariables();
               populateInstructorsDropdown();
               populateBuildingsDropdown();
-              conflictFunction()
               updateCourseElements();
+              conflictFunction();
           }
       };
       console.log(url);
@@ -661,25 +658,25 @@ let courseBlockToDelete = null;
 
 function handleDragstart(event) {
   console.log("Drag start");
+
   const courseBlock = event.target;
+  openEditBox(courseBlock)
+
   event.dataTransfer.setData('text/plain', courseBlock.outerHTML);
   courseBlockToDelete = courseBlock;
 }
 
 
 function handleDragover(event) {
-  console.log("Drag over")
   event.preventDefault();
   event.currentTarget.classList.add('highlight');
 }
 
 function handleDragLeave(event) {
-  console.log("drag leave")
   event.currentTarget.classList.remove('highlight');
 }
 
 function handleDrop(event) {
-  console.log("drop");
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
 
@@ -688,12 +685,13 @@ function handleDrop(event) {
     tempCourseDiv.innerHTML = data;
     let courseCRN = tempCourseDiv.firstChild.getAttribute("CRN")
     let courseChildren = document.querySelectorAll('.course-block[CRN="' + courseCRN + '"]');
-    console.log(courseChildren)
 
 
     const courseBlockContainer = document.createElement('div');
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
+    courseBlockContainer.firstChild.addEventListener("click", openEditBoxClick);
+    
     const timeCell = event.currentTarget;
     const dayTime = timeCell.getAttribute('data-time');
     courseBlockContainer.firstChild.setAttribute('STime', dayTime); // set STime to time-cells time value. 
@@ -711,9 +709,14 @@ function handleDrop(event) {
   event.currentTarget.classList.remove('highlight');
 }
 
+function openEditBoxClick() {
+  openEditBox(this);
+}
+
+
 
 function openEditBox(courseElement) {
-
+  console.log("Open Edit box")
   // get the course information from the courseElement
   const subj = courseElement.getAttribute("subj");
   const crs = courseElement.getAttribute("crs");
@@ -728,22 +731,27 @@ function openEditBox(courseElement) {
   const room = courseElement.getAttribute("room");
 
   // populate the course information in the edit box
+  // Get the previous course block with --conflict-hover-color
+  const courseBlocks = document.querySelectorAll('.course-block');
+  courseBlocks.forEach(courseBlock => {
+    if (courseBlock.style.backgroundColor === 'rgb(172, 179, 255)') {
+      courseBlock.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--lightgrey-background-color');
+    }
+  });
+  
+  
+  
+
   courseElement.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--conflict-hover-color');
-
-
 
   const courseSubjCrsSec = document.querySelector(".course-subj-crs-sec");
   courseSubjCrsSec.textContent = `${subj} ${crs} ${sec}`;
-
   const courseTitle = document.querySelector(".course-title");
   courseTitle.textContent = title;
-
   const courseCRN = document.querySelector(".course-crn");
   courseCRN.textContent = `CRN: ${crn}`;
-
   const instructorInput = document.querySelector("#instructor");
   instructorInput.value = instructor;
-
   const daysInput = document.querySelector("#days");
   daysInput.value = days;
 
@@ -752,34 +760,23 @@ function openEditBox(courseElement) {
 
   const startTimeInput = document.querySelector("#start-time");
   startTimeInput.value = stimeStandard;
-
   const endTimeInput = document.querySelector("#end-time");
   endTimeInput.value = etimeStandard;
-
   const buildingInput = document.querySelector("#building");
   buildingInput.value = bldg;
-
   const roomInput = document.querySelector("#room");
   roomInput.value = room;
+  
+  const saveChangesButton = document.querySelector(".save-course-info-button");
+  const clonedButton = saveChangesButton.cloneNode(true);
+  saveChangesButton.parentNode.replaceChild(clonedButton, saveChangesButton);
 
-  // // remove any existing event listener from the "Save Changes" button
-  // const saveChangesButton = document.querySelector(".save-course-info-button");
-  // saveChangesButton.removeEventListener("click", saveChangesHandler);
-
-  // // add a new event listener to the "Save Changes" button
-  // saveChangesButton.addEventListener("click", saveChangesHandler);
-
-  // remove the event listener from all "Save Changes" buttons
-  const saveChangesButtons = document.querySelectorAll(".save-course-info-button");
-  saveChangesButtons.forEach(button => {
-    button.removeEventListener("click", saveChangesHandler);
-  });
-
-  // add the event listener to the current "Save Changes" button
-  const saveChangesButton = courseElement.querySelector(".save-course-info-button");
-  saveChangesButton.addEventListener("click", saveChangesHandler);
+  clonedButton.addEventListener("click", saveChangesHandler);
 
   function saveChangesHandler() {
+    startTimeInput.classList.remove("invalid-input");
+    endTimeInput.classList.remove("invalid-input");
+    console.log("saving changes")
     // update the course information in the course element
     courseElement.setAttribute("subj", subj);
     courseElement.setAttribute("crs", crs);
@@ -788,6 +785,38 @@ function openEditBox(courseElement) {
     courseElement.setAttribute("crn", crn);
     courseElement.setAttribute("instructor", instructorInput.value);
     courseElement.setAttribute("days", daysInput.value);
+
+    let exitBeforeSaving = false;
+    // remove the red outline before checking the input
+    startTimeInput.classList.remove("invalid-input");
+    endTimeInput.classList.remove("invalid-input");
+    
+    // check if the time inputs are in the correct format
+    if (!validateTimeInput(startTimeInput.value)) {
+      startTimeInput.classList.add("invalid-input");
+      alert("Invalid start time format. Please enter time in HH:MM AM/PM format.");
+      exitBeforeSaving = true;
+    }
+    if (!validateTimeInput(endTimeInput.value)) {
+      endTimeInput.classList.add("invalid-input");
+      alert("Invalid end time format. Please enter time in HH:MM AM/PM format.");
+      exitBeforeSaving = true;
+    }
+    // check if the days are in the correct format
+    if (!validateDaysInput(daysInput.value))
+    {
+      daysInput.classList.add("invalid-input");
+      alert("Invalid days format. Please enter a combination of days: M T W R F S U.");
+      exitBeforeSaving = true;
+    }
+    if (exitBeforeSaving) {
+      return;
+    }
+
+    startTimeInput.value = startTimeInput.value.toUpperCase();
+    endTimeInput.value = endTimeInput.value.toUpperCase();
+    daysInput.value = daysInput.value.toUpperCase();
+    
 
     startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
     endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
@@ -818,6 +847,26 @@ function standardToMilitaryTime(timeString) {
   return militaryHours + " " + militaryMinutes;
 }
 
+function validateTimeInput(input) {
+  const timeRegex = /^(1[0-2]|[1-9]):([0-5][0-9])([AaPp][Mm])$/;
+  return timeRegex.test(input);
+}
+
+function validateDaysInput(input) {
+  const daysRegex = /^(M|T|W|R|F|S|U)+$/i;
+
+  if (!daysRegex.test(input)) {
+    return false;
+  }
+
+  const uniqueDays = new Set(input.toUpperCase().split(''));
+
+  if (uniqueDays.size !== input.length) {
+    return false;
+  }
+
+  return true;
+}
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
@@ -1387,8 +1436,8 @@ window.addEventListener('load', function() {
     removeIgnoreSubjects();
     displayInstructors();
     displayBldgRoom();
-    checkForConflicts();
     updateCourseElements();
+    checkForConflicts();
     setTimeout(function() {
       loadingContainer.style.display = 'none';;
     }, 300);
@@ -1427,6 +1476,25 @@ function displayConflicts() {
       var course1 = conflict.course1;
       var course2 = conflict.course2;
 
+
+      var crn1 = course1.CRN;
+      var crn2 = course2.CRN;
+      document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
+        courseBlock.style.border = "2px solid red";
+      });
+      document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
+        courseBlock.style.border = "2px solid red";
+      });
+
+
+      // document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
+      //   courseBlock.style.backgroundColor = 'lightcoral';
+      // });
+      // document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
+      //   courseBlock.style.backgroundColor = 'lightcoral';
+      // });
+
+
       var conflictBox = document.createElement("div");
       conflictBox.classList.add("conflict-item");
 
@@ -1446,7 +1514,6 @@ function displayConflicts() {
       function showConflictsClick() {
         showConflictDetails(conflict, conflictBox);
       }
-
       conflictsList.appendChild(conflictBox);
     })(conflicts[i]);
   }
@@ -1520,15 +1587,12 @@ function showConflictDetails(conflict, clickedElement) {
 
   // Select all course blocks with the same CRN as the first course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
-    console.log(courseBlock)
-    courseBlock.style.border = "2px solid red";
-    // updateCourseElements();
+    courseBlock.style.backgroundColor = 'lightcoral';
   });
 
   // Select all course blocks with the same CRN as the second course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
-    courseBlock.style.border = "2px solid red";
-    // updateCourseElements();
+    courseBlock.style.backgroundColor = 'lightcoral';
   });
 
   
@@ -1538,8 +1602,6 @@ function showConflictDetails(conflict, clickedElement) {
     document.removeEventListener("click", closeConflictDetails);
     document.addEventListener("click", closeConflictDetails);
   }, 10);
-  
-
 }
 
 
