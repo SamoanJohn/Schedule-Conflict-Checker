@@ -596,18 +596,8 @@ function updateCourseElements(){
         console.warn(`Element not found for day ${day} and time ${time}`);
       }
     });
+    courseElement.remove();
   };
-
-  function minutesBetweenMilitaryTimes(startTimeString, endTimeString) {
-    const startHours = parseInt(startTimeString.slice(0, 2));
-    const startMinutes = parseInt(startTimeString.slice(2));
-    const endHours = parseInt(endTimeString.slice(0, 2));
-    const endMinutes = parseInt(endTimeString.slice(2));
-    const totalStartMinutes = startHours * 60 + startMinutes;
-    const totalEndMinutes = endHours * 60 + endMinutes;
-    const minutesBetween = totalEndMinutes - totalStartMinutes;
-    return minutesBetween;
-  }
 
   // Add new listener to course-block
   // drag events for course-block and time-cells
@@ -631,6 +621,17 @@ function updateCourseElements(){
   });
 }
 
+function minutesBetweenMilitaryTimes(startTimeString, endTimeString) {
+  const startHours = parseInt(startTimeString.slice(0, 2));
+  const startMinutes = parseInt(startTimeString.slice(2));
+  const endHours = parseInt(endTimeString.slice(0, 2));
+  const endMinutes = parseInt(endTimeString.slice(2));
+  const totalStartMinutes = startHours * 60 + startMinutes;
+  const totalEndMinutes = endHours * 60 + endMinutes;
+  const minutesBetween = totalEndMinutes - totalStartMinutes;
+  return minutesBetween;
+}
+
 //Round to nearest 15
 function roundTo15(time) {
   // Convert time to minutes
@@ -652,7 +653,6 @@ function roundTo15(time) {
     return roundedTime;
   }
 }
-
 
 let courseBlockToDelete = null;
 
@@ -686,7 +686,6 @@ function handleDrop(event) {
     let courseCRN = tempCourseDiv.firstChild.getAttribute("CRN")
     let courseChildren = document.querySelectorAll('.course-block[CRN="' + courseCRN + '"]');
 
-
     const courseBlockContainer = document.createElement('div');
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
@@ -698,6 +697,9 @@ function handleDrop(event) {
     courseBlockContainer.firstChild
     timeCell.appendChild(courseBlockContainer.firstChild);
     courseBlockToDelete.remove();
+    
+    // checking for conflict after moving
+    checkForConflicts();
 
     // MW -> M = MW
     // MW -> W = MW
@@ -713,16 +715,9 @@ function openEditBoxClick() {
   openEditBox(this);
 }
 
-
-
 function openEditBox(courseElement) {
   console.log("Open Edit box")
   // get the course information from the courseElement
-  const subj = courseElement.getAttribute("subj");
-  const crs = courseElement.getAttribute("crs");
-  const sec = courseElement.getAttribute("sec");
-  const title = courseElement.getAttribute("title");
-  const crn = courseElement.getAttribute("crn");
   const instructor = courseElement.getAttribute("instructor");
   const days = courseElement.getAttribute("days");
   const stime = courseElement.getAttribute("stime");
@@ -734,22 +729,17 @@ function openEditBox(courseElement) {
   // Get the previous course block with --conflict-hover-color
   const courseBlocks = document.querySelectorAll('.course-block');
   courseBlocks.forEach(courseBlock => {
-    if (courseBlock.style.backgroundColor === 'rgb(172, 179, 255)') {
-      courseBlock.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--lightgrey-background-color');
-    }
+    courseBlock.classList.remove('active');
   });
   
+  // get all CRN
+  let allCourseCRN = courseElement.getAttribute("CRN");
+  let courseChildren = document.querySelectorAll('.course-block[CRN="' + allCourseCRN + '"]');
   
-  
+  courseChildren.forEach(function(course) {
+    course.classList.add('active');
+  });
 
-  courseElement.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--conflict-hover-color');
-
-  const courseSubjCrsSec = document.querySelector(".course-subj-crs-sec");
-  courseSubjCrsSec.textContent = `${subj} ${crs} ${sec}`;
-  const courseTitle = document.querySelector(".course-title");
-  courseTitle.textContent = title;
-  const courseCRN = document.querySelector(".course-crn");
-  courseCRN.textContent = `CRN: ${crn}`;
   const instructorInput = document.querySelector("#instructor");
   instructorInput.value = instructor;
   const daysInput = document.querySelector("#days");
@@ -776,21 +766,7 @@ function openEditBox(courseElement) {
   function saveChangesHandler() {
     startTimeInput.classList.remove("invalid-input");
     endTimeInput.classList.remove("invalid-input");
-    console.log("saving changes")
-    // update the course information in the course element
-    courseElement.setAttribute("subj", subj);
-    courseElement.setAttribute("crs", crs);
-    courseElement.setAttribute("sec", sec);
-    courseElement.setAttribute("title", title);
-    courseElement.setAttribute("crn", crn);
-    courseElement.setAttribute("instructor", instructorInput.value);
-    courseElement.setAttribute("days", daysInput.value);
-
     let exitBeforeSaving = false;
-    // remove the red outline before checking the input
-    startTimeInput.classList.remove("invalid-input");
-    endTimeInput.classList.remove("invalid-input");
-    
     // check if the time inputs are in the correct format
     if (!validateTimeInput(startTimeInput.value)) {
       startTimeInput.classList.add("invalid-input");
@@ -812,25 +788,44 @@ function openEditBox(courseElement) {
     if (exitBeforeSaving) {
       return;
     }
+    
+    // get all CRN
+    let allCourseCRN = courseElement.getAttribute("CRN");
+    let courseChildren = document.querySelectorAll('.course-block[CRN="' + allCourseCRN + '"]');
+    
+    removeCourseFromTimeSlot(courseElement);
 
+    // update the course information in the course element
     startTimeInput.value = startTimeInput.value.toUpperCase();
     endTimeInput.value = endTimeInput.value.toUpperCase();
     daysInput.value = daysInput.value.toUpperCase();
-    
 
     startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
     endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
 
+    courseElement.setAttribute("instructor", instructorInput.value);
+    courseElement.setAttribute("days", daysInput.value);
     courseElement.setAttribute("stime", startTimeMilitary);
     courseElement.setAttribute("etime", endTimeMilitary);
     courseElement.setAttribute("bldg", buildingInput.value);
     courseElement.setAttribute("room", roomInput.value);
 
-    // update the content of the course element
-    const courseText = courseElement.querySelector(".course-text");
-    courseText.textContent = `${subj} ${crs}`;
+    addCourseToCalendar(courseElement)
   }
 }
+
+function removeCourseFromTimeSlot(course) {
+  const crn = course.getAttribute('CRN');
+  const timeSlots = document.querySelectorAll('.time-cell');
+  timeSlots.forEach(timeSlot => {
+    const courseBlocks = timeSlot.querySelectorAll(`.course-block[CRN="${crn}"]`);
+    courseBlocks.forEach(courseBlock => {
+      timeSlot.removeChild(courseBlock);
+    });
+  });
+}
+
+
 
 function standardToMilitaryTime(timeString) {
   var timeArr = timeString.split(":");
@@ -844,7 +839,7 @@ function standardToMilitaryTime(timeString) {
   }
   var militaryHours = hours < 10 ? "0" + hours : hours;
   var militaryMinutes = minutes < 10 ? "0" + minutes : minutes;
-  return militaryHours + " " + militaryMinutes;
+  return militaryHours + "" + militaryMinutes;
 }
 
 function validateTimeInput(input) {
@@ -867,6 +862,45 @@ function validateDaysInput(input) {
 
   return true;
 }
+
+
+function addCourseToCalendar(course) {
+  console.log(course)
+  // check STime for 15 minute incremement
+  let STime = parseInt(course.getAttribute("stime"))
+  if (STime % 15 !== 0) {
+    course.setAttribute('stime', roundTo15(STime));
+  } else {
+    course.setAttribute('stime', course.getAttribute("stime"));
+  }    
+  // Add course element to time cell
+  const days = course.getAttribute('days');
+  const time = course.getAttribute('stime');
+  const daysArray = days.split('');
+  daysArray.forEach(day => {
+    const timeSlot = document.querySelector(`[data-day="${day}"][data-time="${time}"]`);
+    if (timeSlot) {
+      const duplicateCourseElement = course.cloneNode(true);
+      timeSlot.appendChild(duplicateCourseElement);
+
+      minutes = minutesBetweenMilitaryTimes(duplicateCourseElement.getAttribute('stime'), duplicateCourseElement.getAttribute('etime'))
+      height = minutes / 60 * 18.55*4;
+      duplicateCourseElement.style.height = height + "px";
+      // add drag event listener to the cloned element
+      duplicateCourseElement.removeEventListener('dragstart', handleDragstart);
+      duplicateCourseElement.addEventListener('dragstart', handleDragstart);
+      // add a normal click listener to open the Edit box
+      duplicateCourseElement.removeEventListener("click", openEditBoxClick);
+      duplicateCourseElement.addEventListener("click", openEditBoxClick);
+
+      function openEditBoxClick() {
+        openEditBox(duplicateCourseElement);
+      }
+    } else {
+      console.warn(`Element not found for day ${day} and time ${time}`);
+    }
+  });
+};
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
@@ -992,8 +1026,8 @@ $(document).ready(function() {
 
         if (!filterVariables.rangeCourseConflicts.some(function(tuple) {
             return tuple[0] === inputSubject &&
-                    tuple[1] === inputRangeStart &&
-                    tuple[2] === inputRangeEnd;
+                   tuple[1] === inputRangeStart &&
+                   tuple[2] === inputRangeEnd;
         })) {
         filterVariables.rangeCourseConflicts.push([inputSubject, inputRangeStart, inputRangeEnd]);
         var enteredRangeCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'rangeCourseConflicts\')"></span><span>' + inputSubject + " " + inputRangeStart + " - " + inputRangeEnd + '</span></div>');
