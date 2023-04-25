@@ -353,7 +353,6 @@ function handleFileSelect(event) {
     //   original_class_array.push(obj);
     // }
     
-    console.log(original_class_array);
     var newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
       if (col === 'Subj Crs Sec') {
         const [subj, crs, sec] = row[columnIndices[index]].split(' ');
@@ -382,9 +381,10 @@ function handleFileSelect(event) {
 
     class_array = newData.map(row => {
       const [days, stime, etime, bldg, room] = narrowDown(row);
-      return { ...row, Days: days, STime: parse_time(stime), ETime: parse_time(etime), Bldg: bldg, Room: room };
+      return { ...row, Days: days.toString(), STime: parse_time(stime).toString(), ETime: parse_time(etime).toString(), Bldg: bldg.toString(), Room: room.toString() };
     });
-    console.log(class_array)
+    console.log(class_array);
+    
     saved_class_array = [...class_array];
     newData = null;
     contents = null;
@@ -740,7 +740,6 @@ function openEditBoxClick() {
 }
 
 function openEditBox(courseElement) {
-  console.log("Open Edit box")
   // get the course information from the courseElement
   const instructor = courseElement.getAttribute("instructor");
   const days = courseElement.getAttribute("days");
@@ -828,6 +827,7 @@ function openEditBox(courseElement) {
     endTimeInput.value = endTimeInput.value.toUpperCase();
     daysInput.value = daysInput.value.toUpperCase();
 
+
     startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
     endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
 
@@ -838,9 +838,12 @@ function openEditBox(courseElement) {
     courseElement.setAttribute("bldg", buildingInput.value);
     courseElement.setAttribute("room", roomInput.value);
 
-    addCourseToCalendar(courseElement)
+    addCourseToCalendar(courseElement);
+    updateCourseInClassArray(courseElement);
+    updateConflicts();
   }
 }
+
 
 function removeCourseFromTimeSlot(course) {
   const crn = course.getAttribute('CRN');
@@ -852,7 +855,6 @@ function removeCourseFromTimeSlot(course) {
     });
   });
 }
-
 
 
 function standardToMilitaryTime(timeString) {
@@ -893,7 +895,6 @@ function validateDaysInput(input) {
 
 
 function addCourseToCalendar(course) {
-  console.log(course)
   // check STime for 15 minute incremement
   let STime = parseInt(course.getAttribute("stime"))
   if (STime % 15 !== 0) {
@@ -931,9 +932,31 @@ function addCourseToCalendar(course) {
 };
 
 
-
-
-
+function updateCourseInClassArray(course) {
+  const crn = course.getAttribute("CRN");
+  for (let i = 0; i < saved_class_array.length; i++) {
+    if (parseInt(saved_class_array[i].CRN) === parseInt(crn)) {
+      saved_class_array[i].Instructor = course.getAttribute("instructor");
+      saved_class_array[i].Days = course.getAttribute("days");
+      saved_class_array[i].STime = course.getAttribute("stime");
+      saved_class_array[i].ETime = course.getAttribute("etime");
+      saved_class_array[i].Bldg = course.getAttribute("bldg");
+      saved_class_array[i].Room = course.getAttribute("room");
+      break;
+    }
+  }
+  for (let i = 0; i < class_array.length; i++) {
+    if (parseInt(class_array[i].CRN) === parseInt(crn)) {
+      saved_class_array[i].Instructor = course.getAttribute("instructor");
+      saved_class_array[i].Days = course.getAttribute("days");
+      saved_class_array[i].STime = course.getAttribute("stime");
+      saved_class_array[i].ETime = course.getAttribute("etime");
+      saved_class_array[i].Bldg = course.getAttribute("bldg");
+      saved_class_array[i].Room = course.getAttribute("room");
+      break;
+    }
+  }
+}
 
 
 /////////////////////////////////////////////////////////////////////
@@ -1230,7 +1253,6 @@ function getClassTimeSlots(startTime, endTime) {
 // adds class to the hashtable
 function addToHashTable(course_object) {
   const time_slots = getClassTimeSlots(course_object.STime, course_object.ETime);
-  // try and fix this, Im just limiting days to 2 to prevent errors
   for (let i = 0; i < course_object.Days.length; i++) {
     const day = course_object.Days[i];
     for (let j = 0; j < time_slots.length; j++) {
@@ -1238,7 +1260,6 @@ function addToHashTable(course_object) {
       if (!(day in course_hash_table)) {
         console.log("day not found");
         console.log(day)
-
       }
       if (!(time_slot in course_hash_table[day])) {
         console.log("time not found");
@@ -1446,10 +1467,6 @@ function removeIgnoreSubjects() {
 }
 
 function displayInstructors() {
-  console.log("Instructor followed by class_array")
-  console.log(filterVariables.instructors)
-  console.log(class_array)
-
   // Check if the filter includes "All Instructors"
   if (filterVariables.instructors.length === 0) {
     return;
@@ -1495,9 +1512,16 @@ window.addEventListener('load', function() {
   function handleFilterButtonClick() {
     const loadingContainer = document.getElementById('loading-filtering-container');
     loadingContainer.style.display = 'flex';
-    course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
-    class_array = [...saved_class_array];
+    course_hash_table = [];
+    conflicts = [];
+    createHashTable();
+    for (let i = 0; i < saved_class_array.length; i++) {
+      addToHashTable(saved_class_array[i]);
+    }
 
+    // course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
+    class_array = [...saved_class_array];
+    
     removeHiddenCourses();
     removeHiddenSubjects();
     removeIgnoreCourses();
@@ -1519,8 +1543,15 @@ window.addEventListener('load', function() {
   filterbtn.addEventListener('click', handleFilterButtonClick);
 });
 
-
-
+function updateConflicts() {
+  // course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
+  course_hash_table = [];
+  createHashTable();
+  for (let i = 0; i < class_array.length; i++) {
+    addToHashTable(class_array[i]);
+  }
+  checkForConflicts();
+}
 
 ////////////////////////////////////////////////////////////////////
 //  JS for displaying the conflicts
@@ -1531,7 +1562,6 @@ function displayConflicts() {
   document.querySelectorAll('.course-block').forEach(function(courseBlock) {
     courseBlock.classList.remove('conflict');
   });
-
 
   var conflictsList = document.getElementById("conflict-container");
 
@@ -1550,7 +1580,6 @@ function displayConflicts() {
       var conflictMessage = conflict.message;
       var course1 = conflict.course1;
       var course2 = conflict.course2;
-
 
       var crn1 = course1.CRN;
       var crn2 = course2.CRN;
