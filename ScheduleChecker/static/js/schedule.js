@@ -529,6 +529,30 @@ window.addEventListener('load', function() {
   var searchbtn = document.getElementById("search-btn");
   searchbtn.removeEventListener('click', handleSearchButtonClick);
   searchbtn.addEventListener('click', handleSearchButtonClick);
+
+
+
+
+
+  const clearButton = document.querySelector('.clear-course-info-button');
+  const inputFields = document.querySelectorAll('.form-group input');
+
+  clearButton.addEventListener('click', () => {
+    const loadingContainer = document.getElementById('edit-box-loading-container');
+    loadingContainer.style.display = 'flex';
+
+    inputFields.forEach((input) => {
+      input.value = ''; // set input value to an empty string
+    });
+    const courseBlocks = document.querySelectorAll('.course-block');
+    courseBlocks.forEach(courseBlock => {
+      courseBlock.classList.remove('active');
+    });
+
+    setTimeout(function() {
+      loadingContainer.style.display = 'none';;
+    }, 300);
+  });
 });
 
 // update the course elements on the grid.
@@ -789,7 +813,14 @@ function openEditBox(courseElement) {
       return;
     }
   
-    
+    // loading spinner
+    const loadingContainer = document.getElementById('edit-box-loading-container');
+    loadingContainer.style.display = 'flex';
+    setTimeout(function() {
+      loadingContainer.style.display = 'none';;
+    }, 300);
+
+
     removeCourseFromTimeSlot(courseElement);
 
     // update the course information in the course element
@@ -898,6 +929,12 @@ function addCourseToCalendar(course) {
     }
   });
 };
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////
 //  THIS IS ALL THE CODE FOR THE FILTERING OPTIONS
@@ -1469,6 +1506,7 @@ window.addEventListener('load', function() {
     displayBldgRoom();
     updateCourseElements();
     checkForConflicts();
+
     setTimeout(function() {
       loadingContainer.style.display = 'none';;
     }, 300);

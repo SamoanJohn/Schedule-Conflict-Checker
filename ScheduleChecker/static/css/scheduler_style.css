@@ -1274,6 +1274,32 @@ input[type="text"] {
 }
 
 
+.clear-course-info-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+
+.clear-course-info-button {
+  margin-right: 15px;
+  background-color: var(--background-color);
+  color: var(--black-text-color);
+  height: 25px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--submit-button-color);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+.clear-course-info-button:hover {
+  background-color: var(--grey-background-color);
+}
+
+
 .invalid-input {
   outline: 2px solid red;
 }
