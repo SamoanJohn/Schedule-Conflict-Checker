@@ -788,10 +788,7 @@ function openEditBox(courseElement) {
     if (exitBeforeSaving) {
       return;
     }
-    
-    // get all CRN
-    let allCourseCRN = courseElement.getAttribute("CRN");
-    let courseChildren = document.querySelectorAll('.course-block[CRN="' + allCourseCRN + '"]');
+  
     
     removeCourseFromTimeSlot(courseElement);
 
