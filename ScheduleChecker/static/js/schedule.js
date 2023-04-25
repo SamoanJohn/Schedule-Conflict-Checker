@@ -1527,6 +1527,12 @@ window.addEventListener('load', function() {
 //  within a conflict box
 ////////////////////////////////////////////////////////////////////
 function displayConflicts() {
+
+  document.querySelectorAll('.course-block').forEach(function(courseBlock) {
+    courseBlock.classList.remove('conflict');
+  });
+
+
   var conflictsList = document.getElementById("conflict-container");
 
   // Remove existing elements from the container
@@ -1549,21 +1555,12 @@ function displayConflicts() {
       var crn1 = course1.CRN;
       var crn2 = course2.CRN;
       document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
-        courseBlock.style.border = "2px solid red";
+        courseBlock.classList.add('conflict'); // add the "conflict" class
       });
       document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
-        courseBlock.style.border = "2px solid red";
+        courseBlock.classList.add('conflict'); // add the "conflict" class
       });
-
-
-      // document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
-      //   courseBlock.style.backgroundColor = 'lightcoral';
-      // });
-      // document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
-      //   courseBlock.style.backgroundColor = 'lightcoral';
-      // });
-
-
+      
       var conflictBox = document.createElement("div");
       conflictBox.classList.add("conflict-item");
 
@@ -1598,6 +1595,14 @@ function militaryToStandardTime(timeString) {
 }
 
 function showConflictDetails(conflict, clickedElement) {
+
+  document.querySelectorAll('.course-block').forEach(function(courseBlock) {
+    courseBlock.classList.remove('clicked-conflict');
+  });
+  document.querySelectorAll('.conflict-item').forEach(function(conflictItem) {
+    conflictItem.classList.remove('clicked-conflict');
+  });
+  
   // get the courses and conflict message
   var course1 = conflict.course1;
   var course2 = conflict.course2;
@@ -1651,18 +1656,25 @@ function showConflictDetails(conflict, clickedElement) {
 
   // Highlight conflicted courses
   // Get the CRNs of both courses
+  // var crn1 = course1.CRN;
+  // var crn2 = course2.CRN;
+  // document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
+  //   courseBlock.style.backgroundColor = 'lightcoral';
+  // });
+  // document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
+  //   courseBlock.style.backgroundColor = 'lightcoral';
+  // });
+
   var crn1 = course1.CRN;
   var crn2 = course2.CRN;
-
-  // Select all course blocks with the same CRN as the first course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
-    courseBlock.style.backgroundColor = 'lightcoral';
+    courseBlock.classList.add('clicked-conflict'); // add the "conflict" class
   });
-
-  // Select all course blocks with the same CRN as the second course and add the border
   document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
-    courseBlock.style.backgroundColor = 'lightcoral';
+    courseBlock.classList.add('clicked-conflict'); // add the "conflict" class
   });
+  clickedElement.classList.add('clicked-conflict');
+
 
   
   // make the temporary conflict box visible

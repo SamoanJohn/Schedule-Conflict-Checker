@@ -19,7 +19,10 @@
   --loading-background-color: rgba(133, 133, 133, 0.441);
   --remove-item-hover: #383f475d;
   --selected-item-text-color: #383f47;
-}
+  --red-border-color: rgb(201, 0, 0);
+  --red-background-color: rgb(255, 105, 105);
+}  
+
 
 /* Dark mode styles */
 body.dark-mode {
@@ -42,6 +45,8 @@ body.dark-mode {
   --loading-background-color: rgba(133, 133, 133, 0.441);
   --remove-item-hover: #383f475d;
   --selected-item-text-color: #FFFFFF;
+  --red-border-color: rgb(201, 0, 0);
+  --red-background-color: rgb(255, 78, 78);
 }
 
 body {
@@ -994,6 +999,14 @@ input:focus {
   background-color: var(--conflict-hover-color);
 }  
 
+.course-block.conflict {
+  border: 2px solid var(--red-border-color);
+}  
+
+.course-block.clicked-conflict {
+  background-color: var(--red-background-color);
+}  
+
 .course-text {
     font-size: 14px;
     text-align: left;
@@ -1084,6 +1097,11 @@ h2 {
   color: var(--white-text-color);
   transition: background-color 0.2s, color 0.2s;
 }
+
+.conflict-item.clicked-conflict {
+  border: 2px solid var(--red-border-color);
+}
+
 
 .conflict-courses {
   white-space: nowrap;
