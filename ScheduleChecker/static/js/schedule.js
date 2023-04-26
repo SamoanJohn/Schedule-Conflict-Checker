@@ -739,6 +739,7 @@ function handleDrop(event) {
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
     courseBlockContainer.firstChild.getAttribute('Duration'))); 
     courseBlockContainer.firstChild
+    timeCell.appendChild(courseBlockContainer.firstChild);
     courseBlockToDelete.remove();
     
     // checking for conflict after moving
@@ -889,6 +890,16 @@ function standardToMilitaryTime(timeString) {
   var militaryHours = hours < 10 ? "0" + hours : hours;
   var militaryMinutes = minutes < 10 ? "0" + minutes : minutes;
   return militaryHours + "" + militaryMinutes;
+}
+
+function militaryToStandardTime(timeString) {
+  var hours = parseInt(timeString.slice(0, 2));
+  var minutes = parseInt(timeString.slice(2));
+  var meridiem = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12; // convert to 12-hour format
+  var standardHours = hours < 10 ? "0" + hours : hours;
+  var standardMinutes = minutes < 10 ? "0" + minutes : minutes;
+  return standardHours + ":" + standardMinutes + " " + meridiem;
 }
 
 function validateTimeInput(input) {
