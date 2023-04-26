@@ -538,8 +538,6 @@ window.addEventListener('load', function() {
   const inputFields = document.querySelectorAll('.form-group input');
 
   clearButton.addEventListener('click', () => {
-    const loadingContainer = document.getElementById('edit-box-loading-container');
-    loadingContainer.style.display = 'flex';
 
     inputFields.forEach((input) => {
       input.value = ''; // set input value to an empty string
@@ -548,10 +546,6 @@ window.addEventListener('load', function() {
     courseBlocks.forEach(courseBlock => {
       courseBlock.classList.remove('active');
     });
-
-    setTimeout(function() {
-      loadingContainer.style.display = 'none';;
-    }, 300);
   });
 });
 
@@ -587,11 +581,22 @@ function updateCourseElements(){
     courseElement.setAttribute('Instructor', course.Instructor);
     courseElement.setAttribute('DelMthd', course.DelMthd);
 
-    // add Subj and Crs data for block text
     const courseBlockText = document.createElement('div');
     courseBlockText.classList.add('course-text');
-    courseBlockText.textContent = courseElement.getAttribute('Subj') + " " + courseElement.getAttribute('Crs');
+    
+    const subjText = document.createElement('div');
+    subjText.classList.add('course-text-subj');
+    subjText.textContent = courseElement.getAttribute('Subj');
+    courseBlockText.appendChild(subjText);
+    
+    const crsText = document.createElement('div');
+    crsText.classList.add('course-text-crs');
+    crsText.textContent = courseElement.getAttribute('Crs');
+    courseBlockText.appendChild(crsText);
+    
     courseElement.appendChild(courseBlockText);
+    
+    console.log(courseElement)
 
     // Add course element to time cell
     const days = courseElement.getAttribute('Days');
