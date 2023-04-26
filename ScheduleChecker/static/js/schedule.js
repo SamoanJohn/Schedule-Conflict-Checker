@@ -747,6 +747,15 @@ function handleDragLeave(event) {
 }
 
 function handleDrop(event) {
+
+  document.querySelectorAll('.course-block').forEach(function(courseBlock) {
+    courseBlock.classList.remove('clicked-conflict');
+    if (courseBlock.classList.contains('clicked-and-active')) {
+      courseBlock.classList.remove('clicked-and-active');
+      courseBlock.classList.add('active');
+    }
+  });
+  
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
 
@@ -804,15 +813,11 @@ function handleDrop(event) {
     }
     
     openEditBox(courseBlockContainer.firstChild);
-
     addCourseToCalendar(courseBlockContainer.firstChild);
     updateCourseInClassArray(courseBlockContainer.firstChild);
     updateConflicts();
     
-
     courseBlockToDelete.remove();
-    // checking for conflict after moving
-    checkForConflicts();
   }
   event.currentTarget.classList.remove('highlight');
   event.currentTarget.classList.remove('text');
@@ -884,8 +889,6 @@ function openEditBox(courseElement) {
   stimeStandard = militaryToStandardTime(stime)
   etimeStandard = militaryToStandardTime(etime)
 
-
-
   startTimeInput.value = stimeStandard;
   endTimeInput.value = etimeStandard;
   const buildingInput = document.querySelector("#building");
@@ -900,6 +903,15 @@ function openEditBox(courseElement) {
   clonedButton.addEventListener("click", saveChangesHandler);
 
   function saveChangesHandler() {
+
+    document.querySelectorAll('.course-block').forEach(function(courseBlock) {
+      courseBlock.classList.remove('clicked-conflict');
+      if (courseBlock.classList.contains('clicked-and-active')) {
+        courseBlock.classList.remove('clicked-and-active');
+        courseBlock.classList.add('active');
+      }
+    });
+    
     startTimeInput.classList.remove("invalid-input");
     endTimeInput.classList.remove("invalid-input");
     let exitBeforeSaving = false;
@@ -1084,6 +1096,17 @@ function updateCourseInClassArray(course) {
         changeLog.push({oldCourse: oldCourse, newCourse: newCourse});
         break;
       }
+    }
+  }
+  for (let i = 0; i < class_array.length; i++) {
+    if (parseInt(class_array[i].CRN) === parseInt(crn)) {
+      class_array[i].Instructor = course.getAttribute("instructor");
+      class_array[i].Days = course.getAttribute("days");
+      class_array[i].STime = course.getAttribute("stime");
+      class_array[i].ETime = course.getAttribute("etime");
+      class_array[i].Bldg = course.getAttribute("bldg");
+      class_array[i].Room = course.getAttribute("room");
+      break;
     }
   }
 }
@@ -1793,8 +1816,6 @@ function militaryToStandardTime(timeString) {
 }
 
 function showConflictDetails(conflict, clickedElement) {
-
-
   document.querySelectorAll('.course-block').forEach(function(courseBlock) {
     courseBlock.classList.remove('clicked-conflict');
     if (courseBlock.classList.contains('clicked-and-active')) {
