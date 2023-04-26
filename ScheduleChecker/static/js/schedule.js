@@ -580,6 +580,7 @@ function updateCourseElements(){
       courseElement.setAttribute('STime', course.STime);
     }    
     courseElement.setAttribute('ETime', course.ETime);
+    courseElement.setAttribute('Duration', minutesBetweenMilitaryTimes(course.STime, course.ETime));
     courseElement.setAttribute('Bldg', course.Bldg);
     courseElement.setAttribute('Room', course.Room);
     courseElement.setAttribute('Sdate', course.SDate);
@@ -645,6 +646,22 @@ function updateCourseElements(){
   });
 }
 
+
+function calculateEndTime(STime, Duration) {
+  console.log(STime);
+  const STimeHours = parseInt(STime.slice(0, 2));
+  const STimeMinutes = parseInt(STime.slice(2));
+  const STimeInMinutes = STimeHours * 60 + STimeMinutes;
+
+  const ETimeInMinutes = STimeInMinutes + Number(Duration);
+
+  const ETimeHours = Math.floor(ETimeInMinutes / 60);
+  const ETimeMinutes = ETimeInMinutes % 60;
+  const ETime = (ETimeHours < 10 ? '0' : '') + ETimeHours + (ETimeMinutes < 10 ? '0' : '') + ETimeMinutes;
+
+  return ETime;
+}
+
 function minutesBetweenMilitaryTimes(startTimeString, endTimeString) {
   const startHours = parseInt(startTimeString.slice(0, 2));
   const startMinutes = parseInt(startTimeString.slice(2));
@@ -684,7 +701,7 @@ function handleDragstart(event) {
   console.log("Drag start");
 
   const courseBlock = event.target;
-  openEditBox(courseBlock)
+  openEditBox(courseBlock);
 
   event.dataTransfer.setData('text/plain', courseBlock.outerHTML);
   courseBlockToDelete = courseBlock;
@@ -717,9 +734,11 @@ function handleDrop(event) {
     
     const timeCell = event.currentTarget;
     const dayTime = timeCell.getAttribute('data-time');
-    courseBlockContainer.firstChild.setAttribute('STime', dayTime); // set STime to time-cells time value. 
+    courseBlockContainer.firstChild.setAttribute('STime', dayTime); 
+    console.log(courseBlockContainer.firstChild);
+    courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
+    courseBlockContainer.firstChild.getAttribute('Duration'))); 
     courseBlockContainer.firstChild
-    timeCell.appendChild(courseBlockContainer.firstChild);
     courseBlockToDelete.remove();
     
     // checking for conflict after moving
