@@ -753,32 +753,65 @@ function handleDrop(event) {
   if (data.includes('course-block')) {
     const tempCourseDiv = document.createElement('div');
     tempCourseDiv.innerHTML = data;
-    let courseCRN = tempCourseDiv.firstChild.getAttribute("CRN")
-    let courseChildren = document.querySelectorAll('.course-block[CRN="' + courseCRN + '"]');
+    const courseCRN = tempCourseDiv.firstChild.getAttribute("CRN");
+   
 
     const courseBlockContainer = document.createElement('div');
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
     courseBlockContainer.firstChild.addEventListener("click", openEditBoxClick);
-    
+
+    removeCourseFromTimeSlot(courseBlockContainer.firstChild);
+
     const timeCell = event.currentTarget;
-    const dayTime = timeCell.getAttribute('data-time');
-    courseBlockContainer.firstChild.setAttribute('STime', dayTime); 
+    const Time = timeCell.getAttribute('data-time');
+    const Day = timeCell.getAttribute('data-day');
+    const currentDays = courseBlockContainer.firstChild.getAttribute('Days');
+    const currentDaysLength = currentDays.length;
+    courseBlockContainer.firstChild.setAttribute('STime', Time);
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
-    courseBlockContainer.firstChild.getAttribute('Duration'))); 
-    courseBlockContainer.firstChild
+    courseBlockContainer.firstChild.getAttribute('Duration')));
+    
+    if (!currentDays.includes(Day)) {
+      switch (currentDaysLength){
+        case 1:
+          courseBlockContainer.firstChild.setAttribute('Days', Day);
+          break;
+        case 2:
+          if (Day == 'M' || Day == 'W'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'MW');
+          }
+          else if(Day == 'T' || Day == 'R'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'TR');
+          }
+          else{
+            alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          }
+          break;
+        case 3:
+          if (Day == 'M' || Day == 'W' || Day == 'F'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'MWF');
+          }
+          else{
+            alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          }
+          break;
+        case 4:
+        case 5:
+          alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          break;
+      }
+    }
+    
     openEditBox(courseBlockContainer.firstChild);
-    timeCell.appendChild(courseBlockContainer.firstChild);
+
+    addCourseToCalendar(courseBlockContainer.firstChild);
+    updateCourseInClassArray(courseBlockContainer.firstChild);
+    updateConflicts();
+    
 
     courseBlockToDelete.remove();
     // checking for conflict after moving
-
-    // MW -> M = MW
-    // MW -> W = MW
-    // MW -> T = TR
-    // ...
-    // MWF -> T  -> open input box 
-    // single day -> single day 
     checkForConflicts();
   }
   event.currentTarget.classList.remove('highlight');
