@@ -749,10 +749,45 @@ function handleDrop(event) {
     removeCourseFromTimeSlot(courseBlockContainer.firstChild);
 
     const timeCell = event.currentTarget;
-    const dayTime = timeCell.getAttribute('data-time');
-    courseBlockContainer.firstChild.setAttribute('STime', dayTime);
+    const Time = timeCell.getAttribute('data-time');
+    const Day = timeCell.getAttribute('data-day');
+    const currentDays = courseBlockContainer.firstChild.getAttribute('Days');
+    const currentDaysLength = currentDays.length;
+    courseBlockContainer.firstChild.setAttribute('STime', Time);
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
     courseBlockContainer.firstChild.getAttribute('Duration')));
+    
+    if (!currentDays.includes(Day)) {
+      switch (currentDaysLength){
+        case 1:
+          courseBlockContainer.firstChild.setAttribute('Days', Day);
+          break;
+        case 2:
+          if (Day == 'M' || Day == 'W'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'MW');
+          }
+          else if(Day == 'T' || Day == 'R'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'TR');
+          }
+          else{
+            alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          }
+          break;
+        case 3:
+          if (Day == 'M' || Day == 'W' || Day == 'F'){
+            courseBlockContainer.firstChild.setAttribute('Days', 'MWF');
+          }
+          else{
+            alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          }
+          break;
+        case 4:
+        case 5:
+          alert("The course cannot be changed this way, please use the \"Edit Course Information!\" option to make your changes");
+          break;
+      }
+    }
+    
     openEditBox(courseBlockContainer.firstChild);
 
     addCourseToCalendar(courseBlockContainer.firstChild);
