@@ -1021,6 +1021,14 @@ input:focus {
     border: solid 1px rgba(128, 128, 128, 0.63) ;
 }
 
+.time-cell.text:before {
+  content: attr(data-time);
+  font-size: 14px;
+  text-align: left;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--black-text-color);
+}
+
 .conlict {
     border: solid 3px red;
 }

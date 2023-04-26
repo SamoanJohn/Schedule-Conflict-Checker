@@ -710,11 +710,18 @@ function handleDragstart(event) {
 
 function handleDragover(event) {
   event.preventDefault();
+  const time = militaryToStandardTime(event.currentTarget.dataset.time);
+  console.log(time);
   event.currentTarget.classList.add('highlight');
+  event.currentTarget.classList.add('text');
+  event.currentTarget.setAttribute('data-highlight-time', time);
+
 }
 
 function handleDragLeave(event) {
   event.currentTarget.classList.remove('highlight');
+  event.currentTarget.classList.remove('text');
+  event.currentTarget.removeAttribute('data-highlight-time');
 }
 
 function handleDrop(event) {
@@ -753,6 +760,8 @@ function handleDrop(event) {
     // single day -> single day 
   }
   event.currentTarget.classList.remove('highlight');
+  event.currentTarget.classList.remove('text');
+  event.currentTarget.removeAttribute('data-highlight-time');
 }
 
 function openEditBoxClick() {
