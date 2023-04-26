@@ -738,33 +738,30 @@ function handleDrop(event) {
   if (data.includes('course-block')) {
     const tempCourseDiv = document.createElement('div');
     tempCourseDiv.innerHTML = data;
-    let courseCRN = tempCourseDiv.firstChild.getAttribute("CRN")
-    let courseChildren = document.querySelectorAll('.course-block[CRN="' + courseCRN + '"]');
+    const courseCRN = tempCourseDiv.firstChild.getAttribute("CRN");
+   
 
     const courseBlockContainer = document.createElement('div');
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
     courseBlockContainer.firstChild.addEventListener("click", openEditBoxClick);
-    
+
+    removeCourseFromTimeSlot(courseBlockContainer.firstChild);
+
     const timeCell = event.currentTarget;
     const dayTime = timeCell.getAttribute('data-time');
-    courseBlockContainer.firstChild.setAttribute('STime', dayTime); 
-    console.log(courseBlockContainer.firstChild);
+    courseBlockContainer.firstChild.setAttribute('STime', dayTime);
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
-    courseBlockContainer.firstChild.getAttribute('Duration'))); 
-    courseBlockContainer.firstChild
+    courseBlockContainer.firstChild.getAttribute('Duration')));
     openEditBox(courseBlockContainer.firstChild);
-    timeCell.appendChild(courseBlockContainer.firstChild);
+
+    addCourseToCalendar(courseBlockContainer.firstChild);
+    updateCourseInClassArray(courseBlockContainer.firstChild);
+    updateConflicts();
+    
 
     courseBlockToDelete.remove();
     // checking for conflict after moving
-
-    // MW -> M = MW
-    // MW -> W = MW
-    // MW -> T = TR
-    // ...
-    // MWF -> T  -> open input box 
-    // single day -> single day 
     checkForConflicts();
   }
   event.currentTarget.classList.remove('highlight');
