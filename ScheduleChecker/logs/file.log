@@ -1382,3 +1382,734 @@ File C:\Users\austi\AppData\Local\Programs\Python\Python311\Lib\site-packages\dj
 "GET /static/js/schedule.js HTTP/1.1" 200 72948
 "GET /static/images/github.png HTTP/1.1" 200 23628
 "GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71909
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33113
+"GET /static/js/schedule.js HTTP/1.1" 200 72948
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."index", "major_requirements"."Degree", "major_requirements"."Major", "major_requirements"."Course" FROM "major_requirements" WHERE ("major_requirements"."Degree" = 'BS' AND "major_requirements"."Major" = 'Computer Science'); args=('BS', 'Computer Science'); alias=default
+"GET /query/?term=202303&majors=BS%20-%20Computer%20Science HTTP/1.1" 200 22550
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71909
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33113
+"GET /static/js/schedule.js HTTP/1.1" 200 73296
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71909
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33113
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682452711.8709726, current mtime: 1682485851.7249613
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682485851.7249613, current mtime: 1682485913.9737608
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33127
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33132
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33138
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33137
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33137
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33140
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33140
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33140
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682485913.9737608, current mtime: 1682486301.1803112
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71960
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33140
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486301.1803112, current mtime: 1682486311.297876
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33140
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33160
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33145
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 71952
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33193
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486311.297876, current mtime: 1682486631.933519
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72186
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33193
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486631.933519, current mtime: 1682486731.0755157
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72408
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33193
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486731.0755157, current mtime: 1682486741.4710813
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72293
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33193
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72293
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486741.4710813, current mtime: 1682486829.4538991
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72510
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486829.4538991, current mtime: 1682486922.3652143
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72750
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72750
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486922.3652143, current mtime: 1682486934.8352365
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72744
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486934.8352365, current mtime: 1682486994.563398
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 72976
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682486994.563398, current mtime: 1682487068.2139764
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33213
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33216
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33221
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33347
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33221
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33241
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33241
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33211
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33226
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487068.2139764, current mtime: 1682487408.3477414
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73270
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33226
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73270
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33226
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487408.3477414, current mtime: 1682487425.1720445
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73416
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33226
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487425.1720445, current mtime: 1682487465.8053641
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73270
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33226
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73270
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33242
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73270
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33232
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487465.8053641, current mtime: 1682487601.2670224
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73404
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33232
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73404
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33232
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73404
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33232
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73404
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33232
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487601.2670224, current mtime: 1682487843.232169
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73269
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33317
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487843.232169, current mtime: 1682487930.8545737
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33317
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.015) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33338
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33362
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33473
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33474
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33475
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33475
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33472
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33429
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33354
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33398
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33398
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33399
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33400
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33400
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33400
+"GET /static/js/schedule.js HTTP/1.1" 200 73456
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73488
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73516
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73543
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73485
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73665
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73690
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73726
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73726
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73630
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73803
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73823
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73901
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73903
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73938
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73907
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73825
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 73886
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/js/schedule.js HTTP/1.1" 200 73785
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75240
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75240
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73261
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682487930.8545737, current mtime: 1682492416.153
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73355
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682492416.153, current mtime: 1682492513.3886485
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73368
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682492513.3886485, current mtime: 1682492540.7997034
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73383
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+File C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html previous mtime: 1682492540.7997034, current mtime: 1682492553.3030572
+C:\Users\austi\OneDrive\Documents\Schedule-Conflict-Checker\ScheduleChecker\website\templates\scheduler.html notified as changed. Signal results: [(<function template_changed at 0x0000018738515800>, True), (<function translation_file_changed at 0x0000018739666A20>, None)].
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33304
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33604
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.016) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33604
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33604
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33621
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33706
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33723
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/js/schedule.js HTTP/1.1" 200 75444
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33727
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33727
+"GET /static/js/schedule.js HTTP/1.1" 200 75577
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+"GET /static/css/scheduler_style.css HTTP/1.1" 304 0
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33727
+"GET /static/js/schedule.js HTTP/1.1" 200 75578
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33727
+"GET /static/js/schedule.js HTTP/1.1" 200 75592
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492
+(0.000) SELECT "major_requirements"."Degree", "major_requirements"."Major", COUNT("major_requirements"."index") AS "count" FROM "major_requirements" GROUP BY "major_requirements"."Degree", "major_requirements"."Major" ORDER BY "major_requirements"."Degree" ASC, "major_requirements"."Major" ASC; args=(); alias=default
+(0.000) SELECT "subjects"."Subject", "subjects"."Subj" FROM "subjects" ORDER BY "subjects"."Subject" ASC, "subjects"."Subj" ASC; args=(); alias=default
+"GET / HTTP/1.1" 200 73392
+"GET /static/css/scheduler_style.css HTTP/1.1" 200 33727
+"GET /static/js/schedule.js HTTP/1.1" 200 75541
+"GET /static/images/github.png HTTP/1.1" 200 23628
+"GET /static/images/favicon-32x32.png HTTP/1.1" 200 1492

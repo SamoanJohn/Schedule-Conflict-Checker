@@ -525,15 +525,32 @@ window.addEventListener('load', function() {
       xhr.send();
     
   }
+
+
+  const changeLogButton = document.querySelector('#change-log-button');
+  changeLogButton.addEventListener('click', displayChangeLogs);
+
+
+
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
   searchbtn.removeEventListener('click', handleSearchButtonClick);
   searchbtn.addEventListener('click', handleSearchButtonClick);
 
   const clearButton = document.querySelector('.clear-course-info-button');
-  const inputFields = document.querySelectorAll('.form-group input');
+  const inputFields = document.querySelectorAll('input[type="text"]');
+  console.log(inputFields)
 
   clearButton.addEventListener('click', () => {
+    const startTimeInput = document.querySelector("#start-time");
+    const endTimeInput = document.querySelector("#end-time");
+    const daysInput = document.querySelector("#days");
+
+    startTimeInput.classList.remove("invalid-input");
+    endTimeInput.classList.remove("invalid-input");
+    daysInput.classList.remove("invalid-input");
+
+
     const subjElem = document.querySelector('.course-subj-crs-sec');
     const titleElem = document.querySelector('.course-title');
     const crnElem = document.querySelector('.course-crn');
@@ -655,7 +672,6 @@ function updateCourseElements(){
 
 
 function calculateEndTime(STime, Duration) {
-  console.log(STime);
   const STimeHours = parseInt(STime.slice(0, 2));
   const STimeMinutes = parseInt(STime.slice(2));
   const STimeInMinutes = STimeHours * 60 + STimeMinutes;
@@ -718,7 +734,6 @@ function handleDragstart(event) {
 function handleDragover(event) {
   event.preventDefault();
   const time = militaryToStandardTime(event.currentTarget.dataset.time);
-  console.log(time);
   event.currentTarget.classList.add('highlight');
   event.currentTarget.classList.add('text');
   event.currentTarget.setAttribute('data-highlight-time', time);
@@ -749,7 +764,6 @@ function handleDrop(event) {
     const timeCell = event.currentTarget;
     const dayTime = timeCell.getAttribute('data-time');
     courseBlockContainer.firstChild.setAttribute('STime', dayTime); 
-    console.log(courseBlockContainer.firstChild);
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
     courseBlockContainer.firstChild.getAttribute('Duration'))); 
     courseBlockContainer.firstChild
@@ -777,6 +791,13 @@ function openEditBoxClick() {
 }
 
 function openEditBox(courseElement) {
+  const startTimeInput = document.querySelector("#start-time");
+  const endTimeInput = document.querySelector("#end-time");
+  const daysInput = document.querySelector("#days");
+
+  startTimeInput.classList.remove("invalid-input");
+  endTimeInput.classList.remove("invalid-input");
+  daysInput.classList.remove("invalid-input");
   // get the course information from the courseElement
   const subj = courseElement.getAttribute("subj");
   const crs = courseElement.getAttribute("crs");
@@ -825,15 +846,14 @@ function openEditBox(courseElement) {
   
   const instructorInput = document.querySelector("#instructor");
   instructorInput.value = instructor;
-  const daysInput = document.querySelector("#days");
   daysInput.value = days;
 
   stimeStandard = militaryToStandardTime(stime)
   etimeStandard = militaryToStandardTime(etime)
 
-  const startTimeInput = document.querySelector("#start-time");
+
+
   startTimeInput.value = stimeStandard;
-  const endTimeInput = document.querySelector("#end-time");
   endTimeInput.value = etimeStandard;
   const buildingInput = document.querySelector("#building");
   buildingInput.value = bldg;
@@ -1000,31 +1020,78 @@ function addCourseToCalendar(course) {
   });
 };
 
+var changeLog = []
 
 function updateCourseInClassArray(course) {
-  const crn = course.getAttribute("CRN");
-  for (let i = 0; i < saved_class_array.length; i++) {
-    if (parseInt(saved_class_array[i].CRN) === parseInt(crn)) {
-      saved_class_array[i].Instructor = course.getAttribute("instructor");
-      saved_class_array[i].Days = course.getAttribute("days");
-      saved_class_array[i].STime = course.getAttribute("stime");
-      saved_class_array[i].ETime = course.getAttribute("etime");
-      saved_class_array[i].Bldg = course.getAttribute("bldg");
-      saved_class_array[i].Room = course.getAttribute("room");
+  const crn = parseInt(course.getAttribute("CRN"));
+  let courseExists = false;
+  for (let i = 0; i < changeLog.length; i++) {
+    if (parseInt(changeLog[i].oldCourse.CRN) === crn) {
+      courseExists = true;
+      changeLog[i].newCourse.Instructor = course.getAttribute("instructor");
+      changeLog[i].newCourse.Days = course.getAttribute("days");
+      changeLog[i].newCourse.STime = course.getAttribute("stime");
+      changeLog[i].newCourse.ETime = course.getAttribute("etime");
+      changeLog[i].newCourse.Bldg = course.getAttribute("bldg");
+      changeLog[i].newCourse.Room = course.getAttribute("room");
       break;
     }
   }
-  for (let i = 0; i < class_array.length; i++) {
-    if (parseInt(class_array[i].CRN) === parseInt(crn)) {
-      saved_class_array[i].Instructor = course.getAttribute("instructor");
-      saved_class_array[i].Days = course.getAttribute("days");
-      saved_class_array[i].STime = course.getAttribute("stime");
-      saved_class_array[i].ETime = course.getAttribute("etime");
-      saved_class_array[i].Bldg = course.getAttribute("bldg");
-      saved_class_array[i].Room = course.getAttribute("room");
-      break;
+  if (!courseExists) {
+    for (let i = 0; i < saved_class_array.length; i++) {
+      if (parseInt(saved_class_array[i].CRN) === parseInt(crn)) {
+        let oldCourse = JSON.parse(JSON.stringify(saved_class_array[i]));
+        saved_class_array[i].Instructor = course.getAttribute("instructor");
+        saved_class_array[i].Days = course.getAttribute("days");
+        saved_class_array[i].STime = course.getAttribute("stime");
+        saved_class_array[i].ETime = course.getAttribute("etime");
+        saved_class_array[i].Bldg = course.getAttribute("bldg");
+        saved_class_array[i].Room = course.getAttribute("room");
+        let newCourse = JSON.parse(JSON.stringify(saved_class_array[i]));
+        changeLog.push({oldCourse: oldCourse, newCourse: newCourse});
+        break;
+      }
     }
   }
+}
+
+
+function displayChangeLogs() {
+  let logText = "";
+  for (let i = 0; i < changeLog.length; i++) {
+    const oldCourse = changeLog[i].oldCourse;
+    const newCourse = changeLog[i].newCourse;
+    let changes = [];
+    if (oldCourse.Instructor !== newCourse.Instructor) {
+      changes.push(`Instructor changed from ${oldCourse.Instructor} to ${newCourse.Instructor}`);
+    }
+    if (oldCourse.Days !== newCourse.Days) {
+      changes.push(`Days changed from ${oldCourse.Days} to ${newCourse.Days}`);
+    }
+    if (oldCourse.STime !== newCourse.STime) {
+      oldSTime = militaryToStandardTime(oldCourse.STime)
+      newSTime = militaryToStandardTime(newCourse.STime)
+      changes.push(`Start time changed from ${oldSTime} to ${newSTime}`);
+    }
+    if (oldCourse.ETime !== newCourse.ETime) {
+      oldETime = militaryToStandardTime(oldCourse.ETime)
+      newETime = militaryToStandardTime(newCourse.ETime)
+      changes.push(`End time changed from ${oldETime} to ${newETime}`);
+    }
+    if (oldCourse.Bldg !== newCourse.Bldg || oldCourse.Room !== newCourse.Room) {
+      changes.push(`Location changed from ${oldCourse.Bldg} ${oldCourse.Room} to ${newCourse.Bldg} ${newCourse.Room}`);
+    }
+    if (changes.length > 0) {
+      logText += `${oldCourse.CRN} ${oldCourse.Subj} ${oldCourse.Crs} ${oldCourse.Sec} changes:\n`;
+      logText += `${changes.join("\n")}\n\n`;
+    }
+  }
+  if (logText === "") {
+    logText = "No changes recorded.";
+  }
+  const popup = window.open("", "changeLogPopup", "width=600,height=400");
+  popup.document.write(`<pre>${logText}</pre>`);
+  popup.document.close();
 }
 
 

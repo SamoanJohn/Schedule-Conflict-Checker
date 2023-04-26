@@ -1060,7 +1060,6 @@ input:focus {
 .main-container {
   display: flex;
   justify-content: flex-end;
-
 }
 
 /* DISPLAYING CONFLICTS */
@@ -1239,6 +1238,7 @@ h2 {
   margin-top: 40px;
   margin-left: 15px;
 }
+
 /* Edit Box */
 .edit-box {
   width: 100%;
@@ -1272,30 +1272,43 @@ h2 {
 
 .edit-box-content {
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group-left-column {
+  width: 40%;
+  margin-left: 5px;
+}
+
+.form-group-right-column {
+  width: 40%;
+  margin-right: 18px;
 }
 
 .form-group {
   color: var(--black-text-color);
-  display: flex;
-  align-items: center;
-  margin: 10px; 
+  margin: 7px; 
 }
 
-#edit-box-days {
-  max-width: 130px;
-}
 
 .form-group label {
-  margin-right: 10px;
-}
-
-input[type="text"] {
-  width: 80%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
   font-size: 14px;
 }
+
+#instructor, 
+#days,
+#start-time,
+#end-time,
+#building,
+#room {
+  padding: 5px;
+  border: 2px solid var(--grey-border-color);
+  border-radius: 3px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
 
 .save-course-info-button-container {
   display: flex;
@@ -1329,7 +1342,7 @@ input[type="text"] {
 .clear-course-info-button {
   margin-right: 15px;
   background-color: var(--background-color);
-  color: var(--black-text-color);
+  color: var(--submit-button-color);
   height: 25px;
   border-radius: 5px;
   border-style: solid;
@@ -1341,13 +1354,36 @@ input[type="text"] {
 
 
 .clear-course-info-button:hover {
-  background-color: var(--grey-background-color);
+  background-color: var(--lightgrey-background-color);
 }
 
 
 .invalid-input {
   outline: 2px solid red;
 }
+
+.change-log-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#change-log-button {
+  margin-top: 10px;
+  background-color: var(--submit-button-color);
+  color: var(--white-text-color);
+  height: 40px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#change-log-button:hover {
+  background-color: var(--submit-button-hover-color);
+}
+
+
 /* Style for the online course section */
 
 .online-courses {

@@ -276,6 +276,9 @@
     </div>
 
     <!-- Austin -->
+    <datalist id="subj-suggestion">
+      <option value="Format: CSCE">
+    </datalist>
     <!-- John -->
   <!-- data-Day may need to change to a M,T,W,TH format-->
   <div class="main-container"> 
@@ -288,35 +291,58 @@
           <span class="course-crn">Course CRN</span>
         </div>
         <div class="edit-box-content">
-          <div class="form-group">
+          <div class="form-group-left-column">
             <label for="instructor">Instructor:</label>
-            <input type="text" id="instructor">
-          </div>
-          <div class="form-group" id="edit-box-days">
-            <label for="days">Days:</label>
-            <input type="text" id="days">
-          </div>
-          <div class="form-group">
+            <input type="text" id="instructor" placeholder="Instructor" list="instructor-suggestion" oninput="if (this.value=='Format: Witmer F') {this.value='Witmer F'}"/>
+            <datalist id="instructor-suggestion">
+              <option value="Format: Witmer F">
+            </datalist>
+
             <label for="start-time">Start Time:</label>
-            <input type="text" id="start-time">
-            <label for="end-time">End Time:</label>
-            <input type="text" id="end-time">
-          </div>
-          <div class="form-group">
+            <input type="text" id="start-time" placeholder="Start time" list="stime-suggestion" oninput="if (this.value=='Format: 11:30AM') {this.value='11:30AM'}"/>
+            <datalist id="stime-suggestion">
+              <option value="Format: 11:30AM">
+            </datalist>
+
             <label for="building">Building:</label>
-            <input type="text" id="building">
+            <input type="text" id="building" placeholder="Building" list="building-suggestion" oninput="if (this.value=='Format: EIB') {this.value='EIB'}"/>
+            <datalist id="building-suggestion">
+              <option value="Format: EIB">
+            </datalist>
+          </div>
+
+          <div class="form-group-right-column">
+            <label for="days">Days:</label>
+            <input type="text" id="days" placeholder="Days" list="days-suggestion" oninput="if (this.value=='Format: MW') {this.value='MW'}"/>
+            <datalist id="days-suggestion">
+              <option value="Format: MW">
+            </datalist>
+
+            <label for="end-time">End Time:</label>
+            <input type="text" id="end-time" placeholder="End time" list="etime-suggestion" oninput="if (this.value=='Format: 12:45PM') {this.value='12:45PM'}"/>
+            <datalist id="etime-suggestion">
+              <option value="Format: 12:45PM">
+            </datalist>
+
             <label for="room">Room:</label>
-            <input type="text" id="room">
+            <input type="text" id="room" placeholder="Room" list="room-suggestion" oninput="if (this.value=='Format: 209') {this.value='209'}"/>
+            <datalist id="room-suggestion">
+              <option value="Format: 209">
+            </datalist>
           </div>
-          <div class="save-course-info-button-container">
-            <button class="clear-course-info-button">Clear</button>
-            <button class="save-course-info-button">Save Changes</button>
-          </div>
+        </div>
+
+        <div class="save-course-info-button-container">
+          <button class="clear-course-info-button">Clear</button>
+          <button class="save-course-info-button">Save Changes</button>
         </div>
         <div id="edit-box-loading-container" class="loading-container">
           <div class="spinner"></div>
           <div id="edit-box-text">Updating...</div>
         </div>
+      </div>
+      <div class="change-log-button-container">
+        <button id="change-log-button">Generate Change Logs</button>
       </div>
     </div>
 
@@ -874,6 +900,7 @@
     <div id="temp-conflict-container"></div>
   </div>
   <!-- displaying asychronous online courses-->
+
   <div id="toggle-online-courses-indent" class="toggle-online-courses-indent">
     <div class="toggle-online-courses-indent-text">Online / Asynchronous Courses</div>
     <span class="online-courses-dropdown-arrow"></span>
