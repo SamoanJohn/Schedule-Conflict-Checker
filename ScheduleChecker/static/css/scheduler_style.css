@@ -21,6 +21,7 @@
   --selected-item-text-color: #383f47;
   --red-border-color: rgb(201, 0, 0);
   --red-background-color: rgb(255, 105, 105);
+  --purple-background-color: #d28cd2;
 }  
 
 
@@ -47,6 +48,7 @@ body.dark-mode {
   --selected-item-text-color: #FFFFFF;
   --red-border-color: rgb(201, 0, 0);
   --red-background-color: rgb(255, 78, 78);
+  --purple-background-color: #d28cd2;
 }
 
 body {
@@ -997,6 +999,7 @@ input:focus {
 
 .course-block.active {
   background-color: var(--conflict-hover-color);
+  z-index: 999;
 }  
 
 .course-block.conflict {
@@ -1005,6 +1008,10 @@ input:focus {
 
 .course-block.clicked-conflict {
   background-color: var(--red-background-color);
+}  
+
+.course-block.clicked-and-active {
+  background-color: var(--purple-background-color);
 }  
 
 .course-text-subj {

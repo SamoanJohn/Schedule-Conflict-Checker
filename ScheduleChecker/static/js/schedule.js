@@ -530,21 +530,25 @@ window.addEventListener('load', function() {
   searchbtn.removeEventListener('click', handleSearchButtonClick);
   searchbtn.addEventListener('click', handleSearchButtonClick);
 
-
-
-
-
   const clearButton = document.querySelector('.clear-course-info-button');
   const inputFields = document.querySelectorAll('.form-group input');
 
   clearButton.addEventListener('click', () => {
-
+    const subjElem = document.querySelector('.course-subj-crs-sec');
+    const titleElem = document.querySelector('.course-title');
+    const crnElem = document.querySelector('.course-crn');
+  
+    subjElem.textContent = "Course Subj, Crs, Sec";
+    titleElem.textContent = "Course Title";
+    crnElem.textContent = "Course CRN";
+  
     inputFields.forEach((input) => {
       input.value = ''; // set input value to an empty string
     });
     const courseBlocks = document.querySelectorAll('.course-block');
     courseBlocks.forEach(courseBlock => {
       courseBlock.classList.remove('active');
+      courseBlock.classList.remove('clicked-and-active');
     });
   });
 });
@@ -597,8 +601,6 @@ function updateCourseElements(){
     
     courseElement.appendChild(courseBlockText);
     
-    console.log(courseElement)
-
     // Add course element to time cell
     const days = courseElement.getAttribute('Days');
     const time = courseElement.getAttribute('STime');
@@ -751,11 +753,11 @@ function handleDrop(event) {
     courseBlockContainer.firstChild.setAttribute('ETime', calculateEndTime(courseBlockContainer.firstChild.getAttribute('STime'), 
     courseBlockContainer.firstChild.getAttribute('Duration'))); 
     courseBlockContainer.firstChild
+    openEditBox(courseBlockContainer.firstChild);
     timeCell.appendChild(courseBlockContainer.firstChild);
+
     courseBlockToDelete.remove();
-    
     // checking for conflict after moving
-    checkForConflicts();
 
     // MW -> M = MW
     // MW -> W = MW
@@ -763,6 +765,7 @@ function handleDrop(event) {
     // ...
     // MWF -> T  -> open input box 
     // single day -> single day 
+    checkForConflicts();
   }
   event.currentTarget.classList.remove('highlight');
   event.currentTarget.classList.remove('text');
@@ -775,6 +778,21 @@ function openEditBoxClick() {
 
 function openEditBox(courseElement) {
   // get the course information from the courseElement
+  const subj = courseElement.getAttribute("subj");
+  const crs = courseElement.getAttribute("crs");
+  const sec = courseElement.getAttribute("sec");
+  const title = courseElement.getAttribute("title");
+  const crn = courseElement.getAttribute("crn");
+  // Get the HTML elements
+  const subjElem = document.querySelector('.course-subj-crs-sec');
+  const titleElem = document.querySelector('.course-title');
+  const crnElem = document.querySelector('.course-crn');
+
+  // Update the values of the HTML elements
+  subjElem.textContent = `${subj} ${crs} ${sec}`;
+  titleElem.textContent = title;
+  crnElem.textContent = "CRN: " + crn;
+
   const instructor = courseElement.getAttribute("instructor");
   const days = courseElement.getAttribute("days");
   const stime = courseElement.getAttribute("stime");
@@ -787,6 +805,10 @@ function openEditBox(courseElement) {
   const courseBlocks = document.querySelectorAll('.course-block');
   courseBlocks.forEach(courseBlock => {
     courseBlock.classList.remove('active');
+    if (courseBlock.classList.contains('clicked-and-active')) {
+      // If the class is 'clicked-and-active', update it to 'course-block clicked-conflict'
+      courseBlock.classList.remove('clicked-and-active');
+      courseBlock.classList.add('clicked-conflict');}
   });
   
   // get all CRN
@@ -794,9 +816,13 @@ function openEditBox(courseElement) {
   let courseChildren = document.querySelectorAll('.course-block[CRN="' + allCourseCRN + '"]');
   
   courseChildren.forEach(function(course) {
-    course.classList.add('active');
+    if (course.classList.contains('clicked-conflict')) {
+      course.classList.remove('clicked-conflict');
+      course.classList.add('clicked-and-active');
+    }
+    else {course.classList.add('active');}
   });
-
+  
   const instructorInput = document.querySelector("#instructor");
   instructorInput.value = instructor;
   const daysInput = document.querySelector("#days");
@@ -852,7 +878,6 @@ function openEditBox(courseElement) {
     setTimeout(function() {
       loadingContainer.style.display = 'none';;
     }, 300);
-
 
     removeCourseFromTimeSlot(courseElement);
 
@@ -1669,9 +1694,15 @@ function militaryToStandardTime(timeString) {
 
 function showConflictDetails(conflict, clickedElement) {
 
+
   document.querySelectorAll('.course-block').forEach(function(courseBlock) {
     courseBlock.classList.remove('clicked-conflict');
+    if (courseBlock.classList.contains('clicked-and-active')) {
+      courseBlock.classList.remove('clicked-and-active');
+      courseBlock.classList.add('active');
+    }
   });
+
   document.querySelectorAll('.conflict-item').forEach(function(conflictItem) {
     conflictItem.classList.remove('clicked-conflict');
   });
@@ -1741,11 +1772,22 @@ function showConflictDetails(conflict, clickedElement) {
   var crn1 = course1.CRN;
   var crn2 = course2.CRN;
   document.querySelectorAll('.course-block[CRN="' + crn1 + '"]').forEach(function(courseBlock) {
-    courseBlock.classList.add('clicked-conflict'); // add the "conflict" class
+    if (courseBlock.classList.contains('active')) {
+      courseBlock.classList.remove('active');
+      courseBlock.classList.add('clicked-and-active');
+    }
+    courseBlock.classList.add('clicked-conflict');  
   });
+
+
   document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
-    courseBlock.classList.add('clicked-conflict'); // add the "conflict" class
+    if (courseBlock.classList.contains('active')) {
+      courseBlock.classList.remove('active');
+      courseBlock.classList.add('clicked-and-active');
+    }
+    courseBlock.classList.add('clicked-conflict');  
   });
+
   clickedElement.classList.add('clicked-conflict');
 
 
