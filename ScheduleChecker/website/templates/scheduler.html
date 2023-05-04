@@ -68,7 +68,7 @@
           <select id="major-dropdown" class="dropdown" multiple>
             {% with sorted_data=degree_major_data|dictsort:'major' %}
               {% for item in sorted_data %}
-                <option>{{ item.degree }} - {{ item.major }}</option>
+                <option>{{ item.major }} ({{ item.degree }})</option>
               {% endfor %}
             {% endwith %}
           </select>       
@@ -122,9 +122,9 @@
           <div class="advanced-filtering-container">
             <div class="filtering-schedule-conflict-container ">
               <div class="conflict-filtering">
-                <h2>Conflict Filtering</h2>
+                <h2>Conflict Filtering Rules</h2>
                 <div class="individual-class-conflicts">
-                  <h3>Specify individual course conflicts</h3>
+                  <h3>Specify two courses that should never conflict</h3>
                   <div class="individual-class-conflict-selection">
                     <input type="text" id="conflict-1" name="conflict-1" placeholder="Course 1" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
                     <input type="text" id="conflict-2" name="conflict-2" placeholder="Course 2" list="course-suggestion" oninput="if (this.value=='Format: CSCE A101') {this.value='CSCE A101'}"/>
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="range-class-conflicts">
-                  <h3>Specify conflicts within course ranges</h3>
+                  <h3>Specify a range of courses that should never conflict</h3>
                   <div class="range-class-conflict-selection">
                     <input type="text" id="range-subject" name="range-subject" placeholder="Subject" list="subj-suggestion" oninput="if (this.value=='Format: CSCE') {this.value='CSCE'}"/>
                     <input type="text" id="range-start" name="range-start" placeholder="Start" list="crs-lower-suggestion" oninput="if (this.value=='Format: A300') {this.value='A300'}"/>
@@ -192,7 +192,7 @@
                     <button id="instructor-dropdown-toggle" class="dropdown-toggle">Select Instructor...</button>
                     <span class="dropdown-arrow" id="instructor-dropdown-arrow"></span>
                   </div>
-                  <div class="dropdown-wrapper">
+                  <div class="dropdown-wrapper" id="instructor-dropdown-wrapper">
                     <select id="instructor-dropdown" class="dropdown" multiple>
                     </select>
                   </div>
@@ -201,13 +201,12 @@
                 
                 <div id="bldg-room-select-header">
                   <div id="bldg-header">
-                    <h3>Select buildings to display</h3>
+                    <h3>Select buildings and rooms to display</h3>
                   </div>
                   <div id="room-header">
-                    <h3>Select rooms to display</h3>
+                    <!-- <h3>Select rooms to display</h3> -->
                   </div>
                 </div>
-
                 <div class="select-wrapper" id="bldg-room-select-wrapper">
                   <div class="dropdown-toggle-wrapper" id="bldg-dropdown-toggle-wrapper">
                     <button id="bldg-dropdown-toggle" class="dropdown-toggle">Select Building...</button>
@@ -218,14 +217,42 @@
                   </div>
                   <div class="dropdown-toggle-wrapper" id="room-dropdown-toggle-wrapper">
                     <button id="room-dropdown-toggle" class="dropdown-toggle">Select Room...</button>
-                    <span class="dropdown-arrow" id="room-dropdown-arrow"></span>
+                    <!-- <span class="dropdown-arrow" id="room-dropdown-arrow"></span> -->
                     <div class="dropdown-wrapper">
                       <select id="room-dropdown" class="dropdown" multiple></select>
                     </div>
                   </div>
                 </div>
-                <div id="selected-items"></div>              
+                <div id="selected-bldgRoom"></div>    
+                
+                
+                <div id="subj-crs-select-header">
+                  <div id="subj-header">
+                    <h3>Select subjects and courses to display</h3>
+                  </div>
+                  <div id="crs-header">
+                    <!-- <h3>Select courses to display</h3> -->
+                  </div>
+                </div>
+                <div class="select-wrapper" id="subj-crs-select-wrapper">
+                  <div class="dropdown-toggle-wrapper" id="subj-dropdown-toggle-wrapper">
+                    <button id="subj-dropdown-toggle" class="dropdown-toggle">Select Subject...</button>
+                    <span class="dropdown-arrow" id="subj-dropdown-arrow"></span>
+                    <div class="dropdown-wrapper">
+                      <select id="subj-dropdown" class="dropdown" multiple></select>
+                    </div>
+                  </div>
+                  <div class="dropdown-toggle-wrapper" id="crs-dropdown-toggle-wrapper">
+                    <button id="crs-dropdown-toggle" class="dropdown-toggle">Select Course...</button>
+                    <!-- <span class="dropdown-arrow" id="crs-dropdown-arrow"></span> -->
+                    <div class="dropdown-wrapper">
+                      <select id="crs-dropdown" class="dropdown" multiple></select>
+                    </div>
+                  </div>
+                </div>
+                <div id="selected-subjCrs"></div>   
 
+                <!-- 
                 <div class="hide-container">
                   <div class="hide-subjects">
                     <h3>Hide subjects from calendar</h3>
@@ -250,10 +277,11 @@
                     </div>
                     <div id="entered-hide-classes"></div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="apply-filter-container">
+              <button id="clear-filter">Clear</button>
               <button id="apply-filter">Filter</button>
             </div>
           </form>
@@ -900,7 +928,8 @@
     <span class="online-courses-dropdown-arrow"></span>
   </div>
   <div class="online-courses">
-    <div class="course-tiles" id="course-tiles"style="display: none;"></div>
+    <div class="course-tiles" id="course-tiles"></div>
+    <!-- <div class="course-tiles" id="course-tiles"style="display: none;"></div> -->
   </div>
 
     <!-- Footer -->

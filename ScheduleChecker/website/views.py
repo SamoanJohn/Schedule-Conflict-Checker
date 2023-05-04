@@ -52,7 +52,8 @@ def get_major_requirements(request):
     if selected_majors:
         selected_majors = selected_majors.split(',')
         for degree_major in selected_majors:
-            degree, major = degree_major.split(' - ')   # e.g., "BS - Computer Science" 
+            major, degree = degree_major.split(' (')
+            degree = degree[:-1]  # remove the closing parenthesis
             major_requirements = set()   # used to delete duplicate courses
             for requirement in MajorRequirements.objects.filter(degree=degree.strip(), major=major.strip()):
                 major_requirements.add(requirement.course)

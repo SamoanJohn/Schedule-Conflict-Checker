@@ -46,14 +46,14 @@ $(document).ready(function() {
   $('#major-dropdown-toggle').off('click').click(function() {
     event.stopPropagation();
     $('#major-dropdown').toggle();
-    // $('#major-dropdown').focus(); // set focus to the input field
+    $('#major-dropdown').focus(); // set focus to the input field
   });
 
   $('#major-dropdown').off('change').change(function() {
     $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
     var selectedMajor = $(this).val();
     if (selectedMajor[0] !== '') {
-      if (/^[^-]+-\s*[^-]+$/.test(selectedMajor)) { // Check if the option matches the format "?? - ????????"
+      if (/^[^-]+\s*\([^)]+\)$/.test(selectedMajor)) { // Check if the option matches the format "????????? (????)"
         var majors = selectedItems.majors;
         if (!majors.includes(selectedMajor[0])) {
           majors.push(selectedMajor[0]);
@@ -66,35 +66,35 @@ $(document).ready(function() {
     }
   });
 
-  //$major_select.on('keydown', function(e) {
-  //   console.log("key pressed")
-  //   var input = String.fromCharCode(e.keyCode);
-  //   var index = -1;
-  //   var minDistance = Infinity;
+  // working on autoscroll
+  $major_select.on('keydown', function(e) {
+    var input = String.fromCharCode(e.keyCode);
+    var index = -1;
+    var minDistance = Infinity;
 
-  //   // Check if the arrow keys were pressed and prevent the default action
-  //   if (e.keyCode == 38 || e.keyCode == 40) {
-  //     e.preventDefault();
-  //     return;
-  //   }
+    // Check if the arrow keys were pressed and prevent the default action
+    if (e.keyCode == 38 || e.keyCode == 40) {
+      e.preventDefault();
+      return;
+    }
 
-  //   // Find the closest option matching the user's input
-  //   $major_options.each(function(i) {
-  //     var optionText = $(this).text().split(' - ')[1].trim().toUpperCase();
-  //     var distance = optionText.indexOf(input.toUpperCase());
-  //     if (distance >= 0 && distance < minDistance) {
-  //       index = i;
-  //       minDistance = distance;
-  //     }
-  //   });
+    // Find the closest option matching the user's input
+    $major_options.each(function(i) {
+      var optionText = $(this).text()
+      var distance = optionText.indexOf(input.toUpperCase());
+      if (distance >= 0 && distance < minDistance) {
+        index = i;
+        minDistance = distance;
+      }
+    });
 
-  //   // Scroll to the closest option
-  //   if (index >= 0) {
-  //     $major_select.prop('selectedIndex', index);
-  //     var topOffset = $major_select.find('option:selected').offset().top - $major_select.offset().top;
-  //     $major_select.scrollTop(topOffset);
-  //   }
-  // });
+    // Scroll to the closest option
+    if (index >= 0) {
+      $major_select.prop('selectedIndex', index);
+      var topOffset = $major_select.find('option:selected').offset().top - $major_select.offset().top;
+      $major_select.scrollTop(topOffset);
+    }
+  });
 
   $('#subject-dropdown-toggle').off('click').click(function() {
     event.stopPropagation();
@@ -131,6 +131,8 @@ $(document).ready(function() {
       $('#instructor-dropdown').hide();
       $('#bldg-dropdown').hide();
       $('#room-dropdown').hide();
+      $('#subj-dropdown').hide();
+      $('#crs-dropdown').hide();
     }
   });
 
@@ -265,13 +267,13 @@ function populateBuildingsDropdown() {
               var bldgRooms = filterVariables.bldgRoom;
               if (!bldgRooms.includes(selectedItemText)) {
                 var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'bldgRoom\', \'#room-dropdown\')"></span><span>' + selectedItemText + '</span></div>');
-                $('#selected-items').append(selectedItem);
+                $('#selected-bldgRoom').append(selectedItem);
                 filterVariables.bldgRoom.push(selectedItemText);
               }
             }
             else if (selectedRoom[0] === 'Select All') {
               selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'bldgRoom\', \'#room-dropdown\')"></span><span>' + selectedBldg[0] + '</span></div>');
-              $('#selected-items').append(selectedItem);
+              $('#selected-bldgRoom').append(selectedItem);
               filterVariables.bldgRoom.push(selectedBldg[0]);
             }
             $(this).val('');
@@ -284,6 +286,96 @@ function populateBuildingsDropdown() {
   });
 }
 
+
+
+// Define a function to populate the buildings dropdown and register the event handlers
+function populateCoursesAndSubjectDropdown() {
+  // Populating the buildings dropdown with unique building names
+  var subjects = [];
+  for (var i = 0; i < saved_class_array.length; i++) {
+    var subject = saved_class_array[i].Subj;
+    if (!subjects.includes(subject)) {
+      subjects.push(subject);
+    }
+  }
+  console.log(subjects)
+
+  subjects.sort(); // sort the building names alphabetically
+
+  $('#subj-dropdown').empty();
+
+  for (var i = 0; i < subjects.length; i++) {
+    var option = $('<option></option>').text(subjects[i]);
+    $('#subj-dropdown').append(option);
+  }
+
+  // Adding click event to toggle the dropdown
+  $('#subj-dropdown-toggle').off('click').click(function(event) {
+    event.stopPropagation();
+    $('#subj-dropdown').toggle();
+  });
+
+  $('#subj-dropdown').off('change').change(function() {
+    $('#crs-dropdown').hide();
+    $('#subj-dropdown option').css('background-color', '').css('color', '');
+    $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
+    var selectedSubj = $(this).val();
+    if (selectedSubj[0] !== '') {
+      if (/^\S+$/.test(selectedSubj[0])) {
+        // Clearing the options in the room dropdown
+        $('#crs-dropdown').empty();
+        var selectAllOption = $('<option></option>').attr('value', 'Select All').addClass('bold').text('Select All');
+        $('#crs-dropdown').append(selectAllOption);
+        // Filtering the class_array to find unique rooms for the selected building
+        // Filtering the class_array to find unique rooms for the selected building
+        var courses = [];
+        var selectedSubjCrs = saved_class_array.filter(function(c) {
+          return c.Subj === selectedSubj[0];
+        }).forEach(function(c) {
+          if (!courses.includes(c.Crs.toString())) {
+            courses.push(c.Crs.toString());
+          }
+        });
+
+        courses.sort(); // Sort the rooms array
+        // Add options to #room-dropdown
+        for (var i = 0; i < courses.length; i++) {
+          var option = $('<option></option>').text(courses[i]);
+          $('#crs-dropdown').append(option);
+        }
+
+
+        $('#crs-dropdown').toggle(); // Open room dropdown
+
+        // Adding change event to add selected item to selected items list
+        $('#crs-dropdown').off('change').on('change', function() {
+          $(this).find('option:selected').css('background-color', '#007bff').css('color', 'white');
+          var selectedCrs = $(this).val();
+
+          if (selectedCrs[0] !== '') {
+            if (/^\S+$/.test(selectedCrs[0])) {
+              var selectedItemText = selectedSubj[0] + ' ' + selectedCrs[0];
+              var subjectCourses = filterVariables.coursesAndSubjects;
+              if (!subjectCourses.includes(selectedItemText)) {
+                var selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'coursesAndSubjects\', \'#crs-dropdown\')"></span><span>' + selectedItemText + '</span></div>');
+                $('#selected-subjCrs').append(selectedItem);
+                filterVariables.coursesAndSubjects.push(selectedItemText);
+              }
+            }
+            else if (selectedCrs[0] === 'Select All') {
+              selectedItem = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'coursesAndSubjects\', \'#crs-dropdown\')"></span><span>' + selectedSubj[0] + '</span></div>');
+              $('#selected-subjCrs').append(selectedItem);
+              filterVariables.coursesAndSubjects.push(selectedSubj[0]);
+            }
+            $(this).val('');
+          }
+        });
+        $(this).val('');
+      }
+      $(this).val('');
+    }
+  });
+}
 
 function handleFileSelect(event) {
   // Reset file input element
@@ -373,7 +465,6 @@ function handleFileSelect(event) {
       const [days, stime, etime, bldg, room] = narrowDown(row);
       return { ...row, Days: days.toString(), STime: parse_time(stime).toString(), ETime: parse_time(etime).toString(), Bldg: bldg.toString(), Room: room.toString() };
     });
-    console.log(class_array);
     
     saved_class_array = [...class_array];
     newData = null;
@@ -381,6 +472,7 @@ function handleFileSelect(event) {
     initializeFilterVariables();
     populateInstructorsDropdown();
     populateBuildingsDropdown();
+    populateCoursesAndSubjectDropdown();
     updateCourseElements();
     conflictFunction();
   };
@@ -528,12 +620,11 @@ window.addEventListener('load', function() {
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
               class_array = JSON.parse(classes.data);
-              // original_class_array = JSON.parse(classes.data.original_class_data_json);
-              // console.log(original_class_array)
               saved_class_array = [...class_array];
               initializeFilterVariables();
               populateInstructorsDropdown();
               populateBuildingsDropdown();
+              populateCoursesAndSubjectDropdown();
               updateCourseElements();
               conflictFunction();
           }
@@ -544,11 +635,8 @@ window.addEventListener('load', function() {
     
   }
 
-
   const changeLogButton = document.querySelector('#change-log-button');
   changeLogButton.addEventListener('click', displayChangeLogs);
-
-
 
   // add a click event listener to the button
   var searchbtn = document.getElementById("search-btn");
@@ -557,7 +645,6 @@ window.addEventListener('load', function() {
 
   const clearButton = document.querySelector('.clear-course-info-button');
   const inputFields = document.querySelectorAll('input[type="text"]');
-  console.log(inputFields)
 
   clearButton.addEventListener('click', () => {
     const startTimeInput = document.querySelector("#start-time");
@@ -583,7 +670,10 @@ window.addEventListener('load', function() {
     const courseBlocks = document.querySelectorAll('.course-block');
     courseBlocks.forEach(courseBlock => {
       courseBlock.classList.remove('active');
-      courseBlock.classList.remove('clicked-and-active');
+      if (courseBlock.classList.contains('clicked-and-active')) {
+        courseBlock.classList.remove('clicked-and-active');
+        courseBlock.classList.add('clicked-conflict');
+      }
     });
   });
 });
@@ -739,8 +829,6 @@ function roundTo15(time) {
 let courseBlockToDelete = null;
 
 function handleDragstart(event) {
-  console.log("Drag start");
-
   const courseBlock = event.target;
   openEditBox(courseBlock);
 
@@ -765,13 +853,14 @@ function handleDragLeave(event) {
 }
 
 function handleDrop(event) {
-
-  document.querySelectorAll('.course-block').forEach(function(courseBlock) {
-    courseBlock.classList.remove('clicked-conflict');
+  const courseBlocks = document.querySelectorAll('.course-block');
+  courseBlocks.forEach(courseBlock => {
+    if (courseBlock.classList.contains('clicked-conflict')) {
+      courseBlock.classList.remove('clicked-conflict');
+    }
     if (courseBlock.classList.contains('clicked-and-active')) {
       courseBlock.classList.remove('clicked-and-active');
-      courseBlock.classList.add('active');
-    }
+      courseBlock.classList.add('active');}
   });
 
   event.preventDefault();
@@ -782,7 +871,6 @@ function handleDrop(event) {
     tempCourseDiv.innerHTML = data;
     const courseCRN = tempCourseDiv.firstChild.getAttribute("CRN");
    
-
     const courseBlockContainer = document.createElement('div');
     courseBlockContainer.innerHTML = data;
     courseBlockContainer.firstChild.addEventListener('dragstart', handleDragstart);
@@ -847,6 +935,7 @@ function openEditBoxClick() {
 }
 
 function openEditBox(courseElement) {
+  // Flash the border red
   const startTimeInput = document.querySelector("#start-time");
   const endTimeInput = document.querySelector("#end-time");
   const daysInput = document.querySelector("#days");
@@ -877,13 +966,10 @@ function openEditBox(courseElement) {
   const bldg = courseElement.getAttribute("bldg");
   const room = courseElement.getAttribute("room");
 
-  // populate the course information in the edit box
-  // Get the previous course block with --conflict-hover-color
   const courseBlocks = document.querySelectorAll('.course-block');
   courseBlocks.forEach(courseBlock => {
     courseBlock.classList.remove('active');
     if (courseBlock.classList.contains('clicked-and-active')) {
-      // If the class is 'clicked-and-active', update it to 'course-block clicked-conflict'
       courseBlock.classList.remove('clicked-and-active');
       courseBlock.classList.add('clicked-conflict');}
   });
@@ -937,8 +1023,7 @@ function openEditBox(courseElement) {
     startTimeInput.value = fixTimeFormat(startTimeInput.value)
     endTimeInput.value = fixTimeFormat(endTimeInput.value)
     // check if the time inputs are in the correct format
-    console.log(startTimeInput.value)
-    console.log(endTimeInput.value)
+
 
     if (!validateTimeInput(startTimeInput.value)) {
       startTimeInput.classList.add("invalid-input");
@@ -993,6 +1078,13 @@ function openEditBox(courseElement) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Remove the flash-border class after the animation ends
+  var editBox = document.querySelector('.edit-box');
+  editBox.addEventListener("animationend", function () {
+  editBox.classList.remove("flash-border");
+  });
+});
 
 function removeCourseFromTimeSlot(course) {
   const crn = course.getAttribute('CRN');
@@ -1120,11 +1212,17 @@ function addCourseToCalendar(course) {
       duplicateCourseElement.removeEventListener("click", openEditBoxClick);
       duplicateCourseElement.addEventListener("click", openEditBoxClick);
 
+      duplicateCourseElement.classList.remove('clicked-conflict');
+      if (duplicateCourseElement.classList.contains('clicked-and-active')) {
+        duplicateCourseElement.classList.remove('clicked-and-active');
+        duplicateCourseElement.classList.add('active');
+      }
+
       function openEditBoxClick() {
         openEditBox(duplicateCourseElement);
       }
     } else {
-      console.warn(`Element not found for day ${day} and time ${time}`);
+      ole.warn(`Element not found for day ${day} and time ${time}`);
     }
   });
 };
@@ -1227,8 +1325,7 @@ var filterVariables = {
   rangeCourseConflicts: [],
   ignoreCourses: [],
   ignoreSubjects: [],
-  hideCourses: [],
-  hideSubjects: [],
+  coursesAndSubjects: [],
   corequisiteConflicts: [],
   instructors: [],
   bldgRoom: []
@@ -1318,7 +1415,7 @@ $(document).ready(function() {
       course2 = sortedCourses[1];
       if (!filterVariables.individualCourseConflicts.some(tuple => tuple[0] === course1 && tuple[1] === course2)) {
         filterVariables.individualCourseConflicts.push([course1, course2]);
-        var enteredIndividualCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'individualCourseConflicts\')"></span><span>' + course1 + " " + course2 + '</span></div>');
+        var enteredIndividualCourseConflict = $('<div class="selected-item"><span class="remove-item" onclick="removeFilterVariable(this, \'individualCourseConflicts\')"></span><span>' + course1 + " & " + course2 + '</span></div>');
         $('#entered-individual-course-conflict').append(enteredIndividualCourseConflict);
         inputBox1.val('');
         inputBox2.val('');
@@ -1328,6 +1425,7 @@ $(document).ready(function() {
         alert("Check that course format is correct: \"CSCE A101\"");
         return;
     }
+    handleFilterButtonClick();
   });
 
   $('#add-range-class-conflict').off('click').click(function() {
@@ -1371,6 +1469,7 @@ $(document).ready(function() {
         alert("Check that range format is correct: \"CSCE A101 - A201\"");
         return;
     }
+    handleFilterButtonClick();
   });
 
   $('#add-hide-class').off('click').click(function() {
@@ -1397,6 +1496,7 @@ $(document).ready(function() {
         alert("Check that course format is correct. \"CSCE A101\"");
         return;
     }
+    handleFilterButtonClick();
   });
 
   $('#add-hide-subject').off('click').click(function() {
@@ -1418,6 +1518,7 @@ $(document).ready(function() {
         alert("Check that subject format is correct. e.g., \"CSCE\"");
         return;
     }
+    handleFilterButtonClick();
   });
 
   $('#add-ignore-class').off('click').click(function() {
@@ -1444,6 +1545,7 @@ $(document).ready(function() {
         alert("Check that course format is correct. \"CSCE A101\"");
         return;
     }
+    handleFilterButtonClick();
   });
 
   $('#add-ignore-subject').off('click').click(function() {
@@ -1465,6 +1567,7 @@ $(document).ready(function() {
         alert("Check that subject format is correct. e.g., \"CSCE\"");
         return;
     }
+    handleFilterButtonClick();
   });
 });
 
@@ -1628,7 +1731,7 @@ function checkForConflicts() {
             const course1 = courses_in_slot[i];
             const course2 = courses_in_slot[j];
             // Check if the instructors are the same
-            if (course1.Instructor === course2.Instructor) {
+            if (course1.Instructor === course2.Instructor && course1.Instructor !== "Staff U") {
               let message = `have the same instructor: ${course1.Instructor}`;
               addConflict(course1, course2, message);
               continue;
@@ -1697,20 +1800,43 @@ function conflictFunction() {
   checkForConflicts();
 }
 
-function removeHiddenCourses() {
-  // Remove hidden courses from classArray
-  class_array = class_array.filter((course) => {
-    return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
-  });
-  // Remove hidden courses from course_hash_table
+// function removeHiddenCourses() {
+//   // Remove hidden courses from classArray
+
+//   class_array = class_array.filter((course) => {
+//     return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
+//   });
+//   // Remove hidden courses from course_hash_table
+//   for (let day in course_hash_table) {
+//     for (let timeSlot in course_hash_table[day]) {
+//       course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+//         return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
+//       });
+//     }
+//   }
+// }
+
+function displayCoursesAndSubjects() {
+  // Display only hidden courses from classArray if CoursesAndSubjects is not empty; otherwise, display all courses
+  if (filterVariables.coursesAndSubjects.length > 0) {
+    class_array = class_array.filter((course) => {
+      return (filterVariables.coursesAndSubjects.includes(course.Subj) || filterVariables.coursesAndSubjects.includes(course.Subj + ' ' + course.Crs));
+    });
+  }
+  
+  // Display only hidden courses from course_hash_table if CoursesAndSubjects is not empty; otherwise, display all courses
   for (let day in course_hash_table) {
     for (let timeSlot in course_hash_table[day]) {
-      course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
-        return !(filterVariables.hideCourses.includes(course.Subj + ' ' + course.Crs));
-      });
+      if (filterVariables.coursesAndSubjects.length > 0) {
+        course_hash_table[day][timeSlot] = course_hash_table[day][timeSlot].filter((course) => {
+          return (filterVariables.coursesAndSubjects.includes(course.Subj) || filterVariables.coursesAndSubjects.includes(course.Subj + ' ' + course.Crs));
+        });
+      }
     }
   }
 }
+
+
 
 function removeHiddenSubjects() {
   // Remove hidden subjects from classArray
@@ -1792,39 +1918,51 @@ function displayBldgRoom() {
 
 window.addEventListener('load', function() {
   // define a function to handle the button press
-  function handleFilterButtonClick() {
-    const loadingContainer = document.getElementById('loading-filtering-container');
-    loadingContainer.style.display = 'flex';
-    course_hash_table = [];
-    conflicts = [];
-    createHashTable();
-    for (let i = 0; i < saved_class_array.length; i++) {
-      addToHashTable(saved_class_array[i]);
-    }
-
-    // course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
-    class_array = [...saved_class_array];
-    
-    removeHiddenCourses();
-    removeHiddenSubjects();
-    removeIgnoreCourses();
-    removeIgnoreSubjects();
-    displayInstructors();
-    displayBldgRoom();
-    updateCourseElements();
-    checkForConflicts();
-
-    setTimeout(function() {
-      loadingContainer.style.display = 'none';;
-    }, 300);
-
-  }
 
   // add a click event listener to the button
   var filterbtn = document.getElementById("apply-filter");
   filterbtn.removeEventListener('click', handleFilterButtonClick);
   filterbtn.addEventListener('click', handleFilterButtonClick);
+
+  var clearbtn = document.getElementById("clear-filter");
+  clearbtn.removeEventListener('click', handleClearButtonClick);
+  clearbtn.addEventListener('click', handleClearButtonClick);
+
+
 });
+
+function handleClearButtonClick() {
+  initializeFilterVariables();
+  handleFilterButtonClick();
+}
+
+
+function handleFilterButtonClick() {
+  const loadingContainer = document.getElementById('loading-filtering-container');
+  loadingContainer.style.display = 'flex';
+  course_hash_table = [];
+  conflicts = [];
+  createHashTable();
+  for (let i = 0; i < saved_class_array.length; i++) {
+    addToHashTable(saved_class_array[i]);
+  }
+
+  // course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
+  class_array = [...saved_class_array];
+  
+  displayCoursesAndSubjects();
+  removeIgnoreCourses();
+  removeIgnoreSubjects();
+  displayInstructors();
+  displayBldgRoom();
+  updateCourseElements();
+  checkForConflicts();
+
+  setTimeout(function() {
+    loadingContainer.style.display = 'none';;
+  }, 300);
+
+}
 
 function updateConflicts() {
   // course_hash_table = JSON.parse(JSON.stringify(saved_course_hash_table));
@@ -1936,6 +2074,7 @@ function showConflictDetails(conflict, clickedElement) {
   '<p>' + 'Days: ' + course1.Days + '</p>' +
   '<p>' + militaryToStandardTime(course1.STime) + '-' + militaryToStandardTime(course1.ETime) + '</p>' +
   '<p>' + 'Location: ' + course1.Bldg + ' ' + course1.Room + '</p>' +
+  '<div class="invisible-button" id="invisible-button-left" onclick="onClassClick(\'' + course1.CRN + '\')"></div>' +
   '</div>' +
   '<div class="col">' +
   '<h4>' + course2.Subj + ' ' + course2.Crs + ' ' + course2.Sec + '</h4>' +
@@ -1945,6 +2084,7 @@ function showConflictDetails(conflict, clickedElement) {
   '<p>' + 'Days: ' + course2.Days + '</p>' +
   '<p>' + militaryToStandardTime(course2.STime) + '-' + militaryToStandardTime(course2.ETime) + '</p>' +
   '<p>' + 'Location: ' + course2.Bldg + ' ' + course2.Room + '</p>' +
+  '<div class="invisible-button" id="invisible-button-right" onclick="onClassClick(\'' + course2.CRN + '\')"></div>' +
   '</div>' +
   '</div>' +
   '<div class="conflict-message">' + 'These courses ' + conflictMessage + '</div>';
@@ -1991,7 +2131,6 @@ function showConflictDetails(conflict, clickedElement) {
     courseBlock.classList.add('clicked-conflict');  
   });
 
-
   document.querySelectorAll('.course-block[CRN="' + crn2 + '"]').forEach(function(courseBlock) {
     if (courseBlock.classList.contains('active')) {
       courseBlock.classList.remove('active');
@@ -2012,6 +2151,13 @@ function showConflictDetails(conflict, clickedElement) {
   }, 10);
 }
 
+function onClassClick(crn) {
+  // do something with the CRN
+  var editBox = document.querySelector('.edit-box');
+  editBox.classList.add("flash-border");
+  let course = document.querySelector('.course-block[CRN="' + crn + '"]');
+  openEditBox(course)
+}
 
 // function to close temporary conflict box
 function closeConflictDetails(event) {
@@ -2021,8 +2167,6 @@ function closeConflictDetails(event) {
     document.removeEventListener("click", closeConflictDetails);
   }
 }
-
-
 
 function displayOnlineCourses() {
   // Create course tiles for each online course and append them to the "course-tiles" container
@@ -2078,9 +2222,6 @@ window.addEventListener('load', function() {
   // Remove the click event listener (if any) and add it back again
   toggleOnlineCoursesButton.removeEventListener('click', toggleOnlineCourses);
   toggleOnlineCoursesButton.addEventListener('click', toggleOnlineCourses);
-
-
-
 
   var termsLink = document.querySelector('.terms-link a');
   var termsBox = document.querySelector('.terms-box');
