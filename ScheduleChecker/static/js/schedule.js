@@ -134,7 +134,6 @@ $(document).ready(function() {
     }
   });
 
-
   $('.dropdown-btn').off('click').click(function() {
     var dropdown = $(this).next('.dropdown-wrapper');
     $('.dropdown-wrapper').not(dropdown).hide(); // hide all other dropdowns
@@ -142,8 +141,6 @@ $(document).ready(function() {
   });
 
 });
-
-
 
 // Define a function to populate the instructors dropdown and register the event handlers
 function populateInstructorsDropdown() {
@@ -218,7 +215,6 @@ function populateBuildingsDropdown() {
     var option = $('<option></option>').text(buildings[i]);
     $('#bldg-dropdown').append(option);
   }
-
 
   // Adding click event to toggle the dropdown
   $('#bldg-dropdown-toggle').off('click').click(function(event) {
@@ -310,6 +306,7 @@ function handleFileSelect(event) {
   saved_course_hash_table = {};
   online_courses = [];
   unscheduled_courses = [];
+  changeLog = []
   saved_data = false;
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -345,13 +342,6 @@ function handleFileSelect(event) {
       alert(`The Excel file was not recognized. Please download a new file from ${downloadLink}.`);
       return; // Stop the function
     }
-    // for (var i = 1; i < contents.length; i++) {
-    //   var obj = {};
-    //   for (var j = 0; j < contents[0].length; j++) {
-    //     obj[contents[0][j]] = contents[i][j];
-    //   }
-    //   original_class_array.push(obj);
-    // }
     
     var newData = contents.slice(1).map(row => selectedColumns.reduce((acc, col, index) => {
       if (col === 'Subj Crs Sec') {
@@ -453,6 +443,33 @@ function parse_time(time_str) {
 }
 
 window.addEventListener('load', function() {
+  const semesterSelect = document.getElementById("semester-select");
+  const currentYear = new Date().getFullYear();
+  // Generate options for the select element
+  for (let year = currentYear; year <= currentYear + 1; year++) {
+    for (let i = 1; i <= 3; i++) {
+      const term = getTerm(i);
+      const paddedTerm = i <= 3 ? '0' + i : i;
+      const value = `${year}${paddedTerm}`;
+      const label = `${term} ${year}`;
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      semesterSelect.appendChild(option);
+    }
+  }
+
+  // Returns the term string based on a number (1, 2, or 3)
+  function getTerm(num) {
+    if (num === 1) {
+      return "Spring";
+    } else if (num === 2) {
+      return "Summer";
+    } else {
+      return "Fall";
+    }
+  }
+
   // define a function to handle the button press
   function handleSearchButtonClick() {
       var selectedTerm = $('#semester-select').val();
@@ -506,6 +523,7 @@ window.addEventListener('load', function() {
               saved_course_hash_table = {};
               online_courses = [];
               unscheduled_courses = [];
+              changeLog = []
               saved_data = false;
               const classes = JSON.parse(xhr.responseText);
               loadingContainer.style.display = 'none';
@@ -755,7 +773,7 @@ function handleDrop(event) {
       courseBlock.classList.add('active');
     }
   });
-  
+
   event.preventDefault();
   const data = event.dataTransfer.getData('text/plain');
 
@@ -891,9 +909,9 @@ function openEditBox(courseElement) {
 
   startTimeInput.value = stimeStandard;
   endTimeInput.value = etimeStandard;
-  const buildingInput = document.querySelector("#building");
+  const buildingInput = document.querySelector("#building")
   buildingInput.value = bldg;
-  const roomInput = document.querySelector("#room");
+  const roomInput = document.querySelector("#room")
   roomInput.value = room;
   
   const saveChangesButton = document.querySelector(".save-course-info-button");
@@ -915,7 +933,13 @@ function openEditBox(courseElement) {
     startTimeInput.classList.remove("invalid-input");
     endTimeInput.classList.remove("invalid-input");
     let exitBeforeSaving = false;
+
+    startTimeInput.value = fixTimeFormat(startTimeInput.value)
+    endTimeInput.value = fixTimeFormat(endTimeInput.value)
     // check if the time inputs are in the correct format
+    console.log(startTimeInput.value)
+    console.log(endTimeInput.value)
+
     if (!validateTimeInput(startTimeInput.value)) {
       startTimeInput.classList.add("invalid-input");
       alert("Invalid start time format. Please enter time in HH:MM AM/PM format.");
@@ -950,7 +974,8 @@ function openEditBox(courseElement) {
     startTimeInput.value = startTimeInput.value.toUpperCase();
     endTimeInput.value = endTimeInput.value.toUpperCase();
     daysInput.value = daysInput.value.toUpperCase();
-
+    buildingInput.value = buildingInput.value.toUpperCase();
+    roomInput.value = roomInput.value.toUpperCase();    
 
     startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
     endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
@@ -1010,6 +1035,45 @@ function validateTimeInput(input) {
   const timeRegex = /^(1[0-2]|[1-9]):([0-5][0-9])([AaPp][Mm])$/;
   return timeRegex.test(input);
 }
+
+
+function fixTimeFormat(timeStr) {
+
+  timeStr = timeStr.replace(/\s+/g, '');
+  // regular expression to match valid time strings
+  const validTimeFormat = /^([0-9]|0[1-9]|1[0-2]):[0-5][0-9][a|p|A|P][m|M]$/;
+  
+  // if the input matches the valid time format, return it as is
+  if (validTimeFormat.test(timeStr)) {
+    return timeStr;
+  }
+  
+  // otherwise, try to fix the time format
+  const timeFormatRegex = /^(\d{1,2})(\d{2})\s*([a|p|A|P][m|M])?$/i;
+  const match = timeStr.match(timeFormatRegex);
+  if (match) {
+    let hours = parseInt(match[1]);
+    const minutes = match[2];
+    const period = match[3] ? match[3].toUpperCase() : '';
+    
+    // adjust hours for PM times
+    if (period === 'PM' && hours < 12) {
+      hours += 12;
+    }
+    // handle special case for 12AM
+    else if (period === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    
+    // format the time as h:mmAM/PM
+    const formattedHours = hours === 0 ? '12' : hours.toString();
+    return `${formattedHours}:${minutes}${period}`;
+  }
+  
+  // if the input is not valid and cannot be fixed, return null
+  return null;
+}
+
 
 function validateDaysInput(input) {
   const daysRegex = /^(M|T|W|R|F|S|U)+$/i;
@@ -1231,10 +1295,19 @@ $(document).ready(function() {
     var inputBox1 = $('#conflict-1');
     var inputBox2 = $('#conflict-2');
 
-    var course1 = inputBox1.val();
-    var course2 = inputBox2.val();
+    var course1 = inputBox1.val().toUpperCase().trim();
+    var course2 = inputBox2.val().toUpperCase().trim();
+  
+    // Add an "A" if it is not already present in the course code
+    if (!/^[A-Z]{2,4}\s[A-Z]\d{3}(\s+L)?$/.test(course1)) {
+      course1 = course1.replace(/^([A-Z]{2,4})\s*(\d{3})/, '$1 A$2');
+    }
+    if (!/^[A-Z]{2,4}\s[A-Z]\d{3}(\s+L)?$/.test(course2)) {
+      course2 = course2.replace(/^([A-Z]{2,4})\s*(\d{3})/, '$1 A$2');
+    }
+    
 
-    if ((course1.length >= 5 && course1.length <= 12) && (course2.length >= 5 && course2.length <= 12)) {
+    if ((course1.length >= 7 && course1.length <= 11) && (course2.length >= 7 && course2.length <= 11)) {
       var course_conflicts = filterVariables.individualCourseConflicts;
 
       // Sort the values alphabetically
@@ -1263,9 +1336,17 @@ $(document).ready(function() {
     var inputBox2 = $('#range-start');
     var inputBox3 = $('#range-end');
 
-    var inputSubject = inputBox1.val();
-    var inputRangeStart = inputBox2.val();
-    var inputRangeEnd = inputBox3.val();
+    var inputSubject = inputBox1.val().toUpperCase().trim();
+    var inputRangeStart = inputBox2.val().toUpperCase().trim();
+    var inputRangeEnd = inputBox3.val().toUpperCase().trim();
+
+    var pattern = /^A\d{3}$/;
+    if (!pattern.test(inputRangeStart)) {
+      inputRangeStart = "A" + inputRangeStart.replace(/\D/g, "").substr(0, 3);
+    }
+    if (!pattern.test(inputRangeEnd)) {
+      inputRangeEnd = "A" + inputRangeEnd.replace(/\D/g, "").substr(0, 3);
+    }
 
     if ((inputSubject.length >= 2 && inputSubject.length <= 4) &&
         (inputRangeStart.length >= 2 && inputRangeStart.length <= 4) &&
@@ -1296,9 +1377,14 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#hidden-class');
 
-    var course = inputBox1.val();
+    var course = inputBox1.val().toUpperCase().trim();
 
-    if (course.length >= 5 && course.length <= 12) {
+    // Add an "A" if it is not already present in the course code
+    if (!/^[A-Z]{2,4}\s[A-Z]\d{3}(\s+L)?$/.test(course)) {
+      course = course.replace(/^([A-Z]{2,4})\s*(\d{3})/, '$1 A$2');
+    }
+    
+    if (course.length >= 7 && course.length <= 11) {
         var hidden_courses = filterVariables.hideCourses;
         if (!hidden_courses.includes(course)) {
             filterVariables.hideCourses.push(course);
@@ -1317,7 +1403,7 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#hidden-subject');
 
-    var subject = inputBox1.val();
+    var subject = inputBox1.val().toUpperCase().trim();
 
     if (subject.length >= 2 && subject.length <= 4) {
         var hidden_subjects = filterVariables.hideSubjects;
@@ -1338,7 +1424,12 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#ignore-class');
 
-    var course = inputBox1.val();
+    var course = inputBox1.val().toUpperCase().trim();
+
+    // Add an "A" if it is not already present in the course code
+    if (!/^[A-Z]{2,4}\s[A-Z]\d{3}(\s+L)?$/.test(course)) {
+      course = course.replace(/^([A-Z]{2,4})\s*(\d{3})/, '$1 A$2');
+    }
 
     if (course.length >= 5 && course.length <= 12) {
         var ignore_courses = filterVariables.ignoreCourses;
@@ -1359,7 +1450,7 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission behavior
     var inputBox1 = $('#ignore-subject');
 
-    var subject = inputBox1.val();
+    var subject = inputBox1.val().toUpperCase().trim();
 
     if (subject.length >= 2 && subject.length <= 4) {
         var ignore_subjects = filterVariables.ignoreSubjects;
@@ -1987,4 +2078,25 @@ window.addEventListener('load', function() {
   // Remove the click event listener (if any) and add it back again
   toggleOnlineCoursesButton.removeEventListener('click', toggleOnlineCourses);
   toggleOnlineCoursesButton.addEventListener('click', toggleOnlineCourses);
+
+
+
+
+  var termsLink = document.querySelector('.terms-link a');
+  var termsBox = document.querySelector('.terms-box');
+  var termsClose = document.querySelector('.terms-box .terms-close button');
+
+  termsLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    termsBox.style.display = 'block';
+  });
+
+  termsClose.addEventListener('click', function(event) {
+    event.preventDefault();
+    termsBox.style.display = 'none';
+  });
+
+
 });
+
+

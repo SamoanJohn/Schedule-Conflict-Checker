@@ -27,7 +27,7 @@
 
 /* Dark mode styles */
 body.dark-mode {
-  --background-color: #1a1a1a; /* dark mode background color */
+  --background-color: #272727; /* dark mode background color */
   --black-text-color: #FFFFFF; /* default dark mode text color */
   --grey-text-color: #858585;
   --white-text-color: #FFFFFF; /* default button text color */
@@ -885,11 +885,11 @@ input:focus {
   width: 60%;
   position: relative;
   margin-top: 40px; 
-  padding: 10px;
-  padding-left: 5px;
-  border: 2px solid var(--grey-border-color);
+  /* padding: 10px; */
+  /* padding-left: 5px; */
+  /* border: 2px solid var(--grey-border-color);
   border-radius: 15px;
-  background-color: var(--grey-background-color);
+  background-color: var(--grey-background-color); */
 }
 
 .schedule-grid {
@@ -898,8 +898,7 @@ input:focus {
   border-radius: 15px;
   width: 100%;
   display: grid;
-  box-shadow: 0px 5px 15px var(--box-shadow-color);
-
+  /* box-shadow: 0px 5px 15px var(--box-shadow-color); */
 }
 
 .days-row {
@@ -1271,6 +1270,7 @@ h2 {
 }
 
 .edit-box-content {
+  color: var(--black-text-color);
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
@@ -1290,12 +1290,6 @@ h2 {
   color: var(--black-text-color);
   margin: 7px; 
 }
-
-
-.form-group label {
-  font-size: 14px;
-}
-
 #instructor, 
 #days,
 #start-time,
@@ -1546,6 +1540,12 @@ h2 {
   color: white !important;
 }
 
+#terms-and-conditions{
+  color: white !important;
+  font-weight: bold;
+}
+
+
 #email-link {
   color: white !important;
 }
@@ -1586,3 +1586,98 @@ h2 {
   width: 195px;
 }
 
+.terms-link {
+  margin-top: 10px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.terms-box {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.terms-header {
+  margin: 0px;
+  font-size: 16px;
+}
+
+.term-content {
+  font-size: 14px;
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.terms-content {
+  position: absolute;
+  color: var(--black-text-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  padding: 40px;
+  max-height: 90%;
+  overflow-y: auto;
+  text-align: justify;
+  border-radius: 10px;
+}
+
+.terms-box .terms-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 99999;
+}
+
+.terms-close button {
+  width: 25px;
+  height: 25px;
+  border: none; /* Remove the border */
+  border-radius: 50%;
+  background-color: var(--background-color);
+  color: var(--black-text-color);
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  padding: 0;
+}
+
+.terms-close button:hover {
+  background-color: var(--grey-background-color);
+  cursor: pointer;
+}
+
+.terms-close button::before,
+.terms-close button::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 16px;
+  top: 7px;
+  left: 12px;
+  background-color: var(--black-text-color);
+}
+
+.terms-close button::before {
+  transform: rotate(45deg);
+}
+
+.terms-close button::after {
+  transform: rotate(-45deg);
+}
+
+
+@media screen and (max-width: 768px) {
+  .terms-box .terms-content {
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}
