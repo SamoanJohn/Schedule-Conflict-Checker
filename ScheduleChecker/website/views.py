@@ -1,3 +1,13 @@
+# Schedule Checker Team - Austin Edwards, John Schwenke, and Conner Trouy
+# May 4th, 2023
+# Contributions:
+#   This Django view and scraping method was designed by Austin 
+#
+# Dependencies:
+#   The scraping process is dependent on the Curric website for its data https://curric.uaa.alaska.edu/
+
+
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Count

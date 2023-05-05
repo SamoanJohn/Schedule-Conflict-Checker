@@ -1,3 +1,11 @@
+//    Schedule Checker Team - Austin Edwards, John Schwenke, and Conner Trouy
+//    May 4th, 2023
+//    Contributions:
+//      This webpage was spit between Austin and John:
+//        Austin implmeneted everything outside of the calendar.
+//        John implemented the calendar and its functionality.
+//
+
 var selectedItems = {
   majors: [],
   subjects: []
@@ -14,7 +22,6 @@ $(document).ready(function() {
     $('body').toggleClass('dark-mode');
   });
 });
-
 
 
 function removeItem(element, type, id) {
@@ -2355,6 +2362,7 @@ function displayOnlineCourses() {
     courseTilesContainer.appendChild(courseTile);
   });
 }
+
 window.addEventListener('load', function() {
   // Get the toggle button and the course tiles element
   const toggleOnlineCoursesButton = document.querySelector("#toggle-online-courses-indent");
@@ -2390,8 +2398,6 @@ window.addEventListener('load', function() {
     event.preventDefault();
     termsBox.style.display = 'none';
   });
-
-
 });
 
 
