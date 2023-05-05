@@ -750,6 +750,7 @@ function updateCourseElements(){
           openEditBox(duplicateCourseElement);
         }
       } else {
+        console.log(courseElement)
         console.warn(`Element not found for day ${day} and time ${time}`);
       }
     });
@@ -1096,7 +1097,6 @@ function removeCourseFromTimeSlot(course) {
     });
   });
 }
-
 
 function standardToMilitaryTime(timeString) {
   var timeArr = timeString.split(":");
@@ -1571,7 +1571,6 @@ $(document).ready(function() {
   });
 });
 
-
 window.addEventListener('load', function() {
   // Get the toggle button and the advanced filtering content element
   const toggleButton = document.querySelector("#toggle-advanced-filtering");
@@ -1786,7 +1785,8 @@ function conflictFunction() {
       i--; // decrement i to account for the removed row
     }
   }
-  displayOnlineCourses()
+  displayUnscheduledCourses();
+  displayOnlineCourses();
   // initializes the hashtable
   createHashTable();
   // adds the courses to the hash table
@@ -1800,6 +1800,160 @@ function conflictFunction() {
   checkForConflicts();
 }
 
+function displayUnscheduledCourses() {
+  const unscheduledContainer = document.querySelector('.unscheduled-course-container');
+
+  for (let i = 0; i < unscheduled_courses.length; i++) {
+    const course = unscheduled_courses[i];
+  
+    const courseElement = document.createElement('div');
+    courseElement.classList.add('unscheduled-courses');
+  
+    const courseHeader = document.createElement('div');
+    courseHeader.innerHTML = `${course.Subj} ${course.Crs} ${course.Sec}`;
+    courseHeader.classList.add('course-subj-crs-sec');
+    courseElement.appendChild(courseHeader);
+  
+    const courseTitle = document.createElement('div');
+    courseTitle.innerHTML = course.Title;
+    courseTitle.classList.add('course-title');
+    courseElement.appendChild(courseTitle);
+  
+    const courseCRN = document.createElement('div');
+    courseCRN.innerHTML = `CRN: ${course.CRN}`;
+    courseCRN.classList.add('course-crn');
+    courseElement.appendChild(courseCRN);
+  
+    unscheduledContainer.appendChild(courseElement);
+  }
+}
+
+window.addEventListener('load', function() {
+  // define a function to handle the button press
+
+  // add a click event listener to the button
+  const addCourseContainer = document.querySelector('.add-course-container');
+  addCourseContainer.removeEventListener('click', addCourseOpen);
+  addCourseContainer.addEventListener('click', addCourseOpen);
+});
+
+function addCourseOpen() {
+  var addBox = document.querySelector('.add-box-container');
+  addBox.style.display = 'block';
+
+  var advancedFilteringContainer = document.querySelector(".advanced-filtering-container");
+  var advancedFilteringContainerHeight = advancedFilteringContainer.offsetHeight;
+
+  var searchContainer = document.querySelector(".search-container");
+  var searchContainerHeight = searchContainer.offsetHeight;
+
+  var header = document.querySelector(".header");
+  var headerHeight = header.offsetHeight;
+
+  var boxTop = 650 + advancedFilteringContainerHeight + searchContainerHeight + headerHeight;
+  addBox.style.top = boxTop + "px";
+
+
+  var addCourseClose = document.querySelector('.add-course-close-button');
+  addCourseClose.removeEventListener('click', closeAddCourse);
+  addCourseClose.addEventListener('click', closeAddCourse);
+
+  var addCourseButton = document.querySelector('.add-course-button');
+  addCourseButton.removeEventListener('click', addCourse);
+  addCourseButton.addEventListener('click', addCourse);
+}
+
+function closeAddCourse() {
+  var addBox = document.querySelector('.add-box-container');
+  addBox.style.display = 'none';
+}
+
+function addCourse() { 
+
+  const subjInput = document.querySelector("#add-subj");
+  const crsInput = document.querySelector("#add-crs");
+  const secInput = document.querySelector("#add-sec");
+  const titleInput = document.querySelector("#add-title");
+  const crnInput = document.querySelector("#add-crn");
+  const instructorInput = document.querySelector("#add-instructor");
+  const daysInput = document.querySelector("#add-days");
+  const startTimeInput = document.querySelector("#add-start-time");
+  const endTimeInput = document.querySelector("#add-end-time");
+  const buildingInput = document.querySelector("#add-building");
+  const roomInput = document.querySelector("#add-room");
+
+
+  startTimeInput.value = fixTimeFormat(startTimeInput.value)
+  endTimeInput.value = fixTimeFormat(endTimeInput.value)
+
+  var exitBeforeSaving = false;
+  if (!validateTimeInput(startTimeInput.value)) {
+    startTimeInput.classList.add("invalid-input");
+    alert("Invalid start time format. Please enter time in HH:MM AM/PM format.");
+    exitBeforeSaving = true;
+  }
+  if (!validateTimeInput(endTimeInput.value)) {
+    endTimeInput.classList.add("invalid-input");
+    alert("Invalid end time format. Please enter time in HH:MM AM/PM format.");
+    exitBeforeSaving = true;
+  }
+  // check if the days are in the correct format
+  if (!validateDaysInput(daysInput.value))
+  {
+    daysInput.classList.add("invalid-input");
+    alert("Invalid days format. Please enter a combination of days: M T W R F S U.");
+    exitBeforeSaving = true;
+  }
+  if (exitBeforeSaving) {
+    return;
+  }
+
+
+  // update the course information in the course element
+  startTimeInput.value = startTimeInput.value.toUpperCase();
+  endTimeInput.value = endTimeInput.value.toUpperCase();
+  daysInput.value = daysInput.value.toUpperCase();
+  buildingInput.value = buildingInput.value.toUpperCase();
+  roomInput.value = roomInput.value.toUpperCase();    
+
+  startTimeMilitary = standardToMilitaryTime(startTimeInput.value);
+  endTimeMilitary = standardToMilitaryTime(endTimeInput.value);
+
+  const courseElement = document.createElement('div');
+  courseElement.classList.add('course-block');
+  courseElement.setAttribute("instructor", instructorInput.value);
+  courseElement.setAttribute("days", daysInput.value);
+  courseElement.setAttribute("stime", startTimeMilitary);
+  courseElement.setAttribute("etime", endTimeMilitary);
+  courseElement.setAttribute("bldg", buildingInput.value);
+  courseElement.setAttribute("room", roomInput.value);
+
+  courseElement.setAttribute("subj", subjInput.value);
+  courseElement.setAttribute("crs", crsInput.value);
+  courseElement.setAttribute("sec", secInput.value);
+  courseElement.setAttribute("title", titleInput.value);
+  courseElement.setAttribute("crn", crnInput.value);
+
+  
+  const courseBlockText = document.createElement('div');
+  courseBlockText.classList.add('course-text');
+  
+  const subjText = document.createElement('div');
+  subjText.classList.add('course-text-subj');
+  subjText.textContent = courseElement.getAttribute('Subj');
+  courseBlockText.appendChild(subjText);
+  
+  const crsText = document.createElement('div');
+  crsText.classList.add('course-text-crs');
+  crsText.textContent = courseElement.getAttribute('Crs');
+  courseBlockText.appendChild(crsText);
+  
+  courseElement.appendChild(courseBlockText);
+
+  addCourseToCalendar(courseElement);
+  updateCourseInClassArray(courseElement);
+  updateConflicts();
+}
 // function removeHiddenCourses() {
 //   // Remove hidden courses from classArray
 

@@ -363,10 +363,103 @@
           <div id="edit-box-text">Updating...</div>
         </div>
       </div>
+
+      <div class="staging-container">
+        <div class="staging-header">
+          <h2>Unscheduled Courses</h2>
+        </div>
+        <div class="unscheduled-course-container">
+        </div>
+        <div class="add-course-container">
+          <div class="add-course-text"> Add Course </div>
+          <div class="add-icon">+</div>
+        </div>
+      </div>
+
       <div class="change-log-button-container">
         <button id="change-log-button">Generate Change Logs</button>
       </div>
     </div>
+
+
+    <div class="add-box-container">
+      <div class="add-box-header">
+        <div class="add-box-text">Add Course</div>
+        <button class="add-course-close-button"></button>
+      </div>
+      <div class="add-box-information">
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-subj" placeholder="Subject" list="subject-suggestion" oninput="if (this.value=='Format: CSCE') {this.value='CSCE'}"/>
+          <datalist id="subject-suggestion">
+            <option value="Format: CSCE">
+          </datalist>
+
+          <input type="text" class="add-input" id="add-crs" placeholder="Course" list="crs-suggestion" oninput="if (this.value=='Format: A123') {this.value='A123'}"/>
+          <datalist id="crs-suggestion">
+            <option value="Format: A123">
+          </datalist>
+
+          <input type="text" class="add-input" id="add-sec" placeholder="Section" list="section-suggestion" oninput="if (this.value=='Format: 123') {this.value='123'}"/>
+          <datalist id="section-suggestion">
+            <option value="Format: 123">
+          </datalist>
+        </div>
+  
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-title" placeholder="Title" list="title-suggestion" oninput="if (this.value=='Format: Underwater Basket Weaving') {this.value='Underwater Basket Weaving'}"/>
+          <datalist id="title-suggestion">
+            <option value="Format: Underwater Basket Weaving">
+          </datalist>
+        </div>
+  
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-crn" placeholder="Course CRN" list="CRN-suggestion" oninput="if (this.value=='Format: 123456') {this.value='123456'}"/>
+          <datalist id="CRN-suggestion">
+            <option value="Format: 123456">
+          </datalist>
+        </div>
+  
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-instructor" placeholder="Instructor" list="instructor-suggestion" oninput="if (this.value=='Format: Witmer F') {this.value='Witmer F'}"/>
+          <datalist id="instructor-suggestion">
+            <option value="Format: Witmer F">
+          </datalist>
+  
+          <input type="text" class="add-input" id="add-days" placeholder="Days" list="days-suggestion" oninput="if (this.value=='Format: MW') {this.value='MW'}"/>
+          <datalist id="days-suggestion">
+            <option value="Format: MW">
+          </datalist>
+        </div>
+  
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-start-time" placeholder="Start time" list="stime-suggestion" oninput="if (this.value=='Format: 11:30AM') {this.value='11:30AM'}"/>
+          <datalist id="stime-suggestion">
+            <option value="Format: 11:30AM">
+          </datalist>
+  
+          <input type="text" class="add-input" id="add-end-time" placeholder="End time" list="etime-suggestion" oninput="if (this.value=='Format: 12:45PM') {this.value='12:45PM'}"/>
+          <datalist id="etime-suggestion">
+            <option value="Format: 12:45PM">
+          </datalist>
+        </div>
+  
+        <div class="form-group-row">
+          <input type="text" class="add-input" id="add-building" placeholder="Building" list="building-suggestion" oninput="if (this.value=='Format: EIB') {this.value='EIB'}"/>
+          <datalist id="building-suggestion">
+            <option value="Format: EIB">
+          </datalist>     
+          
+          <input type="text" class="add-input" id="add-room" placeholder="Room" list="room-suggestion" oninput="if (this.value=='Format: 209') {this.value='209'}"/>
+          <datalist id="room-suggestion">
+            <option value="Format: 209">
+          </datalist> 
+        </div>
+        <div class="button-row">
+          <button class="add-course-button">Add Course</button>
+        </div>
+      </div>
+    </div>
+
 
     <div class="schedule-container">
       <div class="schedule-grid">
@@ -916,7 +1009,7 @@
     <!-- displaying conflicts -->
     <div id="conflict-container">
       <div id="conflict-header">
-        <h2>Detected Conflicts:</h2>
+        <h2>Detected Conflicts</h2>
       </div>
     </div>
     <div id="temp-conflict-container"></div>
